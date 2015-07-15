@@ -3,15 +3,6 @@
 .head .inner.wrp{width:1200px;margin-left:auto;margin-right:auto}
 .head_box{position:relative;background-color:#fff;border-top:4px solid #44b549;border-bottom:1px solid #d9dadc}
 
-.icon_service_label{
-	background:url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -24px no-repeat;
-	width:38px;
-	height:14px;
-	vertical-align:middle;
-	display:inline-block;
-	line-height:100px;
-	overflow:hidden
-}
 
 .icon_inbox{
 	background:url("/mpres/zh_CN/htmledition/comm_htmledition/style/base/layout_head_z26f6ea.png") 0 -96px no-repeat;
@@ -33,15 +24,6 @@
 .account_info{position:relative;min-width:80px}
 .account_info .avatar{position:absolute;top:0;left:-50px;width:38px;height:38px;background-color:#f0f0f0}
 .account_info .nickname{display:inline-block;font-weight:400;font-style:normal;margin-top:18px}
-
-.account_inbox{position:relative;z-index:1;top:3px;margin-left:5px}
-.account_inbox .icon_inbox{margin-left:3px}
-.account_inbox_switch{display:block;height:28px;line-height:28px;text-align:center;border:1px solid transparent;border-bottom-width:0}
-.account_inbox_switch:hover{text-decoration:none}
-.account_inbox_switch:hover .icon_dot_notices{color:#fff}
-.account_inbox_switch i.icon_common{cursor:pointer;vertical-align:top;margin-top:16px}
-.account_inbox_switch i.inbox{*margin-top:6px}
-.account_inbox_switch i.notices{*margin-top:6px;margin-left:-12px}
 
 .account_logout a{display:inline-block;margin-left:5px;line-height:16px;margin-top:18px;padding-left:14px;border-left:1px solid #e7e7eb}
 .logo{float:left;padding-top:10px;font-size:24px}
