@@ -6,23 +6,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="uc_user")
-public class User {
+public class SharedFile {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
-	public String account;
-	
 	public String name;
 	
-	public String pwd;
+	public String path;
 	
-	public Date addtime;
+	//分享人,上传人
+	public Integer uid;
 	
-	public Date lasttime;
+	public Date uploadTime;
 }

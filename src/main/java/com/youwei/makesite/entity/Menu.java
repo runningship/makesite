@@ -1,28 +1,24 @@
 package com.youwei.makesite.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="uc_user")
-public class User {
+public class Menu {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
-	public String account;
-	
 	public String name;
 	
-	public String pwd;
+	public Integer parentId;
 	
-	public Date addtime;
+	//menu(下面有子菜单),conts(下面没有子菜单)
+	public String type;
 	
-	public Date lasttime;
+	//当type=conts时，有效
+	public String conts;
 }

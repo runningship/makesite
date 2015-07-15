@@ -1,28 +1,22 @@
 package com.youwei.makesite.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
+/**
+ * 共享给个人的文件
+ */
 @Entity
-@Table(name="uc_user")
-public class User {
+public class UserFileItem {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
-	public String account;
+	//SharedFile Id
+	public Integer fileId;
 	
-	public String name;
-	
-	public String pwd;
-	
-	public Date addtime;
-	
-	public Date lasttime;
+	public Integer uid;
 }

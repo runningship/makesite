@@ -6,23 +6,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
+//通知
 @Entity
-@Table(name="uc_user")
-public class User {
+public class Feedback {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
-	public String account;
+	public String title;
 	
-	public String name;
-	
-	public String pwd;
+	public String conts;
 	
 	public Date addtime;
 	
-	public Date lasttime;
 }

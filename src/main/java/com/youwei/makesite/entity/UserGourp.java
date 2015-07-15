@@ -1,28 +1,21 @@
 package com.youwei.makesite.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
+/**
+ * 用户，组 关联关系
+ */
 @Entity
-@Table(name="uc_user")
-public class User {
+public class UserGourp {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
-	public String account;
+	public Integer gid;
 	
-	public String name;
-	
-	public String pwd;
-	
-	public Date addtime;
-	
-	public Date lasttime;
+	public Integer uid;
 }
