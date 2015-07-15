@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)https://mp.weixin.qq.com/cgi-bin/home?t=home/index&lang=zh_CN&token=2029796792 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta charset="utf-8">
+<script type="text/javascript">
+/*
+示例：
+https://mp.weixin.qq.com/mp/speedreport?data_type=3&net=wifi&os=pc&ua=chrome&ext_data=path:cgi-bin/masssendpage?;file:https://mp.weixin.qq.com/cgi-bin/masssendpage?t=mass/send&token=1422887671&lang=zh_CN;line:129;msg:Uncaught_ReferenceError:_jsErrTest_is_not_defined;uin:3081042039;col:4;ua:Mozilla/5.0_(Windows_NT_6.1;_WOW64)_AppleWebKit/537.36_(KHTML,_like_Gecko)_Chrome/38.0.2125.104_Safari/537.36;stack:ReferenceError:_jsErrTest_is_not_defined_____at_https://mp.weixin.qq.com/cgi-bin/masssendpage?t=mass/send&token=1422887671&lang=zh_CN
+*/
+//全局上报
+window.wxError = (function() {
+	var _d={
+		//路径映射模块  如果要将页面分模块，可以在这个map表定正则规则
+		PATH_REG_MAP:{
+            "advanced":/^advanced\/\w/  //以advanced开头的cgi全部归入高级功能模块
+            ,"cardticket": /\/merchant\/(cardstat|electroniccardmgr|cardshelf|carduse|carduserecord|cardapply)/
+		}
+		//上报钩子函数 上报前处理数据
+		/*,hook:function(data){
+		}*/
+	};
+
+	//替换占位符{}，替换换行，截取字段最长不超过150
+	function format(str, o) {
+		return str.replace(/\{(\w+)\}/g, function(_1, _2) {
+			return o[_2] !== undefined ? (o[_2] + "").replace(/\s/g, "_").slice(0, 150): "";
+		});
+	}
+
+	function ua(useragent) {
+		if (/MicroMessenger/i.test(useragent)) {
+			return "wechat";
+		}
+		if (/firefox/i.test(useragent)) {
+			return "firefox";
+		}
+		if (/chrome/i.test(useragent)) {
+			return "chrome";
+		}
+		if (/opera/i.test(useragent)) {
+			return "opera";
+		}
+		if (/safari/i.test(useragent)) {
+			return "safari";
+		}
+		if (/msie 6/i.test(useragent)) {
+			return "IE6";
+		}
+		if (/msie 7/i.test(useragent)) {
+			return "IE7";
+		}
+		if (/msie 8/i.test(useragent)) {
+			return "IE8";
+		}
+		if (/msie 9/i.test(useragent)) {
+			return "IE9";
+		}
+		if (/msie 10/i.test(useragent)) {
+			return "IE10";
+		}
+		return "other";
+	}
+
+	function init(){
+		//cgi路径+action 做为上报监控的id维度
+		
+		_d.path = /(?:mp\.)?weixin\.qq\.com(?::8080)?\/(.*\?)/.exec(location.href)[1];
+		
+		if (/action=.*/.exec(location.href)) {
+			action = /action=.*/.exec(location.href)[0].split("&")[0];
+			_d.path += action;
+		};
+		for (var prop in _d.PATH_REG_MAP) {
+			if (_d.PATH_REG_MAP[prop] instanceof RegExp&&_d.PATH_REG_MAP[prop].exec(_d.path)) {
+				path = prop;
+				break;
+			}
+		}
+		_d.ua=ua(window.navigator.userAgent)
+	}
+	init();
+
+	window.onerror = function(msg, url, line, col, err) {
+		var content = "path:{path};file:{file};line:{line};msg:{msg};uin:{uin};col:{col};ua:{ua};from:mp";
+		//出错的js路径,为了节省长度只截取文件名
+		var file = [];
+		url.replace(/(\w*)\.js/g, function(_, _name) {
+			file.push(_name);
+		})
+		if (file.length > 0) {
+			file = file.join("|");
+		} else {
+			file = url;
+		}
+		//上报协议字段
+		var data = {
+			path: (_d.path||"").replace(/=/g,"-"), //发生错误的页面 替换=
+			file: file, //发生错误的文件(定位到js)
+			line: line, //行号
+			msg: msg, //出错信息
+			uin: "2392488174", //用户id
+			ua: window.navigator.userAgent.replace(/[\:,;]/g,"|"), //浏览器信息  替换掉上报协议中:,;
+			col: col //出错位置
+		};
+
+		//上报协议data过滤
+		_d.hook&&_d.hook(data);
+
+		//排除编辑上报
+		if (data.msg.indexOf("ueditor") >-1 
+			||data.file.indexOf("editor_all_min")>-1 
+			//|| msg.indexOf("media/appmsg_edit") >-1
+			) {
+			return;
+		}
+		content = format(content, data);
+
+		//错误堆栈
+		if (err && err.stack) {
+			content += ";stack:" + err.stack;
+            content = content.slice(0, 1024);
+		}
+		console.log(content);
+		content=["https://mp.weixin.qq.com/mp/speedreport?data_type=3&net=wifi&os=pc&ua=", ua(window.navigator.userAgent), "&ext_data=", encodeURIComponent(content)].join("");
+		
+		//return;
+		var img = new Image();
+		img.src = content;
+    }
+
+    window.wx_loaderror = function(ele){
+        var tag = ele.tagName.toLowerCase();
+        var IDKEY = {
+            'link': 33,
+            'script': 34
+        };
+        if (!IDKEY[tag]) return;
+        
+        var content = '/misc/jslog?level=error&id={id}&content=[uin:2392488174,url:{url},pageurl:{pageurl},ua:{ua}]';
+            content = format(content,{
+                id: IDKEY[tag],
+                url: encodeURIComponent(ele.href||ele.src),
+                pageurl: encodeURIComponent(window.location.href),
+                ua: window.navigator.userAgent
+            });
+        (new Image()).src = content;
+    };
+
+	return {
+		data:_d
+	}
+})()
+/*   wxError.data.hook=function(data){
+   		//data.path="test123";
+   }
+		test();
+   */
+
+</script>
+<script type="text/javascript">
+    //上报测速 --初始点
+    window._points=[+new Date()];
+
+    //上报测速 --js加载完成点,通过编译工具加在seajs.use回调中
+    function wx_main(mod){
+        window._points&&(window._points[3]=+new Date());
+    };
+</script>
+<title>微信公众平台</title>
+<link href="https://res.wx.qq.com/mpres/htmledition/images/favicon218877.ico" rel="Shortcut Icon">
+<link onerror="wx_loaderror(this)" rel="stylesheet" type="text/css" href="./style/layout_head26f6ea.css">
+<link onerror="wx_loaderror(this)" rel="stylesheet" type="text/css" href="./style/base264f38.css">
+
+
+        
+<link onerror="wx_loaderror(this)" rel="stylesheet" href="https://res.wx.qq.com/mpres/htmledition/style/page/page_index25404f.css">
+
+
+    <link charset="utf-8" rel="stylesheet" href="https://res.wx.qq.com/mpres/htmledition/style/widget/pagination218878.css"><style></style></head>
+    <body class="zh_CN">
+        <div class="head" id="header">
+            <script type="text/javascript">
+    //上报测速 --css加载完成点
+    window._points&&(window._points[1]=+new Date());
+</script>
+<div class="head_box">
+    <div class="inner wrp">
+        <h1 class="logo"><a href="https://mp.weixin.qq.com/" title="微信公众平台"></a></h1>
+                                <div class="account">
+                        <div class="account_meta account_info account_meta_primary">
+                                <a href="https://mp.weixin.qq.com/cgi-bin/settingpage?t=setting/index&action=index&token=2029796792&lang=zh_CN" class="nickname">中介宝</a>
+                                <a href="https://mp.weixin.qq.com/cgi-bin/settingpage?t=setting/index&action=index&token=2029796792&lang=zh_CN"><img src="./style/getheadimg" class="avatar"></a>
+                            </div>
+            <div id="accountArea" class="account_meta account_inbox account_meta_primary">
+                                <a href="https://mp.weixin.qq.com/cgi-bin/frame?t=notification/index_frame&lang=zh_CN&token=2029796792" class="account_inbox_switch">
+                                        <i class="icon_inbox">通知</i>&nbsp;
+                                    </a>
+                            </div>
+                <div class="account_meta account_logout account_meta_primary"><a id="logout" href="https://mp.weixin.qq.com/cgi-bin/logout?t=wxm-logout&lang=zh_CN&token=2029796792">退出</a></div>
+                                </div>
+                    </div>
+</div>
+
+        </div>
+        <div id="body" class="body page_index">
+            <div id="js_container_box" class="container_box cell_layout side_l">
+                
+                                <div class="col_side">
+                    <div class="menu_box" id="menuBar">
+<dl class="menu no_extra">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_function.png
+        ) no-repeat;">
+    </i>内容管理
+            </dt> 
+
+				<dd class="menu_item "><a data-id="10005" href="https://mp.weixin.qq.com/cgi-bin/masssendpage?t=mass/send&token=2029796792&lang=zh_CN">一级菜单</a></dd>
+					<dd class="menu_item "><a data-id="10006" href="https://mp.weixin.qq.com/advanced/autoreply?t=ivr/reply&action=beadded&token=2029796792&lang=zh_CN">二级菜单</a></dd>
+					<dd class="menu_item "><a data-id="10007" href="https://mp.weixin.qq.com/advanced/selfmenu?action=index&t=advanced/menu-setting&token=2029796792&lang=zh_CN">文章列表</a></dd>
+		</dl>
+<dl class="menu ">
+    <dt class="menu_title clickable">
+        <a href="https://mp.weixin.qq.com/cgi-bin/frame?nav=10010&t=business/index_frame&iframe=%2Fpaymch%2Fbusiness%3Faction%3Dfirstentry&token=2029796792&lang=zh_CN">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png
+        ) no-repeat;">
+    </i>文件管理
+    </a>        </dt> 
+
+    </dl>
+<dl class="menu ">
+    <dt class="menu_title clickable">
+        <a href="https://mp.weixin.qq.com/cgi-bin/frame?nav=10010&t=business/index_frame&iframe=%2Fpaymch%2Fbusiness%3Faction%3Dfirstentry&token=2029796792&lang=zh_CN">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png
+        ) no-repeat;">
+    </i>微信支付
+    </a>        </dt> 
+
+    </dl>
+<dl class="menu ">
+    <dt class="menu_title">
+        <i class="icon_menu" style="background:url(
+        https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_setup.png
+        ) no-repeat;">
+    </i>用户管理
+            </dt> 
+
+				<dd class="menu_item "><a data-id="10019" href="https://mp.weixin.qq.com/cgi-bin/settingpage?t=setting/index&action=index&token=2029796792&lang=zh_CN">员工列表</a></dd>
+					<dd class="menu_item "><a data-id="10020" href="https://mp.weixin.qq.com/merchant/store?action=detail&t=wxverify/detail&info=verify&token=2029796792&lang=zh_CN">工 作 组</a></dd>
+					<dd class="menu_item "><a data-id="10022" href="https://mp.weixin.qq.com/cgi-bin/safecenterstatus?action=view&t=setting/safe-index&token=2029796792&lang=zh_CN">职位权限</a></dd>
+		</dl>
+</div>
+
+                </div>
+                                
+                <div class="col_main">
+                    
+
+
+<div class="index_show_area">
+    <div class="index_tap added">
+        <ul class="inner">
+            <li class="grid_item size1of2 index_tap_item added_message">
+            <a href="https://mp.weixin.qq.com/cgi-bin/message?t=message/list&count=20&day=7&token=2029796792&lang=zh_CN">
+                <span class="tap_inner">
+                    <i class="icon_index_tap"></i>
+                    <em class="number">0</em>
+                    <strong class="title">新消息</strong>
+                </span>
+            </a>
+            </li>
+            <li class="grid_item size1of2 no_extra index_tap_item added_fans">
+                        <a href="https://mp.weixin.qq.com/cgi-bin/contactmanage?t=user/index&pagesize=10&pageidx=0&type=0&groupid=0&token=2029796792&lang=zh_CN">
+                            <span class="tap_inner no_extra">
+                    <i class="icon_index_tap"></i>
+                                        <em class="number">0</em>
+                    <strong class="title">新增人数</strong>
+                                    </span>
+            </a>
+            </li>
+        </ul>
+    </div>&nbsp;
+    <div class="index_tap total">
+        <ul class="inner">
+            <li class="index_tap_item total_fans extra">
+            <a href="https://mp.weixin.qq.com/cgi-bin/contactmanage?t=user/index&pagesize=10&pageidx=0&type=0&groupid=0&token=2029796792&lang=zh_CN">
+                <span class="tap_inner">
+                    <i class="icon_index_tap"></i>
+                    <em class="number">912</em>
+                    <strong class="title">总用户数</strong>
+                </span>
+            </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="mp_news_area notices_box">
+    
+    <div class="title_bar">
+        <h3>系统公告</h3>
+    </div>
+    <ul class="mp_news_list">
+                               
+                <li class="mp_news_item">
+            <a href="https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&key=1436453021&version=6&lang=zh_CN" target="_blank">
+                <strong>公众号文章新增语音功能                                        <i class="icon_common new"></i>
+                                    </strong>
+                <span class="read_more">2015-07-10</span>
+            </a>
+                    </li>
+                       
+    </ul>
+    
+</div>
+
+<div class="pagination_wrp pageNavigator"><div class="pagination" id="wxPagebar_1436856328084">
+    <span class="page_nav_area">
+        <a href="javascript:void(0);" class="btn page_first" style="display: none;"></a>
+        <a href="javascript:void(0);" class="btn page_prev" style="display: none;"><i class="arrow"></i></a>
+        
+            <span class="page_num">
+                <label>1</label>
+                <span class="num_gap">/</span>
+                <label>5</label>
+            </span>
+        
+        <a href="javascript:void(0);" class="btn page_next"><i class="arrow"></i></a>
+        <a href="javascript:void(0);" class="btn page_last" style="display: none;"></a>            
+    </span>
+    
+    <span class="goto_area">
+        <input type="text">
+        <a href="javascript:void(0);" class="btn page_go">跳转</a>
+    </span>
+    
+</div>
+</div>
+
+
+                </div>
+            </div>
+                                    
+        </div>
+        <div class="foot" id="footer">
+	<ul class="links ft">
+					<li class="links_item no_extra"><a href="http://www.tencent.com/zh-cn/index.shtml" target="_blank">关于腾讯</a></li>
+			<li class="links_item"><a href="https://mp.weixin.qq.com/cgi-bin/readtemplate?t=home/agreement_tmpl&type=info&lang=zh_CN&token=2029796792" target="_blank">服务协议</a></li>
+			<li class="links_item"><a href="https://mp.weixin.qq.com/cgi-bin/readtemplate?t=business/faq_operation_tmpl&type=info&lang=zh_CN&token=2029796792" target="_blank">运营规范</a></li>
+			<li class="links_item"><a href="http://kf.qq.com/product/weixinmp.html" target="_blank">客服中心</a></li>
+                        			<li class="links_item"><a href="mailto:weixinmp@qq.com" target="_blank">联系邮箱</a></li>
+            				<li class="links_item"><p class="copyright">Copyright © 2012-2015 Tencent. All Rights Reserved.</p> </li>
+	</ul>
+    
+	
+</div>
+<script type="text/javascript">
+    //上报测速 --dom加载完成点
+    window._points&&(window._points[2]=+new Date());
+</script>
+
+        
+        <script type="text/javascript">
+    window.wx ={
+        version:"4.0.0",
+        data:{
+            t:"2029796792",
+            ticket:"4a809da925ba2ed885c22126b9e638631f53a0a7",
+            lang:'zh_CN',
+            param:["&token=2029796792",'&lang=zh_CN'].join(""),
+            uin:"2392488174",
+            uin_base64:"MjM5MjQ4ODE3NA==",
+            user_name:"zjb9129588",
+            nick_name:"中介宝",
+            time:"1436856256"||new Date().getTime()/1000
+        },
+        path:{
+            video : "https://res.wx.qq.com/mpres/zh_CN/htmledition/plprecorder/biz_web/video-js218877.swf",    
+            audio : "https://res.wx.qq.com/mpres/zh_CN/htmledition/plprecorder/biz_web/audiojs218877.swf",
+            uploadify : "https://res.wx.qq.com/mpres/zh_CN/htmledition/plprecorder/biz_web/uploadify218877.swf",
+            webuploader : "https://res.wx.qq.com/mpres/zh_CN/htmledition/plprecorder/biz_web/webuploader230dc3.swf",
+            zoom : "https://res.wx.qq.com/mpres/zh_CN/htmledition/plprecorder/biz_web/zoom230dc3.swf",
+            rimgcrop : "https://res.wx.qq.com/mpres/htmledition/images/cut-round218877.gif"
+        },
+        acl:{
+                        "msg_acl" : {
+                "can_text_msg" : 1,
+                "can_image_msg" : 1,
+                "can_voice_msg" : 1,
+                "can_video_msg" : 1,
+                "can_app_msg" : 1,
+                "can_commodity_app_msg" : 0,
+                "can_card_msg" : "0"*1||0, // @cunjinli改掉
+                "can_use_shortvideo" : "1"*1
+            },
+            "ivr_acl" : {
+                "can_text_msg" : 1,
+                "can_image_msg" : 1,
+                "can_voice_msg" : 1,
+                "can_video_msg" : 1,
+                "can_app_msg" : 1,
+                "can_commodity_app_msg" : 0
+            },
+            "merchant_acl" : {
+                "can_use_pay_tmpl" : ""*1,
+                "can_use_account_manage" : ""*1
+            },
+                        "ad_system" : {
+                "can_use_sp" : ""*1            }
+        },
+        events:{}//全局的事件绑定
+    };
+</script>
+
+<script type="text/javascript"> 
+_points&&(_points[3]=+new Date());
+function getico(i){
+    var _img = new Image(1, 1);
+    _img.src =wx.url&&wx.url(location.protocol + "//" + location.host + "/misc/getico" + "?location=" + (i||-1) + "&rand=" + Math.random());
+};  
+
+getico('1698'); 
+
+/****************************邪恶的上报分割线**********************************************************/
+     //上报测速  --onready测速点
+    jQuery(function() {
+        window._points && (window._points[4] = +new Date()); //onready
+    });
+
+    window.onload = function() {
+        //onload测速点
+        window._points && (window._points[5] = +new Date()); //onload
+
+        var params = [];
+        setTimeout(function() {
+            //是否支持html5
+            if (window.performance && window.performance.timing && window.performance.timing.navigationStart) {
+                params.push("flag1=7839&flag2=4&flag3=3");
+                //html上报排序
+                var field = [
+                    "navigationStart",
+                    "unloadEventStart",
+                    "unloadEventEnd",
+                    "redirectStart",
+                    "redirectEnd",
+                    "fetchStart",
+                    "domainLookupStart",
+                    "domainLookupEnd",
+                    "connectStart",
+                    "connectEnd",
+                    "requestStart",
+                    "responseStart",
+                    "responseEnd",
+                    "domLoading",
+                    "domInteractive",
+                    "domContentLoadedEventStart",
+                    "domContentLoadedEventEnd",
+                    "domComplete",
+                    "loadEventStart",
+                    "loadEventEnd"
+                ];
+                field.each(function(name, i) {
+                    field[i] = window.performance.timing[name];
+                });
+                //将html测速点和页面测速点合并
+                _points = field.concat(_points.slice(1));
+                //如果页面有https连接上报
+                window.performance.timing.secureConnectionStart&&_points.push(window.performance.timing.secureConnectionStart);
+            } else {
+                params.push("flag1=7839&flag2=4&flag3=2");
+            }
+            _points && _points.each(function(p, i) {
+                if (i > 0 && p>0) {
+                    (p - _points[0])&&params.push(i + "=" + (p - _points[0]))
+                } else {
+                    //console.log(i + ":" + p);
+                }
+            });
+            _sendReport(params.join("&"));
+        }, 3000);
+    }
+
+    function _sendReport(param) {
+        if (window.location.href.indexOf("https") > -1) {
+            var img = new Image();
+            img.src = "https://huatuospeed.weiyun.com/cgi-bin/r.cgi?" + param;
+        } else {
+            console.log(param);
+        }
+    }
+    
+    seajs.use('common/wx/Log', wx_main);;
+
+    //菜单中 所有子菜单dd 带A标签中有new class的元素
+    jQuery("#menuBar").find("dd>a").click(function(event) {
+        if($(this).find(".new").length>0){
+             jQuery.ajax({
+                url:"/misc/navoperation",
+                data:{
+                    action:"click",
+                    id:$(this).data("id"),
+                    token:wx.data.t
+                },
+                type:"post"
+             }) 
+        }
+        //return false;
+    });
+</script>   
+
+
+        
+
+<script type="text/javascript">
+    wx.cgiData = {
+        nickname_invade : "0" * 1, // 是否名称侵权
+        apply_old_advert : "",
+        apply_new_advert : "",
+        wxverify_annual_review : "" * 1 || 0,
+        wxverify_expired_time : "" * 1,
+        total_count : "112",
+        count : "26",
+        begin : "1",
+        bank_deadline : "0" * 1,
+        force_remit_verify : "0" * 1, // 强制显示小额打款
+        bank_verify_status : "0" * 1,
+        register_type : "0" * 1, // 0=小额打款，1=注册后认证
+        show_verify_warning : '0' * 1,
+        verify_deadline : '1435129469' * 1 // 注册后认证的最后期限
+    };
+    
+    wx.cgiData.notice = {
+        userRole:'28',
+        notifyMsg:''
+    };
+
+seajs.use('home/index.js', wx_main);;
+</script>
+
+
+        
+<script type="text/html" id="js_faqscene_tpl">
+<div class="faqscene" id="js_faqscene_p">
+<div class="faqscene_inner">
+    <div class="faqscene_name js_faq_trigger">常见问题</div>
+    <div class="faqscene_panel js_faq_main_panel">
+        <a href="###" class="faqscene_close">x</a>
+        <div class="faqscene_hd">{data.question}</div>
+        <div class="faqscene_bd">
+            <div class="faqscene_tabs">
+                <div class="faqscene_tab_hd">
+                    <ul class="js_faq_class1">
+                        {if data.guide_list.length>2}
+                        {each data.guide_list as guide i}
+                        {if guide}
+                        <li data-report-id="{guide.report_id}"><a {if i==0}class="active"{/if} href="javascript:;">{guide.itemname}</a></li>
+                        {/if}
+
+                        {/each}
+                        {/if}
+                    </ul>
+                </div>
+                {if data.guide_list.length>1}
+                {/if}
+                {each data.guide_list as guide i}
+                {if guide}
+                <div class="faqscene_tab_bd js_faqscene_content">
+                    <ul>
+                        {each guide.subitems as subitem i}
+                        {if subitem}
+                        <li><a target="_blank" href="{subitem.kf_url}">{subitem.title}</a></li>
+                        {/if}
+                        {/each}
+                    </ul>
+                </div>
+                {/if}
+                {/each}
+            </div>
+        </div>
+        <div class="faqscene_ft"><a href="{data.more_help.kf_url}" target="_blank">{data.more_help.title}</a></div>
+    </div>
+</div>
+</div>
+</script>
+
+
+<script type="text/javascript"> 
+
+;;;(function() {
+
+var jq = jQuery;
+var dom = null;
+var panel = null;
+var close = null
+var faqArea = null;
+var timer = null;
+var tab_heads = null;
+var tab_contents = null;
+var token = "2029796792"
+var report_id = null;
+
+/**
+ * 加载FAQ数据以及进行初始化
+ */
+function loadDataAndInit() {
+    var param = "&cginame=" + urlParser.parser.pathname.replace(/^\//, '');
+    var tValue = urlParser.getParam("t");
+    var actionValue = urlParser.getParam("action");
+
+    param += token 
+             ? ("&token=" + token ) // 带上token
+             : "";
+    param += tValue
+             ? ("&t=" + tValue)
+             : ("&action=" + actionValue);
+
+    var getFAQUrl = "/misc/faq?action=getfaq&lang=zh_CN&f=json" + param;
+
+    $.ajax({
+        type: "GET",
+        url: getFAQUrl,
+    }).success(function(data) {
+        if (data.base_resp.ret !== 0) return;
+        wx.faq_list = data.base_resp.assistant.problem;
+        if (!wx.faq_list.question) return; // 做保护，防止没有吐出
+        renderFaq();
+        makeActions();
+        initReport();
+        panel.hide();
+        goto(0);
+    }).error(function(error) {
+        ; // ignore
+    });
+}
+
+function renderFaq() {
+    jq("body").append(template.render("js_faqscene_tpl", {data: wx.faq_list}));
+    dom = jq("#js_faqscene_p");
+    panel = dom.find(".js_faq_main_panel");
+    close = dom.find(".faqscene_close");
+    faqArea = dom.find(".faqscene_inner");
+    timer = null;
+    tab_heads = dom.find(".js_faq_class1 li");
+    tab_contents = dom.find(".js_faqscene_content");
+}
+
+/**
+ * 点击某个字分类显示该子分类的问题列表
+ * 
+ * @param {Number} idx - 该子分类的下标
+ */
+function goto(idx) {
+    var $currentTab = tab_heads.eq(idx);
+    tab_contents.hide();
+    subitem = $currentTab.find("a").text();
+    report_id = (idx === 0)
+              ? wx.faq_list.guide_list[0].report_id
+              : $currentTab.data("report-id");
+    jq(tab_contents[idx]).show();
+    tab_heads.find("a").removeClass("active");
+    jq(tab_heads[idx]).find("a").addClass("active");
+}
+
+function makeActions() {
+    tab_heads.click(function() {
+        var idx = jq(this).index();
+        goto(idx);
+    });
+
+    // 点击x隐藏FAQ
+    close.on("click", function(event) {
+        event.preventDefault();
+        clearTimeout(timer);
+        panel.hide();
+    });
+
+    // 鼠标移出FAQ隐藏
+    faqArea.on("mouseover", function() {
+        clearTimeout(timer);
+        panel.show();
+    });
+
+    faqArea.on("mouseout", function(event) {
+        timer = setTimeout(function() {
+            panel.hide();
+        }, 300);
+    });
+}
+
+/*======================== 用户点击，上报数据统计 =======================*/
+var subitem = null;
+var questText = "none";
+var questLink = "none";
+var urlParser = new URLParser(window.location.href);
+
+function initReport() {
+    subitem = wx.faq_list.guide_list[0].itemname;
+    report_id = wx.faq_list.guide_list[0].report_id;
+    // 上报每个独立的问题
+    jq("div.js_faqscene_content").find("a").click(function(event) {
+        var $question = jq(this);
+        questText = $question.text();
+        questLink = $question.attr("href");
+        var reportData = getReportData();
+        report(reportData);
+    });
+    // 上报更多问题链接的点击
+    jq("div.faqscene_ft a").click(function(event) {
+        var $more = jq(this);
+        questText = $more.text();
+        var reportData = getReportData();
+        reportData.report_id = wx.faq_list.help_report_id;
+        report(reportData);
+    });
+}
+
+/**
+ * ajax上报点击统计数据
+ *
+ * @param {Object} data - 统计数据
+ */
+function report(data) {
+    //console.log(data);
+    var reportUrl = "/misc/faq?action=report"
+    $.ajax({
+        url: reportUrl,
+        data: data,
+        type: "POST"
+    }).success(function(data) {
+        //console.log(data);
+    });
+}
+
+/**
+ * 获取需要上报的数据
+ * 
+ * @return {Object} 需要上报的数据
+ */
+function getReportData() {
+    var data = {};
+    data.report_id = report_id;
+    data.question = questText;
+    data.action = "report";
+
+    return data;
+}
+
+
+/**
+ * URL分析器
+ * 
+ * @param {String} url - 需要传入的URL
+ * @constructor
+ */ 
+function URLParser(url) {
+    // Check out this gist for URL parser hack: 
+    // https://gist.github.com/jlong/2428561
+    var $el = jq("<a></a>").attr("href", url);
+    this.el = $el.get(0);
+    this.parser = this.el;
+}
+
+/**
+ * 获取URL中的请求特定的请求参数
+ *
+ * @param {String} key - 需要查询的参数的键
+ * @return {String|Null} - 返回值，不存在则为null
+ */
+URLParser.prototype.getParam = function(key) {
+    var KEY_REG = new RegExp("([\?&])" + key + "=([^&#]*)([&#])?");
+    var result = this.el.search.match(KEY_REG);
+    return result
+           ? result[2]
+           : null;
+};
+
+
+loadDataAndInit();
+})();
+</script>
+
+
+    
+
+
+<div class="scale_tips" id="zoom_tips" style="display: none;">
+<div class="scale_tips_inner">
+<i class="icon_scale_tips"></i>
+<p class="scale_tips_content"><span id="zoom_msg"></span><a href="javascript:;" id="zoom_prompt">不再提示</a></p>
+</div>
+</div><div style="position: absolute; right: 0px; bottom: 0px; visibility: visible;"><object type="application/x-shockwave-flash" data="https://res.wx.qq.com/mpres/zh_CN/htmledition/plprecorder/biz_web/zoom230dc3.swf" width="10" height="10" id="ZoomFlash"><param name="movie" value="https://res.wx.qq.com/mpres/zh_CN/htmledition/plprecorder/biz_web/zoom230dc3.swf"><param name="allowscriptaccess" value="always"><param name="wmode" value="transparent"><param name="scale" value="noScale"></object></div></body></html>
