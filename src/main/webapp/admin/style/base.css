@@ -6,21 +6,12 @@ body {
 	-webkit-font-smoothing:antialiased;
 	line-height:1.6
 }
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol,
-dl,
-dd,
-fieldset,
-textarea {
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,dl,dd,fieldset,textarea {
 	margin:0
+}
+ul,ol{
+	padding-left:0;
+	list-style-type:none
 }
 textarea {
 	overflow:auto;
@@ -170,6 +161,8 @@ body.scaled {
 	*margin-bottom:-9999em;
 	min-height:1px
 }
+.side_l .col_side{border-right:1px solid #e7e7eb}
+
 .grid_item {
 	float:left
 }
