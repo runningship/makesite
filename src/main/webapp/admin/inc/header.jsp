@@ -10,4 +10,6 @@
 <link rel="stylesheet" type="text/css" href="/${projectName }/admin/style/head.css">
 <link rel="stylesheet" type="text/css" href="/${projectName }/admin/style/base.css">
 <link rel="stylesheet" href="/${projectName }/admin/style/pageIndex.css">
-<link charset="utf-8" rel="stylesheet" href="/${projectName }/admin/style/pagination.css">
+<link rel="stylesheet" href="/${projectName }/admin/style/pagination.css">
+<script type="text/javascript" src="/${projectName }/basejs/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/${projectName }/layer-v1.9.3/layer/layer.js"></script>

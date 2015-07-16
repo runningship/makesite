@@ -4,6 +4,17 @@
 <head>
 <title>微信公众平台</title>
 <jsp:include page="inc/header.jsp"></jsp:include>
+<script type="text/javascript">
+function openWin(){
+	layer.open({
+	    type: 2,
+	    area: ['700px', '530px'],
+	    fix: false, //不固定
+	    maxmin: true,
+	    content: 'http://www.baidu.com'
+	});
+}
+</script>
 </head>
 <body>
 	<jsp:include page="inc/top.jsp"></jsp:include>
@@ -34,7 +45,7 @@
 					</div>
 				</div>
 				<div class="mp_news_area notices_box">
-
+					<a href="#" onclick="openWin();">打开新窗口</a>
 					<div class="title_bar">
 						<h3>系统公告</h3>
 					</div>
