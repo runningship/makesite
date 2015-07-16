@@ -7,6 +7,18 @@
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link rel="stylesheet" href="list.css">
 </head>
+<script type="text/javascript">
+	function userAdd(){
+		layer.open({
+    	type: 2,
+    	title: '添加用户',
+	    shadeClose: true,
+	    shade: 0.8,
+	    area: ['400px', '50%'],
+	    content: 'AddUser.jsp' //iframe的url
+}); 
+	}
+</script>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
 	<div class="body">
@@ -15,9 +27,9 @@
 			<jsp:include page="../inc/menu.jsp"></jsp:include>
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
-
 					<div class="title_bar">
 						<h3>用户列表</h3>
+						<button onclick="userAdd();return false;" style="float:right;margin-top:-35px;padding:5px;">添 &nbsp;加</button>
 					</div>
 					<table class="userList" >
 						<tr>
