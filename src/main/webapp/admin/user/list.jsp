@@ -14,7 +14,7 @@
     	title: '添加用户',
 	    shadeClose: true,
 	    shade: 0.8,
-	    area: ['400px', '50%'],
+	    area: ['400px', '320px'],
 	    content: 'AddUser.jsp' //iframe的url
 }); 
 	}
