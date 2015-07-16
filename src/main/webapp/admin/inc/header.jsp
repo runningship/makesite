@@ -12,4 +12,5 @@
 <link rel="stylesheet" href="/${projectName }/admin/style/pageIndex.css">
 <link rel="stylesheet" href="/${projectName }/admin/style/pagination.css">
 <script type="text/javascript" src="/${projectName }/basejs/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/${projectName }/basejs/buildHtml.js"></script>
 <script type="text/javascript" src="/${projectName }/layer-v1.9.3/layer/layer.js"></script>

@@ -22,7 +22,7 @@ public class StartUpListener implements ServletContextListener{
 
 	public void contextInitialized(ServletContextEvent event) {
 		initDataSource();
-//		initModule();
+		initModule();
 		JspFactory.getDefaultFactory()
         .getJspApplicationContext(event.getServletContext())
         .addELResolver(new PublicFieldSupportingELResolver());

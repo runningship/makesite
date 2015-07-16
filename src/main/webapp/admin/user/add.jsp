@@ -12,7 +12,7 @@ function save(){
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',
-	    url: '/c/UserService/add',
+	    url: '/${projectName}/c/admin/user/save',
 	    data:a,
 	    mysuccess: function(data){
 	        alert('添加成功');

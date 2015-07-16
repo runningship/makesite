@@ -15,7 +15,7 @@
 	    shadeClose: true,
 	    shade: 0.8,
 	    area: ['400px', '320px'],
-	    content: 'add.jsp' //iframe的url
+	    content: 'AddUser.jsp' //iframe的url
 }); 
 	}
 </script>
