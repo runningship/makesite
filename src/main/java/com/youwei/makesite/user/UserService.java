@@ -23,8 +23,11 @@ public class UserService {
 	@WebMethod
 	public ModelAndView save(User user ){
 		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(user.account)){
+			throw new GException(PlatformExceptionType.BusinessException,"用户账号不能为空");
+		}
 		if(StringUtils.isEmpty(user.name)){
-			throw new GException(PlatformExceptionType.BusinessException,"用户名不能为空");
+			throw new GException(PlatformExceptionType.BusinessException,"用户姓名不能为空");
 		}
 		if(StringUtils.isEmpty(user.pwd)){
 			throw new GException(PlatformExceptionType.BusinessException,"请先设置密码");
@@ -33,7 +36,6 @@ public class UserService {
 		user.pwd = SecurityHelper.Md5(user.pwd);
 		//TODO
 		dao.saveOrUpdate(user);
-		mv.data.put("msg", "添加用户成功");
 		return mv;
 	}
 
@@ -53,7 +55,6 @@ public class UserService {
 		po.tel = user.tel;
 		//TODO
 		dao.saveOrUpdate(po);
-		mv.data.put("msg", "修改用户成功");
 		return mv;
 	}
 

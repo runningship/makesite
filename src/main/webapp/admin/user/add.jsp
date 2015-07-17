@@ -9,6 +9,21 @@
 </head>
 <script type="text/javascript">
 function save(){
+	var account = $('#account').val();
+	var name = $('#name').val();
+	var pwd = $('#pwd').val();
+	if (account=="") {
+		alert('用户账号不能为空');
+		return;
+	};
+	if (name=="") {
+		alert('用户名不能为空');
+		return;
+	};
+	if (pwd=="") {
+		alert('密码不能为空');
+		return;
+	};
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',
@@ -16,40 +31,42 @@ function save(){
 	    data:a,
 	    mysuccess: function(data){
 	        alert('添加成功');
-	    },
-	    complete:function(){
-	        api.button({
-	              name: '保存',
-	              disabled:false
-	          });
+			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+			parent.reloadWindow();
+			parent.layer.close(index); //再执行关闭   
 	    }
     });
+}
+
+function closeThis(){
+	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+	parent.layer.close(index); //再执行关闭   
 }
 </script>
 <body style="background-color:white">
 	<form name="form1" class="add-form" onsubmit="save();">
 		<div class="form-group">
 			<label class="label">登录账号</label>
-			<input name="account" class="form-input" />
+			<input name="account" id="account" class="form-input" />
 		</div>
 		<div class="form-group">
 			<label class="label">用户姓名</label>
-			<input name="name" class="form-input"/>
+			<input name="name" id="name" class="form-input"/>
 		</div>
 		<div class="form-group">
 			<label class="label">用户电话</label>
-			<input name="tel"  class="form-input"/>
+			<input name="tel"  id="tel" class="form-input"/>
 		</div>
 		<div class="form-group">
 			<label class="label">用户密码</label>
-			<input name="pwd" class="form-input" />
+			<input type="password" name="pwd" id="pwd" class="form-input" />
 		</div>
 		
 		<div class="form-group action">
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<div class="form-input btn-wrap" >
 				<button onclick="save();return false;" class="form-button save">保&nbsp;&nbsp;存</button>
-				<button onclick="save();return false;" class="form-button cancel">取&nbsp;&nbsp;消</button>
+				<button onclick="closeThis();return false;" class="form-button cancel">取&nbsp;&nbsp;消</button>
 			</div>
 		</div>
 	</form>

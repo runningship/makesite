@@ -23,8 +23,8 @@
 	    	type: 2,
 	    	title: '添加用户',
 		    shadeClose: false,
-		    shade: 0.8,
-		    area: ['400px', '320px'],
+		    shade: 0.5,
+		    area: ['400px', '350px'],
 		    content: 'add.jsp'
 		}); 
 	}
@@ -34,11 +34,15 @@
 	    	type: 2,
 	    	title: '修改用户',
 		    shadeClose: false,
-		    shade: 0.8,
-		    area: ['400px', '320px'],
+		    shade: 0.5,
+		    area: ['400px', '350px'],
 		    content: 'edit.jsp?id='+id
 		}); 
 	}
+
+function reloadWindow(){
+	window.location.reload();
+}
 
 	function userDel(id){
 		YW.ajax({

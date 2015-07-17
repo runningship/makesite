@@ -8,7 +8,7 @@
 			</h1>
 			<div class="account">
 				<div class="account_meta account_info account_meta_primary">
-					<a href="#" class="nickname">中介宝</a> <a href="#"><img src="./style/getheadimg" class="avatar"></a>
+					<a href="#" class="nickname">中介宝</a> <a href="#"><img src="../style/getheadimg" class="avatar"></a>
 				</div>
 				<div class="account_meta account_logout account_meta_primary">
 					<a href="#">退出</a>
