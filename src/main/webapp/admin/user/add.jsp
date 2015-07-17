@@ -27,26 +27,31 @@ function save(){
 }
 </script>
 <body style="background-color:white">
-	<form name="form1" onsubmit="save();" style="padding:20px">
+	<form name="form1" class="add-form" onsubmit="save();">
 		<div class="form-group">
-			<label>登录账号</label>
+			<label class="label">登录账号</label>
 			<input name="account" class="form-input" />
 		</div>
 		<div class="form-group">
-			<label>用户姓名</label>
+			<label class="label">用户姓名</label>
 			<input name="name" class="form-input"/>
 		</div>
 		<div class="form-group">
-			<label>用户电话</label>
+			<label class="label">用户电话</label>
 			<input name="tel"  class="form-input"/>
 		</div>
 		<div class="form-group">
-			<label>用户密码</label>
+			<label class="label">用户密码</label>
 			<input name="pwd" class="form-input" />
 		</div>
+		
+		<div class="form-group action">
+			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<div class="form-input btn-wrap" >
+				<button onclick="save();return false;" class="form-button save">保&nbsp;&nbsp;存</button>
+				<button onclick="save();return false;" class="form-button cancel">取&nbsp;&nbsp;消</button>
+			</div>
+		</div>
 	</form>
-	<div style="padding-left: 50px;">
-		<button onclick="save();return false;" class="form-button">保&nbsp;&nbsp;存</button>
-	</div>
 </body>
 </html>
