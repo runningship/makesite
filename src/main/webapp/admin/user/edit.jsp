@@ -36,7 +36,7 @@ function save(){
 }
 </script>
 <body style="background-color:white">
-	<form name="form1" role="form" onsubmit="save();return false;" style="padding:20px">
+	<form name="form1" onsubmit="save();return false;" style="padding:20px">
 	<input name="id" value="${user.id}" style="display:none" />
 		<div class="form-group">
 			<label>登录账号</label>

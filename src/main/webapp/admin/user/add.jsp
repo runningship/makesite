@@ -27,7 +27,7 @@ function save(){
 }
 </script>
 <body style="background-color:white">
-	<form name="form1" role="form" onsubmit="save();" style="padding:20px">
+	<form name="form1" onsubmit="save();" style="padding:20px">
 		<div class="form-group">
 			<label>登录账号</label>
 			<input name="account" class="form-input" />
