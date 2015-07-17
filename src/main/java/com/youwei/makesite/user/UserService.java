@@ -36,4 +36,35 @@ public class UserService {
 		mv.data.put("msg", "添加用户成功");
 		return mv;
 	}
+
+	@WebMethod
+	public ModelAndView update(User user ){
+		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(user.name)){
+			throw new GException(PlatformExceptionType.BusinessException,"用户名不能为空");
+		}
+		User po = dao.get(User.class, user.id);
+//		po.id = user.id;
+		po.account = user.account;
+		po.name = user.name;
+		if(StringUtils.isNotEmpty(user.pwd)){
+			po.pwd = SecurityHelper.Md5(user.pwd);
+		}
+		po.tel = user.tel;
+		//TODO
+		dao.saveOrUpdate(po);
+		mv.data.put("msg", "修改用户成功");
+		return mv;
+	}
+
+	@WebMethod
+	public ModelAndView delete(int  id){
+		ModelAndView mv = new ModelAndView();
+		User po = dao.get(User.class, id);
+		if(po!=null){
+			dao.delete(po);
+			mv.data.put("msg", "删除用户成功");
+		}
+		return mv;
+	}
 }

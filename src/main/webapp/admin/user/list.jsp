@@ -1,5 +1,15 @@
+<%@page import="com.youwei.makesite.entity.User"%>
+<%@page import="java.util.List"%>
+<%@page import="org.bc.sdak.SimpDaoTool"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+	List<User> list  = dao.listByParams(User.class,"from User where 1=1");
+	request.setAttribute("list", list);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,13 +20,40 @@
 <script type="text/javascript">
 	function userAdd(){
 		layer.open({
-    	type: 2,
-    	title: '添加用户',
-	    shadeClose: true,
-	    shade: 0.8,
-	    area: ['400px', '320px'],
-	    content: 'add.jsp' //iframe的url
-}); 
+	    	type: 2,
+	    	title: '添加用户',
+		    shadeClose: false,
+		    shade: 0.8,
+		    area: ['400px', '320px'],
+		    content: 'add.jsp'
+		}); 
+	}
+
+	function userEdit(id){
+		layer.open({
+	    	type: 2,
+	    	title: '修改用户',
+		    shadeClose: false,
+		    shade: 0.8,
+		    area: ['400px', '320px'],
+		    content: 'edit.jsp?id='+id
+		}); 
+	}
+
+	function userDel(id){
+		YW.ajax({
+		    type: 'POST',
+		    url: '/${projectName}/c/admin/user/delete?id='+id,
+		    mysuccess: function(data){
+		        alert('删除成功');
+		    },
+		    complete:function(){
+		        api.button({
+		              name: '保存',
+		              disabled:false
+		          });
+		    }
+	    });
 	}
 </script>
 <body>
@@ -34,14 +71,23 @@
 					<table class="userList" >
 						<tr>
 							<td>账号</td>
+							<td>手机号</td>
 							<td>姓名</td>
 							<td>最后登录时间</td>
+							<td>操作</td>
 						</tr>
-						<tr>
-							<td>ceshi</td>
-							<td>测试</td>
-							<td>2015-06-21 15:45:20</td>
-						</tr>
+						<c:forEach items="${list}" var="user">
+							<tr>
+								<td>${user.account}</td>
+								<td>${user.tel}</td>
+								<td>${user.name}</td>
+								<td>${user.lasttime}</td>
+								<td>
+									<a href="#" onclick="userEdit('${user.id}');return false">修改</a>
+									<a href="#" onclick="userDel('${user.id}');return false">删除</a>
+								</td>
+							</tr>
+						</c:forEach>
 					</table>
 				</div>
 
