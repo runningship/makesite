@@ -1,14 +1,20 @@
+<%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.User"%>
 <%@page import="java.util.List"%>
 <%@page import="org.bc.sdak.SimpDaoTool"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-	List<User> list  = dao.listByParams(User.class,"from User where 1=1");
-	request.setAttribute("list", list);
+	Page<User> p = new Page<User>();
+	String currentPageNo =  request.getParameter("currentPageNo");
+	try{
+		p.currentPageNo = Integer.valueOf(currentPageNo);
+	}catch(Exception ex){
+	}
+	p  = dao.findPage(p,"from User where 1=1 order by id desc");
+	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -80,7 +86,7 @@ function reloadWindow(){
 							<td>最后登录时间</td>
 							<td>操作</td>
 						</tr>
-						<c:forEach items="${list}" var="user">
+						<c:forEach items="${page.result}" var="user">
 							<tr>
 								<td>${user.account}</td>
 								<td>${user.tel}</td>
@@ -95,16 +101,7 @@ function reloadWindow(){
 					</table>
 				</div>
 
-				<div class="pagination_wrp">
-					<div class="pagination">
-						<span class="page_nav_area"> <a href="javascript:void(0);" class="btn page_first" style="display: none;"></a> <a href="javascript:void(0);" class="btn page_prev" style="display: none;"><i
-								class="arrow"></i></a> <span class="page_num"> <label>1</label> <span class="num_gap">/</span> <label>5</label>
-						</span> <a href="javascript:void(0);" class="btn page_next"><i class="arrow"></i></a> <a href="javascript:void(0);" class="btn page_last" style="display: none;"></a>
-						</span> <span class="goto_area"> <input type="text"> <a href="javascript:void(0);" class="btn page_go">跳转</a>
-						</span>
-
-					</div>
-				</div>
+				<jsp:include page="../inc/pagination.jsp"></jsp:include>
 
 
 			</div>
