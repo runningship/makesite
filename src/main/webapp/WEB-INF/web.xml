@@ -17,15 +17,6 @@
 	  <session-timeout>1440</session-timeout>
 	 </session-config>
 	 
-	<servlet>
-        <servlet-name>fileup</servlet-name>
-        <servlet-class> com.youwei.makesite.FileUploadServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-	    <servlet-name>fileup</servlet-name>
-	    <url-pattern>/file/upload/*</url-pattern>
-	</servlet-mapping>
-	
 	<filter>
     	<filter-name>grandFilter</filter-name>
     	<filter-class>org.bc.web.GrandFilter</filter-class>

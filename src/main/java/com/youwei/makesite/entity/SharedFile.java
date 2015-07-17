@@ -18,6 +18,11 @@ public class SharedFile {
 	
 	public String path;
 	
+	//单位K
+	public Long size;
+	
+	public String fileId;
+	
 	//分享人,上传人
 	public Integer uid;
 	
