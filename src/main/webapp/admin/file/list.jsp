@@ -76,7 +76,7 @@ $(function(){
 								</c:otherwise> 
 							</c:choose>
 							<td>${file.uname}</td>
-							<td>${file.uploadTime }</td>
+							<td><fmt:formatDate value="${file.uploadTime }" pattern="yyyy-MM-dd HH:mm"/></td>
 							<td><a href="#"  onclick="fileDel(${file.fid})">删除</a></td>
 						</tr>
 						</c:forEach>

@@ -71,7 +71,7 @@ function reloadWindow(){
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
 						<h3>用户列表</h3>
-						<button onclick="userAdd();return false;" style="float:right;margin-top:-35px;padding:5px;">添 &nbsp;加</button>
+						<button style="float:right;margin-top: 5px;padding:5px;">添 &nbsp;加</button>
 					</div>
 					<table class="userList" cellspacing="0">
 						<tr style="background: aliceblue;">

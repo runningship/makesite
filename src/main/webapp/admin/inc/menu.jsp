@@ -14,13 +14,13 @@
 			</dt>
 
 			<dd class="menu_item ">
-				<a data-id="yjcd" href="#">一级菜单</a>
+				<a data-id="yjcd" href="../info/list1.jsp?nav=yj">一级菜单</a>
 			</dd>
 			<dd class="menu_item ">
-				<a data-id="ejcd" href="#">二级菜单</a>
+				<a data-id="ejcd" href="../info/list2.jsp?nav=ej">二级菜单</a>
 			</dd>
 			<dd class="menu_item ">
-				<a data-id="wzlb" href="#">文章列表</a>
+				<a data-id="wzlb" href="../info/list3.jsp?nav=wz">文章列表</a>
 			</dd>
 		</dl>
 		<dl class="menu no_extra">
