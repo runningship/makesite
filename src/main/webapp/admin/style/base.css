@@ -223,7 +223,8 @@ body.scaled {
 .title_bar h3 {
 	font-size:14px;
 	font-weight:400;
-	font-style:normal
+	font-style:normal;
+	float:left;
 }
 button.btn {
 	height:32px;
@@ -416,14 +417,14 @@ button.btn {
 .menu_title.clickable:hover {
 	background-color:#f4f5f9
 }
-.menu_title.selected {
+.selected {
 	background-color:#44b549;
 	color:#fff
 }
-.menu_title.selected:hover {
+.selected:hover {
 	background-color:#44b549
 }
-.menu_title.selected a {
+.selected a {
 	color:#fff
 }
 
@@ -443,7 +444,8 @@ button.btn {
 	color:#222
 }
 .menu_item a:hover {
-	text-decoration:none
+	text-decoration:none;
+	background-color:#eee;
 }
 
 
