@@ -56,12 +56,7 @@ function reloadWindow(){
 		    url: '/${projectName}/c/admin/user/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
-		    },
-		    complete:function(){
-		        api.button({
-		              name: '保存',
-		              disabled:false
-		          });
+		        window.location.reload();
 		    }
 	    });
 	}
@@ -78,16 +73,16 @@ function reloadWindow(){
 						<h3>用户列表</h3>
 						<button onclick="userAdd();return false;" style="float:right;margin-top:-35px;padding:5px;">添 &nbsp;加</button>
 					</div>
-					<table class="userList" >
-						<tr>
+					<table class="userList" cellspacing="0">
+						<tr style="background: aliceblue;">
 							<td>账号</td>
 							<td>手机号</td>
 							<td>姓名</td>
 							<td>最后登录时间</td>
 							<td>操作</td>
 						</tr>
-						<c:forEach items="${page.result}" var="user">
-							<tr>
+						<c:forEach items="${page.result}" var="user" varStatus="status">
+							<tr class="statue_${status.index%2}">
 								<td>${user.account}</td>
 								<td>${user.tel}</td>
 								<td>${user.name}</td>

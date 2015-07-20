@@ -33,7 +33,7 @@ function jumpPage(totalPageCount){
 				<a href="javascript:void(0);" class="btn page_next" onclick="nextPage(${page.currentPageNo});" > <i class="arrow"></i></a>
 			</c:if>
 		</span> 
-		<span class="goto_area"> <input type="text" id="currentPageNo"> <a onclick="jumpPage(${page.currentPageNo})" href="javascript:void(0);" class="btn page_go">跳转</a>
+		<span class="goto_area"> <input type="text" id="currentPageNo"> <a onclick="jumpPage(${page.totalPageCount})" href="javascript:void(0);" class="btn page_go">跳转</a>
 		</span>
 	</div>
 </div>

@@ -23,6 +23,7 @@ import org.bc.web.WebMethod;
 
 import com.youwei.makesite.cache.ConfigCache;
 import com.youwei.makesite.entity.SharedFile;
+import com.youwei.makesite.entity.User;
 import com.youwei.makesite.util.DataHelper;
 
 
@@ -80,5 +81,16 @@ public class FileUploadService {
 		}catch(Exception ex){
 			throw new GException(PlatformExceptionType.BusinessException,"文件上传失败" , ex);
 		}
+	}
+
+	@WebMethod
+	public ModelAndView delete(int  id){
+		ModelAndView mv = new ModelAndView();
+		SharedFile po = dao.get(SharedFile.class, id);
+		if(po!=null){
+			dao.delete(po);
+			mv.data.put("msg", "删除文件成功");
+		}
+		return mv;
 	}
 }
