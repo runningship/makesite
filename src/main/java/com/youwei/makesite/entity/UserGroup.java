@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * 用户，组 关联关系
  */
 @Entity
-public class UserGourp {
+public class UserGroup {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

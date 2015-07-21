@@ -1,11 +1,11 @@
 <%@page import="com.youwei.makesite.entity.Group"%>
-<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@page import="org.bc.sdak.SimpDaoTool"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-	String parentId = request.getParameter("groupId");
+	String parentId = request.getParameter("parentId");
 	request.setAttribute("groupName", "无");
 	try{
 	Group group = dao.get(Group.class, Integer.valueOf(parentId));
@@ -25,25 +25,15 @@
 </head>
 <script type="text/javascript">
 function save(){
-	var account = $('#account').val();
-	var name = $('#name').val();
-	var pwd = $('#pwd').val();
+	var account = $('#name').val();
 	if (account=="") {
-		alert('用户账号不能为空');
-		return;
-	};
-	if (name=="") {
-		alert('用户名不能为空');
-		return;
-	};
-	if (pwd=="") {
-		alert('密码不能为空');
+		alert('用户组名不能为空');
 		return;
 	};
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/user/save',
+	    url: '/${projectName}/c/admin/group/save',
 	    data:a,
 	    mysuccess: function(data){
 	        alert('添加成功');
@@ -58,29 +48,21 @@ function closeThis(){
 	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 	parent.layer.close(index); //再执行关闭   
 }
+
+$(function(){
+});
 </script>
 <body style="background-color:white">
 	<form name="form1" class="add-form" onsubmit="save();">
-		<input type="hidden"  id="groupId" name="groupId" value="${groupId }"/>
+		<input type="hidden"  id="parentId" name="parentId" value="${groupId }"/>
+		<div class="form-group">
+			<label class="label">父级组名</label>
+			<input disabled="disabled" name="parentName" id="parentName"  value="${groupName }" class="form-input" />
+		</div>
+		
 		<div class="form-group">
 			<label class="label">用户组名</label>
-			<input name="groupName" id="groupName" class="form-input"  value="${groupName }"/>
-		</div>
-		<div class="form-group">
-			<label class="label">登录账号</label>
-			<input name="account" id="account" class="form-input" />
-		</div>
-		<div class="form-group">
-			<label class="label">用户姓名</label>
-			<input name="name" id="name" class="form-input"/>
-		</div>
-		<div class="form-group">
-			<label class="label">用户电话</label>
-			<input name="tel"  id="tel" class="form-input"/>
-		</div>
-		<div class="form-group">
-			<label class="label">用户密码</label>
-			<input type="password" name="pwd" id="pwd" class="form-input" />
+			<input name="name" id="name" class="form-input" />
 		</div>
 		
 		<div class="form-group action">

@@ -59,7 +59,7 @@
 				<a data-id="yglb" href="../user/list.jsp?nav=yglb">员工列表</a>
 			</dd>
 			<dd class="menu_item ">
-				<a data-id="yhz" href="#">用 户 组</a>
+				<a data-id="zzjg" href="../user/tree.jsp?nav=zzjg">组织架构</a>
 			</dd>
 			<dd class="menu_item ">
 				<a href="#">职位权限</a>
