@@ -19,4 +19,5 @@ public class GroupFileItem {
 	public Integer fileId;
 	
 	public Integer groupId;
+	
 }

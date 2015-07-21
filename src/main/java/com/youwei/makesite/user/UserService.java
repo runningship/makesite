@@ -79,7 +79,38 @@ public class UserService {
 		User po = dao.get(User.class, id);
 		if(po!=null){
 			dao.delete(po);
+			dao.execute("delete from UserGroup where uid=?", id);
 			mv.data.put("msg", "删除用户成功");
+		}
+		
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView banUser(int  groupId , int uid){
+		ModelAndView mv = new ModelAndView();
+		UserGroup po = dao.getUniqueByParams(UserGroup.class, new String[]{"gid" , "uid" },  new Object[]{groupId , Integer.valueOf(uid)});
+		if(po!=null){
+			dao.delete(po);
+		}
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView addToGroup(int  groupId , String ids){
+		ModelAndView mv = new ModelAndView();
+		for(String uid : ids.split(",")){
+			if(StringUtils.isEmpty(uid)){
+				continue;
+			}
+			UserGroup po = dao.getUniqueByParams(UserGroup.class, new String[]{"gid" , "uid" },  new Object[]{groupId , Integer.valueOf(uid)});
+			if(po!=null){
+				continue;
+			}
+			UserGroup ug = new UserGroup();
+			ug.gid = groupId;
+			ug.uid = Integer.valueOf(uid);
+			dao.saveOrUpdate(ug);
 		}
 		return mv;
 	}

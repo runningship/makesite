@@ -27,4 +27,6 @@ public class User {
 	public Date addtime;
 	
 	public Date lasttime;
+	
+	public String _site;
 }

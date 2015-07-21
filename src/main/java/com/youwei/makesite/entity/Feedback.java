@@ -21,4 +21,5 @@ public class Feedback {
 	
 	public Date addtime;
 	
+	public String _site;
 }

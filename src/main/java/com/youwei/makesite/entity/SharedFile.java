@@ -27,4 +27,6 @@ public class SharedFile {
 	public Integer uid;
 	
 	public Date uploadTime;
+	
+	public String _site;
 }

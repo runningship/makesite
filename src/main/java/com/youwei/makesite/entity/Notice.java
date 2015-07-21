@@ -24,4 +24,6 @@ public class Notice {
 	
 	public Date addtime;
 	
+	public String _site;
+	
 }

@@ -19,6 +19,8 @@
 <script type="text/javascript">
 var parentGroupId='';
 var parentGroupName='';
+var currentUid='';
+var showMenu;
 var setting = {
   view: {
     showIcon: false,
@@ -55,19 +57,16 @@ function onCheck(event, treeId, treeNode){
   console.log(treeNode.id);
 }
 
-function initUserTree(treeId){
-  $.ajax({
-    type: 'POST',
-    url: '/c/admin/user/getUserTree',
-    data:'',
-    success: function(data){
-        var result=JSON.parse(data);
-        $.fn.zTree.init($("#"+treeId), setting, result.result);
-    }
-  });
+function banUser(){
+	YW.ajax({
+	    type: 'POST',
+	    url: '/${projectName}/c/admin/user/banUser?groupId='+parentGroupId+'&uid='+currentUid,
+	    mysuccess: function(data){
+	        alert('移出成功');
+			window.location.reload();
+	    }
+    });
 }
-
-
 function addDiyDom(treeId, treeNode) {
   console.log(treeId);
   var aObj = $("#" + treeNode.tId + "_a");
@@ -103,11 +102,22 @@ function addGroup(){
 function addUser(){
 	layer.open({
     	type: 2,
-    	title: '添加用户组',
+    	title: '添加新用户',
 	    shadeClose: false,
 	    shade: 0.5,
 	    area: ['400px', '400px'],
 	    content: '../user/add.jsp?groupId='+parentGroupId
+	}); 
+}
+
+function inviteUser(){
+	layer.open({
+    	type: 2,
+    	title: '添加已有用户',
+	    shadeClose: false,
+	    shade: 0.5,
+	    area: ['700px', '600px'],
+	    content: 'selectUser.jsp?groupId='+parentGroupId
 	}); 
 }
 
@@ -123,11 +133,17 @@ $(function(){
 function OnRightClick(event, treeId, treeNode) {
   var treeObj = $.fn.zTree.getZTreeObj(treeId);
   treeObj.selectNode(treeNode);
-  if(treeNode.type!='group'){
-    return;
+  if(treeNode.type=='group'){
+	  $('#userMenu').hide();
+	  $('#groupMenu').show();
+	  parentGroupId = treeNode.id;
+	  parentGroupName = treeNode.name;
+  }else{
+	  currentUid = treeNode.id;
+	  $('#groupMenu').hide();
+	  $('#userMenu').show();
   }
-  parentGroupId = treeNode.id;
-  parentGroupName = treeNode.name;
+  
   // blockAlert(event.target.offsetTop);
   // showRMenu(treeNode.type, event.clientX, event.target.parentElement.parentElement.offsetTop+10);
   var Y = event.clientY;
@@ -135,6 +151,7 @@ function OnRightClick(event, treeId, treeNode) {
   //   Y-=250;
   // }
   showRMenu(treeNode.type, event.clientX, Y);
+  showMenu=true;
 }
 function showRMenu(type, x, y) {
 	var rMenu = $("#rMenu");
@@ -146,6 +163,10 @@ function showRMenu(type, x, y) {
   rMenu.css({"top":y+"px", "left":x+"px", "display":"block" , "visibility":"visible"});
 }
 function hideRMenu() {
+	if(showMenu){
+		showMenu = false;
+		return;
+	}
    $("#rMenu").css({"visibility": "hidden"});
 }
 </script>
@@ -165,12 +186,16 @@ div#rMenu {
 #rMenu.list-group {
   box-shadow: 0px 2px 10px #999;
   padding: 0;
-  width:120px;
+  width:140px;
+}
+#rMenu.list-group a:hover{
+background: #428bca;
+  color: white;
 }
 </style>
 </head>
 
-<body>
+<body onclick="hideRMenu();">
 <jsp:include page="../inc/top.jsp"></jsp:include>
 	<div class="body">
 		<div class="container_box cell_layout side_l">
@@ -179,7 +204,7 @@ div#rMenu {
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>用户列表</h3>
+						<h3>用户组织架构</h3>
 						<button onclick="addTopGroup();return false;" class="add">添 &nbsp;加</button>
 					</div>
 					<div class="zTreeDemoBackground left">
@@ -191,9 +216,17 @@ div#rMenu {
 		</div>
 
 	</div>
-	<div id="rMenu" class="list-group" style="position:absolute;z-index:999;display:none;" onclick="hideRMenu();">
-	  <a href="javascript:void(0)" auth="sz_comp_edit" id="m_edit_comp" onclick="addGroup();" class="list-group-item">添加子用户组</a>
-	  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="addUser()" class="list-group-item">增加用户</a>
-	</div>
+	
 </body>
+<div id="rMenu"   class="list-group" style="position:absolute;z-index:999;display:none;" onclick="hideRMenu();">
+	<span id="groupMenu">
+  <a href="javascript:void(0)" auth="sz_comp_edit" id="m_edit_comp" onclick="addGroup();" class="list-group-item">添加子用户组</a>
+  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="addUser()" class="list-group-item">加入新用户</a>
+  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="inviteUser()" class="list-group-item">加入已有用户</a>
+  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="inviteUser()" class="list-group-item">删除用户组</a>
+  </span>
+  <span id="userMenu">
+  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="banUser()" class="list-group-item">移出用户组</a>
+  </span>
+</div>
 </html>

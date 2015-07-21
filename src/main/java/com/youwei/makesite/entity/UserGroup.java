@@ -18,4 +18,5 @@ public class UserGroup {
 	public Integer gid;
 	
 	public Integer uid;
+	
 }

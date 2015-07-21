@@ -21,4 +21,5 @@ public class NoticeReceiver {
 	public Integer receiverId;
 
 	public Integer hasRead;
+	
 }

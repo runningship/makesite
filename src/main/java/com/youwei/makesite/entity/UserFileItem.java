@@ -19,4 +19,5 @@ public class UserFileItem {
 	public Integer fileId;
 	
 	public Integer uid;
+	
 }

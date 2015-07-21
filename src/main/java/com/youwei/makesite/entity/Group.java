@@ -24,4 +24,6 @@ public class Group {
 	public Integer owner;
 	
 	public Date addtime;
+	
+	public String _site;
 }
