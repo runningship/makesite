@@ -12,6 +12,13 @@
 </head>
 <script type="text/javascript">
 function save(){
+	var conts = ue.getContent();
+    if ($('#type').val()=='conts') {
+    	if (conts==null||conts=='') {
+	    	alert('此条件下内容不能为空');
+	    	return;
+	    }
+    };
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',

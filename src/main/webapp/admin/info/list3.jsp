@@ -35,13 +35,29 @@ $(function(){
 	function infoDel(id){
 		YW.ajax({
 		    type: 'POST',
-		    url: '/${projectName}/c/admin/file/delete?id='+id,
+		    url: '/${projectName}/c/admin/article/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
 		        window.location.reload();
 		    }
 	    });
 	}
+
+function reloadWindow(){
+	window.location.reload();
+}
+
+	function editThis(id){
+		layer.open({
+	    	type: 2,
+	    	title: '修改文章',
+		    shadeClose: false,
+		    shade: 0.5,
+		    area: ['800px', '700px'],
+		    content: 'editw.jsp?id='+id
+		}); 
+	}
+	
 </script>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -62,9 +78,9 @@ $(function(){
 						</tr>
 						<c:forEach items="${page.result }" var="article" varStatus="status">
 							<tr class="statue_${status.index%2}">
-							<td><a href='#' target="_blank "> ${article.name } </a></td> 
+							<td> ${article.name } </td> 
 							<td>${article.fname}</td>
-							<td><a href="#">修改</a>  <a href="#">删除</a></td>
+							<td><a href="#" onclick="editThis(${article.id})">修改</a>  <a href="#">删除</a></td>
 						</tr>
 						</c:forEach>
 					</table>

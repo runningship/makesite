@@ -19,6 +19,7 @@ import org.bc.web.WebMethod;
 
 import com.youwei.makesite.cache.ConfigCache;
 import com.youwei.makesite.entity.Article;
+import com.youwei.makesite.entity.Menu;
 import com.youwei.makesite.entity.User;
 import com.youwei.makesite.entity.UserGroup;
 import com.youwei.makesite.util.DataHelper;
@@ -42,6 +43,20 @@ public class ArticleService {
 		dao.saveOrUpdate(art);
 		return mv;
 	}
+
+	@WebMethod
+	public ModelAndView update(Article art){
+		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(art.name)){
+			throw new GException(PlatformExceptionType.BusinessException,"标题不能为空");
+		}
+		Article po = dao.get(Article.class, art.id);
+		po.name = art.name;
+		po.conts = art.conts;
+		//TODO
+		dao.saveOrUpdate(po);
+		return mv;
+	}
 	
 	@WebMethod
 	public ModelAndView delete(int  id){
@@ -49,7 +64,6 @@ public class ArticleService {
 		Article po = dao.get(Article.class, id);
 		if(po!=null){
 			dao.delete(po);
-			mv.data.put("msg", "删除文件成功");
 		}
 		return mv;
 	}

@@ -19,6 +19,7 @@ import org.bc.web.WebMethod;
 
 import com.youwei.makesite.cache.ConfigCache;
 import com.youwei.makesite.entity.Menu;
+import com.youwei.makesite.entity.Article;
 import com.youwei.makesite.entity.User;
 import com.youwei.makesite.util.DataHelper;
 import com.youwei.makesite.util.SecurityHelper;
@@ -41,13 +42,38 @@ public class MenuService {
 		dao.saveOrUpdate(menu);
 		return mv;
 	}
+
+	@WebMethod
+	public ModelAndView update(Menu menu ){
+		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(menu.name)){
+			throw new GException(PlatformExceptionType.BusinessException,"标题不能为空");
+		}
+		Menu po = dao.get(Menu.class, menu.id);
+		po.name = menu.name;
+		po.conts = menu.conts;
+		//TODO
+		dao.saveOrUpdate(po);
+		return mv;
+	}
+	
 	@WebMethod
 	public ModelAndView delete(int  id){
+		String xx = "";
+		xx.split("2")[2].toCharArray();
 		ModelAndView mv = new ModelAndView();
+		long leftCount = dao.countHql("select count(*) from Menu where parentId=?", id);
+		if(leftCount>0){
+			throw new GException(PlatformExceptionType.BusinessException,"该栏目下包含子栏目,请先删除子栏目。");
+		}
+		leftCount = dao.countHql("select count(*) from Article where parentId=?", id);
+		if(leftCount>0){
+			throw new GException(PlatformExceptionType.BusinessException,"该栏目下包含子栏目,请先删除子栏目。");
+		}
+		
 		Menu po = dao.get(Menu.class, id);
 		if(po!=null){
 			dao.delete(po);
-			mv.data.put("msg", "删除文件成功");
 		}
 		return mv;
 	}

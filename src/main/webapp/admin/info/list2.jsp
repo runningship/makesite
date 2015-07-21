@@ -15,7 +15,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"select m2.id as id , m2.name as name , m1.name as fname from Menu m1 , Menu m2 where m2.parentId is not null and m1.id = m2.parentId order by m2.id desc",true,new Object[]{});
+	p  = dao.findPage(p,"select m2.id as id , m2.name as name , m2.type as type , m1.name as fname from Menu m1 , Menu m2 where m2.parentId is not null and m1.id = m2.parentId order by m2.id desc",true,new Object[]{});
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -42,6 +42,21 @@ $(function(){
 		    content: 'add3.jsp?parentId='+id
 		}); 
 	}
+
+	function editThis(id){
+		layer.open({
+	    	type: 2,
+	    	title: '修改项目',
+		    shadeClose: false,
+		    shade: 0.5,
+		    area: ['800px', '700px'],
+		    content: 'edit1.jsp?id='+id
+		}); 
+	}
+	
+function reloadWindow(){
+	window.location.reload();
+}
 
 	function delThis(id){
 		YW.ajax({
@@ -75,7 +90,11 @@ $(function(){
 							<tr class="statue_${status.index%2}">
 							<td>${menu.name }</td> 
 							<td>${menu.fname }</td> 
-							<td><a href="#">修改</a>  <a href="#" onclick="delThis(${menu.id})">删除</a> <a href="#" onclick="openAdd(${menu.id});">添加文章</a></td>
+							<td><a href="#" onclick="editThis(${menu.id})">修改</a>  <a href="#" onclick="delThis(${menu.id})">删除</a> 
+							<c:if test="${menu.type == 'menu'}">
+								<a href="#" onclick="openAdd(${menu.id});">添加文章</a>
+							</c:if>
+							</td>
 						</tr>
 						</c:forEach>
 					</table>

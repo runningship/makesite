@@ -55,6 +55,21 @@ $(function(){
 		}); 
 	}
 
+	function editThis(id){
+		layer.open({
+	    	type: 2,
+	    	title: '修改项目',
+		    shadeClose: false,
+		    shade: 0.5,
+		    area: ['800px', '650px'],
+		    content: 'edit1.jsp?id='+id
+		}); 
+	}
+
+function reloadWindow(){
+	window.location.reload();
+}
+
 	function delThis(id){
 		YW.ajax({
 		    type: 'POST',
@@ -88,7 +103,11 @@ $(function(){
 							<tr class="statue_${status.index%2}">
 							<td>${menu.id } </td> 
 							<td>${menu.name }</td> 
-							<td><a href="#">修改</a>  <a href="#" onclick="delThis(${menu.id})">删除</a> <a href="#" onclick="openAdd2(${menu.id});">添加子项目</a></td>
+							<td><a href="#" onclick="editThis(${menu.id})">修改</a>  <a href="#" onclick="delThis(${menu.id})">删除</a>
+							<c:if test="${menu.type == 'menu'}">
+								<a href="#" onclick="openAdd2(${menu.id});">添加子项目</a>
+							</c:if>
+							</td>
 						</tr>
 						</c:forEach>
 					</table>
