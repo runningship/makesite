@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.bc.sdak.CommonDaoService;
 import org.bc.sdak.GException;
 import org.bc.sdak.TransactionalServiceHelper;
@@ -17,22 +18,35 @@ import org.bc.web.ThreadSession;
 import org.bc.web.WebMethod;
 
 import com.youwei.makesite.cache.ConfigCache;
-import com.youwei.makesite.entity.Menu;
+import com.youwei.makesite.entity.Article;
 import com.youwei.makesite.entity.User;
+import com.youwei.makesite.entity.UserGroup;
 import com.youwei.makesite.util.DataHelper;
+import com.youwei.makesite.util.SecurityHelper;
 
 
-@Module(name="/admin/info")
+@Module(name="/admin/article")
 public class ArticleService {
 
 	static final int MAX_SIZE = 1024000*100;
 	static final String BaseFileDir = ConfigCache.get("upload_path", "");
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
+
+	@WebMethod
+	public ModelAndView save(Article art){
+		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(art.name)){
+			throw new GException(PlatformExceptionType.BusinessException,"标题不能为空");
+		}
+		//TODO
+		dao.saveOrUpdate(art);
+		return mv;
+	}
 	
 	@WebMethod
 	public ModelAndView delete(int  id){
 		ModelAndView mv = new ModelAndView();
-		Menu po = dao.get(Menu.class, id);
+		Article po = dao.get(Article.class, id);
 		if(po!=null){
 			dao.delete(po);
 			mv.data.put("msg", "删除文件成功");
