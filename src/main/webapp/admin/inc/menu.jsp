@@ -14,13 +14,13 @@
 			</dt>
 
 			<dd class="menu_item ">
-				<a data-id="yjcd" href="../info/list1.jsp?nav=yj">一级项目</a>
+				<a data-id="yjcd" href="../info/list1.jsp?nav=yjcd">一级项目</a>
 			</dd>
 			<dd class="menu_item ">
-				<a data-id="ejcd" href="../info/list2.jsp?nav=ej">二级项目</a>
+				<a data-id="ejcd" href="../info/list2.jsp?nav=ejcd">二级项目</a>
 			</dd>
 			<dd class="menu_item ">
-				<a data-id="wzlb" href="../info/list3.jsp?nav=wz">文章列表</a>
+				<a data-id="wzlb" href="../info/list3.jsp?nav=wzlb">文章列表</a>
 			</dd>
 		</dl>
 		<dl class="menu no_extra">
@@ -35,7 +35,7 @@
 				<a data-id="fjx" href="#">发件箱</a>
 			</dd>
 			<dd class="menu_item ">
-				<a data-id="ftz" href="#">发通知</a>
+				<a data-id="ftz" href="../notice/add.jsp?nav=ftz">发通知</a>
 			</dd>
 		</dl>
 		<dl class="menu ">

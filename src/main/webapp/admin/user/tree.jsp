@@ -47,6 +47,26 @@ var setting = {
 	}
 };
 
+$(function(){
+	$.fn.zTree.init($("#treeDemo"), setting);
+	document.oncontextmenu=function(){
+		window.event.returnValue=false;
+		return false;
+	};
+});
+
+function addDiyDom(treeId, treeNode) {
+	  console.log(treeId);
+	  var aObj = $("#" + treeNode.tId + "_a");
+	  aObj.css('display','inline');
+
+	  aObj.parent().addClass('a_'+treeNode.type);
+	  if(treeNode.cnum!=null){
+	    var cnumStr = '<span class="">'+ treeNode.cnum +' </span>';
+	    aObj.prepend(cnumStr);  
+	  }
+	}
+	
 function zTreeBeforeAsync(treeId, treeNode) {
 	if(treeNode){
 		parentGroupId = treeNode.id;
@@ -67,17 +87,7 @@ function banUser(){
 	    }
     });
 }
-function addDiyDom(treeId, treeNode) {
-  console.log(treeId);
-  var aObj = $("#" + treeNode.tId + "_a");
-  aObj.css('display','inline');
 
-  aObj.parent().addClass('a_'+treeNode.type);
-  if(treeNode.cnum!=null){
-    var cnumStr = '<span class="">'+ treeNode.cnum +' </span>';
-    aObj.prepend(cnumStr);  
-  }
-}
 function addTopGroup(){
 	layer.open({
     	type: 2,
@@ -121,13 +131,7 @@ function inviteUser(){
 	}); 
 }
 
-$(function(){
-	$.fn.zTree.init($("#treeDemo"), setting);
-	document.oncontextmenu=function(){
-		window.event.returnValue=false;
-		return false;
-	};
-});
+
 
 
 function OnRightClick(event, treeId, treeNode) {
