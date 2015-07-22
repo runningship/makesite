@@ -15,13 +15,13 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"select m2.id as id , m2.name as name , m2.type as type , m1.name as fname from Menu m1 , Menu m2 where m2.parentId is not null and m1.id = m2.parentId order by m2.id desc",true,new Object[]{});
+	p  = dao.findPage(p,"select m2.id as id , m2.name as name , m2.type as type , m1.name as fname from Menu m1 , Menu m2 where m2.parentId is not null and m1.id = m2.parentId and m1._site =? order by m2.id desc",true,new Object[]{ request.getServerName()});
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>二级项目</title>
+<title>二级栏目</title>
 
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <script type="text/javascript"  src="../js/fileupload.js" ></script>
@@ -46,7 +46,7 @@ $(function(){
 	function editThis(id){
 		layer.open({
 	    	type: 2,
-	    	title: '修改项目',
+	    	title: '修改栏目',
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['800px', '700px'],
@@ -78,12 +78,12 @@ function reloadWindow(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>二级项目</h3>
+						<h3>二级栏目</h3>
 					</div>
 					<table class="fileList" cellspacing="0">
 						<tr style="background: aliceblue;">
-							<td>项目名称</td>
-							<td>父项目</td>
+							<td>栏目名称</td>
+							<td>父栏目</td>
 							<td>操作</td>
 						</tr>
 						<c:forEach items="${page.result }" var="menu" varStatus="status">

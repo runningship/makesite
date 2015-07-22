@@ -43,8 +43,17 @@ public class UserSessionFilter implements Filter {
     			HttpServletResponse resp = (HttpServletResponse)response;
     			resp.setHeader("userOffline", "true");
     			resp.setContentType("text/html");
-    			String str = "<script type='text/javascript'>window.location='"+req.getServletContext().getContextPath()+"/login.jsp'</script>";
-    			response.getOutputStream().write(str.getBytes());
+    			boolean ajax = "XMLHttpRequest".equals( req.getHeader("X-Requested-With") );
+    	        String ajaxFlag = null == req.getParameter("ajax") ?  "false": req.getParameter("ajax") ;
+    	        boolean isAjax = ajax || ajaxFlag.equalsIgnoreCase("true");
+    	        if(isAjax){
+    	        	String str = "window.top.location='"+req.getServletContext().getContextPath()+"/login.jsp'";
+        			response.getOutputStream().write(str.getBytes());
+    	        }else{
+    	        	String str = "<script type='text/javascript'>window.location='"+req.getServletContext().getContextPath()+"/login.jsp'</script>";
+        			response.getOutputStream().write(str.getBytes());
+    	        }
+    			
     		} catch (IOException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();

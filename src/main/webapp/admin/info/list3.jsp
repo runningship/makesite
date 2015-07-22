@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="com.youwei.makesite.entity.Menu"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.SharedFile"%>
@@ -11,12 +14,45 @@
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	Page<Map> p = new Page<Map>();
 	String currentPageNo =  request.getParameter("currentPageNo");
+	String searchText =  request.getParameter("searchText");
+	String yijiId =  request.getParameter("yijiId");
+	String erjiId =  request.getParameter("erjiId");
+	String _site =  request.getServerName();
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"select art.name as name, art.id as id, menu.name as fname from Article art,Menu menu where art.parentId = menu.id ",true,new Object[]{});
+	StringBuilder hql = new StringBuilder("select art.name as name, art.id as id,  m2.name as fname from Article art,Menu m1,Menu m2 where m1.id=m2.parentId and art.parentId=m2.id ");
+	List<Object> params = new ArrayList<Object>();
+	if(StringUtils.isNotEmpty(yijiId)){
+		hql.append(" and m1.id=?");
+		params.add(Integer.valueOf(yijiId));
+	}
+	if(StringUtils.isNotEmpty(erjiId)){
+		hql.append(" and m2.id=?");
+		params.add(Integer.valueOf(erjiId));
+	}
+	if(StringUtils.isNotEmpty(searchText)){
+		hql.append(" and art.name like ?");
+		params.add("%"+searchText+"%");
+	}
+	if(StringUtils.isNotEmpty(_site)){
+		hql.append(" and art._site like ?");
+		params.add("%"+_site+"%");
+	}
+		hql.append(" order by art.id desc");
+	p  = dao.findPage(p, hql.toString(),true, params.toArray());
+
+
+	List<Menu> yiji  = dao.listByParams(Menu.class, "from Menu where parentId is null and type = 'menu' order by id desc");
+	List<Menu> erji  = dao.listByParams(Menu.class, "from Menu where parentId is not null and type = 'menu' order by id desc");
 	request.setAttribute("page", p);
+	request.setAttribute("yijiList", yiji);
+	request.setAttribute("erjiList", erji);
+
+	request.setAttribute("yijiId", yijiId);
+	request.setAttribute("erjiId", erjiId);
+	request.setAttribute("searchText", searchText);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -57,7 +93,18 @@ function reloadWindow(){
 		    content: 'editw.jsp?id='+id
 		}); 
 	}
-	
+
+var SearchId;
+function setSearch(obj){
+	SearchId = obj.value;
+	if (SearchId=='') {
+		$('.erji').show();
+	}else{
+		$('.erji').hide();
+		$('option[type="'+SearchId+'"]').show();
+	}
+}
+
 </script>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -67,13 +114,29 @@ function reloadWindow(){
 			<jsp:include page="../inc/menu.jsp"></jsp:include>
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
-					<div class="title_bar">
-						<h3>文章目录</h3>
-					</div>
+						<div class="title_bar">
+							<h3>文章目录</h3>
+					<form name="form1" type="form" method="get" action="list3.jsp" style="float:right;width:700px;">
+							<select name="yijiId" style="width:100px;" onchange="setSearch(this);">
+								<option value="">全部</option>
+							<c:forEach items="${yijiList }" var="first">
+								<option <c:if test="${first.id==yijiId}"> selected </c:if>  value="${first.id}">${first.name}</option>
+							</c:forEach>
+							</select>
+							<select name="erjiId" style="width:100px;margin-right: 30px;">
+								<option value="">全部</option>
+							<c:forEach items="${erjiList }" var="second">
+								<option class="erji" type="${second.parentId}" value="${second.id}" >${second.name}</option>
+							</c:forEach>
+							</select>
+							<input name="searchText" value="${searchText}"  style="margin-right: 30px;" placeholder="标题名称">
+							<input style="margin-right: 50px;" type="submit" value="搜索"/>
+					</form>
+						</div>
 					<table class="fileList" cellspacing="0">
 						<tr style="background: aliceblue;">
 							<td>文章名</td>
-							<td>父项目</td>
+							<td>父栏目</td>
 							<td>操作</td>
 						</tr>
 						<c:forEach items="${page.result }" var="article" varStatus="status">

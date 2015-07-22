@@ -14,10 +14,10 @@
 			</dt>
 
 			<dd class="menu_item ">
-				<a data-id="yjcd" href="/${projectName }/admin/info/list1.jsp?nav=yjcd">一级项目</a>
+				<a data-id="yjcd" href="/${projectName }/admin/info/list1.jsp?nav=yjcd">一级栏目</a>
 			</dd>
 			<dd class="menu_item ">
-				<a data-id="ejcd" href="/${projectName }/admin/info/list2.jsp?nav=ejcd">二级项目</a>
+				<a data-id="ejcd" href="/${projectName }/admin/info/list2.jsp?nav=ejcd">二级栏目</a>
 			</dd>
 			<dd class="menu_item ">
 				<a data-id="wzlb" href="/${projectName }/admin/info/list3.jsp?nav=wzlb">文章列表</a>

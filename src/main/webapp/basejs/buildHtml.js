@@ -90,8 +90,9 @@ YW={
         error: function(data){
         },
         success:function(data){
-        	if(data.responseText!=undefined && data.responseText.indexOf('login.jsp')!=-1){
-        		window.parent.location='/login.jsp';
+        	if(data!=undefined && data.indexOf('login.jsp')>-1){
+                eval(data);
+        		return;
         	}else{
         		var json;
         		if(typeof(data)=='string'){

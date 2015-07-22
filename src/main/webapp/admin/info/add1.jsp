@@ -39,10 +39,19 @@ function closeThis(){
 }
 
 function showConts(sel){
+	var index = parent.layer.getFrameIndex(window.name);
 	if(sel==1){
 		$('#conts').css('display','');
+		parent.layer.style(index, {
+		    width: '800px',
+		    height:'700px'
+		}); 
 	}else{
 		$('#conts').css('display','none');
+		parent.layer.style(index, {
+		    width: '400px',
+		    height:'300px'
+		}); 
 	}
 }
 
@@ -66,13 +75,13 @@ $(function(){
 		<div class="form-group" >
 			<label class="label">项目种类</label>
             <label class="btn btn-default ">
-                <input type="radio" value="menu" name="type" onclick="showConts(0)" autocomplete="off" checked="checked"> 有子栏目
+                <input type="radio" value="menu" name="type" onclick="showConts(0)" autocomplete="off" > 有子栏目
             </label>
             <label class="btn btn-default">
-                <input type="radio" value="conts" name="type" onclick="showConts(1)" autocomplete="off"> 无子栏目
+                <input type="radio" value="conts" name="type" onclick="showConts(1)" autocomplete="off" checked="checked"> 无子栏目
             </label>
 		</div>
-		<div id="conts" class="form-group" style="display:none;">
+		<div id="conts" class="form-group" style="">
 			<label class="label">文章内容</label>
 	        <span id="editor" type="text/plain" name="conts" style="height:370px;width:98%;"></span>
 		</div>

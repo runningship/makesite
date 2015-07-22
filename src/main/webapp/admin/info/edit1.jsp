@@ -58,8 +58,13 @@ $(function(){
     ue.addListener( 'ready', function( editor ) {
         ue.setContent($('#menu_conts').html());
     });
-    if ($('#type').val()=='conts') {
-    	$('#conts').css('display','');
+    if ($('#type').val()=='menu') {
+		var index = parent.layer.getFrameIndex(window.name);
+    	$('#conts').css('display','none');
+		parent.layer.style(index, {
+		    width: '400px',
+		    height:'300px'
+		}); 
     };
 });
 
@@ -72,7 +77,7 @@ $(function(){
 			<label class="label">&nbsp;&nbsp;标&nbsp;&nbsp;题</label>
 			<input name="name" value="${menu.name}" class="form-input" />
 		</div>
-		<div id="conts" class="form-group" style="display:none;">
+		<div id="conts" class="form-group">
 			<label class="label">文章内容</label>
 	        <span id="editor" type="text/plain" name="conts" style="height:370px;width:98%;"></span>
 		</div>
