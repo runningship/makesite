@@ -1,3 +1,5 @@
+<%@page import="com.youwei.makesite.entity.Notice"%>
+<%@page import="java.util.Map"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.User"%>
 <%@page import="java.util.List"%>
@@ -7,19 +9,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-	Page<User> p = new Page<User>();
+	Page<Notice> p = new Page<Notice>();
 	String currentPageNo =  request.getParameter("currentPageNo");
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from User where 1=1 order by id desc");
+	p  = dao.findPage(p,"from Notice where senderId=? and _site=? ",2 , request.getServerName());
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>用户信息</title>
+<title>发件箱</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link rel="stylesheet" href="list.css">
 </head>
@@ -46,11 +48,7 @@
 		}); 
 	}
 
-function reloadWindow(){
-	window.location.reload();
-}
-
-	function userDel(id){
+function userDel(id){
 		YW.ajax({
 		    type: 'POST',
 		    url: '/${projectName}/c/admin/user/delete?id='+id,
@@ -59,7 +57,7 @@ function reloadWindow(){
 		        window.location.reload();
 		    }
 	    });
-	}
+}
 </script>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -70,26 +68,17 @@ function reloadWindow(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>用户列表</h3>
+						<h3>通知列表</h3>
 					</div>
-					<table class="userList" cellspacing="0">
+					<table class="userList" cellspacing="0" style="width:100%">
 						<tr style="background: aliceblue;">
-							<td>账号</td>
-							<td>手机号</td>
-							<td>姓名</td>
-							<td>最后登录时间</td>
-							<td>操作</td>
+							<td>标题</td>
+							<td width="180">发送时间</td>
 						</tr>
-						<c:forEach items="${page.result}" var="user" varStatus="status">
+						<c:forEach items="${page.result}" var="notice" varStatus="status">
 							<tr class="statue_${status.index%2}">
-								<td>${user.account}</td>
-								<td>${user.tel}</td>
-								<td>${user.name}</td>
-								<td>${user.lasttime}</td>
-								<td>
-									<a href="#" onclick="userEdit('${user.id}');return false">修改</a>
-									<a href="#" onclick="userDel('${user.id}');return false">删除</a>
-								</td>
+								<td>${notice.title}</td>
+								<td>${notice.addtime}</td>
 							</tr>
 						</c:forEach>
 					</table>

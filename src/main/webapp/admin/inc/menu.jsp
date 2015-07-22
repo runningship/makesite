@@ -29,10 +29,10 @@
 			</dt>
 
 			<dd class="menu_item ">
-				<a data-id="sjx" href="#">收件箱</a>
+				<a data-id="sjx" href="../notice/inList.jsp?nav=sjx">收件箱</a>
 			</dd>
 			<dd class="menu_item ">
-				<a data-id="fjx" href="#">发件箱</a>
+				<a data-id="fjx" href="../notice/outList.jsp?nav=fjx">发件箱</a>
 			</dd>
 			<dd class="menu_item ">
 				<a data-id="ftz" href="../notice/add.jsp?nav=ftz">发通知</a>
@@ -46,7 +46,7 @@
 		</dl>
 		<dl class="menu ">
 			<dt class="menu_title clickable">
-				<a href="#"> <i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"> </i>微信支付
+				<a href="#"> <i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"> </i>留言反馈
 				</a>
 			</dt>
 		</dl>

@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.User"%>
 <%@page import="java.util.List"%>
@@ -7,13 +8,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-	Page<User> p = new Page<User>();
+	Page<Map> p = new Page<Map>();
 	String currentPageNo =  request.getParameter("currentPageNo");
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from User where 1=1 order by id desc");
+	p  = dao.findPage(p,"select n.title as title , n.addtime as addtime,  u.name as sender from Notice n , NoticeReceiver nr ,User u where n.id=nr.noticeId and u.id=nr.receiverId and nr.receiverId=?" 
+			+ " and n._site=? order by n.id desc" , true , new Object[]{2 , request.getServerName()});
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -66,13 +68,22 @@ function userDel(id){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>用户列表</h3>
-						<button style="float:right;margin-top: 5px;padding:5px;">添 &nbsp;加</button>
+						<h3>通知列表</h3>
 					</div>
-					<div>
-						<c:forEach items="${page.result}" var="user" varStatus="status">
+					<table class="userList" cellspacing="0" style="width:100%">
+						<tr style="background: aliceblue;">
+							<td>标题</td>
+							<td width="100">发送人</td>
+							<td width="180">发送时间</td>
+						</tr>
+						<c:forEach items="${page.result}" var="notice" varStatus="status">
+							<tr class="statue_${status.index%2}">
+								<td>${notice.title}</td>
+								<td>${notice.sender}</td>
+								<td>${notice.addtime}</td>
+							</tr>
 						</c:forEach>
-					</div>
+					</table>
 				</div>
 
 				<jsp:include page="../inc/pagination.jsp"></jsp:include>
