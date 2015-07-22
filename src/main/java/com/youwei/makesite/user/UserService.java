@@ -55,6 +55,26 @@ public class UserService {
 	}
 
 	@WebMethod
+	public ModelAndView login(User user){
+		ModelAndView mv = new ModelAndView();
+		String pwd = SecurityHelper.Md5(user.pwd);
+		User po = dao.getUniqueByParams(User.class, new String[]{"account" , "pwd"}, new Object[]{user.account  , pwd});
+		if(po==null){
+			throw new GException(PlatformExceptionType.BusinessException,"用户名或密码不正确。");
+		}
+		ThreadSession.getHttpSession().setAttribute("user", po);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView logout(){
+		ModelAndView mv = new ModelAndView();
+		ThreadSession.getHttpSession().removeAttribute("user");
+		mv.redirect="../public/login.jsp";
+		return mv;
+	}
+	
+	@WebMethod
 	public ModelAndView update(User user ){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(user.name)){

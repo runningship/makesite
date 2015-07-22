@@ -34,7 +34,7 @@ var setting = {
   },
   callback: {
     onClick: OnRightClick,
-    beforeAsync: zTreeBeforeAsync
+    onAsyncSuccess: zTreeOnAsyncSuccess
   },
   check:{
     enable:true
@@ -44,6 +44,12 @@ var setting = {
 		url:"/${projectName}/c/admin/user/getOrgData",
 		autoParam:["id"],
 		otherParam:{}
+	}
+};
+
+function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+	if(msg.indexOf('login.jsp')>-1){
+		window.location='/${projectName}/login.jsp';
 	}
 };
 

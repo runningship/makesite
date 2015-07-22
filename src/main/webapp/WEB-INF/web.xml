@@ -17,12 +17,25 @@
 	  <session-timeout>1440</session-timeout>
 	 </session-config>
 	 
+	 <filter>
+    	<filter-name>UserSessionFilter</filter-name>
+    	<filter-class>com.youwei.makesite.UserSessionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+    	<filter-name>UserSessionFilter</filter-name>
+    	<url-pattern>/c/admin/*</url-pattern>
+    </filter-mapping>
+    
 	<filter>
     	<filter-name>grandFilter</filter-name>
     	<filter-class>org.bc.web.GrandFilter</filter-class>
     	<init-param>
     		<param-name>encoding</param-name>
     		<param-value>utf-8</param-value>
+    	</init-param>
+    	<init-param>
+    		<param-name>userOfflineHandler</param-name>
+    		<param-value>com.youwei.makesite.MakesiteUserOfflineHandler</param-value>
     	</init-param>
     </filter>
     <filter-mapping>
