@@ -15,7 +15,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"select m2.id as id , m2.name as name , m2.type as type , m1.name as fname from Menu m1 , Menu m2 where m2.parentId is not null and m1.id = m2.parentId and m1._site =? order by m2.id desc",true,new Object[]{ request.getServerName()});
+	p  = dao.findPage(p,"select m2.id as id , m2.name as name , m2.type as type , m2.orderx as orderx , m1.name as fname from Menu m1 , Menu m2 where m2.parentId is not null and m1.id = m2.parentId and m1._site =? order by m1.orderx desc , m2.orderx desc",true,new Object[]{ request.getServerName()});
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -84,12 +84,14 @@ function reloadWindow(){
 						<tr style="background: aliceblue;">
 							<td>栏目名称</td>
 							<td>父栏目</td>
+							<td>排序</td>
 							<td>操作</td>
 						</tr>
 						<c:forEach items="${page.result }" var="menu" varStatus="status">
 							<tr class="statue_${status.index%2}">
 							<td>${menu.name }</td> 
 							<td>${menu.fname }</td> 
+							<td>${menu.orderx }</td> 
 							<td><a href="#" onclick="editThis(${menu.id})">修改</a>  <a href="#" onclick="delThis(${menu.id})">删除</a> 
 							<c:if test="${menu.type == 'menu'}">
 								<a href="#" onclick="openAdd(${menu.id});">添加文章</a>

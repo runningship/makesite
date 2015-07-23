@@ -70,7 +70,7 @@ function closeThis(){
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<div class="form-input btn-wrap" >
 				<button onclick="save();return false;" class="form-button save">保&nbsp;&nbsp;存</button>
-				<button onclick="closeThis();return false;" class="form-button cancel">取&nbsp;&nbsp;消</button>
+				<button onclick="closeThis();return false;" class="form-button">取&nbsp;&nbsp;消</button>
 			</div>
 		</div>
 	</form>

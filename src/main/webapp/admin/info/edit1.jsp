@@ -77,9 +77,13 @@ $(function(){
 			<label class="label">&nbsp;&nbsp;标&nbsp;&nbsp;题</label>
 			<input name="name" value="${menu.name}" class="form-input" />
 		</div>
+		<div class="form-group">
+			<label class="label">&nbsp;&nbsp;排&nbsp;&nbsp;序</label>
+			<input name="orderx" value="${menu.orderx}" class="form-input" />
+		</div>
 		<div id="conts" class="form-group">
 			<label class="label">文章内容</label>
-	        <span id="editor" type="text/plain" name="conts" style="height:370px;width:98%;"></span>
+	        <span id="editor" type="text/plain" name="conts" style="height:330px;width:98%;"></span>
 		</div>
 		
 		<div class="form-group action">

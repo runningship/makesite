@@ -40,6 +40,7 @@ public class ArticleService {
 			throw new GException(PlatformExceptionType.BusinessException,"标题不能为空");
 		}
 		//TODO
+		art.addtime = new Date();
 		dao.saveOrUpdate(art);
 		return mv;
 	}
@@ -52,6 +53,7 @@ public class ArticleService {
 		}
 		Article po = dao.get(Article.class, art.id);
 		po.name = art.name;
+		po.orderx = art.orderx;
 		po.conts = art.conts;
 		//TODO
 		dao.saveOrUpdate(po);

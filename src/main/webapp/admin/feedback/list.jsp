@@ -1,5 +1,25 @@
+<%@page import="com.youwei.makesite.entity.Feedback"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.bc.sdak.Page"%>
+<%@page import="org.bc.sdak.SimpDaoTool"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<% 
+	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+	Page<Feedback> p = new Page<Feedback>();
+	String currentPageNo =  request.getParameter("currentPageNo");
+	try{
+		p.currentPageNo = Integer.valueOf(currentPageNo);
+	}catch(Exception ex){
+	}
+	p  = dao.findPage(p,"from Feedback where 1=1 order by id desc ");
+	// p  = dao.findPage(p,"from Feedback fk where  _site =? order by fk.id desc ", request.getServerName());
+	request.setAttribute("page", p);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,16 +28,28 @@
 <link rel="stylesheet" href="list.css">
 </head>
 <script type="text/javascript">
-	function userAdd(){
-		layer.open({
-    	type: 2,
-    	title: '添加用户',
-	    shadeClose: true,
-	    shade: 0.8,
-	    area: ['400px', '320px'],
-	    content: 'AddUser.jsp' //iframe的url
-}); 
+	function infoDel(id){
+		YW.ajax({
+		    type: 'POST',
+		    url: '/${projectName}/c/admin/article/delete?id='+id,
+		    mysuccess: function(data){
+		        alert('删除成功');
+		        window.location.reload();
+		    }
+	    });
 	}
+
+	function seeThis(id){
+		layer.open({
+	    	type: 2,
+	    	title: '查看详情',
+		    shadeClose: false,
+		    shade: 0.5,
+		    area: ['400px', '300px'],
+		    content: 'info.jsp?id='+id
+		}); 
+	}
+
 </script>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -28,33 +60,27 @@
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>用户列表</h3>
-						<button onclick="userAdd();return false;" style="float:right;margin-top:-35px;padding:5px;">添 &nbsp;加</button>
+						<h3>反馈列表</h3>
 					</div>
-					<table class="userList" >
-						<tr>
-							<td>账号</td>
-							<td>姓名</td>
-							<td>最后登录时间</td>
+					<table class="feedbacklist" cellspacing="0">
+						<tr style="background: aliceblue;">
+							<td>内容</td>
+							<td>联系方式</td>
+							<td>发布时间</td>
+							<td>操作</td>
 						</tr>
-						<tr>
-							<td>ceshi</td>
-							<td>测试</td>
-							<td>2015-06-21 15:45:20</td>
+						<c:forEach items="${page.result }" var="feedback" varStatus="status">
+						<tr class="statue_${status.index%2}">
+							<td><a href="#" onclick="seeThis(${feedback.id})">${feedback.conts}</a></td>
+							<td>${feedback.contact}</td> 
+							<td><fmt:formatDate value="${feedback.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 
+							<td><a href="#" onclick="seeThis(${feedback.id})">详细</a>  <a href="#" onclick="infoDel(${feedback.id})">删除</a></td>
 						</tr>
+						</c:forEach>
 					</table>
 				</div>
 
-				<div class="pagination_wrp">
-					<div class="pagination">
-						<span class="page_nav_area"> <a href="javascript:void(0);" class="btn page_first" style="display: none;"></a> <a href="javascript:void(0);" class="btn page_prev" style="display: none;"><i
-								class="arrow"></i></a> <span class="page_num"> <label>1</label> <span class="num_gap">/</span> <label>5</label>
-						</span> <a href="javascript:void(0);" class="btn page_next"><i class="arrow"></i></a> <a href="javascript:void(0);" class="btn page_last" style="display: none;"></a>
-						</span> <span class="goto_area"> <input type="text"> <a href="javascript:void(0);" class="btn page_go">跳转</a>
-						</span>
-
-					</div>
-				</div>
+				<jsp:include page="../inc/pagination.jsp"></jsp:include>
 
 
 			</div>

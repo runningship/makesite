@@ -7,6 +7,7 @@
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	Page<Notice> p = new Page<Notice>();
@@ -58,6 +59,18 @@ function userDel(id){
 		    }
 	    });
 }
+
+	function seeThis(id){
+		layer.open({
+	    	type: 2,
+	    	title: '查看已发送邮件',
+		    shadeClose: false,
+		    shade: 0.5,
+		    area: ['600px', '500px'],
+		    content: 'receiveInfo.jsp?id='+id
+		}); 
+	}
+
 </script>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -68,7 +81,7 @@ function userDel(id){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>通知列表</h3>
+						<h3>已发送</h3>
 					</div>
 					<table class="userList" cellspacing="0" style="width:100%">
 						<tr style="background: aliceblue;">
@@ -77,8 +90,8 @@ function userDel(id){
 						</tr>
 						<c:forEach items="${page.result}" var="notice" varStatus="status">
 							<tr class="statue_${status.index%2}">
-								<td>${notice.title}</td>
-								<td>${notice.addtime}</td>
+								<td><a href="#" onclick="seeThis(${notice.id})">${notice.title}</a></td>
+								<td><fmt:formatDate value="${notice.addtime }" pattern="yyyy-MM-dd HH:mm"/></td>
 							</tr>
 						</c:forEach>
 					</table>

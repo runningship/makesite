@@ -4,6 +4,7 @@
 <%@page import="org.bc.sdak.SimpDaoTool"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
@@ -85,7 +86,7 @@ function reloadWindow(){
 								<td>${user.account}</td>
 								<td>${user.tel}</td>
 								<td>${user.name}</td>
-								<td>${user.lasttime}</td>
+								<td><fmt:formatDate value="${user.lasttime }" pattern="yyyy-MM-dd HH:mm"/></td>
 								<td>
 									<a href="#" onclick="userEdit('${user.id}');return false">修改</a>
 									<a href="#" onclick="userDel('${user.id}');return false">删除</a>

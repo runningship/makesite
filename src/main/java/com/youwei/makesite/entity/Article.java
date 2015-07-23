@@ -1,5 +1,7 @@
 package com.youwei.makesite.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,10 @@ public class Article {
 	public String name;
 	
 	public Integer parentId;
+	
+	public Integer orderx;
+	
+	public Date addtime;
 	
 	//当type=conts时，有效
 	public String conts;

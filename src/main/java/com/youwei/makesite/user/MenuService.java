@@ -51,6 +51,7 @@ public class MenuService {
 		}
 		Menu po = dao.get(Menu.class, menu.id);
 		po.name = menu.name;
+		po.orderx = menu.orderx;
 		po.conts = menu.conts;
 		//TODO
 		dao.saveOrUpdate(po);

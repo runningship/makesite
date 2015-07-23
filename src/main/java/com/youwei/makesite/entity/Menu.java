@@ -16,6 +16,8 @@ public class Menu {
 	
 	public Integer parentId;
 	
+	public Integer orderx;
+	
 	//menu(下面有子菜单),conts(下面没有子菜单)
 	public String type;
 	

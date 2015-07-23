@@ -32,7 +32,7 @@
 				<a data-id="sjx" href="/${projectName }/admin/notice/inList.jsp?nav=sjx">收件箱</a>
 			</dd>
 			<dd class="menu_item ">
-				<a data-id="fjx" href="/${projectName }/admin/notice/outList.jsp?nav=fjx">发件箱</a>
+				<a data-id="fjx" href="/${projectName }/admin/notice/outList.jsp?nav=fjx">已发送</a>
 			</dd>
 			<dd class="menu_item ">
 				<a data-id="ftz" href="/${projectName }/admin/notice/add.jsp?nav=ftz">发通知</a>
@@ -46,7 +46,7 @@
 		</dl>
 		<dl class="menu ">
 			<dt class="menu_title clickable">
-				<a href="#"> <i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"> </i>留言反馈
+				<a href="/${projectName }/admin/feedback/list.jsp?nav=fk"> <i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"> </i>留言反馈
 				</a>
 			</dt>
 		</dl>

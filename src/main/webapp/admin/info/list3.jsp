@@ -22,7 +22,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	StringBuilder hql = new StringBuilder("select art.name as name, art.id as id,  m2.name as fname from Article art,Menu m1,Menu m2 where m1.id=m2.parentId and art.parentId=m2.id ");
+	StringBuilder hql = new StringBuilder("select art.name as name, art.id as id , art.addtime as addtime , art.orderx as orderx, m2.name as fname from Article art,Menu m1,Menu m2 where m1.id=m2.parentId and art.parentId=m2.id ");
 	List<Object> params = new ArrayList<Object>();
 	if(StringUtils.isNotEmpty(yijiId)){
 		hql.append(" and m1.id=?");
@@ -40,12 +40,12 @@
 		hql.append(" and art._site like ?");
 		params.add("%"+_site+"%");
 	}
-		hql.append(" order by art.id desc");
+		hql.append(" order by m1.orderx desc , m2.orderx desc , art.orderx desc");
 	p  = dao.findPage(p, hql.toString(),true, params.toArray());
 
 
-	List<Menu> yiji  = dao.listByParams(Menu.class, "from Menu where parentId is null and type = 'menu' order by id desc");
-	List<Menu> erji  = dao.listByParams(Menu.class, "from Menu where parentId is not null and type = 'menu' order by id desc");
+	List<Menu> yiji  = dao.listByParams(Menu.class, "from Menu where parentId is null and type = 'menu' order by orderx desc");
+	List<Menu> erji  = dao.listByParams(Menu.class, "from Menu where parentId is not null and type = 'menu' order by orderx desc");
 	request.setAttribute("page", p);
 	request.setAttribute("yijiList", yiji);
 	request.setAttribute("erjiList", erji);
@@ -137,13 +137,17 @@ function setSearch(obj){
 						<tr style="background: aliceblue;">
 							<td>文章名</td>
 							<td>父栏目</td>
+							<td>排序</td>
+							<td>发布时间</td>
 							<td>操作</td>
 						</tr>
 						<c:forEach items="${page.result }" var="article" varStatus="status">
 							<tr class="statue_${status.index%2}">
 							<td> ${article.name } </td> 
 							<td>${article.fname}</td>
-							<td><a href="#" onclick="editThis(${article.id})">修改</a>  <a href="#">删除</a></td>
+							<td>${article.orderx }</td> 
+							<td><fmt:formatDate value="${article.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 
+							<td><a href="#" onclick="editThis(${article.id})">修改</a>  <a href="#" onclick="infoDel(${article.id})">删除</a></td>
 						</tr>
 						</c:forEach>
 					</table>

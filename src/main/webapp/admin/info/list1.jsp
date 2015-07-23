@@ -16,7 +16,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from Menu menu where parentId is null and _site =? order by menu.id desc", request.getServerName());
+	p  = dao.findPage(p,"from Menu menu where parentId is null and _site =? order by menu.orderx desc ", request.getServerName());
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -101,7 +101,7 @@ function reloadWindow(){
 						</tr>
 						<c:forEach items="${page.result }" var="menu" varStatus="status">
 							<tr class="statue_${status.index%2}">
-							<td>${menu.id } </td> 
+							<td>${menu.orderx } </td> 
 							<td>${menu.name }</td> 
 							<td><a href="#" onclick="editThis(${menu.id})">修改</a>  <a href="#" onclick="delThis(${menu.id})">删除</a>
 							<c:if test="${menu.type == 'menu'}">

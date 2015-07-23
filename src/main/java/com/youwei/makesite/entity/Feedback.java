@@ -16,6 +16,8 @@ public class Feedback {
 	public Integer id;
 	
 	public String title;
+
+	public String contact;
 	
 	public String conts;
 	
