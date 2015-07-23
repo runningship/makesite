@@ -21,6 +21,7 @@ import org.bc.web.PlatformExceptionType;
 import org.bc.web.ThreadSession;
 import org.bc.web.WebMethod;
 
+import com.youwei.makesite.ThreadSessionHelper;
 import com.youwei.makesite.cache.ConfigCache;
 import com.youwei.makesite.entity.SharedFile;
 import com.youwei.makesite.entity.User;
@@ -49,7 +50,7 @@ public class FileUploadService {
 				if(item.getSize()<=0){
 					throw new RuntimeException("no file selected.");
 				}else if(item.getSize()>=MAX_SIZE){
-						throw new RuntimeException("file size exceed 5M");
+						throw new RuntimeException("file size exceed 500M");
 				}else{
 					
 					SharedFile file = new SharedFile();
@@ -61,7 +62,8 @@ public class FileUploadService {
 					file.name = item.getName();
 					file.size = item.getSize();
 					file.fileId = UUID.randomUUID().toString();
-					file.uid = 2;
+					file.uid = ThreadSessionHelper.getUser().id;
+					file.publish = 0;
 					String ext = "";
 					String[] arr = file.name.split("\\.");
 					if(arr.length>0){
@@ -91,6 +93,23 @@ public class FileUploadService {
 			dao.delete(po);
 			mv.data.put("msg", "删除文件成功");
 		}
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView publish(int  id){
+		ModelAndView mv = new ModelAndView();
+		SharedFile po = dao.get(SharedFile.class, id);
+		if(po==null){
+			throw new GException(PlatformExceptionType.BusinessException,"文件已删除或不存在");
+		}
+		if(po.publish==null || po.publish==0){
+			po.publish=1;
+		}else{
+			po.publish = 0;
+		}
+		dao.saveOrUpdate(po);
+		mv.data.put("publish", po.publish);
 		return mv;
 	}
 }

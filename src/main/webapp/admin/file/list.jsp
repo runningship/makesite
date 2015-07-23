@@ -15,7 +15,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"select sf.name as name, sf.id as fid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname from SharedFile sf,User u where sf.uid = u.id order by sf.id desc",true,new Object[]{});
+	p  = dao.findPage(p,"select sf.name as name, sf.id as fid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  , sf.publish as publish from SharedFile sf,User u where sf.uid = u.id order by sf.id desc",true,new Object[]{});
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,16 +33,29 @@ $(function(){
 	initUploadHouseImage('fileUploadBtn' , '${projectName}');
 });
 
-	function fileDel(id){
-		YW.ajax({
-		    type: 'POST',
-		    url: '/${projectName}/c/admin/file/delete?id='+id,
-		    mysuccess: function(data){
-		        alert('删除成功');
-		        window.location.reload();
-		    }
-	    });
-	}
+function fileDel(id){
+	YW.ajax({
+	    type: 'POST',
+	    url: '/${projectName}/c/admin/file/delete?id='+id,
+	    mysuccess: function(data){
+	        alert('删除成功');
+	        window.location.reload();
+	    }
+    });
+}
+function fileShenHe(id , btn){
+	YW.ajax({
+	    type: 'POST',
+	    url: '/${projectName}/c/admin/file/publish?id='+id,
+	    mysuccess: function(data){
+	        if(data.publish){
+	        	$(btn).text('已公开');
+	        }else{
+	        	$(btn).text('未公开');
+	        }
+	    }
+    });
+}
 </script>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -77,7 +90,10 @@ $(function(){
 							</c:choose>
 							<td>${file.uname}</td>
 							<td><fmt:formatDate value="${file.uploadTime }" pattern="yyyy-MM-dd HH:mm"/></td>
-							<td><a href="#"  onclick="fileDel(${file.fid})">删除</a></td>
+							<td>
+								<a href="#"  onclick="fileShenHe(${file.fid} , this)"><c:if test="${file.publish ==1}">已公开</c:if><c:if test="${file.publish ==0}">未公开</c:if></a>
+								<a href="#"  onclick="fileDel(${file.fid})">删除</a>
+							</td>
 						</tr>
 						</c:forEach>
 					</table>

@@ -28,9 +28,6 @@ var setting = {
     dblClickExpand: false,
   },
   data: {
-    simpleData: {
-      enable: true
-    }
   },
   callback: {
     onClick: OnRightClick,
@@ -38,23 +35,30 @@ var setting = {
   },
   check:{
     enable:true
-  },
-  async: {
-		enable: true,
-		url:"/${projectName}/c/admin/user/getOrgData",
-		autoParam:["id"],
-		otherParam:{}
-	}
+  }
 };
 
 function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
 	if(msg.indexOf('login.jsp')>-1){
 		window.location='/${projectName}/login.jsp';
 	}
+	if(!treeNode){
+		//顶层
+		
+	}
 };
 
 $(function(){
-	$.fn.zTree.init($("#treeDemo"), setting);
+	YW.ajax({
+	    type: 'POST',
+	    url: '/${projectName}/c/admin/user/getUserTree',
+	    mysuccess: function(data){
+			$.fn.zTree.init($("#treeDemo"), setting ,data);
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+	 		treeObj.expandAll2();
+	    }
+    });
+	
 	document.oncontextmenu=function(){
 		window.event.returnValue=false;
 		return false;
@@ -92,6 +96,10 @@ function banUser(){
 			window.location.reload();
 	    }
     });
+}
+
+function sendNotice(){
+	window.location="/${projectName}/admin/notice/add.jsp?nav=ftz&groupId="+parentGroupId;
 }
 
 function addTopGroup(){
@@ -234,6 +242,7 @@ background: #428bca;
   <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="addUser()" class="list-group-item">加入新用户</a>
   <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="inviteUser()" class="list-group-item">加入已有用户</a>
   <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="inviteUser()" class="list-group-item">删除用户组</a>
+  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="sendNotice()" class="list-group-item">发送通知</a>
   </span>
   <span id="userMenu">
   <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="banUser()" class="list-group-item">移出用户组</a>

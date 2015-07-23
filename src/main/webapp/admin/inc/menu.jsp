@@ -62,7 +62,7 @@
 				<a data-id="zzjg" href="/${projectName }/admin/user/tree.jsp?nav=zzjg">组织架构</a>
 			</dd>
 			<dd class="menu_item ">
-				<a href="#">职位权限</a>
+				<a href="/${projectName }/admin/role/authList.jsp">职位权限</a>
 			</dd>
 		</dl>
 	</div>

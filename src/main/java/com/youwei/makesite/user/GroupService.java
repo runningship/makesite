@@ -11,6 +11,7 @@ import org.bc.web.Module;
 import org.bc.web.PlatformExceptionType;
 import org.bc.web.WebMethod;
 
+import com.youwei.makesite.ThreadSessionHelper;
 import com.youwei.makesite.entity.Group;
 //
 //import com.sun.image.codec.jpeg.JPEGCodec;
@@ -26,7 +27,7 @@ public class GroupService {
 		if(StringUtils.isEmpty(group.name)){
 			throw new GException(PlatformExceptionType.BusinessException,"用户组名称不能为空");
 		}
-		group.owner = 2;
+		group.owner = ThreadSessionHelper.getUser().id;
 		group.addtime = new Date();
 		dao.saveOrUpdate(group);
 		return mv;

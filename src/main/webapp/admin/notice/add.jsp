@@ -66,26 +66,33 @@ var setting = {
     dblClickExpand: false,
   },
   data: {
-    simpleData: {
-      enable: true
-    }
   },
   callback: {
     
   },
   check:{
     enable:true
-  },
-  async: {
-		enable: true,
-		url:"/${projectName}/c/admin/user/getOrgData",
-		autoParam:["id"],
-		otherParam:{}
-	}
+  }
 };
 
 $(function(){
-	$.fn.zTree.init($("#treeDemo"), setting);
+	var groupId = getParam('groupId');
+	YW.ajax({
+	    type: 'POST',
+	    url: '/${projectName}/c/admin/user/getUserTree',
+	    mysuccess: function(data){
+			$.fn.zTree.init($("#treeDemo"), setting ,data);
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+	 		treeObj.expandAll2();
+	 		
+	 		var nodes = treeObj.getNodesByParam("key", "group_"+groupId, null);
+	 		if(nodes.length>0){
+	 			treeObj.selectNode(nodes[0]);
+	 			treeObj.checkNode(nodes[0], true, true);	
+	 		}
+	    }
+    });
+	
 });
 
 	

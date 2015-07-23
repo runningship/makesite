@@ -12,6 +12,7 @@ import org.bc.web.Module;
 import org.bc.web.PlatformExceptionType;
 import org.bc.web.WebMethod;
 
+import com.youwei.makesite.ThreadSessionHelper;
 import com.youwei.makesite.entity.Article;
 import com.youwei.makesite.entity.Notice;
 import com.youwei.makesite.entity.NoticeReceiver;
@@ -27,7 +28,7 @@ public class NoticeService {
 	public ModelAndView save(Notice notice , String receiverIds){
 		ModelAndView mv = new ModelAndView();
 		notice.addtime  = new Date();
-		notice.senderId=2;
+		notice.senderId=ThreadSessionHelper.getUser().id;
 		dao.saveOrUpdate(notice);
 		for(String receiver : receiverIds.split(",")){
 			if(StringUtils.isEmpty(receiver)){

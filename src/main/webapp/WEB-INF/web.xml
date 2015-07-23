@@ -24,6 +24,7 @@
     <filter-mapping>
     	<filter-name>UserSessionFilter</filter-name>
     	<url-pattern>/c/admin/*</url-pattern>
+    	<url-pattern>*.jsp</url-pattern>
     </filter-mapping>
     
 	<filter>

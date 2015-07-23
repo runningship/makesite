@@ -1515,6 +1515,10 @@
 					view.expandCollapseSonNode(setting, null, expandFlag, true);
 					return expandFlag;
 				},
+				expandAll2: function(callback) {
+					view.expandCollapseSonNode(setting, null, true, false);
+					view.expandCollapseSonNode(setting, null, false, false);
+				},
 				expandNode : function(node, expandFlag, sonSign, focus, callbackFlag) {
 					if (!node || !node.isParent) return null;
 					if (expandFlag !== true && expandFlag !== false) {

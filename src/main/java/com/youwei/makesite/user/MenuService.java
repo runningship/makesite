@@ -60,8 +60,6 @@ public class MenuService {
 	
 	@WebMethod
 	public ModelAndView delete(int  id){
-		String xx = "";
-		xx.split("2")[2].toCharArray();
 		ModelAndView mv = new ModelAndView();
 		long leftCount = dao.countHql("select count(*) from Menu where parentId=?", id);
 		if(leftCount>0){

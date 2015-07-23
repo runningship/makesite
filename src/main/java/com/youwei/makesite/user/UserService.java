@@ -135,12 +135,57 @@ public class UserService {
 		return mv;
 	}
 	
+	@WebMethod
+	public ModelAndView getUserTree(String _site){
+		ModelAndView mv = new ModelAndView();
+		List<Group> groups = dao.listByParams(Group.class, "from Group where parentId is null and _site=?" , _site);
+		JSONArray arr = new JSONArray();
+		for(Group g : groups){
+			JSONObject jobj = new JSONObject();
+			jobj.put("name", g.name);
+			jobj.put("id", g.id);
+			jobj.put("key", "group_"+g.id);
+			jobj.put("isParent", true);
+			jobj.put("type", "group");
+			JSONArray children = getChildrenOfGroup(g.id , _site);
+			if(!children.isEmpty()){
+				jobj.put("children", children);
+			}
+			arr.add(jobj);
+		}
+		mv.returnText = arr.toString();
+		return mv;
+	}
+	
+	private JSONArray getChildrenOfGroup(Integer groupId , String _site){
+		List<Group> groups = dao.listByParams(Group.class, "from Group where parentId = ? and _site=?" , groupId , _site);
+		JSONArray arr = new JSONArray();
+		for(Group g : groups){
+			JSONObject jobj = new JSONObject();
+			jobj.put("name", g.name);
+			jobj.put("id", g.id);
+			jobj.put("type", "group");
+			jobj.put("key", "group_"+g.id);
+			jobj.put("isParent", true);
+			arr.add(jobj);
+		}
+		List<Map> users = dao.listAsMap("select u.name as name , u.id as id from User u , UserGroup ug where u.id = ug.uid and ug.gid=? and u._site=?", groupId , _site);
+		for(Map u : users){
+			JSONObject jobj = new JSONObject();
+			jobj.put("name", u.get("name"));
+			jobj.put("id", u.get("id"));
+			jobj.put("key", "user_"+u.get("id"));
+			jobj.put("type", "user");
+			arr.add(jobj);
+		}
+		return arr;
+	}
+	
 	/**
 	 * 
 	 * @param id 用户组id
 	 */
-	@WebMethod
-	public ModelAndView getOrgData(Integer  id){
+	private ModelAndView getOrgData(Integer  id){
 		ModelAndView mv = new ModelAndView();
 		StringBuilder sb = new StringBuilder("from Group where 1=1");
 		List<Object> params = new ArrayList<Object>();
@@ -155,6 +200,7 @@ public class UserService {
 		for(Group p :groups ){
 			JSONObject json = new JSONObject();
 			json.put("id", p.id);
+			json.put("key", "group"+p.id);
 //			if(pgid==null){
 //				json.put("pId", "0");
 //			}else{
