@@ -59,7 +59,7 @@ $(function(){
 		</div>
 		<div class="form-group">
 			<label class="label">&nbsp;&nbsp;排&nbsp;&nbsp;序</label>
-			<input name="orderx" value="0" class="form-input" />
+			<input name="orderx" value="100" class="form-input" />
 		</div>
 		<div id="conts" class="form-group">
 			<label class="label">文章内容</label>

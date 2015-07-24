@@ -40,7 +40,7 @@
 		hql.append(" and art._site like ?");
 		params.add("%"+_site+"%");
 	}
-		hql.append(" order by m1.orderx desc , m2.orderx desc , art.orderx desc");
+		hql.append(" order by m1.orderx asc , m2.orderx asc , art.orderx asc , art.addtime desc");
 	p  = dao.findPage(p, hql.toString(),true, params.toArray());
 
 

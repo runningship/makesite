@@ -77,7 +77,7 @@ $(function(){
 		</div>
 		<div class="form-group">
 			<label class="label">&nbsp;&nbsp;排&nbsp;&nbsp;序</label>
-			<input name="orderx" value="0" class="form-input" />
+			<input name="orderx" value="100" class="form-input" />
 		</div>
 		<div class="form-group" >
 			<label class="label">项目种类</label>

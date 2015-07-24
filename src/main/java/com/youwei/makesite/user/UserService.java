@@ -18,6 +18,7 @@ import org.bc.web.PlatformExceptionType;
 import org.bc.web.ThreadSession;
 import org.bc.web.WebMethod;
 
+import com.youwei.makesite.MakesiteConstant;
 import com.youwei.makesite.util.SecurityHelper;
 import com.youwei.makesite.entity.Group;
 //
@@ -55,14 +56,20 @@ public class UserService {
 	}
 
 	@WebMethod
-	public ModelAndView login(User user){
+	public ModelAndView login(User user , String _site){
 		ModelAndView mv = new ModelAndView();
 		String pwd = SecurityHelper.Md5(user.pwd);
-		User po = dao.getUniqueByParams(User.class, new String[]{"account" , "pwd"}, new Object[]{user.account  , pwd});
+		User po = dao.getUniqueByParams(User.class, new String[]{"account" , "pwd" , "_site"}, new Object[]{user.account  , pwd , _site});
 		if(po==null){
 			throw new GException(PlatformExceptionType.BusinessException,"用户名或密码不正确。");
 		}
 		ThreadSession.getHttpSession().setAttribute("user", po);
+		List<Map> result = dao.listAsMap("select ra.authId as authId from UserRole ur ,RoleAuth ra where ur.roleId=ra.roleId and ur.uid=?", po.id);
+		List<String> authList = new ArrayList<String>();
+		for(Map map : result){
+			authList.add(map.get("authId").toString());
+		}
+		ThreadSession.getHttpSession().setAttribute(MakesiteConstant.Session_Auth_List, authList);
 		return mv;
 	}
 	
@@ -70,7 +77,8 @@ public class UserService {
 	public ModelAndView logout(){
 		ModelAndView mv = new ModelAndView();
 		ThreadSession.getHttpSession().removeAttribute("user");
-		mv.redirect="../public/login.jsp";
+		ThreadSession.getHttpSession().removeAttribute(MakesiteConstant.Session_Auth_List);
+		mv.redirect=ThreadSession.HttpServletRequest.get().getServletContext().getContextPath()+"/login.jsp";
 		return mv;
 	}
 	
@@ -181,48 +189,4 @@ public class UserService {
 		return arr;
 	}
 	
-	/**
-	 * 
-	 * @param id 用户组id
-	 */
-	private ModelAndView getOrgData(Integer  id){
-		ModelAndView mv = new ModelAndView();
-		StringBuilder sb = new StringBuilder("from Group where 1=1");
-		List<Object> params = new ArrayList<Object>();
-		if(id!=null){
-			sb.append(" and parentId=?");
-			params.add(id);
-		}else{
-			sb.append(" and parentId is null");
-		}
-		List<Group> groups = dao.listByParams(Group.class, sb.toString() , params.toArray());
-		JSONArray arr = new JSONArray();
-		for(Group p :groups ){
-			JSONObject json = new JSONObject();
-			json.put("id", p.id);
-			json.put("key", "group"+p.id);
-//			if(pgid==null){
-//				json.put("pId", "0");
-//			}else{
-//				json.put("pId", "g_"+pgid);
-//			}
-			json.put("name", p.name);
-			json.put("type", "group");
-			json.put("isParent", true);
-			arr.add(json);
-		}
-		if(id!=null){
-			List<Map> users = dao.listAsMap("select u.name as name ,u.id as uid from User u , UserGroup ug where u.id=ug.uid and ug.gid=?" , id);
-			for(Map u : users){
-				JSONObject json = new JSONObject();
-				json.put("id", u.get("uid"));
-				json.put("name", u.get("name"));
-				json.put("type", "user");
-				json.put("isParent", false);
-				arr.add(json);
-			}
-		}
-		mv.returnText = arr.toString();
-		return mv;
-	}
 }

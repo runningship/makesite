@@ -16,7 +16,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from Menu menu where parentId is null and _site =? order by menu.orderx desc ", request.getServerName());
+	p  = dao.findPage(p,"from Menu menu where parentId is null and _site =? order by menu.orderx asc, menu.id desc ", request.getServerName());
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
