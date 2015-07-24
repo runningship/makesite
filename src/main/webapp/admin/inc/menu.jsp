@@ -56,13 +56,13 @@
 			</dt>
 
 			<dd class="menu_item ">
-				<a data-id="yglb" href="/${projectName }/admin/user/list.jsp?nav=yglb">员工列表</a>
-			</dd>
-			<dd class="menu_item ">
 				<a data-id="zzjg" href="/${projectName }/admin/user/tree.jsp?nav=zzjg">组织架构</a>
 			</dd>
 			<dd class="menu_item ">
-				<a href="/${projectName }/admin/role/authList.jsp">职位权限</a>
+				<a href="/${projectName }/admin/role/roleList.jsp">职位权限</a>
+			</dd>
+			<dd class="menu_item ">
+				<a data-id="yglb" href="/${projectName }/admin/user/list.jsp?nav=yglb">员工列表</a>
 			</dd>
 		</dl>
 	</div>

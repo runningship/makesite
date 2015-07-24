@@ -57,7 +57,7 @@
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
 						<h3>用户列表</h3>
-						<button class="add" onclick="addToGroup();" style="float:right;margin-top: 5px;padding:5px;">添 &nbsp;加</button>
+						<button class="add" onclick="addToGroup();" style="float:right;margin-top: 5px;padding:5px;">加&nbsp;入</button>
 					</div>
 					<table class="userList" cellspacing="0">
 						<tr style="background: aliceblue;">

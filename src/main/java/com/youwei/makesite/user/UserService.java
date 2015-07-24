@@ -26,12 +26,13 @@ import com.youwei.makesite.entity.Group;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.youwei.makesite.entity.User;
 import com.youwei.makesite.entity.UserGroup;
+import com.youwei.makesite.entity.UserRole;
 @Module(name="/admin/user")
 public class UserService {
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
 	@WebMethod
-	public ModelAndView save(User user  , Integer groupId){
+	public ModelAndView save(User user  , Integer groupId , String roleIds){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(user.account)){
 			throw new GException(PlatformExceptionType.BusinessException,"用户账号不能为空");
@@ -51,6 +52,15 @@ public class UserService {
 			ug.gid = groupId;
 			ug.uid = user.id;
 			dao.saveOrUpdate(ug);
+		}
+		if(roleIds!=null && roleIds.length() != 0){
+			String[] Ids = roleIds.split(",");
+			for(int i=0;i<Ids.length ;i++){
+				UserRole rg = new UserRole();
+				rg.roleId = Integer.valueOf(Ids[i]);
+				rg.uid = user.id;
+				dao.saveOrUpdate(rg);
+			}
 		}
 		return mv;
 	}
@@ -83,7 +93,7 @@ public class UserService {
 	}
 	
 	@WebMethod
-	public ModelAndView update(User user ){
+	public ModelAndView update(User user  , Integer groupId ,  String roleIds ){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(user.name)){
 			throw new GException(PlatformExceptionType.BusinessException,"用户名不能为空");
@@ -98,6 +108,21 @@ public class UserService {
 		po.tel = user.tel;
 		//TODO
 		dao.saveOrUpdate(po);
+		if(groupId!=null){
+			UserGroup ug = new UserGroup();
+			ug.gid = groupId;
+			ug.uid = user.id;
+			dao.saveOrUpdate(ug);
+		}
+		if(roleIds!=null && roleIds.length() != 0){
+			String[] Ids = roleIds.split(",");
+			for(int i=0;i<Ids.length ;i++){
+				UserRole rg = new UserRole();
+				rg.roleId = Integer.valueOf(Ids[i]);
+				rg.uid = user.id;
+				dao.saveOrUpdate(rg);
+			}
+		}
 		return mv;
 	}
 

@@ -16,7 +16,11 @@ import org.bc.web.PlatformExceptionType;
 import org.bc.web.ThreadSession;
 import org.bc.web.WebMethod;
 
+import antlr.collections.List;
+
 import com.youwei.makesite.entity.Role;
+import com.youwei.makesite.entity.RoleAuth;
+import com.youwei.makesite.entity.User;
 //
 //import com.sun.image.codec.jpeg.JPEGCodec;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -73,4 +77,22 @@ public class RoleService {
 			throw new GException(PlatformExceptionType.BusinessException, "读取资源文件失败");
 		}
 	}
+	
+	@WebMethod
+	public ModelAndView addRoleAuth(int roleId,String authId){
+		ModelAndView mv = new ModelAndView();
+		RoleAuth po = new RoleAuth();
+		po.authId = authId;
+		po.roleId = roleId;
+		dao.saveOrUpdate(po);
+		return mv;
+	}
+
+	@WebMethod
+	public ModelAndView deleteRoleAuth(int roleId,String authId){
+		ModelAndView mv = new ModelAndView();
+		dao.execute("delete from RoleAuth where roleId=? and authId=?", roleId,authId);
+		return mv;
+	}
+	
 }

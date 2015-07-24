@@ -1,5 +1,5 @@
+<%@page import="com.youwei.makesite.entity.Role"%>
 <%@page import="org.bc.sdak.Page"%>
-<%@page import="com.youwei.makesite.entity.User"%>
 <%@page import="java.util.List"%>
 <%@page import="org.bc.sdak.SimpDaoTool"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
@@ -8,13 +8,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-	Page<User> p = new Page<User>();
+	Page<Role> p = new Page<Role>();
 	String currentPageNo =  request.getParameter("currentPageNo");
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from User where 1=1 order by id desc");
+	p  = dao.findPage(p,"from Role where 1=1 order by id desc");
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -25,25 +25,36 @@
 <link rel="stylesheet" href="list.css">
 </head>
 <script type="text/javascript">
-	function userAdd(){
+	function roleAdd(){
 		layer.open({
 	    	type: 2,
-	    	title: '添加用户',
+	    	title: '添加职位',
 		    shadeClose: false,
 		    shade: 0.5,
-		    area: ['500px', '500px'],
+		    area: ['400px', '250px'],
 		    content: 'add.jsp'
 		}); 
 	}
 
-	function userEdit(id){
+	function roleEdit(id){
 		layer.open({
 	    	type: 2,
-	    	title: '修改用户',
+	    	title: '修改职位',
 		    shadeClose: false,
 		    shade: 0.5,
-		    area: ['500px', '500px'],
+		    area: ['400px', '250px'],
 		    content: 'edit.jsp?id='+id
+		}); 
+	}
+
+	function authEdit(id){
+		layer.open({
+	    	type: 2,
+	    	title: '编辑权限',
+		    shadeClose: false,
+		    shade: 0.5,
+		    area: ['800px', '700px'],
+		    content: 'authList.jsp?roleId='+id
 		}); 
 	}
 
@@ -51,10 +62,10 @@ function reloadWindow(){
 	window.location.reload();
 }
 
-	function userDel(id){
+	function roleDel(id){
 		YW.ajax({
 		    type: 'POST',
-		    url: '/${projectName}/c/admin/user/delete?id='+id,
+		    url: '/${projectName}/c/admin/role/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
 		        window.location.reload();
@@ -71,25 +82,23 @@ function reloadWindow(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>用户列表</h3>
+						<h3>职位列表</h3>
+						<button style="float:right;margin-top: 5px;padding:5px;" onclick="roleAdd();">添加职位</button>
 					</div>
 					<table class="userList" cellspacing="0">
 						<tr style="background: aliceblue;">
-							<td>账号</td>
-							<td>手机号</td>
-							<td>姓名</td>
-							<td>最后登录时间</td>
+							<td>职位名称</td>
+							<td>职位介绍</td>
 							<td>操作</td>
 						</tr>
-						<c:forEach items="${page.result}" var="user" varStatus="status">
+						<c:forEach items="${page.result}" var="role" varStatus="status">
 							<tr class="statue_${status.index%2}">
-								<td>${user.account}</td>
-								<td>${user.tel}</td>
-								<td>${user.name}</td>
-								<td><fmt:formatDate value="${user.lasttime }" pattern="yyyy-MM-dd HH:mm"/></td>
+								<td>${role.name}</td>
+								<td>${role.duty}</td>
 								<td>
-									<a href="#" onclick="userEdit('${user.id}');return false">修改</a>
-									<a href="#" onclick="userDel('${user.id}');return false">删除</a>
+									<a href="#" onclick="roleEdit('${role.id}');return false">修改</a>
+									<a href="#" onclick="authEdit('${role.id}');return false">权限</a>
+									<a href="#" onclick="roleDel('${role.id}');return false">删除</a>
 								</td>
 							</tr>
 						</c:forEach>

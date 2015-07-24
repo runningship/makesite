@@ -1,6 +1,11 @@
+<%@page import="com.youwei.makesite.entity.Role"%>
+<%@page import="com.youwei.makesite.entity.UserRole"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@page import="com.youwei.makesite.entity.User"%>
 <%@page import="org.bc.sdak.SimpDaoTool"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
@@ -8,6 +13,17 @@
 	Integer id = Integer.valueOf(request.getParameter("id"));
 	User user = dao.get(User.class, id);
 	request.setAttribute("user", user);
+	List<Map> result  = dao.listAsMap("select r.name as name , r.id as id from Role r , UserRole ur where ur.uid = ? and ur.roleId = r.id ",new Object[]{id});
+	StringBuilder roleIds = new StringBuilder("");
+	StringBuilder roleNames = new StringBuilder("");
+	for(Map m : result){
+		roleIds.append(m.get("id")).append(",");
+		roleNames.append(m.get("name")).append(",");
+	}
+	String roleId = roleIds.toString();
+	roleId = roleId.substring(0,roleId.length()-1);
+	request.setAttribute("roleIds", roleId);
+	request.setAttribute("roleNames", roleNames.toString());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -42,6 +58,22 @@ function save(){
     });
 }
 
+function setRoles(roleIds,roleNames){
+	$('#roleIds').val(roleIds);
+	$('#roleName').val(roleNames);
+}
+
+	function editRole(ids){
+		layer.open({
+	    	type: 2,
+	    	title: '选择职位',
+		    shadeClose: false,
+		    shade: 0.5,
+		    area: ['400px', '400px'],
+		    content: 'role_select.jsp?ids='+ids
+		}); 
+	}
+
 function closeThis(){
 	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 	parent.layer.close(index); //再执行关闭   
@@ -50,6 +82,7 @@ function closeThis(){
 <body style="background-color:white">
 	<form name="form1" onsubmit="save();return false;" style="padding:20px">
 	<input name="id" value="${user.id}" style="display:none" />
+	<input name="roleIds" id="roleIds" value="${roleIds}" style="display:none" />
 		<div class="form-group">
 			<label>登录账号</label>
 			<input name="account" id="account" value="${user.account}" class="form-input" />
@@ -66,11 +99,16 @@ function closeThis(){
 			<label>用户密码</label>
 			<input name="pwd" class="form-input" placeholder="无需修改请不用填写" />
 		</div>
+		<div class="form-group">
+			<label>用户职位</label>
+			<input name="roleName" id="roleName" class="form-input" value="${roleNames}"/>
+			<img src="add_icon.png" class="form-img" onclick="editRole('${roleIds}');" />
+		</div>
 		<div class="form-group action">
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<div class="form-input btn-wrap" >
 				<button onclick="save();return false;" class="form-button save">保&nbsp;&nbsp;存</button>
-				<button onclick="closeThis();return false;" class="form-button">取&nbsp;&nbsp;消</button>
+				<button onclick="closeThis();return false;" class="form-button cancel">取&nbsp;&nbsp;消</button>
 			</div>
 		</div>
 	</form>

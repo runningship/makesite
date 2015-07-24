@@ -129,8 +129,8 @@ function addUser(){
     	title: '添加新用户',
 	    shadeClose: false,
 	    shade: 0.5,
-	    area: ['400px', '400px'],
-	    content: '../user/add.jsp?groupId='+parentGroupId
+		area: ['500px', '500px'],
+	    content: 'add.jsp?groupId='+parentGroupId
 	}); 
 }
 

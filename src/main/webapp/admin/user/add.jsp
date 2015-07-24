@@ -54,6 +54,22 @@ function save(){
     });
 }
 
+function setRoles(roleIds,roleNames){
+	$('#roleIds').val(roleIds);
+	$('#roleName').val(roleNames);
+}
+
+	function addRole(ids){
+		layer.open({
+	    	type: 2,
+	    	title: '选择职位',
+		    shadeClose: false,
+		    shade: 0.5,
+		    area: ['400px', '400px'],
+		    content: 'role_select.jsp'
+		}); 
+	}
+
 function closeThis(){
 	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 	parent.layer.close(index); //再执行关闭   
@@ -62,6 +78,7 @@ function closeThis(){
 <body style="background-color:white">
 	<form name="form1" class="add-form" onsubmit="save();">
 		<input type="hidden"  id="groupId" name="groupId" value="${groupId }"/>
+		<input name="roleIds" id="roleIds" type="hidden" />
 		<div class="form-group">
 			<label class="label">用户组名</label>
 			<input name="groupName" id="groupName" class="form-input"  value="${groupName }"/>
@@ -77,6 +94,11 @@ function closeThis(){
 		<div class="form-group">
 			<label class="label">用户电话</label>
 			<input name="tel"  id="tel" class="form-input"/>
+		</div>
+		<div class="form-group">
+			<label class="label">用户职位</label>
+			<input name="roleName" id="roleName" class="form-input"/>
+			<img src="add_icon.png" class="form-img" onclick="addRole();" />
 		</div>
 		<div class="form-group">
 			<label class="label">用户密码</label>
