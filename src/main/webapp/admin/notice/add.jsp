@@ -40,7 +40,7 @@ function send(){
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/notice/save',
+	    url: '${projectName }/c/admin/notice/save',
 	    data:a,
 	    mysuccess: function(data){
 	        alert('发送成功');
@@ -53,7 +53,9 @@ var ue;
 $(function(){
 	ue = UE.getEditor('editor',{
         toolbars: [
-            ['forecolor', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
+            ['forecolor', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'insertvideo',
+             'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
+             'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
             ]
         ],
   });
@@ -79,7 +81,7 @@ $(function(){
 	var groupId = getParam('groupId');
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/user/getUserTree',
+	    url: '${projectName }/c/admin/user/getUserTree',
 	    mysuccess: function(data){
 			$.fn.zTree.init($("#treeDemo"), setting ,data);
 			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");

@@ -36,7 +36,7 @@ $(function(){
 function fileDel(id){
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/file/delete?id='+id,
+	    url: '${projectName }/c/admin/file/delete?id='+id,
 	    mysuccess: function(data){
 	        alert('删除成功');
 	        window.location.reload();
@@ -46,7 +46,7 @@ function fileDel(id){
 function fileShenHe(id , btn){
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/file/publish?id='+id,
+	    url: '${projectName }/c/admin/file/publish?id='+id,
 	    mysuccess: function(data){
 	        if(data.publish){
 	        	$(btn).text('已公开');
@@ -79,7 +79,7 @@ function fileShenHe(id , btn){
 						</tr>
 						<c:forEach items="${page.result }" var="file" varStatus="status">
 							<tr class="statue_${status.index%2}">
-							<td><a href='/${projectName }/upload/${file.path }' target="_blank "> ${file.name } </a></td> 
+							<td><a href='${projectName }/upload/${file.path }' target="_blank "> ${file.name } </a></td> 
 							<c:choose>
 								<c:when test="${file.size/1000/1000 >=0.99}">  
 									<td><fmt:formatNumber type="number" value="${file.size/1000/1000 }" maxFractionDigits="1"/>M</td>

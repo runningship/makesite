@@ -71,7 +71,7 @@ $(function(){
 	function infoDel(id){
 		YW.ajax({
 		    type: 'POST',
-		    url: '/${projectName}/c/admin/article/delete?id='+id,
+		    url: '${projectName }/c/admin/article/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
 		        window.location.reload();
@@ -105,6 +105,16 @@ function setSearch(obj){
 	}
 }
 
+function openView(id){
+	layer.open({
+    	type: 2,
+    	title: '文章预览',
+	    shadeClose: false,
+	    shade: 0.5,
+	    area: ['600px', '800px'],
+	    content: 'view.jsp?id='+id
+	}); 
+}
 </script>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -114,23 +124,22 @@ function setSearch(obj){
 			<jsp:include page="../inc/menu.jsp"></jsp:include>
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
-						<div class="title_bar">
-							<h3>文章目录</h3>
-					<form name="form1" type="form" method="get" action="list3.jsp" style="float:right;width:700px;">
-							<select name="yijiId" style="width:100px;" onchange="setSearch(this);">
+						<div class="title_bar" style="height:50px;line-height:50px;">
+					<form name="form1" type="form" method="get" action="list3.jsp" style="">
+							<select name="yijiId" style="height:32px;width:120px;" onchange="setSearch(this);">
 								<option value="">全部</option>
 							<c:forEach items="${yijiList }" var="first">
 								<option <c:if test="${first.id==yijiId}"> selected </c:if>  value="${first.id}">${first.name}</option>
 							</c:forEach>
 							</select>
-							<select name="erjiId" style="width:100px;margin-right: 30px;">
+							<select name="erjiId" style="height:32px;width:120px;">
 								<option value="">全部</option>
 							<c:forEach items="${erjiList }" var="second">
 								<option class="erji" type="${second.parentId}" value="${second.id}" >${second.name}</option>
 							</c:forEach>
 							</select>
-							<input name="searchText" value="${searchText}"  style="margin-right: 30px;" placeholder="标题名称">
-							<input style="margin-right: 50px;" type="submit" value="搜索"/>
+							<input name="searchText" value="${searchText}"  style="margin-left:50px;height:26px;width:300px;" placeholder="标题名称">
+							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
 					</form>
 						</div>
 					<table class="fileList" cellspacing="0">
@@ -143,7 +152,7 @@ function setSearch(obj){
 						</tr>
 						<c:forEach items="${page.result }" var="article" varStatus="status">
 							<tr class="statue_${status.index%2}">
-							<td> ${article.name } </td> 
+							<td> <a href="#" onclick="openView(${article.id});">${article.name }</a> </td> 
 							<td>${article.fname}</td>
 							<td>${article.orderx }</td> 
 							<td><fmt:formatDate value="${article.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 

@@ -31,7 +31,7 @@ function save(){
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/menu/update',
+	    url: '${projectName }/c/admin/menu/update',
 	    data:a,
 	    mysuccess: function(data){
 	        alert('修改成功');

@@ -52,7 +52,7 @@
 function userDel(id){
 		YW.ajax({
 		    type: 'POST',
-		    url: '/${projectName}/c/admin/user/delete?id='+id,
+		    url: '${projectName }/c/admin/user/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
 		        window.location.reload();

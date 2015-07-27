@@ -29,7 +29,7 @@ function save(){
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/article/update',
+	    url: '${projectName }/c/admin/article/update',
 	    data:a,
 	    mysuccess: function(data){
 	        alert('修改成功');
@@ -49,7 +49,7 @@ var ue;
 $(function(){
 	ue = UE.getEditor('editor',{
         toolbars: [
-            ['forecolor', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
+            ['forecolor','source', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
             ]
         ],
   });

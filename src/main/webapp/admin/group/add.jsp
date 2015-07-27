@@ -33,7 +33,7 @@ function save(){
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/group/save',
+	    url: '${projectName }/c/admin/group/save',
 	    data:a,
 	    mysuccess: function(data){
 	        alert('添加成功');

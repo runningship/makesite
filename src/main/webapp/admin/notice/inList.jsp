@@ -15,7 +15,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"select n.title as title , n.addtime as addtime, n.id as id , u.name as sender from Notice n , NoticeReceiver nr ,User u where n.id=nr.noticeId and u.id=nr.receiverId and nr.receiverId=?" 
+	p  = dao.findPage(p,"select n.title as title , n.addtime as addtime, n.id as id , u.name as sender ,nr.hasRead as hasRead ,nr.id as nrid from Notice n , NoticeReceiver nr ,  User u where n.id=nr.noticeId and u.id=nr.receiverId and nr.receiverId=?" 
 			+ " and n._site=? order by n.id desc" , true , new Object[]{2 , request.getServerName()});
 	request.setAttribute("page", p);
 %>
@@ -52,7 +52,7 @@
 function userDel(id){
 		YW.ajax({
 		    type: 'POST',
-		    url: '/${projectName}/c/admin/user/delete?id='+id,
+		    url: '${projectName }/c/admin/user/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
 		        window.location.reload();
@@ -61,14 +61,14 @@ function userDel(id){
 }
 
 
-	function seeThis(id){
+	function seeThis(id , nrid){
 		layer.open({
 	    	type: 2,
 	    	title: '查看收到邮件',
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['600px', '500px'],
-		    content: 'receiveInfo.jsp?id='+id
+		    content: 'receiveInfo.jsp?id='+id+'&nrid='+nrid
 		}); 
 	}
 
@@ -92,7 +92,7 @@ function userDel(id){
 						</tr>
 						<c:forEach items="${page.result}" var="notice" varStatus="status">
 							<tr class="statue_${status.index%2}">
-								<td><a href="#" onclick="seeThis(${notice.id})">${notice.title}</a></td>
+								<td <c:if test="${notice.hasRead==0 }">style="font-weight:bold"</c:if> > <a href="#" onclick="seeThis(${notice.id} , ${notice.nrid })" >${notice.title}</a></td>
 								<td>${notice.sender}</td>
 								<td><fmt:formatDate value="${notice.addtime }" pattern="yyyy-MM-dd HH:mm"/></td>
 							</tr>

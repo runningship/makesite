@@ -39,7 +39,7 @@
 		
 		YW.ajax({
 		    type: 'POST',
-		    url: '/${projectName}/c/admin/user/addToGroup?groupId=${groupId}',
+		    url: '${projectName }/c/admin/user/addToGroup?groupId=${groupId}',
 		    data:"ids="+ids,
 		    mysuccess: function(data){
 		        alert('添加成功');

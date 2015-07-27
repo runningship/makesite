@@ -40,7 +40,7 @@ var setting = {
 
 function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
 	if(msg.indexOf('login.jsp')>-1){
-		window.location='/${projectName}/login.jsp';
+		window.location='${projectName }/login.jsp';
 	}
 	if(!treeNode){
 		//顶层
@@ -51,7 +51,7 @@ function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
 $(function(){
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/user/getUserTree',
+	    url: '${projectName }/c/admin/user/getUserTree',
 	    mysuccess: function(data){
 			$.fn.zTree.init($("#treeDemo"), setting ,data);
 			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
@@ -90,7 +90,7 @@ function onCheck(event, treeId, treeNode){
 function banUser(){
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/user/banUser?groupId='+parentGroupId+'&uid='+currentUid,
+	    url: '${projectName }/c/admin/user/banUser?groupId='+parentGroupId+'&uid='+currentUid,
 	    mysuccess: function(data){
 	        alert('移出成功');
 			window.location.reload();
@@ -99,7 +99,7 @@ function banUser(){
 }
 
 function sendNotice(){
-	window.location="/${projectName}/admin/notice/add.jsp?nav=ftz&groupId="+parentGroupId;
+	window.location="${projectName }/admin/notice/add.jsp?nav=ftz&groupId="+parentGroupId;
 }
 
 function addTopGroup(){

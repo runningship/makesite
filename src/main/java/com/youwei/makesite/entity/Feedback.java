@@ -17,11 +17,15 @@ public class Feedback {
 	
 	public String title;
 
+	public String name;
+	
 	public String contact;
 	
 	public String conts;
 	
 	public Date addtime;
+	
+	public String email;
 	
 	public String _site;
 }

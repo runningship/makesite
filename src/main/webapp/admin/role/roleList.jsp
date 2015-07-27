@@ -65,7 +65,7 @@ function reloadWindow(){
 	function roleDel(id){
 		YW.ajax({
 		    type: 'POST',
-		    url: '/${projectName}/c/admin/role/delete?id='+id,
+		    url: '${projectName }/c/admin/role/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
 		        window.location.reload();

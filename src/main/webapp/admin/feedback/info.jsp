@@ -29,13 +29,25 @@ $(function(){
 
 </script>
 <body style="background-color:white">
-
+	
 		<div class="form-group">
-			<label class="label">联系方式：</label>
+			<span>主题：</span>
+	        <span >${feedback.title}</span>
+		</div>
+		<div class="form-group">
+			<span>联系人：</span>
+	        <span >${feedback.name}</span>
+		</div>
+		<div class="form-group">
+			<span>联系方式：</span>
 	        <span >${feedback.contact}</span>
 		</div>
+		<div class="form-group">
+			<span>邮箱：</span>
+	        <span >${feedback.email}</span>
+		</div>
 		<div id="conts" class="form-group">
-			<label class="label">详细内容：</label>
+			<span>内容：</span>
 	        <span >${feedback.conts}</span>
 		</div>
 </body>

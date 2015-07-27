@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+request.setAttribute("domain", request.getServerName());
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,7 +10,7 @@
 	<title>Wide Admin - Login</title>
 	<script type="text/javascript" src="basejs/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="basejs/buildHtml.js"></script>
-
+	<link rel="stylesheet" href="style/login.css">
 <script type="text/javascript">
 function login(){
 	var a=$('form[name=form1]').serialize();
@@ -35,7 +38,7 @@ $(function(){
 	<body>
 	<div id="container">
 		<div class="logo">
-			<a href="#"><img src="assets/img/logo.png" alt="" /></a>
+			<a href="#"><img src="style/image/${domain }/logo.png" alt="" /></a>
 		</div>
 		<div id="box">
 			<form name="form1">

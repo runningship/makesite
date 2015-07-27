@@ -61,7 +61,7 @@ function reloadWindow(){
 	function delThis(id){
 		YW.ajax({
 		    type: 'POST',
-		    url: '/${projectName}/c/admin/menu/delete?id='+id,
+		    url: '${projectName }/c/admin/menu/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
 		        window.location.reload();

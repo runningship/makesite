@@ -40,7 +40,7 @@ var roleId;
 function saveAuth(id){
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/role/addRoleAuth?roleId='+roleId+'&authId='+id,
+	    url: '${projectName }/c/admin/role/addRoleAuth?roleId='+roleId+'&authId='+id,
 	    mysuccess: function(data){
 	    }
     });
@@ -49,7 +49,7 @@ function saveAuth(id){
 function deleteAuth(id){
 	YW.ajax({
 	    type: 'POST',
-	    url: '/${projectName}/c/admin/role/deleteRoleAuth?roleId='+roleId+'&authId='+id,
+	    url: '${projectName }/c/admin/role/deleteRoleAuth?roleId='+roleId+'&authId='+id,
 	    mysuccess: function(data){
 	    }
     });

@@ -31,7 +31,7 @@
 	function infoDel(id){
 		YW.ajax({
 		    type: 'POST',
-		    url: '/${projectName}/c/admin/article/delete?id='+id,
+		    url: '${projectName }/c/admin/article/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
 		        window.location.reload();
@@ -42,7 +42,7 @@
 	function seeThis(id){
 		layer.open({
 	    	type: 2,
-	    	title: '查看详情',
+	    	title: '网友留言',
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['400px', '300px'],
