@@ -24,7 +24,9 @@
 <head>
 <title>收件箱</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
-<link rel="stylesheet" href="list.css">
+<style type="text/css">
+.first{padding-left:10px;}
+</style>
 </head>
 <script type="text/javascript">
 	function userAdd(){
@@ -81,18 +83,23 @@ function userDel(id){
 			<jsp:include page="../inc/menu.jsp"></jsp:include>
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
-					<div class="title_bar">
-						<h3>收件箱</h3>
-					</div>
+					<div class="title_bar" style="height:50px;line-height:50px;">
+					<form name="form1" type="form" method="get" action="list3.jsp" style="">
+							<span>标题: </span><input name="searchText" value="${searchText}"  style="height:26px;width:250px;">
+							<span style="margin-left:50px;">发送人: </span><input name="searchText" value="${searchText}"  style="height:26px;width:200px;">
+							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
+					</form>
+						</div>
 					<table class="userList" cellspacing="0" style="width:100%">
 						<tr style="background: aliceblue;">
-							<td>标题</td>
+							<td class="first">标题</td>
 							<td width="100">发送人</td>
 							<td width="180">发送时间</td>
 						</tr>
 						<c:forEach items="${page.result}" var="notice" varStatus="status">
 							<tr class="statue_${status.index%2}">
-								<td <c:if test="${notice.hasRead==0 }">style="font-weight:bold"</c:if> > <a href="#" onclick="seeThis(${notice.id} , ${notice.nrid })" >${notice.title}</a></td>
+								<td class="first" <c:if test="${notice.hasRead==0 }">style="font-weight:bold"</c:if> >
+									 <a href="#" onclick="seeThis(${notice.id} , ${notice.nrid })" >${notice.title}</a></td>
 								<td>${notice.sender}</td>
 								<td><fmt:formatDate value="${notice.addtime }" pattern="yyyy-MM-dd HH:mm"/></td>
 							</tr>

@@ -17,6 +17,11 @@
 <head>
 <title>文章预览</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
+<link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">  
+<script src="http://vjs.zencdn.net/c/video.js"></script> 
+<style type="text/css">
+.edui-upload-video{margin-left:auto;margin-right:auto;}
+</style>
 <link rel="stylesheet" href="add.css">
 </head>
 <script type="text/javascript">

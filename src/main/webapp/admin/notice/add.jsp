@@ -6,7 +6,7 @@
 <title>用户信息</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/ueditor.all.yw.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/ueditor.all.js"> </script>
 <script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
 <link href="../js/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
 <link href="../js/zTree_v3/css/div.css" rel="stylesheet">

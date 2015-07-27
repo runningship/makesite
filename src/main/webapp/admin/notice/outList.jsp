@@ -67,7 +67,7 @@ function userDel(id){
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['600px', '500px'],
-		    content: 'receiveInfo.jsp?id='+id
+		    content: 'sendInfo.jsp?id='+id
 		}); 
 	}
 

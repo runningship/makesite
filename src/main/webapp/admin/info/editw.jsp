@@ -15,7 +15,7 @@
 <title>用户信息</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/ueditor.all.yw.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/ueditor.all.js"> </script>
 <script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
 <link rel="stylesheet" href="add.css">
 </head>
@@ -34,7 +34,6 @@ function save(){
 	    mysuccess: function(data){
 	        alert('修改成功');
 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-			parent.reloadWindow();
 			parent.layer.close(index); //再执行关闭   
 	    }
     });
@@ -49,7 +48,8 @@ var ue;
 $(function(){
 	ue = UE.getEditor('editor',{
         toolbars: [
-            ['forecolor','source', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
+            ['forecolor','source', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize','insertvideo','map',
+             'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
             ]
         ],
   });

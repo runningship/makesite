@@ -14,14 +14,14 @@
 <link rel="stylesheet" href="add.css">
 </head>
 <script type="text/javascript">
-function userEdit(id){
+function modifyPwd(){
 	layer.open({
     	type: 2,
-    	title: '修改用户',
+    	title: '修改密码',
 	    shadeClose: false,
 	    shade: 0.5,
-	    area: ['400px', '350px'],
-	    content: 'edit.jsp?id='+id
+	    area: ['400px', '310px'],
+	    content: 'pwd.jsp?uid='+${user.id}
 	}); 
 }
 </script>
@@ -49,7 +49,7 @@ function userEdit(id){
 						</div>
 						<div class="form-group">
 							<label>用户密码</label>
-							<input name="pwd" class="form-input"  disabled="disabled" value="******************" placeholder="无需修改请不用填写" /><a href="#">修改密码</a>
+							<input name="pwd" class="form-input"  disabled="disabled" value="******************" placeholder="无需修改请不用填写" /><a onclick="modifyPwd();" href="#">修改密码</a>
 						</div>
 						<div class="form-group action">
 							<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
