@@ -1,5 +1,8 @@
+<%@page import="java.util.Map"%>
+<%@page import="com.youwei.makesite.entity.NoticeReceiver"%>
 <%@page import="com.youwei.makesite.entity.User"%>
 <%@page import="com.youwei.makesite.entity.Notice"%>
+<%@page import="java.util.List"%>
 <%@page import="org.bc.sdak.SimpDaoTool"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,9 +12,13 @@
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	Integer id = Integer.valueOf(request.getParameter("id"));
 	Notice notice = dao.get(Notice.class, id);
-	User user = dao.get(User.class, notice.senderId);
+	List<Map> result = dao.listAsMap("select u.name as rname from NoticeReceiver nr , User u where nr.receiverId = u.id and nr.noticeId = ?", notice.id);
+	StringBuilder users = new StringBuilder("");
+	for(Map m : result){
+		users.append(m.get("rname")).append(",");
+	}
 	request.setAttribute("Notice", notice);
-	request.setAttribute("Sender", user);
+	request.setAttribute("Sender", users);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,7 +46,7 @@ $(function(){
 		</div>
 		<div class="form-group">
 			<label class="label2">收件人：</label>
-	        <span >${Sender.name}</span>
+	        <span >${Sender}</span>
 		</div>
 		<div class="form-group">
 			<label class="label2">内&nbsp;&nbsp;容：</label>

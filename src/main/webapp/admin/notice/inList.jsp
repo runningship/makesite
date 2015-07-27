@@ -1,3 +1,6 @@
+<%@page import="com.youwei.makesite.ThreadSessionHelper"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.User"%>
@@ -11,13 +14,35 @@
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	Page<Map> p = new Page<Map>();
 	String currentPageNo =  request.getParameter("currentPageNo");
+	String title =  request.getParameter("title");
+	String sendName =  request.getParameter("sendName");
+	String _site =  request.getServerName();
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"select n.title as title , n.addtime as addtime, n.id as id , u.name as sender ,nr.hasRead as hasRead ,nr.id as nrid from Notice n , NoticeReceiver nr ,  User u where n.id=nr.noticeId and u.id=nr.receiverId and nr.receiverId=?" 
-			+ " and n._site=? order by n.id desc" , true , new Object[]{2 , request.getServerName()});
+	StringBuilder hql = new StringBuilder("select n.title as title , n.addtime as addtime, n.id as id , u.name as sender ,nr.hasRead as hasRead ,nr.id as nrid from Notice n , NoticeReceiver nr ,  User u where n.id=nr.noticeId and u.id=nr.receiverId ");
+	List<Object> params = new ArrayList<Object>();
+	hql.append(" and nr.receiverId=?");
+	params.add(ThreadSessionHelper.getUser().id);
+	if(StringUtils.isNotEmpty(title)){
+		hql.append(" and n.title like ?");
+		params.add("%"+title+"%");
+	}
+	if(StringUtils.isNotEmpty(sendName)){
+		hql.append(" and u.name like ?");
+		params.add("%"+sendName+"%");
+	}
+	if(StringUtils.isNotEmpty(_site)){
+		hql.append(" and n._site = ?");
+		params.add(_site);
+	}
+		hql.append(" order by n.id desc");
+	p  = dao.findPage(p, hql.toString(),true, params.toArray());
 	request.setAttribute("page", p);
+
+	request.setAttribute("title", title);
+	request.setAttribute("sendName", sendName);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -84,9 +109,10 @@ function userDel(id){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar" style="height:50px;line-height:50px;">
-					<form name="form1" type="form" method="get" action="list3.jsp" style="">
-							<span>标题: </span><input name="searchText" value="${searchText}"  style="height:26px;width:250px;">
-							<span style="margin-left:50px;">发送人: </span><input name="searchText" value="${searchText}"  style="height:26px;width:200px;">
+						<h3>收件箱</h3>
+					<form name="form1" type="form" method="post" action="inList.jsp" style="">
+							<span style="margin-left:50px;">标题: </span><input name="title" value="${title}"  style="height:26px;width:250px;">
+							<span style="margin-left:50px;">发送人: </span><input name="sendName" value="${sendName}"  style="height:26px;width:200px;">
 							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
 					</form>
 						</div>

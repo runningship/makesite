@@ -1,3 +1,6 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="com.youwei.makesite.ThreadSessionHelper"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.SharedFile"%>
@@ -11,11 +14,29 @@
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	Page<Map> p = new Page<Map>();
 	String currentPageNo =  request.getParameter("currentPageNo");
+	String filename =  request.getParameter("filename");
+	String sendName =  request.getParameter("sendName");
+	String _site =  request.getServerName();
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"select sf.name as name, sf.id as fid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  , sf.publish as publish from SharedFile sf,User u where sf.uid = u.id order by sf.id desc",true,new Object[]{});
+	StringBuilder hql = new StringBuilder("select sf.name as name, sf.id as fid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  , sf.publish as publish from SharedFile sf,User u where sf.uid = u.id");
+	List<Object> params = new ArrayList<Object>();
+	if(StringUtils.isNotEmpty(filename)){
+		hql.append(" and sf.filename like ?");
+		params.add("%"+filename+"%");
+	}
+	if(StringUtils.isNotEmpty(sendName)){
+		hql.append(" and u.name like ?");
+		params.add("%"+sendName+"%");
+	}
+	if(StringUtils.isNotEmpty(_site)){
+		hql.append(" and sf._site = ?");
+		params.add(_site);
+	}
+		hql.append(" order by sf.id desc");
+	p  = dao.findPage(p, hql.toString(),true, params.toArray());
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -66,8 +87,13 @@ function fileShenHe(id , btn){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>文件列表</h3>
-						<button id="fileUploadBtn" style="float:right;margin-top:-35px;padding:5px;">上 &nbsp;传</button>
+						<h3 style="margin-top: 5px;">文件列表</h3>
+					<form name="form1" type="form" method="post" action="list.jsp" style="">
+							<span style="margin-left:20px;">文件名: </span><input name="filename" value="${filename}"  style="height:26px;width:200px;">
+							<span style="margin-left:20px;">上传人: </span><input name="sendName" value="${sendName}"  style="height:26px;width:200px;">
+							<input style="margin-left:20px;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
+					</form>
+						<button id="fileUploadBtn" style="float:right;margin-top:-35px;padding:5px;margin-top: -40px;">上 &nbsp;传</button>
 					</div>
 					<table class="fileList" cellspacing="0">
 						<tr style="background: aliceblue;">

@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.User"%>
 <%@page import="java.util.List"%>
@@ -10,12 +12,33 @@
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	Page<User> p = new Page<User>();
 	String currentPageNo =  request.getParameter("currentPageNo");
+	String userName =  request.getParameter("userName");
+	String userTel =  request.getParameter("userTel");
+	String _site =  request.getServerName();
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from User where 1=1 order by id desc");
+	StringBuilder hql = new StringBuilder("from User where 1=1 ");
+	List<Object> params = new ArrayList<Object>();
+	if(StringUtils.isNotEmpty(userName)){
+		hql.append(" and name like ?");
+		params.add("%"+userName+"%");
+	}
+	if(StringUtils.isNotEmpty(userTel)){
+		hql.append(" and tel like ?");
+		params.add("%"+userTel+"%");
+	}
+	if(StringUtils.isNotEmpty(_site)){
+		hql.append(" and _site = ?");
+		params.add(_site);
+	}
+	hql.append(" order by id desc");
+	p  = dao.findPage(p, hql.toString(), params.toArray());
 	request.setAttribute("page", p);
+
+	request.setAttribute("userName", userName);
+	request.setAttribute("userTel", userTel);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -70,8 +93,13 @@ function reloadWindow(){
 			<jsp:include page="../inc/menu.jsp"></jsp:include>
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
-					<div class="title_bar">
+					<div class="title_bar" style="height:50px;line-height:50px;">
 						<h3>用户列表</h3>
+					<form name="form1" type="form" method="post" action="list.jsp" style="">
+							<span style="margin-left:50px;">用户名: </span><input name="userName" value="${userName}" style="margin-top: 10px;height:26px;width:100px;">
+							<span style="margin-left:50px;">联系电话: </span><input name="userTel" value="${userTel}"  style="margin-top: 10px;height:26px;width:200px;">
+							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
+					</form>
 					</div>
 					<table class="userList" cellspacing="0">
 						<tr style="background: aliceblue;">

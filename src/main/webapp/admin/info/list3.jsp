@@ -125,7 +125,7 @@ function openView(id){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 						<div class="title_bar" style="height:50px;line-height:50px;">
-					<form name="form1" type="form" method="get" action="list3.jsp" style="">
+					<form name="form1" type="form" method="post" action="list3.jsp" style="">
 							<select name="yijiId" style="height:32px;width:120px;" onchange="setSearch(this);">
 								<option value="">全部</option>
 							<c:forEach items="${yijiList }" var="first">

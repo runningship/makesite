@@ -21,9 +21,11 @@
 		roleNames.append(m.get("name")).append(",");
 	}
 	String roleId = roleIds.toString();
-	roleId = roleId.substring(0,roleId.length()-1);
 	String roleName = roleNames.toString();
-	roleName = roleName.substring(0,roleName.length()-1);
+	if(!roleId.isEmpty()){
+		roleId = roleId.substring(0,roleId.length()-1);
+		roleName = roleName.substring(0,roleName.length()-1);
+	}
 	request.setAttribute("roleIds", roleId);
 	request.setAttribute("roleName", roleName);
 %>
