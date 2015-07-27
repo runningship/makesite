@@ -9,6 +9,7 @@
 	List<String> authList = (List<String>)request.getSession().getAttribute(MakesiteConstant.Session_Auth_List);
 	request.setAttribute(MakesiteConstant.Session_Auth_List, authList);
 	request.setAttribute("user", request.getSession().getAttribute("user"));
+	request.setAttribute("domain", request.getServerName());
 %>
 <script type="text/javascript">
 function editMe(){
@@ -26,11 +27,11 @@ function editMe(){
 	<div class="head_box">
 		<div class="inner wrp">
 			<div class="logo">
-				<img src="../style/getheadimg"  style="height:38px;float:left;padding-right:10px;"/><div style="float:right;"><span>联信</span> · 管理后台</div>
+				<img src="${projectName }/assets/${domain}/logo.png"  style="height:38px;float:left;padding-right:10px;"/><div style="float:right;"><span>联信</span> · 管理后台</div>
 			</div>
 			<div class="account">
 				<div class="account_meta account_info">
-					<a href="#" class="nickname">${user.name }</a><span style="color:#ddd">|</span><a class="logout"  style="text-decoration:underline;" href="${projectName }/c/admin/user/logout">退出</a>
+					<a class="nickname">${user.name }</a><span style="color:#ddd">|</span><a class="logout"  style="" href="${projectName }/c/admin/user/logout">退出</a>
 				</div>
 			</div>
 		</div>

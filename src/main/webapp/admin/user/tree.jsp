@@ -14,7 +14,6 @@
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link href="../js/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
 <link href="../js/zTree_v3/css/div.css" rel="stylesheet">
-<link href="list.css" rel="stylesheet">
 <script type="text/javascript" src="../js/zTree_v3/js/jquery.ztree.all-3.5.js"></script>
 <script type="text/javascript">
 var parentGroupId='';
@@ -30,22 +29,11 @@ var setting = {
   data: {
   },
   callback: {
-    onClick: OnRightClick,
-    onAsyncSuccess: zTreeOnAsyncSuccess
+    onClick: OnRightClick
   },
   check:{
-    enable:true
+    enable:false
   }
-};
-
-function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
-	if(msg.indexOf('login.jsp')>-1){
-		window.location='${projectName }/login.jsp';
-	}
-	if(!treeNode){
-		//顶层
-		
-	}
 };
 
 $(function(){
@@ -71,6 +59,11 @@ function addDiyDom(treeId, treeNode) {
 	  aObj.css('display','inline');
 
 	  aObj.parent().addClass('a_'+treeNode.type);
+	  if(treeNode.type=='group'){
+		  aObj.prepend('<span class="group"></span>');  
+	  }else{
+		  aObj.prepend('<span class="user"></span>');
+	  }
 	  if(treeNode.cnum!=null){
 	    var cnumStr = '<span class="">'+ treeNode.cnum +' </span>';
 	    aObj.prepend(cnumStr);  
@@ -168,6 +161,8 @@ function OnRightClick(event, treeId, treeNode) {
 	  parentGroupId = treeNode.id;
 	  parentGroupName = treeNode.name;
   }else{
+	  parentGroupId = treeNode.getParentNode().id;
+	  parentGroupName = treeNode.getParentNode().name;
 	  currentUid = treeNode.id;
 	  $('#groupMenu').hide();
 	  $('#userMenu').show();
@@ -221,6 +216,8 @@ div#rMenu {
 background: #428bca;
   color: white;
 }
+.group{background:url(../js/zTree_v3/css/zTreeStyle/img/diy/group.png) 0 0 no-repeat;padding-right:16px;}
+.user{background:url(../js/zTree_v3/css/zTreeStyle/img/diy/user.png) 0 0 no-repeat;padding-right:16px;}
 </style>
 </head>
 

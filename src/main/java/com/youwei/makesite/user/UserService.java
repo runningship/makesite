@@ -125,6 +125,17 @@ public class UserService {
 	}
 
 	@WebMethod
+	public ModelAndView modifyPwd(int  uid , String oldPwd , String newPwd){
+		ModelAndView mv = new ModelAndView();
+		User po = dao.get(User.class, uid);
+		if(po!=null){
+			po.pwd = SecurityHelper.Md5(newPwd);
+			dao.saveOrUpdate(po);
+		}
+		return mv;
+	}
+	
+	@WebMethod
 	public ModelAndView delete(int  id){
 		ModelAndView mv = new ModelAndView();
 		User po = dao.get(User.class, id);

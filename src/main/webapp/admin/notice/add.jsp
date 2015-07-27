@@ -12,6 +12,10 @@
 <link href="../js/zTree_v3/css/div.css" rel="stylesheet">
 <script type="text/javascript" src="../js/zTree_v3/js/jquery.ztree.all-3.5.js"></script>
 <link rel="stylesheet" href="add.css">
+<style type="text/css">
+.group{background:url(../js/zTree_v3/css/zTreeStyle/img/diy/group.png) 0 0 no-repeat;padding-right:16px;}
+.user{background:url(../js/zTree_v3/css/zTreeStyle/img/diy/user.png) 0 0 no-repeat;padding-right:16px;}
+</style>
 </head>
 <script type="text/javascript">
 function send(){
@@ -102,12 +106,12 @@ function addDiyDom(treeId, treeNode) {
 	  console.log(treeId);
   var aObj = $("#" + treeNode.tId + "_a");
   aObj.css('display','inline');
-
-  aObj.parent().addClass('a_'+treeNode.type);
-  if(treeNode.cnum!=null){
-    var cnumStr = '<span class="">'+ treeNode.cnum +' </span>';
-    aObj.prepend(cnumStr);  
+  if(treeNode.type=='group'){
+	  aObj.prepend('<span class="group"></span>');  
+  }else{
+	  aObj.prepend('<span class="user"></span>');
   }
+  aObj.parent().addClass('a_'+treeNode.type);
 }
 	
 </script>
