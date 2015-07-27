@@ -93,7 +93,7 @@ public class UserService {
 	}
 	
 	@WebMethod
-	public ModelAndView update(User user  , Integer groupId ,  String roleIds ){
+	public ModelAndView update(User user  ,  String roleIds ){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(user.name)){
 			throw new GException(PlatformExceptionType.BusinessException,"用户名不能为空");
@@ -108,21 +108,19 @@ public class UserService {
 		po.tel = user.tel;
 		//TODO
 		dao.saveOrUpdate(po);
-		if(groupId!=null){
-			UserGroup ug = new UserGroup();
-			ug.gid = groupId;
-			ug.uid = user.id;
-			dao.saveOrUpdate(ug);
-		}
 		if(roleIds!=null && roleIds.length() != 0){
 			String[] Ids = roleIds.split(",");
+			dao.execute("delete from UserRole where uid=?", user.id);
 			for(int i=0;i<Ids.length ;i++){
+				if(StringUtils.isEmpty(Ids[i])){
+					continue;
+				}
 				UserRole rg = new UserRole();
 				rg.roleId = Integer.valueOf(Ids[i]);
 				rg.uid = user.id;
 				dao.saveOrUpdate(rg);
 			}
-		}
+		}else{}
 		return mv;
 	}
 
@@ -133,6 +131,7 @@ public class UserService {
 		if(po!=null){
 			dao.delete(po);
 			dao.execute("delete from UserGroup where uid=?", id);
+			dao.execute("delete from UserRole where uid=?", id);
 			mv.data.put("msg", "删除用户成功");
 		}
 		

@@ -10,6 +10,7 @@
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	Page<Role> p = new Page<Role>();
+	String ids =  request.getParameter("ids");
 	String currentPageNo =  request.getParameter("currentPageNo");
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
@@ -56,10 +57,15 @@ function closeThis(){
 	parent.layer.close(index); //再执行关闭   
 }
 
+
 $(function(){
-	ids = getParam('ids');
+	var ids = getParam('ids');
+	ids = decodeURI(ids);
+	var roles = getParam('names');
+	roles = decodeURI(roles);
     if(ids!=""){
-		Ids = ids.split(",");
+		Ids = ids.split("%2C");
+		Roles = roles.split("%2C");
 		for(var i=0;i<Ids.length ;i++){
 			$('#'+Ids[i]).attr('checked',true);
 		}
@@ -69,7 +75,6 @@ $(function(){
 <body>
 	<div class="body2">
 		<div class="container_box cell_layout side_l">
-
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<table class="userList" cellspacing="0">
@@ -80,7 +85,7 @@ $(function(){
 						</tr>
 						<c:forEach items="${page.result}" var="role" varStatus="status">
 							<tr class="statue_${status.index%2}">
-								<td>${role.name}</td>
+								<td id="name_${role.id}">${role.name}</td>
 								<td>${role.duty}</td>
 								<td>
 									<input type="checkbox"  name="roleId" id="${role.id}"

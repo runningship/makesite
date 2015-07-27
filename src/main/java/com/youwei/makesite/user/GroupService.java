@@ -48,6 +48,10 @@ public class GroupService {
 	@WebMethod
 	public ModelAndView delete(int  id){
 		ModelAndView mv = new ModelAndView();
+		long leftCount = dao.countHql("select count(*) from Group where parentId=?", id);
+		if(leftCount>0){
+			throw new GException(PlatformExceptionType.BusinessException,"该群组下包含子群组,请先删除子群组。");
+		}
 		Group po = dao.get(Group.class, id);
 		if(po!=null){
 			dao.delete(po);

@@ -98,6 +98,17 @@ function banUser(){
     });
 }
 
+function deleteGroup(){
+	YW.ajax({
+	    type: 'POST',
+	    url: '${projectName }/c/admin/group/delete?id='+parentGroupId,
+	    mysuccess: function(data){
+	        alert('删除成功');
+			window.location.reload();
+	    }
+    });
+}
+
 function sendNotice(){
 	window.location="${projectName }/admin/notice/add.jsp?nav=ftz&groupId="+parentGroupId;
 }
@@ -241,7 +252,7 @@ background: #428bca;
   <a href="javascript:void(0)" auth="sz_comp_edit" id="m_edit_comp" onclick="addGroup();" class="list-group-item">添加子用户组</a>
   <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="addUser()" class="list-group-item">加入新用户</a>
   <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="inviteUser()" class="list-group-item">加入已有用户</a>
-  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="inviteUser()" class="list-group-item">删除用户组</a>
+  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="deleteGroup()" class="list-group-item">删除用户组</a>
   <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="sendNotice()" class="list-group-item">发送通知</a>
   </span>
   <span id="userMenu">

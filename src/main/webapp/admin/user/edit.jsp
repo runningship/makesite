@@ -22,8 +22,10 @@
 	}
 	String roleId = roleIds.toString();
 	roleId = roleId.substring(0,roleId.length()-1);
+	String roleName = roleNames.toString();
+	roleName = roleName.substring(0,roleName.length()-1);
 	request.setAttribute("roleIds", roleId);
-	request.setAttribute("roleNames", roleNames.toString());
+	request.setAttribute("roleName", roleName);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -63,14 +65,16 @@ function setRoles(roleIds,roleNames){
 	$('#roleName').val(roleNames);
 }
 
-	function editRole(ids){
+	function editRole(){
+		var ids = $('#roleIds').val();
+		var names = $('#roleName').val();
 		layer.open({
 	    	type: 2,
 	    	title: '选择职位',
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['400px', '400px'],
-		    content: 'role_select.jsp?ids='+ids
+		    content: 'role_select.jsp?ids='+ids+'&names='+names
 		}); 
 	}
 
@@ -101,8 +105,8 @@ function closeThis(){
 		</div>
 		<div class="form-group">
 			<label>用户职位</label>
-			<input name="roleName" id="roleName" class="form-input" value="${roleNames}"/>
-			<img src="add_icon.png" class="form-img" onclick="editRole('${roleIds}');" />
+			<input name="roleName" id="roleName" class="form-input" value="${roleName}"/>
+			<img src="add_icon.png" class="form-img" onclick="editRole();" />
 		</div>
 		<div class="form-group action">
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
