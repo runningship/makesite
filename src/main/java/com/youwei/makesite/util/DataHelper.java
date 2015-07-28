@@ -18,7 +18,7 @@ public class DataHelper {
 	
 	public static long getDiskSize(String serverName){
 		String baseDir = ConfigCache.get("upload_path", "");
-		File file = new File(baseDir + serverName);
+		File file = new File(baseDir +File.separator+ serverName);
 		return FileUtils.sizeOfDirectory(file);
 	}
 }

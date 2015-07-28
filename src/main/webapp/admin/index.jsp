@@ -1,6 +1,38 @@
+<%@page import="com.youwei.makesite.user.UserService"%>
+<%@page import="com.youwei.makesite.ThreadSessionHelper"%>
+<%@page import="com.youwei.makesite.entity.Menu"%>
+<%@page import="java.util.List"%>
+<%@page import="org.bc.sdak.SimpDaoTool"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@page import="com.youwei.makesite.util.DataHelper"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+long yiji = dao.countHql("SELECT COUNT(*) FROM Menu where parentId is null and _site = ?" , request.getServerName());
+request.setAttribute("yiji", yiji);
+
+long erji = dao.countHql("SELECT COUNT(*) FROM Menu where parentId is not null and _site = ?" , request.getServerName());
+request.setAttribute("erji", erji);
+
+long Artcount = dao.countHql("SELECT COUNT(*) FROM Article where  _site = ?" , request.getServerName());
+request.setAttribute("Artcount", Artcount);
+
+long ucount = dao.countHql("SELECT COUNT(*) FROM User where  _site = ?" , request.getServerName());
+request.setAttribute("ucount", ucount);
+
+long nrcount = dao.countHql("SELECT COUNT(*) FROM NoticeReceiver where receiverId = ? and _site = ?" ,ThreadSessionHelper.getUser().id , request.getServerName());
+request.setAttribute("nrcount", nrcount);
+
+long ncount = dao.countHql("SELECT COUNT(*) FROM Notice where senderId = ? and _site = ?" ,ThreadSessionHelper.getUser().id , request.getServerName());
+request.setAttribute("ncount", ncount);
+
+long filecount = dao.countHql("SELECT COUNT(*) FROM SharedFile where _site = ?" , request.getServerName());
+request.setAttribute("filecount", filecount);
+
+long uonline = UserService.onlineUserCountMap.get(request.getServerName());
+request.setAttribute("uonline", uonline);
+
 request.setAttribute("domainSize",DataHelper.getDiskSize(request.getServerName()));
 %>
 <!DOCTYPE html>
@@ -38,28 +70,28 @@ function openWin(){
 					<ul class="mp_news_list">
 
 						<li class="mp_news_item"><a > <strong>一级栏目数
-							</strong> <span class="read_more">8个</span>
+							</strong> <span class="read_more">${yiji}个</span>
 						</a></li>
 						<li class="mp_news_item"><a target="_blank"> <strong>二级栏目数
-							</strong> <span class="read_more">8个</span>
+							</strong> <span class="read_more">${erji}个</span>
 						</a></li>
 						<li class="mp_news_item"><a target="_blank"> <strong>文章数量
-							</strong> <span class="read_more">8篇</span>
+							</strong> <span class="read_more">${Artcount}篇</span>
 						</a></li>
 						<li class="mp_news_item"><a target="_blank"> <strong>用户数
-							</strong> <span class="read_more">8人</span>
+							</strong> <span class="read_more">${ucount}人</span>
 						</a></li>
 						<li class="mp_news_item"><a target="_blank"> <strong>在线用户数
-							</strong> <span class="read_more">8人</span>
+							</strong> <span class="read_more">${uonline}人</span>
 						</a></li>
-						<li class="mp_news_item"><a target="_blank"> <strong>收收到的通知
-							</strong> <span class="read_more">8条</span>
+						<li class="mp_news_item"><a target="_blank"> <strong>收到的通知
+							</strong> <span class="read_more">${nrcount}条</span>
 						</a></li>
 						<li class="mp_news_item"><a target="_blank"> <strong>我发的通知
-							</strong> <span class="read_more">8条</span>
+							</strong> <span class="read_more">${ncount}条</span>
 						</a></li>
 						<li class="mp_news_item"><a target="_blank"> <strong>共享文件数
-							</strong> <span class="read_more">8</span>
+							</strong> <span class="read_more">${filecount}条</span>
 						</a></li>
 						<li class="mp_news_item"><a target="_blank"> <strong>占用磁盘空间
 							</strong> <span class="read_more">${domainSize/1024/1024 }M</span>

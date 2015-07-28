@@ -9,7 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>用户信息</title>
+<title>我的资料</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link rel="stylesheet" href="add.css">
 </head>
@@ -54,7 +54,7 @@ function modifyPwd(){
 						<div class="form-group action">
 							<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 							<div class="form-input btn-wrap" >
-								<button onclick="save();return false;" class="form-button" style="float:right">保&nbsp;&nbsp;存</button>
+								<button onclick="save();return false;" class="form-button" style="float:right;cursor:pointer">保&nbsp;&nbsp;存</button>
 							</div>
 						</div>
 					</form>

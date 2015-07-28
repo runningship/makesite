@@ -94,9 +94,8 @@ function reloadWindow(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar" style="height:50px;line-height:50px;">
-						<h3>用户列表</h3>
 					<form name="form1" type="form" method="post" action="list.jsp" style="">
-							<span style="margin-left:50px;">用户名: </span><input name="userName" value="${userName}" style="margin-top: 10px;height:26px;width:100px;">
+							<span>用户名: </span><input name="userName" value="${userName}" style="margin-top: 10px;height:26px;width:100px;">
 							<span style="margin-left:50px;">联系电话: </span><input name="userTel" value="${userTel}"  style="margin-top: 10px;height:26px;width:200px;">
 							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
 					</form>

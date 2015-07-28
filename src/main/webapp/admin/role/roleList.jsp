@@ -20,7 +20,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>职位信息</title>
+<title>职位权限</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link rel="stylesheet" href="list.css">
 </head>
@@ -82,8 +82,7 @@ function reloadWindow(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>职位列表</h3>
-						<button style="float:right;margin-top: 5px;padding:5px;" onclick="roleAdd();">添加职位</button>
+						<button style="float:left;margin-top: 5px;padding:5px;cursor:pointer" onclick="roleAdd();">添加职位</button>
 					</div>
 					<table class="userList" cellspacing="0">
 						<tr style="background: aliceblue;">

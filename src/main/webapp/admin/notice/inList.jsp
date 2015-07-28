@@ -109,9 +109,8 @@ function userDel(id){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar" style="height:50px;line-height:50px;">
-						<h3>收件箱</h3>
 					<form name="form1" type="form" method="post" action="inList.jsp" style="">
-							<span style="margin-left:50px;">标题: </span><input name="title" value="${title}"  style="height:26px;width:250px;">
+							<span>标题: </span><input name="title" value="${title}"  style="height:26px;width:250px;">
 							<span style="margin-left:50px;">发送人: </span><input name="sendName" value="${sendName}"  style="height:26px;width:200px;">
 							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
 					</form>

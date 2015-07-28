@@ -92,7 +92,7 @@ function reloadWindow(){
 					<div class="title_bar">
 						<h3>一级栏目</h3>
 						<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
-						<button style="float:right;margin-top: 5px;padding:5px;" onclick="openAdd();">添 &nbsp;加</button>
+						<button style="float:right;margin-top: 5px;padding:5px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
 						</c:if>
 					</div>
 					<table class="fileList" cellspacing="0">

@@ -38,7 +38,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>发件箱</title>
+<title>已发送</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link rel="stylesheet" href="list.css">
 </head>
@@ -97,9 +97,8 @@ function userDel(id){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>已发送</h3>
 					<form name="form1" type="form" method="post" action="outList.jsp" style="">
-							<span style="margin-left:50px;">标题: </span><input name="title" value="${title}"  style="height:26px;width:250px;">
+							<span>标题: </span><input name="title" value="${title}"  style="height:26px;width:250px;">
 							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
 					</form>
 					</div>
