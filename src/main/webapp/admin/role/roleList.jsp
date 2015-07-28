@@ -20,7 +20,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>用户信息</title>
+<title>职位信息</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link rel="stylesheet" href="list.css">
 </head>
@@ -53,7 +53,7 @@
 	    	title: '编辑权限',
 		    shadeClose: false,
 		    shade: 0.5,
-		    area: ['800px', '700px'],
+		    area: ['397px', '700px'],
 		    content: 'authList.jsp?roleId='+id
 		}); 
 	}
