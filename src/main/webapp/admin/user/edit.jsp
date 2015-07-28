@@ -67,18 +67,22 @@ function setRoles(roleIds,roleNames){
 	$('#roleName').val(roleNames);
 }
 
-	function editRole(){
-		var ids = $('#roleIds').val();
-		var names = $('#roleName').val();
-		layer.open({
-	    	type: 2,
-	    	title: '选择职位',
-		    shadeClose: false,
-		    shade: 0.5,
-		    area: ['400px', '400px'],
-		    content: 'role_select.jsp?ids='+ids+'&names='+names
-		}); 
-	}
+function editRole(){
+	var ids = $('#roleIds').val();
+	var names = $('#roleName').val();
+	layer.open({
+    	type: 2,
+    	title: '选择职位',
+	    shadeClose: false,
+	    shade: 0.5,
+	    area: ['400px', '400px'],
+	    content: 'role_select.jsp?ids='+ids+'&names='+names
+	}); 
+}
+
+function setPWD(){
+	$('#pwd').attr('disabled',false);
+}
 
 function closeThis(){
 	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
@@ -102,13 +106,14 @@ function closeThis(){
 			<input name="tel" value="${user.tel}"  class="form-input"/>
 		</div>
 		<div class="form-group">
-			<label>用户密码</label>
-			<input name="pwd" class="form-input" placeholder="无需修改请不用填写" />
-		</div>
-		<div class="form-group">
 			<label>用户职位</label>
 			<input name="roleName" id="roleName" class="form-input" value="${roleName}"/>
-			<img src="add_icon.png" class="form-img" onclick="editRole();" />
+			<a onclick="editRole();return false" href="#">设置</a>
+		</div>
+		<div class="form-group">
+			<label>用户密码</label>
+			<input type="password" name="pwd" id="pwd" class="form-input" placeholder="********************" disabled="disabled" />
+			<a onclick="setPWD();return false" href="#">重置</a>
 		</div>
 		<div class="form-group action">
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>

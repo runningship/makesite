@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>用户信息</title>
+<title>群组信息</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link href="../js/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
 <link href="../js/zTree_v3/css/div.css" rel="stylesheet">
@@ -231,7 +231,7 @@ background: #428bca;
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
 						<h3>用户组织架构</h3>
-						<button onclick="addTopGroup();return false;" class="add">添 &nbsp;加</button>
+						<button style="float:right;margin-top: 5px;padding:5px;" onclick="addTopGroup();return false;" class="add">添 &nbsp;加</button>
 					</div>
 					<div class="zTreeDemoBackground left">
 						<ul id="treeDemo" class="ztree"></ul>

@@ -98,7 +98,7 @@ function closeThis(){
 		<div class="form-group">
 			<label class="label">用户职位</label>
 			<input name="roleName" id="roleName" class="form-input"/>
-			<img src="add_icon.png" class="form-img" onclick="addRole();" />
+			<a onclick="editRole();" href="#">设置</a>
 		</div>
 		<div class="form-group">
 			<label class="label">用户密码</label>
