@@ -45,7 +45,7 @@
 	    	title: '网友留言',
 		    shadeClose: false,
 		    shade: 0.5,
-		    area: ['400px', '300px'],
+		    area: ['500px', '400px'],
 		    content: 'info.jsp?id='+id
 		}); 
 	}
@@ -74,7 +74,7 @@
 							<td><a href="#" onclick="seeThis(${feedback.id})">${feedback.conts}</a></td>
 							<td>${feedback.contact}</td> 
 							<td><fmt:formatDate value="${feedback.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 
-							<td><a href="#" onclick="seeThis(${feedback.id})">详细</a>  <a href="#" onclick="infoDel(${feedback.id})">删除</a></td>
+							<td><a href="#" onclick="infoDel(${feedback.id})">删除</a></td>
 						</tr>
 						</c:forEach>
 					</table>

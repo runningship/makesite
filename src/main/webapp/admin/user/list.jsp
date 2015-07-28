@@ -116,8 +116,8 @@ function reloadWindow(){
 								<td>${user.name}</td>
 								<td><fmt:formatDate value="${user.lasttime }" pattern="yyyy-MM-dd HH:mm"/></td>
 								<td>
-									<a href="#" onclick="userEdit('${user.id}');return false">修改</a>
-									<a href="#" onclick="userDel('${user.id}');return false">删除</a>
+									<c:if test="${session_auth_list.indexOf('$user_modifyUser')>-1 }"><a href="#" onclick="userEdit('${user.id}');return false">修改</a></c:if>
+									<c:if test="${session_auth_list.indexOf('$user_modifyUser')>-1 && user.isSuperAdmin==0}"><a href="#" onclick="userDel('${user.id}');return false">删除</a></c:if>
 								</td>
 							</tr>
 						</c:forEach>

@@ -19,4 +19,6 @@ public class Role {
 	public String duty;
 	
 	public String _site;
+	
+	public Integer isSystemRole;
 }

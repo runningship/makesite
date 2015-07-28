@@ -156,7 +156,9 @@ function openView(id){
 							<td>${article.fname}</td>
 							<td>${article.orderx }</td> 
 							<td><fmt:formatDate value="${article.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 
-							<td><a href="#" onclick="editThis(${article.id})">修改</a>  <a href="#" onclick="infoDel(${article.id})">删除</a></td>
+							<td>
+								<c:if test="${session_auth_list.indexOf('$info_modifyArticle')>-1 }"><a href="#" onclick="editThis(${article.id})">修改</a></c:if> 
+							 	<c:if test="${session_auth_list.indexOf('$info_delArticle')>-1 }"><a href="#" onclick="infoDel(${article.id})">删除</a></c:if></td>
 						</tr>
 						</c:forEach>
 					</table>

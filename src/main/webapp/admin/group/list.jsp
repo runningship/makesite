@@ -20,7 +20,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>用户组信息</title>
+<title>部门信息</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link rel="stylesheet" href="list.css">
 </head>
@@ -28,7 +28,7 @@
 	function userAdd(){
 		layer.open({
 	    	type: 2,
-	    	title: '添加用户组',
+	    	title: '添加部门',
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['400px', '200px'],
@@ -39,7 +39,7 @@
 	function userEdit(id){
 		layer.open({
 	    	type: 2,
-	    	title: '修改用户组',
+	    	title: '修改部门',
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['400px', '200px'],

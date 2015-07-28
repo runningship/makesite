@@ -28,5 +28,7 @@ public class User {
 	
 	public Date lasttime;
 	
+	public Integer isSuperAdmin;
+	
 	public String _site;
 }

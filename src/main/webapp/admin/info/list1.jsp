@@ -91,7 +91,9 @@ function reloadWindow(){
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
 						<h3>一级栏目</h3>
+						<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
 						<button style="float:right;margin-top: 5px;padding:5px;" onclick="openAdd();">添 &nbsp;加</button>
+						</c:if>
 					</div>
 					<table class="fileList" cellspacing="0">
 						<tr style="background: aliceblue;">
@@ -103,10 +105,14 @@ function reloadWindow(){
 							<tr class="statue_${status.index%2}">
 							<td>${menu.orderx } </td> 
 							<td>${menu.name }</td> 
-							<td><a href="#" onclick="editThis(${menu.id})">修改</a>  <a href="#" onclick="delThis(${menu.id})">删除</a>
-							<c:if test="${menu.type == 'menu'}">
-								<a href="#" onclick="openAdd2(${menu.id});">添加子栏目</a>
-							</c:if>
+							<td>
+								<c:if test="${session_auth_list.indexOf('$info_modifyMenu')>-1 }"><a href="#" onclick="editThis(${menu.id})">修改</a> </c:if>
+							 	<c:if test="${session_auth_list.indexOf('$info_delMenu')>-1 }"><a href="#" onclick="delThis(${menu.id})">删除</a></c:if>
+								<c:if test="${menu.type == 'menu'}">
+									<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
+										<a href="#" onclick="openAdd2(${menu.id});">添加子栏目</a>
+									</c:if>
+								</c:if>
 							</td>
 						</tr>
 						</c:forEach>

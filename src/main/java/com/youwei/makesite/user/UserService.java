@@ -73,13 +73,15 @@ public class UserService {
 		if(po==null){
 			throw new GException(PlatformExceptionType.BusinessException,"用户名或密码不正确。");
 		}
+		po.lasttime = new Date();
+		dao.saveOrUpdate(po);
 		ThreadSession.getHttpSession().setAttribute("user", po);
 		List<Map> result = dao.listAsMap("select ra.authId as authId from UserRole ur ,RoleAuth ra where ur.roleId=ra.roleId and ur.uid=?", po.id);
-		List<String> authList = new ArrayList<String>();
+		StringBuilder authList= new StringBuilder("");
 		for(Map map : result){
-			authList.add(map.get("authId").toString());
+			authList.append(map.get("authId").toString());
 		}
-		ThreadSession.getHttpSession().setAttribute(MakesiteConstant.Session_Auth_List, authList);
+		ThreadSession.getHttpSession().setAttribute(MakesiteConstant.Session_Auth_List, authList.toString());
 		return mv;
 	}
 	

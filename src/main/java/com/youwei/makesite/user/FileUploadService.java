@@ -36,7 +36,7 @@ public class FileUploadService {
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
 	@WebMethod
-	public ModelAndView upload(){
+	public ModelAndView upload(String _site){
 		ModelAndView mv = new ModelAndView();
 		HttpServletRequest request = ThreadSession.HttpServletRequest.get();
 		FileItemFactory factory = new DiskFileItemFactory();
@@ -64,6 +64,7 @@ public class FileUploadService {
 					file.fileId = UUID.randomUUID().toString();
 					file.uid = ThreadSessionHelper.getUser().id;
 					file.publish = 0;
+					file._site = _site;
 					String ext = "";
 					String[] arr = file.name.split("\\.");
 					if(arr.length>0){

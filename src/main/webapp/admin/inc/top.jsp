@@ -6,7 +6,7 @@
     pageEncoding="UTF-8"%>
 <%
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-	List<String> authList = (List<String>)request.getSession().getAttribute(MakesiteConstant.Session_Auth_List);
+	String authList = (String)request.getSession().getAttribute(MakesiteConstant.Session_Auth_List);
 	request.setAttribute(MakesiteConstant.Session_Auth_List, authList);
 	request.setAttribute("user", request.getSession().getAttribute("user"));
 	request.setAttribute("domain", request.getServerName());

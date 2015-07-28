@@ -21,7 +21,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	StringBuilder hql = new StringBuilder("select sf.name as name, sf.id as fid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  , sf.publish as publish from SharedFile sf,User u where sf.uid = u.id");
+	StringBuilder hql = new StringBuilder("select sf.name as name, sf.id as fid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  ,sf.path as path, sf.publish as publish from SharedFile sf,User u where sf.uid = u.id");
 	List<Object> params = new ArrayList<Object>();
 	if(StringUtils.isNotEmpty(filename)){
 		hql.append(" and sf.filename like ?");
@@ -87,13 +87,15 @@ function fileShenHe(id , btn){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3 style="margin-top: 5px;">文件列表</h3>
 					<form name="form1" type="form" method="post" action="list.jsp" style="">
-							<span style="margin-left:20px;">文件名: </span><input name="filename" value="${filename}"  style="height:26px;width:200px;">
+							<span>文件名: </span><input name="filename" value="${filename}"  style="height:26px;width:200px;">
 							<span style="margin-left:20px;">上传人: </span><input name="sendName" value="${sendName}"  style="height:26px;width:200px;">
 							<input style="margin-left:20px;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
+							<c:if test="${session_auth_list.indexOf('$file_upload')>-1 }">
+							<button id="fileUploadBtn" style="float:right;margin-top:-35px;padding:5px;">上 &nbsp;传</button>
+							</c:if>
 					</form>
-						<button id="fileUploadBtn" style="float:right;margin-top:-35px;padding:5px;margin-top: -40px;">上 &nbsp;传</button>
+						
 					</div>
 					<table class="fileList" cellspacing="0">
 						<tr style="background: aliceblue;">
@@ -117,7 +119,9 @@ function fileShenHe(id , btn){
 							<td>${file.uname}</td>
 							<td><fmt:formatDate value="${file.uploadTime }" pattern="yyyy-MM-dd HH:mm"/></td>
 							<td>
+								<c:if test="${session_auth_list.indexOf('$file_shenhe')>-1 }">
 								<a href="#"  onclick="fileShenHe(${file.fid} , this)"><c:if test="${file.publish ==1}">已公开</c:if><c:if test="${file.publish ==0}">未公开</c:if></a>
+								</c:if>
 								<a href="#"  onclick="fileDel(${file.fid})">删除</a>
 							</td>
 						</tr>

@@ -1,8 +1,8 @@
 
 function initUploadHouseImage(id , projectName){
   $('#'+id).uploadify({
-      'swf'      : '/'+projectName+'/admin/js/uploadify/uploadify.swf',
-      'uploader' : '/'+projectName+'/c/admin/file/upload',
+      'swf'      : projectName+'/admin/js/uploadify/uploadify.swf',
+      'uploader' :projectName+'/c/admin/file/upload',
       'buttonText': '上传文件',
       'removeTimeout': 0.5,
       'fileSizeLimit' : '500MB',

@@ -14,7 +14,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from Role where 1=1 order by id desc");
+	p  = dao.findPage(p,"from Role where isSystemRole=0 order by id desc");
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -104,10 +104,7 @@ function reloadWindow(){
 						</c:forEach>
 					</table>
 				</div>
-
 				<jsp:include page="../inc/pagination.jsp"></jsp:include>
-
-
 			</div>
 		</div>
 

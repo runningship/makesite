@@ -92,9 +92,13 @@ function reloadWindow(){
 							<td>${menu.name }</td> 
 							<td>${menu.fname }</td> 
 							<td>${menu.orderx }</td> 
-							<td><a href="#" onclick="editThis(${menu.id})">修改</a>  <a href="#" onclick="delThis(${menu.id})">删除</a> 
+							<td>
+							<c:if test="${session_auth_list.indexOf('$info_modifyMenu')>-1 }"><a href="#" onclick="editThis(${menu.id})">修改</a></c:if> 
+							<c:if test="${session_auth_list.indexOf('$info_delMenu')>-1 }"> <a href="#" onclick="delThis(${menu.id})">删除</a> </c:if>
 							<c:if test="${menu.type == 'menu'}">
+								<c:if test="${session_auth_list.indexOf('$info_modifyMenu')>-1 }">
 								<a href="#" onclick="openAdd(${menu.id});">添加文章</a>
+								</c:if>
 							</c:if>
 							</td>
 						</tr>

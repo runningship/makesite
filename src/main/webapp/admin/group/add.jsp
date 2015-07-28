@@ -27,7 +27,7 @@
 function save(){
 	var account = $('#name').val();
 	if (account=="") {
-		alert('用户组名不能为空');
+		alert('部门名不能为空');
 		return;
 	};
 	var a=$('form[name=form1]').serialize();
@@ -56,12 +56,12 @@ $(function(){
 	<form name="form1" class="add-form" onsubmit="save();">
 		<input type="hidden"  id="parentId" name="parentId" value="${groupId }"/>
 		<div class="form-group">
-			<label class="label">父级组名</label>
+			<label class="label">上级部门</label>
 			<input disabled="disabled" name="parentName" id="parentName"  value="${groupName }" class="form-input" />
 		</div>
 		
 		<div class="form-group">
-			<label class="label">用户组名</label>
+			<label class="label">部门名称</label>
 			<input name="name" id="name" class="form-input" />
 		</div>
 		

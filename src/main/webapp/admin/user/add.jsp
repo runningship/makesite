@@ -80,7 +80,7 @@ function closeThis(){
 		<input type="hidden"  id="groupId" name="groupId" value="${groupId }"/>
 		<input name="roleIds" id="roleIds" type="hidden" />
 		<div class="form-group">
-			<label class="label">用户组名</label>
+			<label class="label">部门名</label>
 			<input name="groupName" id="groupName" class="form-input"  value="${groupName }"/>
 		</div>
 		<div class="form-group">

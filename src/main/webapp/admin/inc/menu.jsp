@@ -1,5 +1,11 @@
+<%@page import="com.youwei.makesite.MakesiteConstant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+//String authList = (String)request.getSession().getAttribute(MakesiteConstant.Session_Auth_List);
+//request.setAttribute(MakesiteConstant.Session_Auth_List, authList);
+%>
     <script type="text/javascript">
     $(function(){
     	var nav = getParam('nav');
@@ -8,7 +14,8 @@
 </script>
 <div class="col_side">
 	<div class="menu_box">
-		<dl class="menu no_extra">
+		<c:if test="${session_auth_list.indexOf('$info')>-1 }">
+			<dl class="menu no_extra">
 			<dt class="menu_title">
 				<i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_function.png) no-repeat;"> </i>信息发布
 			</dt>
@@ -23,6 +30,8 @@
 				<a data-id="wzlb" href="${projectName }/admin/info/list3.jsp?nav=wzlb">文章列表</a>
 			</dd>
 		</dl>
+		</c:if>
+		
 		<dl class="menu no_extra">
 			<dt class="menu_title">
 				<i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_function.png) no-repeat;"> </i>通知管理
@@ -44,12 +53,14 @@
 				</a>
 			</dt>
 		</dl>
+		<c:if test="${session_auth_list.indexOf('$feedback')>-1 }">
 		<dl class="menu ">
 			<dt class="menu_title clickable">
 				<a data-id="fk" href="${projectName }/admin/feedback/list.jsp?nav=fk"> <i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"> </i>留言反馈
 				</a>
 			</dt>
 		</dl>
+		</c:if>
 		<dl class="menu ">
 			<dt class="menu_title clickable">
 				<a data-id="me" href="${projectName }/admin/user/info.jsp?nav=me"><i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"></i>我的资料

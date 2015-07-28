@@ -25,7 +25,7 @@ public class GroupService {
 	public ModelAndView save(Group group ){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(group.name)){
-			throw new GException(PlatformExceptionType.BusinessException,"用户组名称不能为空");
+			throw new GException(PlatformExceptionType.BusinessException,"部门名称不能为空");
 		}
 		group.owner = ThreadSessionHelper.getUser().id;
 		group.addtime = new Date();
@@ -50,12 +50,12 @@ public class GroupService {
 		ModelAndView mv = new ModelAndView();
 		long leftCount = dao.countHql("select count(*) from Group where parentId=?", id);
 		if(leftCount>0){
-			throw new GException(PlatformExceptionType.BusinessException,"该群组下包含子群组,请先删除子群组。");
+			throw new GException(PlatformExceptionType.BusinessException,"该群组下包含子群组,请先删除子部门。");
 		}
 		Group po = dao.get(Group.class, id);
 		if(po!=null){
 			dao.delete(po);
-			mv.data.put("msg", "删除用户组成功");
+			mv.data.put("msg", "删除部门成功");
 		}
 		return mv;
 	}

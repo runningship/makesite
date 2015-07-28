@@ -109,7 +109,7 @@ function sendNotice(){
 function addTopGroup(){
 	layer.open({
     	type: 2,
-    	title: '添加用户组',
+    	title: '添加部门',
 	    shadeClose: false,
 	    shade: 0.5,
 	    area: ['400px', '250px'],
@@ -119,7 +119,7 @@ function addTopGroup(){
 function addGroup(){
 	layer.open({
     	type: 2,
-    	title: '添加用户组',
+    	title: '添加部门',
 	    shadeClose: false,
 	    shade: 0.5,
 	    area: ['400px', '250px'],
@@ -230,8 +230,8 @@ background: #428bca;
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>用户组织架构</h3>
-						<button style="float:right;margin-top: 5px;padding:5px;" onclick="addTopGroup();return false;" class="add">添 &nbsp;加</button>
+						<h3>部门织架构</h3>
+						<button style="float:right;margin-top: 5px;padding:5px;" onclick="addTopGroup();return false;" class="add">添加部门</button>
 					</div>
 					<div class="zTreeDemoBackground left">
 						<ul id="treeDemo" class="ztree"></ul>
@@ -246,14 +246,15 @@ background: #428bca;
 </body>
 <div id="rMenu"   class="list-group" style="position:absolute;z-index:999;display:none;" onclick="hideRMenu();">
 	<span id="groupMenu">
-  <a href="javascript:void(0)" auth="sz_comp_edit" id="m_edit_comp" onclick="addGroup();" class="list-group-item">添加子用户组</a>
-  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="addUser()" class="list-group-item">加入新用户</a>
-  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="inviteUser()" class="list-group-item">加入已有用户</a>
-  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="deleteGroup()" class="list-group-item">删除用户组</a>
-  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="sendNotice()" class="list-group-item">发送通知</a>
+	
+  <c:if test="${session_auth_list.indexOf('$user_org_addGroup')>-1 }"><a href="javascript:void(0)" id="m_edit_comp" onclick="addGroup();" class="list-group-item">添加部门</a></c:if>
+    <c:if test="${session_auth_list.indexOf('$user_org_addNewUser')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="addUser()" class="list-group-item">加入新用户</a></c:if>
+    <c:if test="${session_auth_list.indexOf('$user_org_inviteUser')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="inviteUser()" class="list-group-item">加入已有用户</a></c:if>
+    <c:if test="${session_auth_list.indexOf('$user_org_delGroup')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="deleteGroup()" class="list-group-item">删除部门</a></c:if>
+    <a href="javascript:void(0)"  id="m_del_comp" onclick="sendNotice()" class="list-group-item">发送通知</a>
   </span>
   <span id="userMenu">
-  <a href="javascript:void(0)" auth="sz_comp_del" id="m_del_comp" onclick="banUser()" class="list-group-item">移出用户组</a>
+  <c:if test="${session_auth_list.indexOf('$user_org_removeUserFromGroup')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="banUser()" class="list-group-item">移出部门</a></c:if>
   </span>
 </div>
 </html>
