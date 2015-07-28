@@ -1,11 +1,11 @@
 package com.youwei.makesite.util;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 
-import org.bc.sdak.CommonDaoService;
-import org.bc.sdak.SimpDaoTool;
+import org.apache.commons.io.FileUtils;
 
-import com.youwei.makesite.entity.User;
+import com.youwei.makesite.cache.ConfigCache;
 
 public class DataHelper {
 
@@ -15,4 +15,10 @@ public class DataHelper {
 	public static SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	public static SimpleDateFormat sdf4 = new SimpleDateFormat("yyyyMMdd");
 	
+	
+	public static long getDiskSize(String serverName){
+		String baseDir = ConfigCache.get("upload_path", "");
+		File file = new File(baseDir + serverName);
+		return FileUtils.sizeOfDirectory(file);
+	}
 }

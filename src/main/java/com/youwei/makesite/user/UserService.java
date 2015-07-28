@@ -2,6 +2,7 @@ package com.youwei.makesite.user;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,9 @@ import com.youwei.makesite.entity.UserGroup;
 import com.youwei.makesite.entity.UserRole;
 @Module(name="/admin/user")
 public class UserService {
+	
+	public static Map<String,Integer> onlineUserCountMap = new HashMap<String , Integer>();
+	
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
 	@WebMethod
@@ -82,6 +86,12 @@ public class UserService {
 			authList.append(map.get("authId").toString());
 		}
 		ThreadSession.getHttpSession().setAttribute(MakesiteConstant.Session_Auth_List, authList.toString());
+		String serverName = ThreadSession.HttpServletRequest.get().getServerName();
+		if(!onlineUserCountMap.containsKey(serverName)){
+			onlineUserCountMap.put(serverName, 1);
+		}else{
+			onlineUserCountMap.put(serverName,onlineUserCountMap.get(serverName)+1);
+		}
 		return mv;
 	}
 	

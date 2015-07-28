@@ -1,4 +1,8 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+request.setAttribute("domainSize",DataHelper.getDiskSize(request.getServerName()));
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +19,9 @@ function openWin(){
 	});
 }
 </script>
+<style type="text/css">
+.mp_news_item a{color:#459ae9}
+</style>
 </head>
 <body>
 	<jsp:include page="inc/top.jsp"></jsp:include>
@@ -23,53 +30,43 @@ function openWin(){
 
 			<jsp:include page="inc/menu.jsp"></jsp:include>
 			<div class="col_main">
-				<div class="index_show_area">
-					<div class="index_tap added">
-						<ul class="inner">
-							<li class="grid_item size1of2 index_tap_item added_message"><a href="#"> <span class="tap_inner"> <i class="icon_index_tap"></i> <em class="number">0</em> <strong class="title">新消息</strong>
-								</span>
-							</a></li>
-							<li class="grid_item size1of2 no_extra index_tap_item added_fans"><a href="#"> <span class="tap_inner no_extra"> <i class="icon_index_tap"></i> <em class="number">0</em> <strong
-										class="title">新增人数</strong>
-								</span>
-							</a></li>
-						</ul>
-					</div>
-					&nbsp;
-					<div class="index_tap total">
-						<ul class="inner">
-							<li class="index_tap_item total_fans extra"><a href="#"> <span class="tap_inner"> <i class="icon_index_tap"></i> <em class="number">912</em> <strong class="title">总用户数</strong>
-								</span>
-							</a></li>
-						</ul>
-					</div>
-				</div>
 				<div class="mp_news_area notices_box">
-					<a href="#" onclick="openWin();">打开新窗口</a>
+					<a href="#" ></a>
 					<div class="title_bar">
-						<h3>系统公告</h3>
+						<h3>系统信息</h3>
 					</div>
 					<ul class="mp_news_list">
 
-						<li class="mp_news_item"><a href="#" target="_blank"> <strong>公众号文章新增语音功能 <i class="icon_common new"></i>
-							</strong> <span class="read_more">2015-07-10</span>
+						<li class="mp_news_item"><a > <strong>一级栏目数
+							</strong> <span class="read_more">8个</span>
 						</a></li>
-
+						<li class="mp_news_item"><a target="_blank"> <strong>二级栏目数
+							</strong> <span class="read_more">8个</span>
+						</a></li>
+						<li class="mp_news_item"><a target="_blank"> <strong>文章数量
+							</strong> <span class="read_more">8篇</span>
+						</a></li>
+						<li class="mp_news_item"><a target="_blank"> <strong>用户数
+							</strong> <span class="read_more">8人</span>
+						</a></li>
+						<li class="mp_news_item"><a target="_blank"> <strong>在线用户数
+							</strong> <span class="read_more">8人</span>
+						</a></li>
+						<li class="mp_news_item"><a target="_blank"> <strong>收收到的通知
+							</strong> <span class="read_more">8条</span>
+						</a></li>
+						<li class="mp_news_item"><a target="_blank"> <strong>我发的通知
+							</strong> <span class="read_more">8条</span>
+						</a></li>
+						<li class="mp_news_item"><a target="_blank"> <strong>共享文件数
+							</strong> <span class="read_more">8</span>
+						</a></li>
+						<li class="mp_news_item"><a target="_blank"> <strong>占用磁盘空间
+							</strong> <span class="read_more">${domainSize/1024/1024 }M</span>
+						</a></li>
 					</ul>
 
 				</div>
-
-				<div class="pagination_wrp">
-					<div class="pagination">
-						<span class="page_nav_area"> <a href="javascript:void(0);" class="btn page_first" style="display: none;"></a> <a href="javascript:void(0);" class="btn page_prev" style="display: none;"><i
-								class="arrow"></i></a> <span class="page_num"> <label>1</label> <span class="num_gap">/</span> <label>5</label>
-						</span> <a href="javascript:void(0);" class="btn page_next"><i class="arrow"></i></a> <a href="javascript:void(0);" class="btn page_last" style="display: none;"></a>
-						</span> <span class="goto_area"> <input type="text"> <a href="javascript:void(0);" class="btn page_go">跳转</a>
-						</span>
-
-					</div>
-				</div>
-
 
 			</div>
 		</div>

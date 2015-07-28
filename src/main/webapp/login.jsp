@@ -7,17 +7,25 @@ request.setAttribute("domain", request.getServerName());
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Wide Admin - Login</title>
+	<title>联信投资 - 后台登录</title>
 	<script type="text/javascript" src="basejs/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="basejs/buildHtml.js"></script>
+	<script type="text/javascript" src="layer-v1.9.3/layer/layer.js"></script>
 	<link rel="stylesheet" href="style/login.css">
 <script type="text/javascript">
 function login(){
+	var index;
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'post',
 	    url: '${projectName}/c/admin/user/login',
 	    data: a,
+	    beforeSend: function(XMLHttpRequest){
+        	index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+        },
+        complete: function(XMLHttpRequest, textStatus){
+            layer.close(index);
+        },
 	    mysuccess: function(json){
 	        window.location="admin/index.jsp";
 	    },
