@@ -18,6 +18,7 @@ import org.bc.web.PlatformExceptionType;
 import org.bc.web.ThreadSession;
 
 import com.youwei.makesite.entity.User;
+import com.youwei.makesite.util.DataHelper;
 
 public class SiteFilter implements Filter {
 
@@ -37,7 +38,7 @@ public class SiteFilter implements Filter {
 		if(path.contains("admin") || path.contains("login") || path.contains("assets")){
 			chain.doFilter(request, response);
 		}else{
-			RequestDispatcher rd = req.getRequestDispatcher("/"+req.getServerName()+path);
+			RequestDispatcher rd = req.getRequestDispatcher("/"+DataHelper.getServerName(req)+path);
 			rd.forward(request, response);
 		}
 	}
