@@ -435,7 +435,7 @@ button.btn {
 }
 .menu_item a {
 	display:block;
-	padding:0 0 0 58px;
+	padding:0 0 0 50px;
 	width:auto;
 	overflow:hidden;
 	text-overflow:ellipsis;
@@ -499,4 +499,3 @@ body {
 
 
 
-    

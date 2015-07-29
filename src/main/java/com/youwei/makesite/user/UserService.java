@@ -20,6 +20,7 @@ import org.bc.web.ThreadSession;
 import org.bc.web.WebMethod;
 
 import com.youwei.makesite.MakesiteConstant;
+import com.youwei.makesite.util.DataHelper;
 import com.youwei.makesite.util.SecurityHelper;
 import com.youwei.makesite.entity.Group;
 //
@@ -86,7 +87,7 @@ public class UserService {
 			authList.append(map.get("authId").toString());
 		}
 		ThreadSession.getHttpSession().setAttribute(MakesiteConstant.Session_Auth_List, authList.toString());
-		String serverName = ThreadSession.HttpServletRequest.get().getServerName();
+		String serverName = DataHelper.getServerName(ThreadSession.HttpServletRequest.get());
 		if(!onlineUserCountMap.containsKey(serverName)){
 			onlineUserCountMap.put(serverName, 1);
 		}else{
@@ -101,7 +102,7 @@ public class UserService {
 		ThreadSession.getHttpSession().removeAttribute("user");
 		ThreadSession.getHttpSession().removeAttribute(MakesiteConstant.Session_Auth_List);
 		mv.redirect=ThreadSession.HttpServletRequest.get().getServletContext().getContextPath()+"/login/login.jsp";
-		String serverName = ThreadSession.HttpServletRequest.get().getServerName();
+		String serverName = DataHelper.getServerName(ThreadSession.HttpServletRequest.get());
 		if(onlineUserCountMap.containsKey(serverName)){
 			onlineUserCountMap.put(serverName,onlineUserCountMap.get(serverName)-1);
 		}

@@ -56,7 +56,7 @@ public class FileUploadService {
 					SharedFile file = new SharedFile();
 					file.uploadTime = new Date();
 					String path = BaseFileDir+File.separator ;
-					String webpath = request.getServerName() +File.separator + DataHelper.sdf4.format(file.uploadTime);
+					String webpath = DataHelper.getServerName(request) +File.separator + DataHelper.sdf4.format(file.uploadTime);
 					
 					
 					file.name = item.getName();
