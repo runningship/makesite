@@ -100,7 +100,11 @@ public class UserService {
 		ModelAndView mv = new ModelAndView();
 		ThreadSession.getHttpSession().removeAttribute("user");
 		ThreadSession.getHttpSession().removeAttribute(MakesiteConstant.Session_Auth_List);
-		mv.redirect=ThreadSession.HttpServletRequest.get().getServletContext().getContextPath()+"/login.jsp";
+		mv.redirect=ThreadSession.HttpServletRequest.get().getServletContext().getContextPath()+"/login/login.jsp";
+		String serverName = ThreadSession.HttpServletRequest.get().getServerName();
+		if(onlineUserCountMap.containsKey(serverName)){
+			onlineUserCountMap.put(serverName,onlineUserCountMap.get(serverName)-1);
+		}
 		return mv;
 	}
 	

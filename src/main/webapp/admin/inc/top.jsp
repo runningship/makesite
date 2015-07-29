@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="com.youwei.makesite.MakesiteConstant"%>
 <%@page import="java.util.List"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
@@ -9,7 +10,7 @@
 	String authList = (String)request.getSession().getAttribute(MakesiteConstant.Session_Auth_List);
 	request.setAttribute(MakesiteConstant.Session_Auth_List, authList);
 	request.setAttribute("user", request.getSession().getAttribute("user"));
-	request.setAttribute("domain", request.getServerName());
+	request.setAttribute("domain", DataHelper.getServerName(request));
 %>
 <script type="text/javascript">
 function editMe(){

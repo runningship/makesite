@@ -17,7 +17,6 @@
 	}catch(Exception ex){
 	}
 	p  = dao.findPage(p,"from Feedback where 1=1 order by id desc ");
-	// p  = dao.findPage(p,"from Feedback fk where  _site =? order by fk.id desc ", request.getServerName());
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

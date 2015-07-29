@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.youwei.makesite.entity.Menu"%>
@@ -17,7 +18,7 @@
 	String searchText =  request.getParameter("searchText");
 	String yijiId =  request.getParameter("yijiId");
 	String erjiId =  request.getParameter("erjiId");
-	String _site =  request.getServerName();
+	String _site =  DataHelper.getServerName(request);
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){

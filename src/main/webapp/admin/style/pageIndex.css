@@ -41,7 +41,9 @@
 }
 
 .notices_box {
-	margin:0 15px
+	/*margin:0 15px*/
+	border: 0;
+	border-bottom: 1px solid #EEE;
 }
 
 .index_tap {

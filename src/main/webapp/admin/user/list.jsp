@@ -14,7 +14,7 @@
 	String currentPageNo =  request.getParameter("currentPageNo");
 	String userName =  request.getParameter("userName");
 	String userTel =  request.getParameter("userTel");
-	String _site =  request.getServerName();
+	String _site =  DataHelper.getServerName(request)
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){

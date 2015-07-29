@@ -17,7 +17,8 @@
 		<c:if test="${session_auth_list.indexOf('$info')>-1 }">
 			<dl class="menu no_extra">
 			<dt class="menu_title">
-				<i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_function.png) no-repeat;"> </i>信息发布
+				<i class="iconfont">&#xe60c;</i>
+				信息发布
 			</dt>
 
 			<dd class="menu_item ">
@@ -34,7 +35,8 @@
 		
 		<dl class="menu no_extra">
 			<dt class="menu_title">
-				<i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_function.png) no-repeat;"> </i>通知管理
+				<i class="iconfont">&#xe60d;</i>
+				通知管理
 			</dt>
 
 			<dd class="menu_item ">
@@ -49,27 +51,34 @@
 		</dl>
 		<dl class="menu ">
 			<dt class="menu_title clickable">
-				<a data-id="wjgx" href="${projectName }/admin/file/list.jsp?nav=wjgx"> <i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"> </i>文件共享
+				<a data-id="wjgx" href="${projectName }/admin/file/list.jsp?nav=wjgx">
+				<i class="iconfont">&#xe617;</i>
+				文件共享
 				</a>
 			</dt>
 		</dl>
 		<c:if test="${session_auth_list.indexOf('$feedback')>-1 }">
 		<dl class="menu ">
 			<dt class="menu_title clickable">
-				<a data-id="fk" href="${projectName }/admin/feedback/list.jsp?nav=fk"> <i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"> </i>留言反馈
+				<a data-id="fk" href="${projectName }/admin/feedback/list.jsp?nav=fk">
+				<i class="iconfont">&#xe611;</i>
+				留言反馈
 				</a>
 			</dt>
 		</dl>
 		</c:if>
 		<dl class="menu ">
 			<dt class="menu_title clickable">
-				<a data-id="me" href="${projectName }/admin/user/info.jsp?nav=me"><i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_wxpay_v2.png) no-repeat;"></i>我的资料
+				<a data-id="me" href="${projectName }/admin/user/info.jsp?nav=me">
+				<i class="iconfont">&#xe60f;</i>
+				我的资料
 				</a>
 			</dt>
 		</dl>
 		<dl class="menu ">
 			<dt class="menu_title">
-				<i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_setup.png) no-repeat;"> </i>用户管理
+				<i class="iconfont">&#xe601;</i>
+				用户管理
 			</dt>
 
 			<dd class="menu_item ">
@@ -84,7 +93,8 @@
 		</dl>
 		<dl class="menu ">
 			<dt class="menu_title">
-				<i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_setup.png) no-repeat;"> </i>公司信息
+				<i class="iconfont">&#xe60e;</i>
+				公司信息
 			</dt>
 
 			<dd class="menu_item ">

@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="com.youwei.makesite.entity.Menu"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.bc.sdak.Page"%>
@@ -16,7 +17,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from Menu menu where parentId is null and _site =? order by menu.orderx asc, menu.id desc ", request.getServerName());
+	p  = dao.findPage(p,"from Menu menu where parentId is null and _site =? order by menu.orderx asc, menu.id desc ", DataHelper.getServerName(request));
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

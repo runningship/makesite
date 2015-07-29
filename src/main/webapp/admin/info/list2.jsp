@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.SharedFile"%>
@@ -15,7 +16,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"select m2.id as id , m2.name as name , m2.type as type , m2.orderx as orderx , m1.name as fname from Menu m1 , Menu m2 where m2.parentId is not null and m1.id = m2.parentId and m1._site =? order by m1.orderx asc , m2.orderx asc ,m2.id desc",true,new Object[]{ request.getServerName()});
+	p  = dao.findPage(p,"select m2.id as id , m2.name as name , m2.type as type , m2.orderx as orderx , m1.name as fname from Menu m1 , Menu m2 where m2.parentId is not null and m1.id = m2.parentId and m1._site =? order by m1.orderx asc , m2.orderx asc ,m2.id desc",true,new Object[]{ DataHelper.getServerName(request)});
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

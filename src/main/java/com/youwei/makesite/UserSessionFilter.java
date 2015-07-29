@@ -47,10 +47,10 @@ public class UserSessionFilter implements Filter {
     	        String ajaxFlag = null == req.getParameter("ajax") ?  "false": req.getParameter("ajax") ;
     	        boolean isAjax = ajax || ajaxFlag.equalsIgnoreCase("true");
     	        if(isAjax){
-    	        	String str = "window.top.location='"+req.getServletContext().getContextPath()+"/login.jsp'";
+    	        	String str = "window.top.location='"+req.getServletContext().getContextPath()+"/login/login.jsp'";
         			response.getOutputStream().write(str.getBytes());
     	        }else{
-    	        	String str = "<script type='text/javascript'>window.location='"+req.getServletContext().getContextPath()+"/login.jsp'</script>";
+    	        	String str = "<script type='text/javascript'>window.location='"+req.getServletContext().getContextPath()+"/login/login.jsp'</script>";
         			response.getOutputStream().write(str.getBytes());
     	        }
     			

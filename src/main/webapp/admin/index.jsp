@@ -10,31 +10,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-long yiji = dao.countHql("SELECT COUNT(*) FROM Menu where parentId is null and _site = ?" , request.getServerName());
+long yiji = dao.countHql("SELECT COUNT(*) FROM Menu where parentId is null and _site = ?" , DataHelper.getServerName(request));
 request.setAttribute("yiji", yiji);
 
-long erji = dao.countHql("SELECT COUNT(*) FROM Menu where parentId is not null and _site = ?" , request.getServerName());
+long erji = dao.countHql("SELECT COUNT(*) FROM Menu where parentId is not null and _site = ?" , DataHelper.getServerName(request));
 request.setAttribute("erji", erji);
 
-long Artcount = dao.countHql("SELECT COUNT(*) FROM Article where  _site = ?" , request.getServerName());
+long Artcount = dao.countHql("SELECT COUNT(*) FROM Article where  _site = ?" , DataHelper.getServerName(request));
 request.setAttribute("Artcount", Artcount);
 
-long ucount = dao.countHql("SELECT COUNT(*) FROM User where  _site = ?" , request.getServerName());
+long ucount = dao.countHql("SELECT COUNT(*) FROM User where  _site = ?" , DataHelper.getServerName(request));
 request.setAttribute("ucount", ucount);
 
 long nrcount = dao.countHql("SELECT COUNT(*) FROM NoticeReceiver where receiverId = ?" ,ThreadSessionHelper.getUser().id);
 request.setAttribute("nrcount", nrcount);
 
-long ncount = dao.countHql("SELECT COUNT(*) FROM Notice where senderId = ? and _site = ?" ,ThreadSessionHelper.getUser().id , request.getServerName());
+long ncount = dao.countHql("SELECT COUNT(*) FROM Notice where senderId = ? and _site = ?" ,ThreadSessionHelper.getUser().id , DataHelper.getServerName(request));
 request.setAttribute("ncount", ncount);
 
-long filecount = dao.countHql("SELECT COUNT(*) FROM SharedFile where _site = ?" , request.getServerName());
+long filecount = dao.countHql("SELECT COUNT(*) FROM SharedFile where _site = ?" , DataHelper.getServerName(request));
 request.setAttribute("filecount", filecount);
 
-long uonline = UserService.onlineUserCountMap.get(request.getServerName());
+Integer uonline = UserService.onlineUserCountMap.get(DataHelper.getServerName(request));
 request.setAttribute("uonline", uonline);
 
-request.setAttribute("domainSize",DataHelper.getDiskSize(request.getServerName()));
+request.setAttribute("domainSize",DataHelper.getDiskSize(DataHelper.getServerName(request)));
 %>
 <!DOCTYPE html>
 <html>
@@ -113,3 +113,6 @@ function openWin(){
 
 	</div>
 	<div class="foot"></div>
+
+</body>
+</html>
