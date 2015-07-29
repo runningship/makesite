@@ -5,8 +5,9 @@
     pageEncoding="UTF-8"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-	Article art = dao.getUniqueByKeyValue(Article.class, "where name='company' and _site =?", request.getServerName());
-	request.setAttribute("art", art);
+String[] params = {"name" , "_site"};
+Article art = dao.getUniqueByParams(Article.class, params,new Object[] {"company" , request.getServerName() });
+request.setAttribute("art", art);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,10 +28,6 @@
 </head>
 <script type="text/javascript">
 function send(){
-	if(!$('#title').val()){
-		alert('标题不能为空');
-		return;
-	}
 	var conts = ue.getContent();
     if (conts==null||conts=='') {
     	alert('内容不能为空');
@@ -58,6 +55,9 @@ $(function(){
             ]
         ],
   });
+    ue.addListener( 'ready', function( editor ) {
+        ue.setContent($('#menu_conts').html());
+    });
 });
 
 $(function(){
@@ -89,6 +89,7 @@ $(function(){
 							</td>
 							</tr>
 						</table>
+		<div id="menu_conts" style="display:none">${art.conts}</div>
 					</form>
 				</div>
 			</div>
