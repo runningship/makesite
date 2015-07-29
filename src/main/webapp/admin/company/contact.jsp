@@ -1,9 +1,17 @@
+<%@page import="com.youwei.makesite.entity.Article"%>
+<%@page import="org.bc.sdak.SimpDaoTool"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+	Article art = dao.getUniqueByKeyValue(Article.class, "where name='contact' and _site =?", request.getServerName());
+	request.setAttribute("art", art);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>发通知</title>
+<title>联系我们</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/ueditor.all.js"> </script>
@@ -71,7 +79,7 @@ $(function(){
 						<table style="width:100%" >
 							<tr class="form-group" style="display:none">
 								<td style="text-align:left;"><label class="label">标题</label></td>
-								<td><input name="title" id="title" style="kkk" class="form-input" /></td>
+								<td><input name="name" id="name" value="contact" class="form-input" /></td>
 							</tr>
 							<tr class="form-group">
 								<td style="vertical-align: top;text-align:left;"><label class="label">正文</label></td>
