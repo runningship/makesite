@@ -48,6 +48,7 @@ public class UserService {
 		if(StringUtils.isEmpty(user.pwd)){
 			throw new GException(PlatformExceptionType.BusinessException,"请先设置密码");
 		}
+		user.isSuperAdmin = 0;
 		user.addtime = new Date();
 		user.pwd = SecurityHelper.Md5(user.pwd);
 		//TODO

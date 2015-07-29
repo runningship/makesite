@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.bc.sdak.Page"%>
@@ -14,7 +15,7 @@
 	String currentPageNo =  request.getParameter("currentPageNo");
 	String userName =  request.getParameter("userName");
 	String userTel =  request.getParameter("userTel");
-	String _site =  DataHelper.getServerName(request)
+	String _site =  DataHelper.getServerName(request);
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){

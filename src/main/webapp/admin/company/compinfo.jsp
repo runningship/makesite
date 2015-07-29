@@ -5,9 +5,9 @@
     pageEncoding="UTF-8"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-String[] params = {"name" , "_site"};
-Article art = dao.getUniqueByParams(Article.class, params,new Object[] {"company" , request.getServerName() });
-request.setAttribute("art", art);
+	String[] params = {"name" , "_site"};
+	Article art = dao.getUniqueByParams(Article.class, params,new Object[] {"company" , request.getServerName() });
+	request.setAttribute("art", art);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

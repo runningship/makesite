@@ -31,6 +31,7 @@ public class RoleService {
 	@WebMethod
 	public ModelAndView save(Role role){
 		ModelAndView mv = new ModelAndView();
+		role.isSystemRole = 0;
 		dao.saveOrUpdate(role);
 		return mv;
 	}
