@@ -86,7 +86,7 @@ function fileShenHe(id , btn){
 			<jsp:include page="../inc/menu.jsp"></jsp:include>
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
-					<div class="title_bar">
+					<div class="title_bar" style="height:50px;line-height:50px;">
 					<form name="form1" type="form" method="post" action="list.jsp" style="">
 							<span>文件名: </span><input name="filename" value="${filename}"  style="height:26px;width:200px;">
 							<span style="margin-left:20px;">上传人: </span><input name="sendName" value="${sendName}"  style="height:26px;width:200px;">

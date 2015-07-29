@@ -6,6 +6,7 @@
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
@@ -21,7 +22,7 @@ request.setAttribute("Artcount", Artcount);
 long ucount = dao.countHql("SELECT COUNT(*) FROM User where  _site = ?" , request.getServerName());
 request.setAttribute("ucount", ucount);
 
-long nrcount = dao.countHql("SELECT COUNT(*) FROM NoticeReceiver where receiverId = ? and _site = ?" ,ThreadSessionHelper.getUser().id , request.getServerName());
+long nrcount = dao.countHql("SELECT COUNT(*) FROM NoticeReceiver where receiverId = ?" ,ThreadSessionHelper.getUser().id);
 request.setAttribute("nrcount", nrcount);
 
 long ncount = dao.countHql("SELECT COUNT(*) FROM Notice where senderId = ? and _site = ?" ,ThreadSessionHelper.getUser().id , request.getServerName());
@@ -93,8 +94,15 @@ function openWin(){
 						<li class="mp_news_item"><a target="_blank"> <strong>共享文件数
 							</strong> <span class="read_more">${filecount}条</span>
 						</a></li>
-						<li class="mp_news_item"><a target="_blank"> <strong>占用磁盘空间
-							</strong> <span class="read_more">${domainSize/1024/1024 }M</span>
+						<li class="mp_news_item"><a target="_blank"> <strong>占用磁盘空间</strong> 
+							<c:choose>
+								<c:when test="${domainSize/1024/1024 >=0.99}">  
+									<span class="read_more"><fmt:formatNumber type="number" value="${domainSize/1024/1024 }" maxFractionDigits="1"/>M
+							  	</c:when> 
+  								<c:otherwise>  
+									<span class="read_more"><fmt:formatNumber type="number" value="${domainSize/1024}" maxFractionDigits="1"/>K</span>
+								</c:otherwise> 
+							</c:choose>
 						</a></li>
 					</ul>
 

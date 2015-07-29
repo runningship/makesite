@@ -229,8 +229,8 @@ background: #428bca;
 			<jsp:include page="../inc/menu.jsp"></jsp:include>
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
-					<div class="title_bar">
-						<button style="float:left;margin-top: 5px;padding:5px;cursor:pointer" onclick="addTopGroup();return false;" class="add">添加部门</button>
+					<div class="title_bar" style="height:50px;line-height:50px;">
+						<button style="float:left;margin-right:20px;margin-top:12px;height:28px;cursor:pointer" onclick="addTopGroup();return false;" class="add">添加部门</button>
 					</div>
 					<div class="zTreeDemoBackground left">
 						<ul id="treeDemo" class="ztree"></ul>

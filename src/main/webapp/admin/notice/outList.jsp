@@ -96,7 +96,7 @@ function userDel(id){
 			<jsp:include page="../inc/menu.jsp"></jsp:include>
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
-					<div class="title_bar">
+					<div class="title_bar" style="height:50px;line-height:50px;">
 					<form name="form1" type="form" method="post" action="outList.jsp" style="">
 							<span>标题: </span><input name="title" value="${title}"  style="height:26px;width:250px;">
 							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>

@@ -82,6 +82,18 @@
 				<a data-id="yglb" href="${projectName }/admin/user/list.jsp?nav=yglb">员工列表</a>
 			</dd>
 		</dl>
+		<dl class="menu ">
+			<dt class="menu_title">
+				<i class="icon_menu" style="background: url(https://res.wx.qq.com/mpres/htmledition/images/icon/menu/icon_menu_setup.png) no-repeat;"> </i>公司信息
+			</dt>
+
+			<dd class="menu_item ">
+				<a data-id="zzjg" href="${projectName }/admin/company/contact.jsp">联系我们</a>
+			</dd>
+			<dd class="menu_item ">
+				<a href="${projectName }/admin/company/compinfo.jsp">公司简介</a>
+			</dd>
+		</dl>
 	</div>
 
 </div>
