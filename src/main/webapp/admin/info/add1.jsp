@@ -78,7 +78,7 @@ $(function(){
 		</div>
 		<div class="form-group" >
 			<label class="label">项目种类</label>
-            <label class="btn btn-default ">
+            <label class="btn btn-default " style="margin: 6px;">
                 <input type="radio" value="menu" name="type" onclick="showConts(0)" autocomplete="off" > 有子栏目
             </label>
             <label class="btn btn-default">

@@ -33,6 +33,11 @@
 <script type="text/javascript">
 $(function(){
 });
+//在引入css的基础上配置skin参数，如下所示
+layer.config({
+	skin:'layer-ext-shaishai',
+	extend:'skin/shaishai/style.css'
+});
 
 	function openAdd(){
 		layer.open({
@@ -42,6 +47,10 @@ $(function(){
 		    shade: 0.5,
 		    area: ['800px', '700px'],
 		    content: 'add1.jsp'
+		}, function(){
+		    layer.msg('的确很重要', {icon: 1});
+		}, function(){
+		    layer.msg('奇葩么么哒', {shift: 6});
 		}); 
 	}
 

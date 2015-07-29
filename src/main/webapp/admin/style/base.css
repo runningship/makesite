@@ -270,6 +270,7 @@ button.btn {
 	font-size:14px;
 	border-width:1px;
 	border-style:solid;
+	border: 1px solid #ccc;
 	cursor:pointer
 }
 .btn:hover {
@@ -396,6 +397,7 @@ button.btn {
 	*font-size:14px;
 	color:#8d8d8d
 }
+.menu_title .iconfont{ display: inline-block; width: 16px; margin-right: 5px;}
 .menu_title .new {
 	margin-left:3px
 }
@@ -435,7 +437,7 @@ button.btn {
 }
 .menu_item a {
 	display:block;
-	padding:0 0 0 50px;
+	padding:0 0 0 55px;
 	width:auto;
 	overflow:hidden;
 	text-overflow:ellipsis;

@@ -17,6 +17,7 @@ import org.bc.web.PlatformExceptionType;
 import org.bc.web.ThreadSession;
 
 import com.youwei.makesite.entity.User;
+import com.youwei.makesite.util.DataHelper;
 
 public class UserSessionFilter implements Filter {
 
@@ -30,6 +31,7 @@ public class UserSessionFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req  = (HttpServletRequest)request;
+		req.setAttribute("_site", DataHelper.getServerName(req));
 		ThreadSession.setHttpSession(req.getSession());
 		HttpSession session = ThreadSession.getHttpSession();
 		String path = req.getServletPath();

@@ -34,7 +34,6 @@ public class SiteFilter implements Filter {
 		HttpServletRequest req  = (HttpServletRequest)request;
 		ThreadSession.setHttpSession(req.getSession());
 		String path = req.getServletPath();
-		System.out.println(path);
 		if(path.contains("admin") || path.contains("login") || path.contains("assets")){
 			chain.doFilter(request, response);
 		}else{
