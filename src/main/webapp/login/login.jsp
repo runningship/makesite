@@ -8,10 +8,10 @@ request.setAttribute("domain", request.getServerName());
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>联信投资 - 后台登录</title>
-	<script type="text/javascript" src="basejs/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="basejs/buildHtml.js"></script>
-	<script type="text/javascript" src="layer-v1.9.3/layer/layer.js"></script>
-	<link rel="stylesheet" href="style/login.css">
+	<script type="text/javascript" src="../admin/js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../admin/js/buildHtml.js"></script>
+	<script type="text/javascript" src="../admin/js/layer-v1.9.3/layer/layer.js"></script>
+	<link rel="stylesheet" href="login.css">
 <script type="text/javascript">
 function login(){
 	var index;
@@ -27,7 +27,7 @@ function login(){
             layer.close(index);
         },
 	    mysuccess: function(json){
-	        window.location="admin/index.jsp";
+	        window.location="../admin/index.jsp";
 	    },
 	    error:function(data){
 	    	  alert('用户名或密码错误');
@@ -46,7 +46,7 @@ $(function(){
 	<body>
 	<div id="container">
 		<div class="logo">
-			<a href="#"><img src="style/image/${domain }/logo.png" alt="" /></a>
+			<a href="#"><img src="../assets/${domain }/login_logo.png" alt="" /></a>
 		</div>
 		<div id="box">
 			<form name="form1">
