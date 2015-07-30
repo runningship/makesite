@@ -20,8 +20,8 @@
 <link rel="stylesheet" href="add.css">
 </head>
 <script type="text/javascript">
-var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-
+var index = parent.layer.getFrameIndex(window.name), //获取窗口索引
+id=${menu.id};
 function save(){
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
@@ -30,7 +30,7 @@ function save(){
 	    data:a,
 	    mysuccess: function(data){
 	        alert('修改成功');
-			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+	        //parent.('#tr'+)
 			parent.reloadWindow();
 			parent.layer.close(index); //再执行关闭   
 	    }
@@ -38,7 +38,6 @@ function save(){
 }
 
 function closeThis(){
-	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 	parent.layer.close(index); //再执行关闭   
 }
 function a(){
@@ -61,7 +60,7 @@ $(function(){
 			<input name="orderx" value="${menu.orderx}" class="form-input" />
 		</div>
 		
-		<div class="form-group action">
+		<div class="form-group action hidden">
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<div class="form-input btn-wrap" >
 				<button onclick="save();return false;" class="form-button save">保&nbsp;&nbsp;存</button>

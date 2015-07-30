@@ -176,10 +176,9 @@ $(document).ready(function(){
                 </div>
             </div> -->
             <div class="logo_box">
-                <a href="#" class="logo"><img src="images/logo.png" height="70" alt=""></a>
+                <a href="#" class="logo"><img src="images/logoT.png" height="100" alt=""></a>
             </div>
-        </div>
-        <div class="wbox clearfix">
+            <div class="frbox">
             <ul class="nav clearfix">
                 <li class="navli hv"><a href="index.jsp" class="a">首页</a></li>
 				<c:forEach items="${yiji}" var="yiji">
