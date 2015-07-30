@@ -57,6 +57,7 @@ function getPrentId(){
 	}
 	return parentId;
 }
+
 function topMenuChange(){
 	$('#level_2 [pid]').css('display','none');
 	$('#level_2 [pid='+$('#level_1').val()+']').css('display','');
@@ -82,6 +83,7 @@ $(function(){
             ]
         ],
   });
+	topMenuChange();
 });
 
 </script>
@@ -91,16 +93,16 @@ $(function(){
 		<div class="form-group">
 			<label class="label">栏目</label>
 			<select id="level_1" onchange="topMenuChange(this)">
+				<option value="">无</option>
 				<c:forEach items="${list1 }" var="menu" >
 				<option value="${menu.id }">${menu.name}</option>
 				</c:forEach>
-				<option value="">无</option>
 			</select>
 			<select id="level_2">
+				<option value="">无</option>
 				<c:forEach items="${list2 }" var="menu" >
 					<option pid="${menu.parentId }" value="${menu.id }">${menu.name}</option>
 				</c:forEach>
-				<option value="">无</option>
 			</select>
 			
 		</div>

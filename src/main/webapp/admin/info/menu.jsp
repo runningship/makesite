@@ -91,15 +91,15 @@ function openAdd(){
 					</div>
 					<table class="fileList" cellspacing="0">
 						<tr style="background: aliceblue;">
-							<td>父栏目</td>
 							<td>栏目名称</td>
+							<td>父栏目</td>
 							<td>排序</td>
 							<td>操作</td>
 						</tr>
 						<c:forEach items="${page.result }" var="menu" varStatus="status">
 						<tr class="statue_${status.index%2}" id="tr${menu.id}">
-							<td class="fname">${menu.fname }</td> 
 							<td class="name">${menu.name }</td> 
+							<td class="fname">${menu.fname }</td> 
 							<td class="orders">${menu.orderx }</td> 
 							<td>
 							<c:if test="${session_auth_list.indexOf('$info_modifyMenu')>-1 }"><a href="#" onclick="editThis(${menu.id})">修改</a></c:if> 

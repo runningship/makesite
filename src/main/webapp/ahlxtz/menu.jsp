@@ -44,7 +44,7 @@
                  </c:if>
                 </li>
 		</c:forEach>
-            <li class="navli hv"><a href="new.jsp?parentId=-1" class="a">联系我们</a></li>
+            <li class="navli hv"><a href="contact.jsp?parentId=-1" class="a">联系我们</a></li>
             <li class="navli hv"><a href="book.jsp" class="a">反馈信息</a></li>
         </ul>
         </div>
