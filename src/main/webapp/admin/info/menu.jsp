@@ -1,5 +1,4 @@
 <%@page import="com.youwei.makesite.util.DataHelper"%>
-<%@page import="com.youwei.makesite.entity.Menu"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.SharedFile"%>
@@ -11,19 +10,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-	Page<Menu> p = new Page<Menu>();
+	Page<Map> p = new Page<Map>();
 	String currentPageNo =  request.getParameter("currentPageNo");
 	try{
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from Menu menu where parentId is null and _site =? order by menu.orderx asc, menu.id desc ", DataHelper.getServerName(request));
+	p  = dao.findPageBySql(p,"select m1.id as id , m2.name as fname , m1.orderx as orderx , m1.name as name from Menu m1 left join "
+			+" Menu m2 on m1.parentId = m2.id where m1._site =? order by m2.orderx asc,m1.orderx desc",new Object[]{ DataHelper.getServerName(request)});
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>一级栏目</title>
+<title>栏目管理</title>
 
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <script type="text/javascript"  src="../js/fileupload.js" ></script>
@@ -33,53 +33,38 @@
 <script type="text/javascript">
 $(function(){
 });
-//在引入css的基础上配置skin参数，如下所示
-layer.config({
-	skin:'layer-ext-shaishai',
-	extend:'skin/shaishai/style.css'
-});
+function editOK(i,a,b){
 
-	function openAdd(){
-		layer.open({
-	    	type: 2,
-	    	title: '添加一级栏目',
-		    shadeClose: false,
-		    shade: 0.5,
-		    area: ['800px', '700px'],
-		    content: 'add1.jsp'
-		}, function(){
-		    layer.msg('的确很重要', {icon: 1});
-		}, function(){
-		    layer.msg('奇葩么么哒', {shift: 6});
-		}); 
-	}
-
-	function openAdd2(id){
-		layer.open({
-	    	type: 2,
-	    	title: '添加二级栏目',
-		    shadeClose: false,
-		    shade: 0.5,
-		    area: ['800px', '700px'],
-		    content: 'add2.jsp?parentId='+id
-		}); 
-	}
-
+}
 	function editThis(id){
 		layer.open({
 	    	type: 2,
 	    	title: '修改栏目',
 		    shadeClose: false,
 		    shade: 0.5,
-		    area: ['800px', '650px'],
-		    content: 'edit1.jsp?id='+id
+		    area: ['500px', '280px'],
+		    content: 'edit1.jsp?id='+id,
+		    btn: ['确定','取消'],
+		    yes:function(index){
+		    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+			    return false;
+			}
 		}); 
 	}
 
 function reloadWindow(){
 	window.location.reload();
 }
-
+function openAdd(){
+	layer.open({
+    	type: 2,
+    	title: '添加栏目',
+	    shadeClose: false,
+	    shade: 0.5,
+	    area: ['500px', '300px'],
+	    content: 'addMenu.jsp'
+	}); 
+}
 	function delThis(id){
 		YW.ajax({
 		    type: 'POST',
@@ -100,29 +85,25 @@ function reloadWindow(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar">
-						<h3>一级栏目</h3>
 						<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
-						<button style="float:right;margin-top: 5px;padding:5px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
+							<button style="float:right;margin-top: 5px;padding:5px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
 						</c:if>
 					</div>
 					<table class="fileList" cellspacing="0">
 						<tr style="background: aliceblue;">
-							<td>排序</td>
+							<td>父栏目</td>
 							<td>栏目名称</td>
+							<td>排序</td>
 							<td>操作</td>
 						</tr>
 						<c:forEach items="${page.result }" var="menu" varStatus="status">
-							<tr class="statue_${status.index%2}">
-							<td>${menu.orderx } </td> 
-							<td>${menu.name }</td> 
+						<tr class="statue_${status.index%2}" id="tr${menu.id}">
+							<td class="fname">${menu.fname }</td> 
+							<td class="name">${menu.name }</td> 
+							<td class="orders">${menu.orderx }</td> 
 							<td>
-								<c:if test="${session_auth_list.indexOf('$info_modifyMenu')>-1 }"><a href="#" onclick="editThis(${menu.id})">修改</a> </c:if>
-							 	<c:if test="${session_auth_list.indexOf('$info_delMenu')>-1 }"><a href="#" onclick="delThis(${menu.id})">删除</a></c:if>
-								<c:if test="${menu.type == 'menu'}">
-									<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
-										<a href="#" onclick="openAdd2(${menu.id});">添加子栏目</a>
-									</c:if>
-								</c:if>
+							<c:if test="${session_auth_list.indexOf('$info_modifyMenu')>-1 }"><a href="#" onclick="editThis(${menu.id})">修改</a></c:if> 
+							<c:if test="${session_auth_list.indexOf('$info_delMenu')>-1 }"> <a href="#" onclick="delThis(${menu.id})">删除</a> </c:if>
 							</td>
 						</tr>
 						</c:forEach>

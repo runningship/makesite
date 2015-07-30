@@ -38,7 +38,6 @@ public class MenuService {
 		if(StringUtils.isEmpty(menu.name)){
 			throw new GException(PlatformExceptionType.BusinessException,"标题不能为空");
 		}
-		//TODO
 		dao.saveOrUpdate(menu);
 		return mv;
 	}
@@ -52,7 +51,6 @@ public class MenuService {
 		Menu po = dao.get(Menu.class, menu.id);
 		po.name = menu.name;
 		po.orderx = menu.orderx;
-		po.conts = menu.conts;
 		//TODO
 		dao.saveOrUpdate(po);
 		return mv;

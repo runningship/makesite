@@ -20,14 +20,9 @@
 <link rel="stylesheet" href="add.css">
 </head>
 <script type="text/javascript">
+var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
 function save(){
-	var conts = ue.getContent();
-    if ($('#type').val()=='conts') {
-    	if (conts==null||conts=='') {
-	    	alert('内容不能为空');
-	    	return;
-	    }
-    };
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',
@@ -46,33 +41,17 @@ function closeThis(){
 	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 	parent.layer.close(index); //再执行关闭   
 }
+function a(){
+	alert(1)
+}
 
-var ue;
 $(function(){
-	ue = UE.getEditor('editor',{
-        toolbars: [
-            ['forecolor', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
-            ]
-        ],
-  });
-    ue.addListener( 'ready', function( editor ) {
-        ue.setContent($('#menu_conts').html());
-    });
-    if ($('#type').val()=='menu') {
-		var index = parent.layer.getFrameIndex(window.name);
-    	$('#conts').css('display','none');
-		parent.layer.style(index, {
-		    width: '400px',
-		    height:'300px'
-		}); 
-    };
 });
 
 </script>
 <body style="background-color:white">
-	<form name="form1" class="add-form" onsubmit="save();">
+	<form name="form1" class="add-form" onsubmit="return false;">
 	<input name="id" value="${menu.id}" style="display:none">
-	<input name="type" id="type" value="${menu.type}" style="display:none">
 		<div class="form-group">
 			<label class="label">&nbsp;&nbsp;标&nbsp;&nbsp;题</label>
 			<input name="name" value="${menu.name}" class="form-input" />
@@ -80,10 +59,6 @@ $(function(){
 		<div class="form-group">
 			<label class="label">&nbsp;&nbsp;排&nbsp;&nbsp;序</label>
 			<input name="orderx" value="${menu.orderx}" class="form-input" />
-		</div>
-		<div id="conts" class="form-group">
-			<label class="label">文章内容</label>
-	        <span id="editor" type="text/plain" name="conts" style="height:330px;width:98%;"></span>
 		</div>
 		
 		<div class="form-group action">

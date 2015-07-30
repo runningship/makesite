@@ -23,30 +23,29 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	StringBuilder hql = new StringBuilder("select art.name as name, art.id as id , art.addtime as addtime , art.orderx as orderx, m2.name as fname from Article art,Menu m1,Menu m2 where m1.id=m2.parentId and art.parentId=m2.id ");
+	StringBuilder hql = new StringBuilder("select art.id as artId, art.name ,art._site , tt.* from Article art left join ( "
+			  +" SELECT m1.id as fid , m2.id as tfid , m1.name as fname ,m2.name as tfname FROM Menu m1 left join Menu m2 on m1.parentId=m2.id ) tt on art.parentId=tt.fid where art._site=?");
 	List<Object> params = new ArrayList<Object>();
+	params.add(_site);
 	if(StringUtils.isNotEmpty(yijiId)){
-		hql.append(" and m1.id=?");
+		hql.append(" and (tt.tfid=? or tt.fid=?) ");
+		params.add(Integer.valueOf(yijiId));
 		params.add(Integer.valueOf(yijiId));
 	}
 	if(StringUtils.isNotEmpty(erjiId)){
-		hql.append(" and m2.id=?");
+		hql.append(" and tt.fid=?");
 		params.add(Integer.valueOf(erjiId));
 	}
 	if(StringUtils.isNotEmpty(searchText)){
 		hql.append(" and art.name like ?");
 		params.add("%"+searchText+"%");
 	}
-	if(StringUtils.isNotEmpty(_site)){
-		hql.append(" and art._site like ?");
-		params.add("%"+_site+"%");
-	}
-		hql.append(" order by m1.orderx asc , m2.orderx asc , art.orderx asc , art.addtime desc");
-	p  = dao.findPage(p, hql.toString(),true, params.toArray());
+	//hql.append(" order by m1.orderx asc , m2.orderx asc , art.orderx asc , art.addtime desc");
+	p  = dao.findPageBySql(p, hql.toString(), params.toArray());
 
 
-	List<Menu> yiji  = dao.listByParams(Menu.class, "from Menu where parentId is null and type = 'menu' order by orderx desc");
-	List<Menu> erji  = dao.listByParams(Menu.class, "from Menu where parentId is not null and type = 'menu' order by orderx desc");
+	List<Menu> yiji  = dao.listByParams(Menu.class, "from Menu where parentId is null and _site = ? order by orderx desc" , _site);
+	List<Menu> erji  = dao.listByParams(Menu.class, "from Menu where parentId is not null and _site = ? order by orderx desc" , _site);
 	request.setAttribute("page", p);
 	request.setAttribute("yijiList", yiji);
 	request.setAttribute("erjiList", erji);
@@ -67,6 +66,7 @@
 </head>
 <script type="text/javascript">
 $(function(){
+	topMenuChange();
 });
 
 	function infoDel(id){
@@ -116,6 +116,28 @@ function openView(id){
 	    content: 'view.jsp?id='+id
 	}); 
 }
+
+function topMenuChange(){
+	$('#level_2 [pid]').css('display','none');
+	$('#level_2 [pid='+$('#level_1').val()+']').css('display','');
+	var arr = $('#level_2 [pid='+$('#level_1').val()+']');
+	if('${erjiId}'){
+		$('#level_2').val('${erjiId}');
+	}else{
+		$('#level_2').val('');
+	}
+}
+
+function openAdd(id){
+	layer.open({
+    	type: 2,
+    	title: '添加文章',
+	    shadeClose: false,
+	    shade: 0.5,
+	    area: ['800px', '700px'],
+	    content: 'add3.jsp?parentId='+id
+	}); 
+}
 </script>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -126,18 +148,21 @@ function openView(id){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 						<div class="title_bar" style="height:50px;line-height:50px;">
+						<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
+							<button style="float:left;margin-top: 11px;padding:5px;margin-right:20px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
+						</c:if>
 					<form name="form1" type="form" method="post" action="list3.jsp" style="">
-							<select name="yijiId" style="height:32px;width:120px;" onchange="setSearch(this);">
+							<select name="yijiId" style="height:32px;width:120px;word-wrap: normal;" id="level_1" onchange="topMenuChange()">
 								<option value="">全部</option>
 							<c:forEach items="${yijiList }" var="first">
 								<option <c:if test="${first.id==yijiId}"> selected </c:if>  value="${first.id}">${first.name}</option>
 							</c:forEach>
 							</select>
-							<select name="erjiId" style="height:32px;width:120px;">
+							<select name="erjiId" style="height:32px;width:120px;word-wrap: normal;" id="level_2">
 								<option value="">全部</option>
-							<c:forEach items="${erjiList }" var="second">
-								<option class="erji" type="${second.parentId}" value="${second.id}" >${second.name}</option>
-							</c:forEach>
+								<c:forEach items="${erjiList }" var="second">
+									<option class="erji" pid="${second.parentId}" value="${second.id}" >${second.name}</option>
+								</c:forEach>
 							</select>
 							<input name="searchText" value="${searchText}"  style="margin-left:50px;height:26px;width:300px;" placeholder="标题名称">
 							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
@@ -145,8 +170,8 @@ function openView(id){
 						</div>
 					<table class="fileList" cellspacing="0">
 						<tr style="background: aliceblue;">
-							<td>文章名</td>
-							<td>父栏目</td>
+							<td>标题</td>
+							<td>栏目名称</td>
 							<td>排序</td>
 							<td>发布时间</td>
 							<td>操作</td>
@@ -158,8 +183,8 @@ function openView(id){
 							<td>${article.orderx }</td> 
 							<td><fmt:formatDate value="${article.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 
 							<td>
-								<c:if test="${session_auth_list.indexOf('$info_modifyArticle')>-1 }"><a href="#" onclick="editThis(${article.id})">修改</a></c:if> 
-							 	<c:if test="${session_auth_list.indexOf('$info_delArticle')>-1 }"><a href="#" onclick="infoDel(${article.id})">删除</a></c:if></td>
+								<c:if test="${session_auth_list.indexOf('$info_modifyArticle')>-1 }"><a href="#" onclick="editThis(${article.artId})">修改</a></c:if> 
+							 	<c:if test="${session_auth_list.indexOf('$info_delArticle')>-1 }"><a href="#" onclick="infoDel(${article.artId})">删除</a></c:if></td>
 						</tr>
 						</c:forEach>
 					</table>

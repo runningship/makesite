@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="java.util.List"%>
 <%@page import="com.youwei.makesite.entity.Menu"%>
 <%@page import="org.bc.sdak.SimpDaoTool"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
  <%
  CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
  List<Menu> list1 = dao.listByParams(Menu.class, "from Menu where parentId is null and _site=?" , DataHelper.getServerName(request));
@@ -22,20 +22,25 @@
 <script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/ueditor.all.yw.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="../js/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
 <link rel="stylesheet" href="add.css">
+<style type="text/css">
+select{
+width: 100px;
+  height: 30px;
+  margin-left: 6px;
+}
+</style>
 </head>
 <script type="text/javascript">
 function save(){
-	var conts = ue.getContent();
-    if (conts==null||conts=='') {
-    	alert('内容不能为空');
+	if (!$('#name').val()) {
+    	alert('栏目名称不能为空');
     	return;
-    };
-    
-    $('#parentId').val(getPrentId());
+    }
+	$('#parentId').val(getPrentId());
 	var a=$('form[name=form1]').serialize();
 	YW.ajax({
 	    type: 'POST',
-	    url: '${projectName }/c/admin/article/save',
+	    url: '${projectName }/c/admin/menu/save',
 	    data:a,
 	    mysuccess: function(data){
 	        alert('添加成功');
@@ -46,6 +51,14 @@ function save(){
     });
 }
 
+function closeThis(){
+	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+	parent.layer.close(index); //再执行关闭   
+}
+
+$(function(){
+	topMenuChange();
+});
 
 function getPrentId(){
 	var parentId="";
@@ -67,29 +80,12 @@ function topMenuChange(){
 		$('#level_2').val('');
 	}
 }
-
-function closeThis(){
-	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-	parent.layer.close(index); //再执行关闭   
-}
-
-var ue;
-$(function(){
-	ue = UE.getEditor('editor',{
-        toolbars: [
-            ['forecolor','source', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'bold','insertvideo','map',
-             'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
-            ]
-        ],
-  });
-});
-
 </script>
 <body style="background-color:white">
 	<form name="form1" class="add-form" onsubmit="save();">
-		<input name="parentId" id="parentId" type="hidden" />
+		<input type="hidden" name="parentId" id="parentId"/>
 		<div class="form-group">
-			<label class="label">栏目</label>
+			<label class="label">父栏目</label>
 			<select id="level_1" onchange="topMenuChange(this)">
 				<c:forEach items="${list1 }" var="menu" >
 				<option value="${menu.id }">${menu.name}</option>
@@ -100,21 +96,15 @@ $(function(){
 				<c:forEach items="${list2 }" var="menu" >
 					<option pid="${menu.parentId }" value="${menu.id }">${menu.name}</option>
 				</c:forEach>
-				<option value="">无</option>
 			</select>
-			
 		</div>
 		<div class="form-group">
-			<label class="label">&nbsp;&nbsp;标&nbsp;&nbsp;题</label>
+			<label class="label">&nbsp;&nbsp;名&nbsp;&nbsp;称</label>
 			<input name="name" id="name" class="form-input" />
 		</div>
 		<div class="form-group">
 			<label class="label">&nbsp;&nbsp;排&nbsp;&nbsp;序</label>
 			<input name="orderx" value="100" class="form-input" />
-		</div>
-		<div id="conts" class="form-group">
-			<label class="label">文章内容</label>
-	        <span id="editor" type="text/plain" name="conts" style="height:330px;width:98%;"></span>
 		</div>
 		
 		<div class="form-group action">
