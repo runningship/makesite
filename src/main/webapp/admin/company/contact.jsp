@@ -75,12 +75,9 @@ $(function(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<form name="form1" class="add-form" onsubmit="return false;">
-						<input type="hidden" name="receiverIds" id="receiverIds" />
+						<input type="hidden" name="parentId" value="-1" />
+						<input type="hidden" name="name" value="contact" />
 						<table style="width:100%" >
-							<tr class="form-group" style="display:none">
-								<td style="text-align:left;"><label class="label">标题</label></td>
-								<td><input name="name" id="name" value="contact" class="form-input" /></td>
-							</tr>
 							<tr class="form-group">
 								<td style="vertical-align: top;text-align:left;"><label class="label">正文</label></td>
 								<td><span id="editor" type="text/plain" name="conts" style="height:700px;width:100%;"></span></td>

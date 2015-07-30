@@ -10,6 +10,7 @@
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	List<Menu> yiji = dao.listByParams(Menu.class, "from Menu where parentId is null and _site = ?", DataHelper.getServerName(request));
 	List<Menu> erji = dao.listByParams(Menu.class, "from Menu where parentId is not null and _site = ?", DataHelper.getServerName(request));
+	List<Article> Article = dao.listByParams(Article.class, "from Menu where parentId is not null and _site = ?", DataHelper.getServerName(request));
 	String[] params = {"name" , "_site"};
 	Article art = dao.getUniqueByParams(Article.class, params,new Object[] {"company" , DataHelper.getServerName(request) });
 	request.setAttribute("contact", art);
@@ -25,6 +26,8 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <script src="js/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-1.9.1.js"></script> -->
+<script type="text/javascript" src="js/buildHtml.js"></script>
 <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
 <script type="text/javascript" src="js/jquery.bxslider.js"></script>
 <script type="text/javascript" src="js/slides.min.jquery.js"></script>
@@ -41,6 +44,14 @@ $(document).on('click', '.selector', function(event) {
     event.preventDefault();
     /* Act on the event */
 });
+$(document).on('click', '.btn_act', function(event) {
+    var Thi=$(this),
+    ThiType=Thi.data('type');
+    if(ThiType=='submit'){
+        $('[name=form1]').submit();
+    }
+    event.preventDefault();
+})
 $(document).on({
       mouseenter: function(){
         $(this).find('.hvB').show();
@@ -59,6 +70,23 @@ $(document).ready(function(){
         pauseOnAction: false
     });
 });
+function login(){
+	var index;
+	var a=$('form[name=form1]').serialize();
+	YW.ajax({
+	    type: 'post',
+	    url: '${projectName}/c/admin/user/login',
+	    data: a,
+	    mysuccess: function(json){
+	    	  alert('登陆成功');
+// 	        window.location="../admin/index.jsp";
+	    },
+	    error:function(data){
+	    	  alert('用户名或密码错误');
+	      }
+	  });
+}
+
 </script>
 <script>
 $(function(){
@@ -153,25 +181,25 @@ $(document).ready(function(){
         </div>
         <div class="wbox clearfix">
             <ul class="nav clearfix">
-                <li class="navli hv"><a href="#" class="a">新闻中心</a>
-                    <ul class="subnav hvB">
-                        <li><a href="#">新闻1</a></li>
-                        <li><a href="#">新闻2</a></li>
-                        <li><a href="#">新闻3</a></li>
-                        <li><a href="#">新闻4</a></li>
-                    </ul>
-                </li>
+                <li class="navli hv"><a href="index.jsp" class="a">首页</a></li>
 				<c:forEach items="${yiji}" var="yiji">
-                	<li class="navli hv"><a href="#">${yiji.name }</a>
+                	<li class="navli hv"><a href="#" class="a">${yiji.name }</a>
 	                    <ul class="subnav hvB">
 						<c:forEach items="${erji}" var="erji">
 							<c:if test="${erji.parentId == yiji.id}">
-		                        <li><a href="#">${erji.name}</a></li>
+		                        <li><a href="list.jsp?id=${erji.id}&parentId=${yiji.id}">${erji.name}</a></li>
+	                        </c:if>
+	                    </c:forEach>
+						<c:forEach items="${Arcticle}" var="Arcticle">
+							<c:if test="${Arcticle.parentId == yiji.id}">
+		                        <li><a href="new.jsp?id=${Arcticle.id}&parentId=${Arcticle.id}">${Arcticle.name}</a></li>
 	                        </c:if>
 	                    </c:forEach>
 	                    </ul>
                     </li>
 				</c:forEach>
+                <li class="navli hv"><a href="new.jsp?parentId=-1" class="a">联系我们</a></li>
+                <li class="navli hv"><a href="book.jsp" class="a">反馈信息</a></li>
             </ul>
         </div>
         <div class="bgb"></div>
@@ -187,17 +215,17 @@ $(document).ready(function(){
         <div class="wbox PT30 clearfix">
             <div class="loginboxs">
                 
-                <form name="form" action="">
+                <form name="form1" onsubmit="login();return false;">
                 <ul>
                     <li class="tit"><strong>登录</strong></li>
-                    <li><label class="inputbox focus"><i class="iconfont iu">&#xe608;</i><input type="text" name="u" class="input u" value=""></label></li>
-                    <li><label class="inputbox"><i class="iconfont iu">&#xe606;</i><input type="text" name="p" class="input p" value=""></label></li>
-                    <li class="btnbox"><a href="#" class="btn btn_submit btn_act" data-type="submit">登　录</a><input type="submit" class="submit hidden"></li>
+                    <li><label class="inputbox focus"><i class="iconfont iu">&#xe608;</i><input type="text" name="account" class="input u" value=""></label></li>
+                    <li><label class="inputbox"><i class="iconfont iu">&#xe606;</i><input type="text" name="pwd" class="input p" value=""></label></li>
+                    <li class="btnbox"><a href="#" class="btn btn_submit btn_act" data-type="submit">登　录</a></li>
                 </ul>
                 </form>
             </div>
             <div class="aboutbox">
-                <strong class="tita">关于我们</strong>
+                <strong class="tita">${contact.name}</strong>
                 <strong class="titb">COMPANY PROFILE</strong>
                 <p>${contact.conts}</p>
             </div>

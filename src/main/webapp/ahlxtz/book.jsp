@@ -1,5 +1,18 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
+<%@page import="java.util.List"%>
+<%@page import="com.youwei.makesite.entity.Menu"%>
+<%@page import="org.bc.sdak.SimpDaoTool"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% 
+	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+	List<Menu> yiji = dao.listByParams(Menu.class, "from Menu where parentId is null and _site = ?", DataHelper.getServerName(request));
+	List<Menu> erji = dao.listByParams(Menu.class, "from Menu where parentId is not null and _site = ?", DataHelper.getServerName(request));
+	
+	request.setAttribute("yiji", yiji);
+	request.setAttribute("erji", erji);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,19 +82,17 @@ $(document).ready(function() {
         </div>
         <div class="wbox clearfix">
             <ul class="nav clearfix">
-                <li class="navli hv"><a href="#" class="a">关于我们</a></li>
-                <li class="navli hv"><a href="#" class="a">新闻中心</a>
-                    <ul class="subnav hvB">
-                        <li><a href="#">新闻1</a></li>
-                        <li><a href="#">新闻2</a></li>
-                        <li><a href="#">新闻3</a></li>
-                        <li><a href="#">新闻4</a></li>
-                    </ul>
-                </li>
-                <li class="navli hv"><a href="#">商务服务</a></li>
-                <li class="navli hv"><a href="#">人才发展</a></li>
-                <li class="navli hv"><a href="#">企业责任</a></li>
-                <li class="navli hv"><a href="#">交流中心</a></li>
+				<c:forEach items="${yiji}" var="yiji">
+                	<li class="navli hv"><a href="#">${yiji.name }</a>
+	                    <ul class="subnav hvB">
+						<c:forEach items="${erji}" var="erji">
+							<c:if test="${erji.parentId == yiji.id}">
+		                        <li><a href="#">${erji.name}</a></li>
+	                        </c:if>
+	                    </c:forEach>
+	                    </ul>
+                    </li>
+				</c:forEach>
             </ul>
         </div>
         <div class="bgb"></div>
@@ -108,47 +119,18 @@ $(document).ready(function() {
     <div class="footer">
         <div class="wbox fline">
             <ul class="fline_list clearfix">
+				<c:forEach items="${yiji}" var="yiji">
                 <li class="a1">
                     <dl>
-                        <dt class="lineTitle">关于我们 </dt>
-                        <dd> <a href="about_fazhan.asp">发展历程</a> </dd>
-                        <dd> <a href="about_ceo.asp">CEO寄语</a></dd>
-                        <dd> <a href="about_wenhua.asp">企业文化</a> </dd>
-                        <dd> <a href="about_honor.asp">资质荣誉</a> </dd>
-                        <dd> <a href="about_team.asp">团队风采</a> </dd>
+                        <dt class="lineTitle">${yiji.name} </dt>
+						<c:forEach items="${erji}" var="erji">
+							<c:if test="${erji.parentId == yiji.id}">
+                        	<dd> <a href="about_fazhan.asp">${erji.name}</a> </dd>
+                        	</c:if>
+                        </c:forEach>
                     </dl>
                 </li>
-                <li class="a2">
-                    <dl>
-                        <dt class="lineTitle">客户服务 </dt>
-                        <dd> <a href="/service_plan.asp">服务政策</a> </dd>
-                        <dd> <a href="/service_faq.asp">常见问题</a> </dd>
-                        <dd> <a href="/service_network.asp">服务网络</a></dd>
-                        <dd> <a href="/service_ad.asp">广告欣赏</a> </dd>
-                        <dd> <a href="/service_guestbook.asp">意见反馈</a> </dd>
-                        <dd> <a href="/service_buy.asp">投资通道</a> </dd>
-                        <dd> <a href="/service_download.asp">资料下载</a> </dd>
-                  </dl>
-                </li>
-                <li class="a3">
-                    <dl>
-                        <dt class="lineTitle">新闻动态 </dt>
-                        <dd><a href="/news.asp?id=1">公司新闻</a> </dd>
-                        <dd><a href="/news.asp?id=2">行业动态</a> </dd>
-                        <dd><a href="/news.asp?id=5">产品新闻</a> </dd>
-                        <dd><a href="/news.asp?id=6">媒体报道</a> </dd>
-                        <dd><a href="/news.asp?id=7">品牌活动</a> </dd>
-                    </dl>
-                </li>
-                <li class="a4">
-                    <dl>
-                        <dt class="lineTitle">关于我们 </dt>
-                        <dd> <a href="about_wenhua.asp">企业文化</a> </dd>
-                        <dd> <a href="about_network.asp">销售网络</a> </dd>
-                        <dd> <a href="about_honor.asp">资质荣誉</a> </dd>
-                        <dd> <a href="about_team.asp">团队风采</a> </dd>
-                    </dl>
-                </li>
+                </c:forEach>
                 <li class="fr">
                     <dl>
                         <dt class="lineTitle">联系我们 </dt>

@@ -62,9 +62,9 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endCo
 .hreader .bgb{ background: url('../images/bgb.png') repeat-x top; position: absolute; bottom: -11px; width: 100%; height: 10px; z-index: 2;}
 
 .banner{}
-.nav { margin: 10px 0 0; padding:0  20px; text-align: center; }
-.nav .navli{ float: left; line-height: 34px; padding:0 20px; position: relative;font-size: 15px;font-family: 'Microsoft Yahei','黑体';  font-size: 18px;}
-.nav .navli .a{padding-bottom: 11px; display: block;}
+.nav { margin: 10px 0; padding:0  20px; text-align: center; }
+.nav .navli{ float: left; height: 34px; line-height: 34px; padding:0 20px; position: relative;font-size: 15px;font-family: 'Microsoft Yahei','黑体';  font-size: 18px;}
+.nav .navli .a{ padding-bottom: 16px;}
 .nav .subnav{display: none;background: url(subbg.gif) no-repeat left top;position: absolute;left: 0;top: 44px;z-index: 99;font-size: 12px;border-radius: 3px;/*box-shadow:0px 5px 10px #000;*/overflow: hidden;padding: 10px 0;border-top: 3px solid #D7182A;
 box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .nav .subnav {background-color: #646e71;width: 100%;
@@ -258,16 +258,7 @@ login
 
 
 
-/* listpage */
-.listpage .UList{padding: 20px 30px;}
-.listpage .UList li{ margin: 3px 0;}
-.listpage .UList li a{ display: block; color: #666; font-size: 16px; padding: 8px 5px; border-bottom: 1px dashed #EEE;}
-.listpage .UList li a span{ float: right; font-size: 14px; color: #999;}
-.listpage .UList li a:hover{ color: #D7182A;}
 
-
-
-/* about */
 .aboutContent{ padding: 20px 20px 20px 20px; text-align:left; }
 .aboutContent h2{ font-size: 16px; font-weight: bold; margin: 5px 0px;}
 .aboutContent p { font-size: 14px; margin-bottom: 20px;}
@@ -285,7 +276,7 @@ login
 
 
 
-/* book */
+
 .bookpage .bookbox{ padding: 60px 0 0 0; width: 550px;}
 .bookpage .bookbox strong{ display: block; font-size: 18px; font-weight: bold;}
 .bookpage .bookbox b{ display: inline-block; margin-top: 10px; font-size: 18px; font-weight: bold; color: #D7182A;}
