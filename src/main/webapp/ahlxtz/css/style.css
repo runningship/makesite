@@ -60,14 +60,15 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endCo
 
 .hreader{ background: #FFF; border-bottom: 1px solid #FFF; position: relative;}
 .hreader .frbox{ position: absolute; right: 0; top: 40px; padding-top: 20px;
- position:relative; top: 4px; display: inline-block;}
+ position:relative; top: 4px; display: inline-block; padding-top: 0px;}
 .hreader .logo_box{display: inline-block;}
 .hreader .bgb{ background: url('../images/bgb.png') repeat-x top; position: absolute; bottom: -11px; width: 100%; height: 10px; z-index: 2;}
 
 .banner{}
 .nav { margin: 10px 0 0; padding:0 0px; text-align: center; }
-.nav .navli{ float: left; line-height: 34px; padding:0 20px; position: relative;font-size: 15px;font-family: 'Microsoft Yahei','黑体';  font-size: 18px;}
-.nav .navli .a{padding-bottom: 11px; display: block;}
+.nav .navli{ float: left; line-height: 34px; padding:0 12px; position: relative;font-size: 15px;font-family: 'Microsoft Yahei','黑体';  font-size: 18px;}
+.nav .navli a.a{padding-bottom: 11px; display: block;}
+.nav .navli a.a:hover{ color: #D7182A;}
 .nav .subnav{display: none;background: url(subbg.gif) no-repeat left top;position: absolute;left: 0;top: 44px;z-index: 99;font-size: 12px;border-radius: 3px;/*box-shadow:0px 5px 10px #000;*/overflow: hidden;padding: 10px 0;border-top: 3px solid #D7182A;
 box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .nav .subnav {background-color: #646e71;width: 100%;
@@ -266,8 +267,13 @@ login
 .listpage .UList li{ margin: 3px 0;}
 .listpage .UList li a{ display: block; color: #666; font-size: 16px; padding: 8px 5px; border-bottom: 1px dashed #EEE;}
 .listpage .UList li a span{ float: right; font-size: 14px; color: #999;}
-.listpage .UList li a:hover{ color: #D7182A;}
+.listpage .UList li a:hover{ color: #D7182A; text-decoration:underline;}
 
+.pagelist{text-align: center; margin: 20px 0;}
+.pagelist li{ display: inline-block;}
+.pagelist li a{display: block; padding: 5px 10px; background: #F6F6F6; border-radius: 3px; border:1px solid #DFDFDF;}
+.pagelist li a:hover{ color: #D7182A; border:1px solid #D7182A; }
+.pagelist li a.active{ color: #FFF; border:1px solid #FF5666; background: #FF929C; }
 
 
 /* about */

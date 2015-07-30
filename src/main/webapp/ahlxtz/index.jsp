@@ -1,49 +1,10 @@
-<%@page import="com.youwei.makesite.entity.Article"%>
-<%@page import="com.youwei.makesite.util.DataHelper"%>
-<%@page import="com.youwei.makesite.entity.Menu"%>
-<%@page import="java.util.List"%>
-<%@page import="org.bc.sdak.SimpDaoTool"%>
-<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% 
-	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-	List<Menu> yiji = dao.listByParams(Menu.class, "from Menu where parentId is null and _site = ?", DataHelper.getServerName(request));
-	List<Menu> erji = dao.listByParams(Menu.class, "from Menu where parentId is not null and _site = ?", DataHelper.getServerName(request));
-	List<Article> Article = dao.listByParams(Article.class, "from Menu where parentId is not null and _site = ?", DataHelper.getServerName(request));
-	String[] params = {"name" , "_site"};
-	Article art = dao.getUniqueByParams(Article.class, params,new Object[] {"company" , DataHelper.getServerName(request) });
-	request.setAttribute("contact", art);
-	request.setAttribute("yiji", yiji);
-	request.setAttribute("erji", erji);
-%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Examples</title>
-<meta name="description" content="">
-<meta name="keywords" content="">
-<script src="js/jquery.min.js"></script>
-<!-- <script type="text/javascript" src="js/jquery-1.9.1.js"></script> -->
-<script type="text/javascript" src="js/buildHtml.js"></script>
-<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="js/jquery.bxslider.js"></script>
-<script type="text/javascript" src="js/slides.min.jquery.js"></script>
-<script type="text/javascript" src="js/jquery.imagesAutoBox.js"></script>
-
-
-<link href="css/reset.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css">
-
-
+<jsp:include page="header.jsp"></jsp:include>
 <script type="text/javascript">
-$(document).on('click', '.selector', function(event) {
-    event.preventDefault();
-    /* Act on the event */
-});
 $(document).on('click', '.btn_act', function(event) {
     var Thi=$(this),
     ThiType=Thi.data('type');
@@ -52,18 +13,6 @@ $(document).on('click', '.btn_act', function(event) {
     }
     event.preventDefault();
 })
-$(document).on({
-      mouseenter: function(){
-        $(this).find('.hvB').show();
-      },
-      mouseleave: function(){
-        var Thi=$(this),
-        st=setTimeout(function(){
-            Thi.find('.hvB').hide();
-            clearTimeout(st);
-        },300);
-      }
-},'.hv');
 $(document).ready(function(){
     $('.banner').flexslider({
         directionNav: true,
@@ -152,57 +101,9 @@ $(document).ready(function(){
 </style>
 </head>
 <body>
-<div class="body">
-    <div class="toper">
-        <div class="wbox">
-            <dl class="tMenu hv">
-                <dt class="hvA">成员网站 +</dt>
-                <dd class="hvB"><a href="#">站点1站点1站点1站点1</a>
-                <a href="#">站点2</a>
-                <a href="#">站点3</a></dd>
-            </dl>
-            <ul class="tA">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">加入收藏</a></li>
-                <li><a href="#">设置首页</a></li>
-            </ul>
-        </div>
-    </div>
+    <jsp:include page="top.jsp"></jsp:include>
     <div class="hreader">
-        <div class="wbox clearfix">
-            <!-- <div class="frbox">
-                <div class="fl searchBox">
-                    <img src="images/temp/search.jpg" alt="">
-                </div>
-            </div> -->
-            <div class="logo_box">
-                <a href="#" class="logo"><img src="images/logoT.png" height="100" alt=""></a>
-            </div>
-            <div class="frbox">
-            <ul class="nav clearfix">
-                <li class="navli hv"><a href="index.jsp" class="a">首页</a></li>
-				<c:forEach items="${yiji}" var="yiji">
-                	<li class="navli hv"><a href="#" class="a">${yiji.name }</a>
-	                    <ul class="subnav hvB">
-						<c:forEach items="${erji}" var="erji">
-							<c:if test="${erji.parentId == yiji.id}">
-		                        <li><a href="list.jsp?id=${erji.id}&parentId=${yiji.id}">${erji.name}</a></li>
-	                        </c:if>
-	                    </c:forEach>
-						<c:forEach items="${Arcticle}" var="Arcticle">
-							<c:if test="${Arcticle.parentId == yiji.id}">
-		                        <li><a href="new.jsp?id=${Arcticle.id}&parentId=${Arcticle.id}">${Arcticle.name}</a></li>
-	                        </c:if>
-	                    </c:forEach>
-	                    </ul>
-                    </li>
-				</c:forEach>
-                <li class="navli hv"><a href="new.jsp?parentId=-1" class="a">联系我们</a></li>
-                <li class="navli hv"><a href="book.jsp" class="a">反馈信息</a></li>
-            </ul>
-        </div>
-        <div class="bgb"></div>
-    </div>
+     <jsp:include page="menu.jsp"></jsp:include>
     <div class="banner">
     <ul class="slides">
         <li style="background:url(images/temp/img1.jpg) 50% 0 no-repeat;"></li>

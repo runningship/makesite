@@ -38,6 +38,6 @@ function imgAutoBox(thi) {
         img.css("margin-top",fs+"px");
     }              
             
-    console.log(sr+'\nbw:'+bw+'\nbh:'+bh+'\nb1:'+b1+'\nw:'+w+'\nh:'+h+'\nb2:'+b2);
+    //console.log(sr+'\nbw:'+bw+'\nbh:'+bh+'\nb1:'+b1+'\nw:'+w+'\nh:'+h+'\nb2:'+b2);
     
 };

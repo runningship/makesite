@@ -1,5 +1,7 @@
 package com.youwei.makesite.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,4 +27,8 @@ public class Menu {
 	public String conts;
 	
 	public String _site;
+	
+	public transient List<Menu> menuChildren;
+	
+	public transient List<Article> articleChildren;
 }
