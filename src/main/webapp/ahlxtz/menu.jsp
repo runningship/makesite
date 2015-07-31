@@ -39,10 +39,10 @@
             	<c:if test="${topMenu.menuChildren.size()>0 ||  topMenu.articleChildren.size()>0}">
                  <ul class="subnav hvB"  >
 					<c:forEach items="${topMenu.menuChildren}" var="menu">
-	                      <li><a href="list.jsp?id=${menu.id}&parentId=${topMenu.id}">${menu.name}</a></li>
+	                      <li class="topMenuSubLi"><a href="list.jsp?id=${menu.id}&parentId=${topMenu.id}">${menu.name}</a></li>
 	                 </c:forEach>
 					<c:forEach items="${topMenu.articleChildren}" var="art">
-	                      <li><a href="new.jsp?id=${art.id}&parentId=${topMenu.id}">${art.name}</a></li>
+	                      <li class="topMenuSubLi"><a href="new.jsp?id=${art.id}&parentId=${topMenu.id}">${art.name}</a></li>
 	                 </c:forEach>
                  </ul>
                  </c:if>

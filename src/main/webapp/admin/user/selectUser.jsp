@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.User"%>
@@ -16,7 +17,7 @@
 	}catch(Exception ex){
 	}
 	int gid = Integer.valueOf(groupId);
-	p  = dao.findPage(p,"from User where id not in (select distinct(uid) from UserGroup where gid=?)" , new Object[]{gid});
+	p  = dao.findPage(p,"from User where id not in (select distinct(uid) from UserGroup where gid=?) and _site=?" , new Object[]{gid , DataHelper.getServerName(request)});
 	request.setAttribute("page", p);
 	request.setAttribute("groupId", groupId);
 %>

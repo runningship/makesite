@@ -134,7 +134,8 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .imgbox{ border-radius: 3px; overflow: hidden;}
 .imgbox img{ display: block; width: 100%;}
 
-
+.topMenuSubLi{height:30px;overflow:hidden;;}
+.topMenuSubLi a{width:80%;margin-left:auto;margin-right:auto;}
 
 .footer{ background: #FFF; padding-top: 20px;}
 .footer .fline{ padding: 20px 0;}
@@ -240,7 +241,7 @@ login
 .newspage{}
 .newspage .table{width: 100%;border-top: 1px solid #e2e2e2; background: #FFF;}
 .newspage .table .l{ text-align: right; width: 200px; background: #F7F7F7;}
-.newspage .table .l a{color: #595959;}
+.newspage .table .l a{color: #595959;  overflow: hidden;height:36px;width: 60%;margin-left: auto;  margin-right: auto;}
 .newspage .table .l a:hover{color: #D7182A;}
 .newspage .table .l a:hover .posa{ display:inline-block;}
 .newspage .table .r{ border: 1px solid #e2e2e2; border-top: 0;}
@@ -255,8 +256,8 @@ login
 .breadcrumb li a:hover{ color: #D7182A;}
 
 .menutabs{ margin-right: -1px;}
-.menutabs dt{ font-size: 18px; font-weight: bold; border-bottom: 1px solid #CFCFCF; padding: 30px 30px 20px 0;}
-.menutabs dd {height: 35px;line-height: 35px;text-indent: 35px;font-weight: normal;border-bottom: #e2e2e2 solid 1px;color: #7b7b7b;font-size: 16px;padding-right: 30px;}
+.menutabs dt{ font-size: 18px; font-weight: bold; border-bottom: 1px solid #CFCFCF; padding: 30px 0px 20px 0px;text-align:center}
+.menutabs dd {height: 35px;line-height: 35px;font-weight: normal;border-bottom: #e2e2e2 solid 1px;color: #7b7b7b;font-size: 16px;text-align:center;}
 .menutabs dd.active {border-right: 4px solid #D7182A;background: #ffffff;  font-weight: bold;}
 .menutabs dd a{ display: block;}
 .menutabs dd a:hover{ color:#D7182A; }

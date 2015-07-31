@@ -16,3 +16,4 @@
 <link href="css/reset.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css">
+<link type="image/x-icon" rel="icon" href="favicon.ico">

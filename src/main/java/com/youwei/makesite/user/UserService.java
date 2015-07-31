@@ -117,14 +117,12 @@ public class UserService {
 			throw new GException(PlatformExceptionType.BusinessException,"用户名不能为空");
 		}
 		User po = dao.get(User.class, user.id);
-//		po.id = user.id;
 		po.account = user.account;
 		po.name = user.name;
 		if(StringUtils.isNotEmpty(user.pwd)){
 			po.pwd = SecurityHelper.Md5(user.pwd);
 		}
 		po.tel = user.tel;
-		//TODO
 		dao.saveOrUpdate(po);
 		if(roleIds!=null && roleIds.length() != 0){
 			String[] Ids = roleIds.split(",");
