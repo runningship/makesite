@@ -151,7 +151,7 @@ function openAdd(id){
 						<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
 							<button style="float:left;margin-top: 11px;padding:5px;margin-right:20px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
 						</c:if>
-					<form name="form1" type="form" method="post" action="list3.jsp" style="">
+					<form name="form1" type="form" method="post" action="list3.jsp?nav=wzlb" style="">
 							<select name="yijiId" style="height:32px;width:120px;word-wrap: normal;" id="level_1" onchange="topMenuChange()">
 								<option value="">全部</option>
 							<c:forEach items="${yijiList }" var="first">

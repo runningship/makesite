@@ -80,11 +80,6 @@ $(document).on({
         </div>
     </div>
     <div class="footer">
-        <div class="wbox flink">
-            <a href="#">首页</a>
-            <a href="#">联系我们</a>
-            <a href="#">法律声明</a>
-        </div>
         <div class="copyright">
             <div class="wbox">
                 <img src="images/logo_m.png" alt="">

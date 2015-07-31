@@ -25,7 +25,7 @@
 	StringBuilder hql = new StringBuilder("select sf.name as name, sf.id as fid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  ,sf.path as path, sf.publish as publish from SharedFile sf,User u where sf.uid = u.id");
 	List<Object> params = new ArrayList<Object>();
 	if(StringUtils.isNotEmpty(filename)){
-		hql.append(" and sf.filename like ?");
+		hql.append(" and sf.name like ?");
 		params.add("%"+filename+"%");
 	}
 	if(StringUtils.isNotEmpty(sendName)){
@@ -39,6 +39,8 @@
 		hql.append(" order by sf.id desc");
 	p  = dao.findPage(p, hql.toString(),true, params.toArray());
 	request.setAttribute("page", p);
+	request.setAttribute("filename", filename);
+	request.setAttribute("sendName", sendName);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -88,7 +90,7 @@ function fileShenHe(id , btn){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar" style="height:50px;line-height:50px;">
-					<form name="form1" type="form" method="post" action="list.jsp" style="">
+					<form name="form1" type="form" method="post" action="list.jsp?nav=wjgx" style="">
 							<span>文件名: </span><input name="filename" value="${filename}"  style="height:26px;width:200px;">
 							<span style="margin-left:20px;">上传人: </span><input name="sendName" value="${sendName}"  style="height:26px;width:200px;">
 							<input style="margin-left:20px;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
