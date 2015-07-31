@@ -1,16 +1,17 @@
 <%@page import="org.apache.commons.lang.StringUtils"%>
-<%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.Article"%>
 <%@page import="java.util.List"%>
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="com.youwei.makesite.entity.Menu"%>
 <%@page import="org.bc.sdak.SimpDaoTool"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String topId = request.getParameter("parentId");
-	
+	String id = request.getParameter("parent2Id");
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+	Menu menu = dao.get(Menu.class, Integer.valueOf(id));
+	String topId = String.valueOf(menu.parentId);
 	Menu topMenu = dao.get(Menu.class, Integer.valueOf(topId));
 	
 	request.setAttribute("topMenu", topMenu);
@@ -18,26 +19,20 @@
 	request.setAttribute("topId", topId);
 	//加载子栏目列表
 	List<Menu> menuList = dao.listByParams(Menu.class, "from Menu where parentId=?", Integer.valueOf(topId));
-	
-	String menuId = request.getParameter("id");
-	if(StringUtils.isEmpty(menuId)){
-		menuId = menuList.get(0).id.toString();
-	}
-	Menu currentMenu = dao.get(Menu.class, Integer.valueOf(menuId));
-	request.setAttribute("currentMenu", currentMenu);
-	request.setAttribute("menuId", menuId);
-	
 	//加载文章列表
 	List<Article> articleList = dao.listByParams(Article.class, "from Article where parentId=?", Integer.valueOf(topId));
 	request.setAttribute("menuList", menuList);
 	request.setAttribute("articleList", articleList);
 	
-	Page<Article> p = new Page<Article>();
-	p.setPageSize(1);
-	String currentPageNo =  request.getParameter("currentPageNo");
-	//加载二级栏目下的文章列表 
-	p = dao.findPage(p, "from Article where parentId=?", Integer.valueOf(menuId));
-	request.setAttribute("page", p);
+	String articleId = request.getParameter("id");
+	if(StringUtils.isEmpty(articleId)){
+		request.setAttribute("currentArticle", articleList.get(0));
+	}else{
+		Article currentArticle = dao.get(Article.class, Integer.valueOf(articleId));
+		request.setAttribute("currentArticle", currentArticle);
+	}
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -69,10 +64,6 @@ $(document).on({
         // },300);
       }
 },'.hv');
-
-function goPage(pageNo){
-	window.location = window.location.href+"&currentPageNo="+pageNo;
-}
 </script>
 
 
@@ -81,12 +72,12 @@ function goPage(pageNo){
 </head>
 <body class="backgray">
 <div class="body">
-    <jsp:include page="top.jsp"></jsp:include>
+   	<jsp:include page="top.jsp"></jsp:include>
     <div class="hreader">
-        <jsp:include page="menu.jsp"></jsp:include>
+    	<jsp:include page="menu.jsp"></jsp:include>
     </div>
     <div class="mainer ">
-        <div class="wbox newspage listpage">
+        <div class="wbox newspage">
             <div class="wrap">
                 <ul class="breadcrumb">
                   <li><a href="#">首页</a><span>/</span></li>
@@ -99,13 +90,16 @@ function goPage(pageNo){
                         <dl class="menutabs">
                             <dt>${topMenu.name }</dt>
                             <c:forEach items="${menuList}" var="menu">
-                            	<dd <c:if test="${menu.id==menuId }"> class="active"</c:if>>
+                            	<dd <c:if test="${menu.id==currentArticle.parentId }"> class="active"</c:if> >
                             		<c:if test="${menu.id==menuId }"><a href="#">${menu.name }</a></c:if>
                             		<c:if test="${menu.id!=menuId }"><a href="list.jsp?id=${menu.id }&parentId=${topId}">${menu.name }</a></c:if> 
                             	</dd>
                             </c:forEach>
                             <c:forEach items="${articleList}" var="art">
-                            	<dd ><a href="new.jsp?id=${art.id }&parentId=${topId}">${art.name }</a> </dd>
+                            	<dd >
+                            		<c:if test="${art.id==currentArticle.id }"> <a href="#">${art.name }</a></c:if>
+                            		<c:if test="${art.id!=currentArticle.id }"> <a href="new.jsp?id=${art.id }&parentId=${topId}">${art.name }</a></c:if>
+                            	</dd>
                             </c:forEach>
                         </dl>
                         <div class="aboutContent">
@@ -119,34 +113,10 @@ function goPage(pageNo){
                     </div>
                     <div class="td r">
                         <div class="titlebox">
-                            <h1 class="h1">${currentMenu.name }</h1>
+                            <h1 class="h1">${currentArticle.name}</h1>
                             <p></p>
                         </div>
-                        <ul class="UList">
-                        	<c:forEach items="${page.result}" var="art">
-                            <li class="first">
-                                <a href="info.jsp?id=${art.id}&parent2Id=${art.parentId}" title="${art.name }"><span>${art.addtime }</span>${art.name }</a>
-                            </li>
-                            </c:forEach>
-                        </ul>
-                        <ul class="pagelist">
-                            <li><a href="#">首页</a></li>
-                            <c:forEach var="offset" begin="1" end="2" step="1">
-                            	<c:if test="${page.currentPageNo-offset >0}">
-                            	<li><a href="javascript:void(0)" onclick="goPage(${page.currentPageNo-offset})">${page.currentPageNo-offset }</a></li>
-                            	</c:if>  
-                            </c:forEach>
-                            <li><a href="#" class="active">${page.currentPageNo}</a></li> 
-                  			<c:forEach var="offset" begin="1" end="2" step="1">
-                  				<c:if test="${page.currentPageNo+offset <page.totalPageCount}">
-                            	<li><a href="javascript:void(0)" onclick="goPage(${page.currentPageNo+offset})">${page.currentPageNo+offset }</a></li>
-                            	</c:if> 
-                            </c:forEach>
-                            <c:if test="${page.currentPageNo+offset <page.totalPageCount}">
-                             	<li><a href="#">...</a></li>
-                             </c:if>
-                            <li><a href="#">尾页</a></li>
-                        </ul>
+                        <div class="content">${currentArticle.conts}</div>
                     </div>
                 </div>
             </div>

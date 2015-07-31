@@ -178,7 +178,7 @@ function openAdd(id){
 						</tr>
 						<c:forEach items="${page.result }" var="article" varStatus="status">
 							<tr class="statue_${status.index%2}">
-							<td> <a href="#" onclick="openView(${article.id});">${article.name }</a> </td> 
+							<td> <a href="#" onclick="openView(${article.artId});">${article.name }</a> </td> 
 							<td>${article.fname}</td>
 							<td>${article.orderx }</td> 
 							<td><fmt:formatDate value="${article.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 

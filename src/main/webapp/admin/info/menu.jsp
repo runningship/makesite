@@ -48,7 +48,11 @@
 </head>
 <script type="text/javascript">
 $(function(){
+	$('#mySelect').change(function(){
+		$('#submit').click();
+	})
 });
+
 function editOK(i,a,b){
 
 }
@@ -101,18 +105,19 @@ function openAdd(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar" style="height:50px;line-height:50px;">
-						<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
-							<button style="float:left;margin-right:20px;margin-top: 11px;padding:5px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
-						</c:if>
-					<form name="form1" type="form" method="post" action="menu.jsp?nav=lmgl" style="">
-							<select name="parentId" style="height:32px;;margin-top: 11px;margin-left:100px;width:120px;word-wrap: normal;" id="level_1" onchange="topMenuChange()">
+					<form name="form1" type="form" method="post" action="menu.jsp?nav=lmgl" style="float:left;">
+							<span style="margin-left:10px;">父栏目</span>
+							<select name="parentId" style="height:32px;;margin-top: 11px;width:120px;word-wrap: normal;" id="mySelect">
 								<option value="">全部</option>
 							<c:forEach items="${yijiList }" var="first">
 								<option <c:if test="${first.id==parentId}"> selected </c:if>  value="${first.id}">${first.name}</option>
 							</c:forEach>
 							</select>
-							<input style="margin-right:20px;float:right;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
+							<input style="margin-right:20px;margin-top:12px;height:28px;width:60px;cursor:pointer;display:none" id="submit" type="submit" value="搜索"/>
 					</form>
+						<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
+							<button style="float:right;margin-top: 11px;padding:5px;margin-right:20px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
+						</c:if>
 					</div>
 					<table class="fileList" cellspacing="0">
 						<tr style="background: aliceblue;">

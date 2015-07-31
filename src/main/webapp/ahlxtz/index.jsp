@@ -283,27 +283,6 @@ $(document).ready(function(){
         </div>
     </div>
     <div class="footer">
-        <div class="wbox fline">
-            <ul class="fline_list clearfix">
-				<c:forEach items="${yiji}" var="yiji">
-                <li class="a1">
-                    <dl>
-                        <dt class="lineTitle">${yiji.name} </dt>
-						<c:forEach items="${erji}" var="erji">
-							<c:if test="${erji.parentId == yiji.id}">
-                        	<dd> <a href="about_fazhan.asp">${erji.name}</a> </dd>
-                        	</c:if>
-                        </c:forEach>
-                    </dl>
-                </li>
-                </c:forEach>
-            </ul>
-        </div>
-<!--         <div class="wbox flink"> -->
-<!--             <a href="#">首页</a> -->
-<!--             <a href="#">联系我们</a> -->
-<!--             <a href="#">法律声明</a> -->
-<!--         </div> -->
         <jsp:include page="footer.jsp"></jsp:include>
     </div>
 </div>

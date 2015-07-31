@@ -39,7 +39,7 @@ request.setAttribute("domainSize",DataHelper.getDiskSize(DataHelper.getServerNam
 <!DOCTYPE html>
 <html>
 <head>
-<title>微信公众平台</title>
+<title>管理后台</title>
 <jsp:include page="inc/header.jsp"></jsp:include>
 <script type="text/javascript">
 function openWin(){
