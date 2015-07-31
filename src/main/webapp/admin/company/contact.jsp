@@ -84,7 +84,7 @@ $(function(){
 							</tr>
 							<tr>
 							<td colspan="2">
-								<button onclick="send();return false;" class="form-button save" style="float:right;cursor:pointer">发&nbsp;&nbsp;送</button>
+								<button onclick="send();return false;" class="form-button save" style="float:right;cursor:pointer">保&nbsp;&nbsp;&nbsp;存</button>
 							</td>
 							</tr>
 						</table>

@@ -1,11 +1,11 @@
 .form-group{margin-bottom: 5px;padding-left: 10px;}
-.form-input{  width: 265px;
-  margin: 6px;
+.form-input{  width: 98%;
+  margin: 6px 0px 6px 0;
+  padding: 0 0 0 6px;
   height: 30px;
   line-height: 30px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-right: 15px;}
+  border-radius: 4px;
+  border: 1px solid #d4d4d4;}
 .form-select{  width: 35%;
   margin: 6px;
   height: 30px;
@@ -13,10 +13,11 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-right: 15px;}
-.label{  font-size: 16px;
+.label{font-family: "宋体";
+  font-size: 14px;
   color: #aaa;  width: 80px;
-  display: inline-block; text-align: right;
-  }
+  display: inline-block; text-align:left;
+}
 .form-button{padding:5px 15px;color:#aaa}
 .btn-wrap{border:none;display:inline-block;}
 .save{float:left;}

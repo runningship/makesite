@@ -52,11 +52,11 @@ $(function(){
 	<form name="form1" class="add-form" onsubmit="return false;">
 	<input name="id" value="${menu.id}" style="display:none">
 		<div class="form-group">
-			<label class="label">&nbsp;&nbsp;标&nbsp;&nbsp;题</label>
+			<label class="label">标题</label>
 			<input name="name" value="${menu.name}" class="form-input" />
 		</div>
 		<div class="form-group">
-			<label class="label">&nbsp;&nbsp;排&nbsp;&nbsp;序</label>
+			<label class="label">排序</label>
 			<input name="orderx" value="${menu.orderx}" class="form-input" />
 		</div>
 		

@@ -1,3 +1,4 @@
+<%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.Article"%>
 <%@page import="java.util.List"%>
 <%@page import="com.youwei.makesite.entity.Menu"%>
@@ -22,8 +23,12 @@
 	request.setAttribute("menuList", menuList);
 	request.setAttribute("articleList", articleList);
 	
+	Page<Article> p = new Page<Article>();
+	p.setPageSize(1);
+	String currentPageNo =  request.getParameter("currentPageNo");
 	//加载二级栏目下的文章列表 
-	List<Article> articleList2 = dao.listByParams(Article.class, "from Article where parentId=?", Integer.valueOf(menuId));
+	p = dao.findPage(p, "from Article where parentId=?", Integer.valueOf(menuId));
+	request.setAttribute("page", p);
 %>
 <!DOCTYPE html>
 <html>
@@ -55,6 +60,10 @@ $(document).on({
         // },300);
       }
 },'.hv');
+
+function goPage(pageNo){
+	window.location = window.location.href+"&currentPageNo="+pageNo;
+}
 </script>
 
 
@@ -105,7 +114,7 @@ $(document).on({
                             <p></p>
                         </div>
                         <ul class="UList">
-                        	<c:forEach items="${articleList}" var="art">
+                        	<c:forEach items="${page.result}" var="art">
                             <li class="first">
                                 <a href="#" title="${art.name }"><span>${art.addtime }</span>${art.name }</a>
                             </li>
@@ -113,13 +122,20 @@ $(document).on({
                         </ul>
                         <ul class="pagelist">
                             <li><a href="#">首页</a></li>
-                            <li><a href="#">上一页</a></li>
-                            <li><a href="#" class="active">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li>...</li>
-                            <li><a href="#">11</a></li>
-                            <li><a href="#">12</a></li>
-                            <li><a href="#">下一页</a></li>
+                            <c:forEach var="offset" begin="1" end="2" step="1">
+                            	<c:if test="${page.currentPageNo-offset >0}">
+                            	<li><a href="javascript:void(0)" onclick="goPage(${page.currentPageNo-offset})">${page.currentPageNo-offset }</a></li>
+                            	</c:if>  
+                            </c:forEach>
+                            <li><a href="#" class="active">${page.currentPageNo}</a></li> 
+                  			<c:forEach var="offset" begin="1" end="2" step="1">
+                  				<c:if test="${page.currentPageNo+offset <page.totalPageCount}">
+                            	<li><a href="javascript:void(0)" onclick="goPage(${page.currentPageNo+offset})">${page.currentPageNo+offset }</a></li>
+                            	</c:if> 
+                            </c:forEach>
+                            <c:if test="${page.currentPageNo+offset <page.totalPageCount}">
+                             	<li><a href="#">...</a></li>
+                             </c:if>
                             <li><a href="#">尾页</a></li>
                         </ul>
                     </div>

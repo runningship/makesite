@@ -28,7 +28,7 @@ function editMe(){
 	<div class="head_box">
 		<div class="inner wrp">
 			<div class="logo">
-				<img src="${projectName }/assets/${domain}/logo.png"  style="height:38px;float:left;padding-right:10px;"/><div style="float:right;"><span>联信</span> · 管理后台</div>
+				<img src="${projectName }/assets/${domain}/logo.png"  style="height:48px;float:left;padding-right:10px;"/><div style="float:right;line-height:53px;"> · 管理后台</div>
 			</div>
 			<div class="account">
 				<div class="account_meta account_info">

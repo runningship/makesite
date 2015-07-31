@@ -1,5 +1,35 @@
+<%@page import="com.youwei.makesite.util.HTMLSpirit"%>
+<%@page import="com.youwei.makesite.entity.Menu"%>
+<%@page import="java.util.List"%>
+<%@page import="com.youwei.makesite.util.DataHelper"%>
+<%@page import="com.youwei.makesite.entity.Article"%>
+<%@page import="org.bc.sdak.SimpDaoTool"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+request.setAttribute("projectName", request.getServletContext().getContextPath());
+CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+Article jianjie = dao.getUniqueByParams(Article.class, new String[]{"name" , "_site"}, new Object[]{"company" , DataHelper.getServerName(request)});
+request.setAttribute("jianjie", jianjie);
+//选择前4个栏目
+List<Menu> menus = dao.listByParams(Menu.class, "from Menu where _site=? and parentId is null order by orderx asc", DataHelper.getServerName(request));
+//循环获取子目录,子文章
+for(Menu menu : menus){
+	//加载子栏目列表
+	List<Menu> menuList = dao.listByParams(Menu.class, "from Menu where parentId=? order by orderx asc", menu.id);
+	//加载文章列表
+	List<Article> articleList = dao.listByParams(Article.class, "from Article where parentId=? order by orderx asc", menu.id);
+	menu.menuChildren = menuList;
+	menu.articleChildren = articleList;
+}
+request.setAttribute("menus", menus);
+if(menus.get(0).articleChildren!=null && menus.get(0).articleChildren.size()>0){
+	request.setAttribute("firstArticle", menus.get(0).articleChildren.get(0));
+	String firstArticleConts = HTMLSpirit.delHTMLTag(menus.get(0).articleChildren.get(0).conts);
+	request.setAttribute("firstArticleConts", firstArticleConts);
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +57,7 @@ function login(){
 	    url: '${projectName}/c/admin/user/login',
 	    data: a,
 	    mysuccess: function(json){
-	    	  alert('登陆成功');
-// 	        window.location="../admin/index.jsp";
+		      window.location="admin/index.jsp";
 	    },
 	    error:function(data){
 	    	  alert('用户名或密码错误');
@@ -85,6 +114,12 @@ $(function(){
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
+	$(document).on('keyup',function(event){
+		if(event.keyCode==13){
+			login();
+		}
+	});
+	
     $('.ul_pic_lists').bxSlider({
         slideWidth: 200, 
         auto: true,
@@ -119,15 +154,15 @@ $(document).ready(function(){
                 <ul>
                     <li class="tit"><strong>登录</strong></li>
                     <li><label class="inputbox focus"><i class="iconfont iu">&#xe608;</i><input type="text" name="account" class="input u" value=""></label></li>
-                    <li><label class="inputbox"><i class="iconfont iu">&#xe606;</i><input type="text" name="pwd" class="input p" value=""></label></li>
+                    <li><label class="inputbox"><i class="iconfont iu">&#xe606;</i><input type="password" name="pwd" class="input p" value=""></label></li>
                     <li class="btnbox"><a href="#" class="btn btn_submit btn_act" data-type="submit">登　录</a></li>
                 </ul>
                 </form>
             </div>
             <div class="aboutbox">
-                <strong class="tita">${contact.name}</strong>
+                <strong class="tita">${jianjie.name}</strong>
                 <strong class="titb">COMPANY PROFILE</strong>
-                <p>${contact.conts}</p>
+                <p>${jianjie.conts}</p>
             </div>
         </div>
         <div class="wbox clearfix">
@@ -160,13 +195,18 @@ $(document).ready(function(){
 
 
             <div class="newbox">
-                <div class="h2"><span class="fr"><a href="#">更多</a></span><strong>要闻</strong></div>
+                <div class="h2"><span class="fr"><a href="#">更多</a></span><strong>${menus.get(0).name }</strong></div>
                 <ul class="ul_news_list w360">
-                    <li class="first">
-                        <strong><a href="#">新闻列表第一条信息，最重要的信息！</a></strong>
-                        <p>新闻列表第一条信息，最重要的信息,新闻列表第一条信息，最重要的信息,新闻列表第一条信息，最重要的信息,新闻列表第一条信息，最重要的信息,新闻列表第一条信息，最重要的信息,新闻列表第一条信息，最重要的信息,新闻列表第一条信息，最重要的信息,</p>
-                    </li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
+                	<c:if test="${firstArticle ne null }">
+                		<li class="first">
+	                        <strong><a href="#">${firstArticle.name }</a></strong>
+	                        <p style="height:70px;overflow:hidden">${firstArticleConts }</p>
+	                    </li>
+                	</c:if>
+                    <c:forEach items="${menus.get(0).menuChildren }" var="menu"  begin="0" step="1" end="6">
+                    	<li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
+                    </c:forEach>
+                    
                     <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
                     <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
                     <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
