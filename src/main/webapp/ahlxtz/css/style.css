@@ -108,8 +108,9 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 
 .newbox{ padding:20px 0;}
 .newbox .h2{ margin-bottom: 20px;}
+.ul_news_list{height:110px;overflow:hidden}
 .ul_news_list.w360 {  width: 360px; height: 290px;}
-.ul_news_list li a{font-size: 13px; display: block; color: #666;margin-bottom: 5px;font-family: 'Microsoft Yahei';position: relative;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+.ul_news_list li a{font-size: 13px; display: block; color: #666;margin-bottom: 5px;font-family: 'Microsoft Yahei';position: relative;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;  width: 220px;}
 .ul_news_list li strong a{ font-size: 16px;display: inline-block; color: #333;}
 .ul_news_list li a:hover{ color: #D7182A;}
 .ul_news_list li a span{ position: absolute; right: 0; top: 0;}
@@ -117,7 +118,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .ul_news_list li.first{ padding-bottom: 10px; margin-bottom: 10px; border-bottom: solid 1px #ccc;}
 .newimgbox{ position: relative; float: right; width: 550px;}
 
-.newbox.w300{ width: 300px;}
+.newbox.w300{ width: 300px;display:inline-block;}
 .newbox.w300.m{ margin-left: 30px;}
 
 .imgLink { padding:20px 0; }

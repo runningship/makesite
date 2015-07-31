@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.entity.Article"%>
 <%@page import="java.util.List"%>
@@ -8,16 +9,24 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String topId = request.getParameter("parentId");
-	String menuId = request.getParameter("id");
+	
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	Menu topMenu = dao.get(Menu.class, Integer.valueOf(topId));
-	Menu currentMenu = dao.get(Menu.class, Integer.valueOf(menuId));
+	
 	request.setAttribute("topMenu", topMenu);
-	request.setAttribute("currentMenu", currentMenu);
-	request.setAttribute("menuId", menuId);
+	
 	request.setAttribute("topId", topId);
 	//加载子栏目列表
 	List<Menu> menuList = dao.listByParams(Menu.class, "from Menu where parentId=?", Integer.valueOf(topId));
+	
+	String menuId = request.getParameter("id");
+	if(StringUtils.isEmpty(menuId)){
+		menuId = menuList.get(0).id.toString();
+	}
+	Menu currentMenu = dao.get(Menu.class, Integer.valueOf(menuId));
+	request.setAttribute("currentMenu", currentMenu);
+	request.setAttribute("menuId", menuId);
+	
 	//加载文章列表
 	List<Article> articleList = dao.listByParams(Article.class, "from Article where parentId=?", Integer.valueOf(topId));
 	request.setAttribute("menuList", menuList);
@@ -144,18 +153,7 @@ function goPage(pageNo){
         </div>
     </div>
     <div class="footer">
-        <div class="wbox flink">
-            <a href="#">首页</a>
-            <a href="#">联系我们</a>
-            <a href="#">法律声明</a>
-        </div>
-        <div class="copyright">
-            <div class="wbox">
-                <img src="images/logo_m.png" alt="">
-                ©2015 中华国际 版权所有 　 皖ICP备11012870号
-                <div class="fr">版权所有</div>
-            </div>
-        </div>
+        <jsp:include page="footer.jsp"></jsp:include>
     </div>
 </div>
 </body>

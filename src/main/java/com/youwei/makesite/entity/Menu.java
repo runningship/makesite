@@ -1,5 +1,6 @@
 package com.youwei.makesite.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class Menu {
 	
 	public String _site;
 	
-	public transient List<Menu> menuChildren;
+	public transient List<Menu> menuChildren = new ArrayList<Menu>();
 	
-	public transient List<Article> articleChildren;
+	public transient List<Article> articleChildren = new ArrayList<Article>();
 }

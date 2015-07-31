@@ -31,7 +31,11 @@
         <ul class="nav clearfix">
             <li class="navli hv"><a href="index.jsp" class="a">首页</a></li>
 		<c:forEach items="${topMenus}" var="topMenu">
-            	<li class="navli hv"><a href="#" class="a">${topMenu.name }</a>
+            	<li class="navli hv">
+            		<c:if test="${topMenu.menuChildren.size()>0 }"><a href="list.jsp?parentId=${topMenu.id }" class="a">${topMenu.name }</a></c:if>
+            		<c:if test="${topMenu.menuChildren.size()<=0 && topMenu.articleChildren.size()>0}"><a href="new.jsp?parentId=${topMenu.id }" class="a">${topMenu.name }</a></c:if>
+            		<c:if test="${topMenu.menuChildren.size()<=0 && topMenu.articleChildren.size()<=0}"><a href="#" class="a">${topMenu.name }</a></c:if>
+            		
             	<c:if test="${topMenu.menuChildren.size()>0 ||  topMenu.articleChildren.size()>0}">
                  <ul class="subnav hvB"  >
 					<c:forEach items="${topMenu.menuChildren}" var="menu">

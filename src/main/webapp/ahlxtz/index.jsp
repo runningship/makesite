@@ -7,6 +7,7 @@
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 request.setAttribute("projectName", request.getServletContext().getContextPath());
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
@@ -196,7 +197,10 @@ $(document).ready(function(){
 
 
             <div class="newbox">
-                <div class="h2"><span class="fr"><a href="#">更多</a></span><strong>${menus.get(0).name }</strong></div>
+                <div class="h2"><span class="fr">
+                	<c:if test="${menus.get(0).menuChildren.size()>0 }"> <a href="list.jsp?parentId=${menus.get(0).id}">更多</a></c:if>
+                	<c:if test="${menus.get(0).menuChildren.size()<=0 }"> <a href="new.jsp?parentId=${menus.get(0).id}">更多</a></c:if>
+                </span><strong>${menus.get(0).name }</strong></div>
                 <ul class="ul_news_list w360">
                 	<c:if test="${firstArticle ne null }">
                 		<li class="first">
@@ -204,16 +208,11 @@ $(document).ready(function(){
 	                        <p style="height:70px;overflow:hidden">${firstArticleConts }</p>
 	                    </li>
                 	</c:if>
-                    <c:forEach items="${menus.get(0).menuChildren }" var="menu"  begin="0" step="1" end="6">
-                    	<li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
+                	<div style="height:160px;overflow:hidden">
+                    <c:forEach items="${menus.get(0).articleChildren }" var="art"  begin="0" step="1" end="6">
+                    	<li><a href="#" class="inTit fl">${art.name }</a> <span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
                     </c:forEach>
-                    
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -227,34 +226,37 @@ $(document).ready(function(){
         </div>
 
         <div class="wbox clearfix">
-            <div class="newbox w300 fr">
-                <div class="h2"><span class="fr"><a href="#">更多</a></span><strong>媒体焦点</strong></div>
-                <ul class="ul_news_list">
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                </ul>
-            </div>
             <div class="newbox w300 fl">
-                <div class="h2"><span class="fr"><a href="#">更多</a></span><strong>新闻</strong></div>
+                <div class="h2"><span class="fr">
+                	<c:if test="${menus.get(1).menuChildren.size()>0 }"> <a href="list.jsp?parentId=${menus.get(1).id}">更多</a></c:if>
+                	<c:if test="${menus.get(1).menuChildren.size()<=0 }"> <a href="new.jsp?parentId=${menus.get(1).id}">更多</a></c:if>
+                </span><strong>${menus.get(1).name }</strong></div>
                 <ul class="ul_news_list">
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
+                    <c:forEach items="${menus.get(1).articleChildren }" var="art"  begin="0" step="1" end="4">
+                    	<li><a href="#" class="inTit fl">${art.name }</a><span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="newbox w300 fl m">
-                <div class="h2"><span class="fr"><a href="#">更多</a></span><strong>公告</strong></div>
+                <div class="h2"><span class="fr">
+					<c:if test="${menus.get(2).menuChildren.size()>0 }"> <a href="list.jsp?parentId=${menus.get(2).id}">更多</a></c:if>
+                	<c:if test="${menus.get(2).menuChildren.size()<=0 }"> <a href="new.jsp?parentId=${menus.get(2).id}">更多</a></c:if>
+				</span><strong>${menus.get(2).name }</strong></div>
                 <ul class="ul_news_list">
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
-                    <li><a href="#" class="inTit">阿里巴巴集团战略合作伙伴<span>2015-04-20</span></a></li>
+                    <c:forEach items="${menus.get(2).articleChildren }" var="art"  begin="0" step="1" end="4">
+                    	<li><a href="#" class="inTit fl">${art.name }</a><span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
+                    </c:forEach>
+                </ul>
+            </div>
+            <div class="newbox w300 fl m">
+                <div class="h2"><span class="fr">
+                	<c:if test="${menus.get(3).menuChildren.size()>0 }"> <a href="list.jsp?parentId=${menus.get(3).id}">更多</a></c:if>
+                	<c:if test="${menus.get(3).menuChildren.size()<=0 }"> <a href="new.jsp?parentId=${menus.get(3).id}">更多</a></c:if>
+                </span><strong>${menus.get(3).name }</strong></div>
+                <ul class="ul_news_list">
+                    <c:forEach items="${menus.get(3).articleChildren }" var="art"  begin="0" step="1" end="4">
+                    	<li><a href="#" class="inTit fl">${art.name }</a><span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>
@@ -276,34 +278,6 @@ $(document).ready(function(){
                     <div class="slide"><img src="images/temp/10.jpg" alt=""></div>
                     <div class="slide"><img src="images/temp/11.jpg" alt=""></div>
                 </div>
-<!--                 <ul class="ul_pic_list">
-                    <li class="slide first">
-                        <div class="imgbox"><a href="#" class="">
-                            <img src="images/temp/0.jpg" alt="">
-                        </a></div>
-                        <a href="#" class="inTit">产品图片展示</a> 
-                    </li>
-                    <li class="slide">
-                        <div class="imgbox"><a href="#" class="">
-                            <img src="images/temp/0.jpg" alt="">
-                        </a></div>
-                    </li>
-                    <li class="slide">
-                        <div class="imgbox"><a href="#" class="">
-                            <img src="images/temp/0.jpg" alt="">
-                        </a></div>
-                    </li>
-                    <li class="slide">
-                        <div class="imgbox"><a href="#" class="">
-                            <img src="images/temp/0.jpg" alt="">
-                        </a></div>
-                    </li>
-                    <li class="slide">
-                        <div class="imgbox"><a href="#" class="">
-                            <img src="images/temp/0.jpg" alt="">
-                        </a></div>
-                    </li>
-                </ul> -->
                 </div>
             </div>
         </div>
@@ -323,28 +297,14 @@ $(document).ready(function(){
                     </dl>
                 </li>
                 </c:forEach>
-                <li class="fr">
-                    <dl>
-                        <dt class="lineTitle">联系我们 </dt>
-                        <h1>4006-666-888</h1>
-                        <p>周一至周日 8:00-18:00<br/>（仅收市话费）</p>
-                        <div><a href="#" class="btn">在线客服</a></div>
-                    </dl>
-                </li>
             </ul>
         </div>
-        <div class="wbox flink">
-            <a href="#">首页</a>
-            <a href="#">联系我们</a>
-            <a href="#">法律声明</a>
-        </div>
-        <div class="copyright">
-            <div class="wbox">
-                <img src="images/logo_m.png" alt="">
-                ©2015 中华国际 版权所有 　 皖ICP备11012870号
-                <div class="fr">版权所有</div>
-            </div>
-        </div>
+<!--         <div class="wbox flink"> -->
+<!--             <a href="#">首页</a> -->
+<!--             <a href="#">联系我们</a> -->
+<!--             <a href="#">法律声明</a> -->
+<!--         </div> -->
+        <jsp:include page="footer.jsp"></jsp:include>
     </div>
 </div>
 </body>
