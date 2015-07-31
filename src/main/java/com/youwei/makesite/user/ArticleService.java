@@ -39,8 +39,13 @@ public class ArticleService {
 		if(StringUtils.isEmpty(art.name)){
 			throw new GException(PlatformExceptionType.BusinessException,"标题不能为空");
 		}
-		//TODO
-		art.addtime = new Date();
+		if(art.id !=null){
+			Article po = dao.get(Article.class, art.id);
+			po.conts = art.conts;
+		}else{
+			//TODO
+			art.addtime = new Date();
+		}
 		dao.saveOrUpdate(art);
 		return mv;
 	}

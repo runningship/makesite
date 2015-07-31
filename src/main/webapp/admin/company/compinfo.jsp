@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="com.youwei.makesite.entity.Article"%>
 <%@page import="org.bc.sdak.SimpDaoTool"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
@@ -6,7 +7,7 @@
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	String[] params = {"name" , "_site"};
-	Article art = dao.getUniqueByParams(Article.class, params,new Object[] {"company" , request.getServerName() });
+	Article art = dao.getUniqueByParams(Article.class, params,new Object[] {"company" , DataHelper.getServerName(request) });
 	request.setAttribute("art", art);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -49,7 +50,7 @@ var ue;
 $(function(){
 	ue = UE.getEditor('editor',{
         toolbars: [
-            ['forecolor', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'insertvideo',
+            ['forecolor','source', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'map' , 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'insertvideo',
              'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
              'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
             ]
@@ -73,6 +74,7 @@ $(function(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<form name="form1" class="add-form" onsubmit="return false;">
+						<input type="hidden" name="id" value="${art.id }" />
 						<input type="hidden" name="parentId" value="-1" />
 						<input type="hidden" name="name" value="company" />
 						<table style="width:100%" >

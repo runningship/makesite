@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="com.youwei.makesite.entity.Role"%>
 <%@page import="org.bc.sdak.Page"%>
 <%@page import="java.util.List"%>
@@ -14,7 +15,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from Role where isSystemRole=0 and _site = ? order by id desc",request.getServerName());
+	p  = dao.findPage(p,"from Role where isSystemRole=0 and _site = ? order by id desc",DataHelper.getServerName(request));
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
