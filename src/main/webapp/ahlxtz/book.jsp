@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
+request.setAttribute("projectName", request.getServletContext().getContextPath());
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	List<Menu> yiji = dao.listByParams(Menu.class, "from Menu where parentId is null and _site = ?", DataHelper.getServerName(request));
 	List<Menu> erji = dao.listByParams(Menu.class, "from Menu where parentId is not null and _site = ?", DataHelper.getServerName(request));
@@ -16,6 +17,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="header.jsp"></jsp:include>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>Examples</title>
@@ -46,67 +48,54 @@ $(document).ready(function() {
         $(this).find('.subnav').stop(true,true).slideUp(200);
     });
 });
+
+function save(){
+	var index;
+	var a=$('form[name=form1]').serialize();
+	YW.ajax({
+	    type: 'post',
+	    url: '${projectName}/c/admin/feedback/save',
+	    data: a,
+	    mysuccess: function(json){
+	    	  alert('成功');
+// 	        window.location="../admin/index.jsp";
+	    },
+	    error:function(data){
+	    	  alert('失败');
+	      }
+	  });
+}
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+    $(document).on('keyup',function(event){
+        if(event.keyCode==13){
+            login();
+        }
+    });
+});
+</script>
 
 <style>
 </style>
 </head>
 <body class="backgray">
 <div class="body">
-    <div class="toper">
-        <div class="wbox">
-            <dl class="tMenu hv">
-                <dt class="hvA">成员网站 +</dt>
-                <dd class="hvB"><a href="#">站点1</a>
-                <a href="#">站点2</a>
-                <a href="#">站点3</a></dd>
-            </dl>
-            <ul class="tA">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">加入收藏</a></li>
-                <li><a href="#">设置首页</a></li>
-            </ul>
-        </div>
-    </div>
+    <jsp:include page="top.jsp"></jsp:include>
     <div class="hreader">
-        <div class="wbox clearfix">
-            <!-- <div class="frbox">
-                <div class="fl searchBox">
-                    <img src="images/temp/search.jpg" alt="">
-                </div>
-            </div> -->
-            <div class="logo_box">
-                <a href="#" class="logo"><img src="images/logo.png" height="70" alt=""></a>
-            </div>
-        </div>
-        <div class="wbox clearfix">
-            <ul class="nav clearfix">
-				<c:forEach items="${yiji}" var="yiji">
-                	<li class="navli hv"><a href="#">${yiji.name }</a>
-	                    <ul class="subnav hvB">
-						<c:forEach items="${erji}" var="erji">
-							<c:if test="${erji.parentId == yiji.id}">
-		                        <li><a href="#">${erji.name}</a></li>
-	                        </c:if>
-	                    </c:forEach>
-	                    </ul>
-                    </li>
-				</c:forEach>
-            </ul>
-        </div>
-        <div class="bgb"></div>
+    <jsp:include page="menu.jsp"></jsp:include>
     </div>
     <div class="mainer ">
         <div class="wbox bookpage">
             <div class="bookbox">
                 <strong>如果您对我们有什么建议、投诉、需求，可以通过留言告诉我们,</strong>
                 <b>我们会在第一时间了解并及时与您联系。</b>
-                <form action="">
+                <form name="form1" onsubmit="save();return false">
                 <ul class="bookcont">
-                    <li><label><span>称呼：</span><input type="text" class="input" name="uname" value=""></label></li>
-                    <li><label><span>电话：</span><input type="text" class="input" name="utel" value=""></label></li>
-                    <li><label><span>内容：</span><textarea class="textarea" name="uoent" id="" cols="30" rows="10"></textarea></label></li>
+                    <li><label><span>我怎么称呼您：</span><input type="text" class="input" name="name"></label></li>
+                    <li><label><span>您的联系方式：</span><input type="text" class="input" name="contact" placeholder="多种方式：电话：138****7714;QQ：987****147"></label></li>
+                    <li><label><span>您想要说的话：</span><textarea class="textarea" name="conts" cols="30" rows="10"></textarea></label></li>
                     <li>
                         <a href="#" class="btn btn_act btn_submit" data-type="submit"><span>提交</span></a>
                         <input type="submit" class="hidden submit" name="submit">

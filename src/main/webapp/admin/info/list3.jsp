@@ -23,7 +23,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	StringBuilder hql = new StringBuilder("select art.id as artId, art.name ,art._site , tt.* from Article art left join ( "
+	StringBuilder hql = new StringBuilder("select art.id as artId, art.name ,art._site , art.addtime as addtime , art.orderx as orderx , tt.* from Article art left join ( "
 			  +" SELECT m1.id as fid , m2.id as tfid , m1.name as fname ,m2.name as tfname FROM Menu m1 left join Menu m2 on m1.parentId=m2.id ) tt on art.parentId=tt.fid where art._site=? and art.parentId>0");
 	List<Object> params = new ArrayList<Object>();
 	params.add(_site);

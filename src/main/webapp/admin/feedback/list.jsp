@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
@@ -64,13 +65,17 @@
 					<table class="feedbacklist" cellspacing="0">
 						<tr style="background: aliceblue;">
 							<td>内容</td>
+							<td>联系人</td>
 							<td>联系方式</td>
 							<td>发布时间</td>
 							<td>操作</td>
 						</tr>
 						<c:forEach items="${page.result }" var="feedback" varStatus="status">
+						<c:set var="string1" value="${feedback.conts}"/>
+						<c:set var="string2" value="${fn:substring(string1, 0, 20)}" />
 						<tr class="statue_${status.index%2}">
-							<td><a href="#" onclick="seeThis(${feedback.id})">${feedback.conts}</a></td>
+							<td><a href="#" onclick="seeThis(${feedback.id})">${string2}...</a></td>
+							<td>${feedback.name}</td> 
 							<td>${feedback.contact}</td> 
 							<td><fmt:formatDate value="${feedback.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 
 							<td><a href="#" onclick="infoDel(${feedback.id})">删除</a></td>

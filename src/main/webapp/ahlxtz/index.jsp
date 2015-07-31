@@ -156,6 +156,7 @@ $(document).ready(function(){
                     <li><label class="inputbox focus"><i class="iconfont iu">&#xe608;</i><input type="text" name="account" class="input u" value=""></label></li>
                     <li><label class="inputbox"><i class="iconfont iu">&#xe606;</i><input type="password" name="pwd" class="input p" value=""></label></li>
                     <li class="btnbox"><a href="#" class="btn btn_submit btn_act" data-type="submit">登　录</a></li>
+                        <input type="submit" class="hidden submit" name="submit">
                 </ul>
                 </form>
             </div>
