@@ -67,6 +67,9 @@
 <script type="text/javascript">
 $(function(){
 	topMenuChange();
+	if('${erjiId}'){
+		$('#level_2').val('${erjiId}');
+	}
 });
 
 	function infoDel(id){
@@ -91,7 +94,12 @@ function reloadWindow(){
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['800px', '700px'],
-		    content: 'editw.jsp?id='+id
+		    content: 'editw.jsp?id='+id,
+		    btn: ['确定','取消'],
+		    yes:function(index){
+		    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+			    return false;
+			}
 		}); 
 	}
 
@@ -121,11 +129,7 @@ function topMenuChange(){
 	$('#level_2 [pid]').css('display','none');
 	$('#level_2 [pid='+$('#level_1').val()+']').css('display','');
 	var arr = $('#level_2 [pid='+$('#level_1').val()+']');
-	if('${erjiId}'){
-		$('#level_2').val('${erjiId}');
-	}else{
-		$('#level_2').val('');
-	}
+	$('#level_2').val('');
 }
 
 function openAdd(id){
@@ -135,7 +139,12 @@ function openAdd(id){
 	    shadeClose: false,
 	    shade: 0.5,
 	    area: ['800px', '700px'],
-	    content: 'add3.jsp?parentId='+id
+	    content: 'add3.jsp?parentId='+id,
+	    btn: ['确定','取消'],
+	    yes:function(index){
+	    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+		    return false;
+		}
 	}); 
 }
 </script>

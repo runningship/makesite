@@ -226,6 +226,10 @@ public class UserService {
 			jobj.put("type", "group");
 			jobj.put("key", "group_"+g.id);
 			jobj.put("isParent", true);
+			JSONArray children = getChildrenOfGroup(g.id , _site);
+			if(!children.isEmpty()){
+				jobj.put("children", children);
+			}
 			arr.add(jobj);
 		}
 		List<Map> users = dao.listAsMap("select u.name as name , u.id as id from User u , UserGroup ug where u.id = ug.uid and ug.gid=? and u._site=?", groupId , _site);

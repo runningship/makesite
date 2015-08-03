@@ -69,12 +69,18 @@ $(function(){
 		<div id="conts" class="form-group">
 	        <span id="editor" type="text/plain" name="conts" style="height:370px;width:98%;"></span>
 		</div>
-        <div class="form-group">
-            <label class="label">&nbsp;&nbsp;排&nbsp;&nbsp;序</label>
-            <input name="orderx" value="${art.orderx}" class="form-input" />
+
+        <div class="FormGroup">
+            <h3>文章参数设置</h3>
+            <div class=" table">
+                <div class="tr">
+                    <div class="th"><label class="label">排序</label></div>
+                    <div class="td"><input name="orderx" value="${art.orderx}" class="form-input" /></div>
+                </div>
+            </div>
         </div>
 		
-		<div class="form-group action">
+		<div class="form-group action hidden">
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<div class="form-input btn-wrap" >
 				<button onclick="save();return false;" class="form-button save">保&nbsp;&nbsp;存</button>

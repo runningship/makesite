@@ -22,10 +22,10 @@
 <link rel="stylesheet" href="add.css">
 <style type="text/css">
 select{
-width: 100px;
+width: 98%;
   height: 30px;
-  margin-left: 6px;
 }
+.first{width:60px;}
 </style>
 </head>
 <script type="text/javascript">
@@ -59,30 +59,31 @@ $(function(){
 </script>
 <body style="background-color:white">
 	<form name="form1" class="add-form" onsubmit="save();">
+		<table style="width:80%;  margin-right: auto;margin-left:auto;">
+			<tr>
+				<td class="first"><label >父栏目</label></td>
+				<td><select name="parentId">
+							<option value="">无</option>
+							<c:forEach items="${list1 }" var="menu" >
+							<option value="${menu.id }">${menu.name}</option>
+							</c:forEach>
+						</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="first"><label>名&nbsp;称</label></td>
+				<td><input name="name" id="name" class="form-input" /></td>
+			</tr>
+			<tr>
+				<td class="first"><label >序&nbsp;号</label></td>
+				<td><input name="orderx" value="100" class="form-input" /></td>
+			</tr>
+			<tr>
+				<td class="first"></td>
+				<td ><button onclick="save();return false;" class="form-button fr hand" style="margin-right:2%;margin-top:20px;">保&nbsp;&nbsp;存</button></td>
+			</tr>
+		</table>
 		<div class="form-group">
-			<label class="label">父栏目</label>
-			<select name="parentId">
-				<option value="">无</option>
-				<c:forEach items="${list1 }" var="menu" >
-				<option value="${menu.id }">${menu.name}</option>
-				</c:forEach>
-			</select>
-		</div>
-		<div class="form-group">
-			<label class="label">&nbsp;&nbsp;名&nbsp;&nbsp;称</label>
-			<input name="name" id="name" class="form-input" />
-		</div>
-		<div class="form-group">
-			<label class="label">&nbsp;&nbsp;排&nbsp;&nbsp;序</label>
-			<input name="orderx" value="100" class="form-input" />
-		</div>
-		
-		<div class="form-group action">
-			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<div class="form-input btn-wrap" >
-				<button onclick="save();return false;" class="form-button save">保&nbsp;&nbsp;存</button>
-				<button onclick="closeThis();return false;" class="form-button cancel">取&nbsp;&nbsp;消</button>
-			</div>
 		</div>
 	</form>
 </body>

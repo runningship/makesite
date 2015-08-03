@@ -90,36 +90,48 @@ $(function(){
 <body style="background-color:white">
 	<form name="form1" class="add-form" onsubmit="save();">
 		<input name="parentId" id="parentId" type="hidden" />
+
+		<div class=" table">
+			<div class="tr">
+				<div class="th"><label class="label">标题</label></div>
+				<div class="td" style="width:450px;"><input name="name" id="name" class="form-input" /></div>
+			</div>
+		</div>
+		<div class=" table">
+			<div class="tr">
+				<div class="th"><label class="label">栏目</label></div>
+				<div class="td">
+					<select class="form-select" id="level_1" onchange="topMenuChange(this)">
+						<option value="">无</option>
+						<c:forEach items="${list1 }" var="menu" >
+						<option value="${menu.id }">${menu.name}</option>
+						</c:forEach>
+					</select>
+					<select class="form-select" id="level_2">
+						<option value="">无</option>
+						<c:forEach items="${list2 }" var="menu" >
+							<option pid="${menu.parentId }" value="${menu.id }">${menu.name}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="th"><label class="label">排序</label></div>
+				<div class="td"><input name="orderx" value="100" class="form-input" /></div>
+			</div>
+		</div>
 		<div class="form-group">
-			<label class="label">栏目</label>
-			<select id="level_1" onchange="topMenuChange(this)">
-				<option value="">无</option>
-				<c:forEach items="${list1 }" var="menu" >
-				<option value="${menu.id }">${menu.name}</option>
-				</c:forEach>
-			</select>
-			<select id="level_2">
-				<option value="">无</option>
-				<c:forEach items="${list2 }" var="menu" >
-					<option pid="${menu.parentId }" value="${menu.id }">${menu.name}</option>
-				</c:forEach>
-			</select>
+			
 			
 		</div>
 		<div class="form-group">
-			<label class="label">&nbsp;&nbsp;标&nbsp;&nbsp;题</label>
-			<input name="name" id="name" class="form-input" />
-		</div>
-		<div class="form-group">
-			<label class="label">&nbsp;&nbsp;排&nbsp;&nbsp;序</label>
-			<input name="orderx" value="100" class="form-input" />
+			
+			
 		</div>
 		<div id="conts" class="form-group">
 			<label class="label">文章内容</label>
 	        <span id="editor" type="text/plain" name="conts" style="height:330px;width:98%;"></span>
 		</div>
 		
-		<div class="form-group action">
+		<div class="form-group action hidden">
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<div class="form-input btn-wrap" >
 				<button onclick="save();return false;" class="form-button save">保&nbsp;&nbsp;存</button>

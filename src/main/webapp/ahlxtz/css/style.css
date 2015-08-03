@@ -137,7 +137,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .topMenuSubLi{height:30px;overflow:hidden;;}
 .topMenuSubLi a{width:80%;margin-left:auto;margin-right:auto;}
 
-.footer{ background: #FFF; padding-top: 20px;}
+.footer{ background: #FFF; padding-top: 0px;}
 .footer .fline{ padding: 20px 0;}
 .footer .fline_list{}
 .footer .fline_list li {color: #b5b5b7;float: left;line-height: 23px;}

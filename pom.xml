@@ -94,7 +94,7 @@
 		<dependency>
 			<groupId>org.bc</groupId>
 			<artifactId>bc-ueditor</artifactId>
-			<version>1.0</version>
+			<version>1.0-makesite</version>
 		</dependency>
 		
 		<!-- <dependency> -->

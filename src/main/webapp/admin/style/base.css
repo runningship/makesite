@@ -410,11 +410,24 @@ button.btn {
 	display:block;
 	padding:0 30px 0;
 	color:#222;
-	text-decoration:none
+	text-decoration:none;
 }
 .menu_title a:hover {
-	text-decoration:none
+	text-decoration:none;
 }
+
+
+.menu_title a.selected {
+	background-color:#44b549;
+	color:#fff
+}
+.menu_title a.selected:hover {
+	background-color:#44b549
+}
+.menu_title a.selected {
+	color:#fff
+}
+
 .menu_title.clickable {
 	padding:0
 }
@@ -448,11 +461,22 @@ button.btn {
 	text-overflow:ellipsis;
 	white-space:nowrap;
 	word-wrap:normal;
-	color:#222
+	color:#222;
 }
 .menu_item a:hover {
 	text-decoration:none;
 	background-color:#eee;
+}
+
+.menu_item a.selected {
+	background-color:#44b549;
+	color:#fff
+}
+.menu_item a.selected:hover {
+	background-color:#44b549
+}
+.menu_item a.selected {
+	color:#fff
 }
 
 
@@ -504,5 +528,7 @@ body {
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;}
 
-
+.form-button{padding: 5px 15px;  color: #666;}
 .hidden{ display: none;}
+.fr{float:right}
+.hand{cursor:pointer}

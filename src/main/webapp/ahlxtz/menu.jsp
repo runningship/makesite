@@ -20,7 +20,7 @@
 	}
 	request.setAttribute("topMenus", topMenus);
 	List<Article> topArticles = dao.listByParams(Article.class, "from Article where parentId is null and _site = ?", DataHelper.getServerName(request));
-	//List<Menu> erji = dao.listByParams(Menu.class, "from Menu where parentId is not null and _site = ?", DataHelper.getServerName(request));
+	request.setAttribute("topArticles", topArticles);
 	
 %>
     <div class="wbox clearfix">
@@ -30,25 +30,28 @@
         <div class="frbox">
         <ul class="nav clearfix">
             <li class="navli hv"><a href="index.jsp" class="a">首页</a></li>
-		<c:forEach items="${topMenus}" var="topMenu">
-            	<li class="navli hv">
-            		<c:if test="${topMenu.menuChildren.size()>0 }"><a href="list.jsp?parentId=${topMenu.id }" class="a">${topMenu.name }</a></c:if>
-            		<c:if test="${topMenu.menuChildren.size()<=0 && topMenu.articleChildren.size()>0}"><a href="new.jsp?parentId=${topMenu.id }" class="a">${topMenu.name }</a></c:if>
-            		<c:if test="${topMenu.menuChildren.size()<=0 && topMenu.articleChildren.size()<=0}"><a href="#" class="a">${topMenu.name }</a></c:if>
-            		
-            	<c:if test="${topMenu.menuChildren.size()>0 ||  topMenu.articleChildren.size()>0}">
-                 <ul class="subnav hvB"  >
-					<c:forEach items="${topMenu.menuChildren}" var="menu">
-	                      <li class="topMenuSubLi"><a href="list.jsp?id=${menu.id}&parentId=${topMenu.id}">${menu.name}</a></li>
-	                 </c:forEach>
-					<c:forEach items="${topMenu.articleChildren}" var="art">
-	                      <li class="topMenuSubLi"><a href="new.jsp?id=${art.id}&parentId=${topMenu.id}">${art.name}</a></li>
-	                 </c:forEach>
-                 </ul>
-                 </c:if>
-                </li>
-		</c:forEach>
-            <li class="navli hv"><a href="contact.jsp?parentId=-1" class="a">联系我们</a></li>
+			<c:forEach items="${topMenus}" var="topMenu">
+	            	<li class="navli hv">
+	            		<c:if test="${topMenu.menuChildren.size()>0 }"><a href="list.jsp?parentId=${topMenu.id }" class="a">${topMenu.name }</a></c:if>
+	            		<c:if test="${topMenu.menuChildren.size()<=0 && topMenu.articleChildren.size()>0}"><a href="new.jsp?parentId=${topMenu.id }" class="a">${topMenu.name }</a></c:if>
+	            		<c:if test="${topMenu.menuChildren.size()<=0 && topMenu.articleChildren.size()<=0}"><a href="#" class="a">${topMenu.name }</a></c:if>
+	            		
+	            	<c:if test="${topMenu.menuChildren.size()>0 ||  topMenu.articleChildren.size()>0}">
+	                 <ul class="subnav hvB"  >
+						<c:forEach items="${topMenu.menuChildren}" var="menu">
+		                      <li class="topMenuSubLi"><a href="list.jsp?id=${menu.id}&parentId=${topMenu.id}">${menu.name}</a></li>
+		                 </c:forEach>
+						<c:forEach items="${topMenu.articleChildren}" var="art">
+		                      <li class="topMenuSubLi"><a href="new.jsp?id=${art.id}&parentId=${topMenu.id}">${art.name}</a></li>
+		                 </c:forEach>
+	                 </ul>
+	                 </c:if>
+	                </li>
+			</c:forEach>
+			<c:forEach items="${topArticles}" var="topArt">
+				<li class="navli hv"><a href="topNews.jsp?topArticleId=${topArt.id}">${topArt.name}</a></li>
+			</c:forEach>
+<!--             <li class="navli hv"><a href="contact.jsp?parentId=-1" class="a">联系我们</a></li> -->
             <li class="navli hv"><a href="book.jsp" class="a">反馈信息</a></li>
         </ul>
         </div>

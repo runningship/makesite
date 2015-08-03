@@ -12,6 +12,7 @@
 request.setAttribute("projectName", request.getServletContext().getContextPath());
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 Article jianjie = dao.getUniqueByParams(Article.class, new String[]{"name" , "_site"}, new Object[]{"company" , DataHelper.getServerName(request)});
+jianjie.conts = HTMLSpirit.delHTMLTag(jianjie.conts);
 request.setAttribute("jianjie", jianjie);
 //选择前4个栏目
 List<Menu> menus = dao.listByParams(Menu.class, "from Menu where _site=? and parentId is null order by orderx asc", DataHelper.getServerName(request));
@@ -164,7 +165,7 @@ $(document).ready(function(){
             <div class="aboutbox">
                 <strong class="tita">${jianjie.name}</strong>
                 <strong class="titb">COMPANY PROFILE</strong>
-                <p>${jianjie.conts}</p>
+                <p style="height:130px;overflow:hidden;">${jianjie.conts}</p>
             </div>
         </div>
         <div class="wbox clearfix">
