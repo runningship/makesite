@@ -127,6 +127,17 @@ function addGroup(){
 	}); 
 }
 
+function editGroup(){
+	layer.open({
+    	type: 2,
+    	title: '修改部门',
+	    shadeClose: false,
+	    shade: 0.5,
+		area: ['400px', '250px'],
+	    content: '../group/edit.jsp?groupId='+parentGroupId
+	}); 
+}
+
 function addUser(){
 	layer.open({
     	type: 2,
@@ -148,9 +159,6 @@ function inviteUser(){
 	    content: 'selectUser.jsp?groupId='+parentGroupId
 	}); 
 }
-
-
-
 
 function OnRightClick(event, treeId, treeNode) {
   var treeObj = $.fn.zTree.getZTreeObj(treeId);
@@ -247,6 +255,7 @@ background: #428bca;
 	<span id="groupMenu">
 	
   <c:if test="${session_auth_list.indexOf('$user_org_addGroup')>-1 }"><a href="javascript:void(0)" id="m_edit_comp" onclick="addGroup();" class="list-group-item">添加部门</a></c:if>
+  <c:if test="${session_auth_list.indexOf('$user_org_addGroup')>-1 }"><a href="javascript:void(0)" id="m_edit_comp" onclick="editGroup();" class="list-group-item">修改部门</a></c:if>
     <c:if test="${session_auth_list.indexOf('$user_org_addNewUser')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="addUser()" class="list-group-item">加入新用户</a></c:if>
     <c:if test="${session_auth_list.indexOf('$user_org_inviteUser')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="inviteUser()" class="list-group-item">加入已有用户</a></c:if>
     <c:if test="${session_auth_list.indexOf('$user_org_delGroup')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="deleteGroup()" class="list-group-item">删除部门</a></c:if>

@@ -31,7 +31,7 @@
 	function infoDel(id){
 		YW.ajax({
 		    type: 'POST',
-		    url: '${projectName }/c/admin/article/delete?id='+id,
+		    url: '${projectName }/c/admin/feedback/delete?id='+id,
 		    mysuccess: function(data){
 		        alert('删除成功');
 		        window.location.reload();

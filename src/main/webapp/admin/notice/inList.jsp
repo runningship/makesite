@@ -92,7 +92,7 @@ function userDel(id){
 	function seeThis(id , nrid){
 		layer.open({
 	    	type: 2,
-	    	title: '查看收到邮件',
+	    	title: '查看通知',
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['600px', '500px'],

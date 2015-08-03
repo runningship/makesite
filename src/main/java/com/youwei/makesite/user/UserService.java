@@ -119,6 +119,7 @@ public class UserService {
 		User po = dao.get(User.class, user.id);
 		po.account = user.account;
 		po.name = user.name;
+//		String pwd = user.pwd.replace("*", "");
 		if(StringUtils.isNotEmpty(user.pwd)){
 			po.pwd = SecurityHelper.Md5(user.pwd);
 		}

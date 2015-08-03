@@ -90,7 +90,7 @@ function save(){
 						</div>
 						<div class="form-group">
 							<label>用户密码</label>
-							<input name="pwd" class="form-input"  disabled="disabled" value="******************" placeholder="无需修改请不用填写" /><a onclick="modifyPwd();" href="#">修改密码</a>
+							<input type="password" name="pwd" class="form-input"  disabled="disabled" value="******************" placeholder="无需修改请不用填写" /><a onclick="modifyPwd();" href="#">修改密码</a>
 						</div>
 						<div class="form-group action">
 							<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>

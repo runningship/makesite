@@ -59,16 +59,18 @@ function setRoles(roleIds,roleNames){
 	$('#roleName').val(roleNames);
 }
 
-	function addRole(ids){
-		layer.open({
-	    	type: 2,
-	    	title: '选择职位',
-		    shadeClose: false,
-		    shade: 0.5,
-		    area: ['400px', '400px'],
-		    content: 'role_select.jsp'
-		}); 
-	}
+function editRole(){
+	var ids = $('#roleIds').val();
+	var names = $('#roleName').val();
+	layer.open({
+    	type: 2,
+    	title: '选择职位',
+	    shadeClose: false,
+	    shade: 0.5,
+	    area: ['400px', '400px'],
+	    content: 'role_select.jsp?ids='+ids+'&names='+names
+	}); 
+}
 
 function closeThis(){
 	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
@@ -80,7 +82,7 @@ function closeThis(){
 		<input type="hidden"  id="groupId" name="groupId" value="${groupId }"/>
 		<input name="roleIds" id="roleIds" type="hidden" />
 		<div class="form-group">
-			<label class="label">部门名</label>
+			<label class="label">部门名称</label>
 			<input name="groupName" id="groupName" class="form-input"  value="${groupName }"/>
 		</div>
 		<div class="form-group">

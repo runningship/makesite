@@ -37,9 +37,9 @@ public class GroupService {
 	public ModelAndView update(Group group ){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(group.name)){
-			throw new GException(PlatformExceptionType.BusinessException,"用户名不能为空");
+			throw new GException(PlatformExceptionType.BusinessException,"部门名称不能为空");
 		}
-		User po = dao.get(User.class, group.id);
+		Group po = dao.get(Group.class, group.id);
 		po.name = group.name;
 		dao.saveOrUpdate(po);
 		return mv;

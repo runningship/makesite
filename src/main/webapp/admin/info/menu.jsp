@@ -62,7 +62,7 @@ function editOK(i,a,b){
 	    	title: '修改栏目',
 		    shadeClose: false,
 		    shade: 0.5,
-		    area: ['500px', '280px'],
+		    area: ['400px', '280px'],
 		    content: 'edit1.jsp?id='+id,
 		    btn: ['确定','取消'],
 		    yes:function(index){
@@ -106,7 +106,7 @@ function openAdd(){
 				<div class="mp_news_area notices_box">
 					<div class="title_bar" style="height:50px;line-height:50px;">
 					<form name="form1" type="form" method="post" action="menu.jsp?nav=lmgl" style="float:left;">
-							<span style="margin-left:10px;">父栏目</span>
+							<span style="">父栏目</span>
 							<select name="parentId" style="height:32px;;margin-top: 11px;width:120px;word-wrap: normal;" id="mySelect">
 								<option value="">全部</option>
 							<c:forEach items="${yijiList }" var="first">
