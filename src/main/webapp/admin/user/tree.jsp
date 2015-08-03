@@ -175,7 +175,7 @@ function inviteUser(){
     	title: '添加已有用户',
 	    shadeClose: false,
 	    shade: 0.5,
-	    area: ['700px', '600px'],
+	    area: ['600px', '636px'],
 	    content: 'selectUser.jsp?groupId='+parentGroupId,
 	    btn: ['加入','取消'],
 	    yes:function(index){
