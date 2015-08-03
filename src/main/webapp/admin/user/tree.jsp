@@ -113,7 +113,12 @@ function addTopGroup(){
 	    shadeClose: false,
 	    shade: 0.5,
 	    area: ['400px', '250px'],
-	    content: '../group/add.jsp'
+	    content: '../group/add.jsp',
+	    btn: ['确定','取消'],
+	    yes:function(index){
+	    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+		    return false;
+		}
 	}); 
 }
 function addGroup(){
@@ -123,7 +128,12 @@ function addGroup(){
 	    shadeClose: false,
 	    shade: 0.5,
 	    area: ['400px', '250px'],
-	    content: '../group/add.jsp?parentId='+parentGroupId+'&parentName='+parentGroupName
+	    content: '../group/add.jsp?parentId='+parentGroupId+'&parentName='+parentGroupName,
+	    btn: ['确定','取消'],
+	    yes:function(index){
+	    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+		    return false;
+		}
 	}); 
 }
 
@@ -134,7 +144,12 @@ function editGroup(){
 	    shadeClose: false,
 	    shade: 0.5,
 		area: ['400px', '250px'],
-	    content: '../group/edit.jsp?groupId='+parentGroupId
+	    content: '../group/edit.jsp?groupId='+parentGroupId,
+	    btn: ['确定','取消'],
+	    yes:function(index){
+	    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+		    return false;
+		}
 	}); 
 }
 
@@ -145,7 +160,12 @@ function addUser(){
 	    shadeClose: false,
 	    shade: 0.5,
 		area: ['500px', '500px'],
-	    content: 'add.jsp?groupId='+parentGroupId
+	    content: 'add.jsp?groupId='+parentGroupId,
+	    btn: ['确定','取消'],
+	    yes:function(index){
+	    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+		    return false;
+		}
 	}); 
 }
 
@@ -156,7 +176,12 @@ function inviteUser(){
 	    shadeClose: false,
 	    shade: 0.5,
 	    area: ['700px', '600px'],
-	    content: 'selectUser.jsp?groupId='+parentGroupId
+	    content: 'selectUser.jsp?groupId='+parentGroupId,
+	    btn: ['加入','取消'],
+	    yes:function(index){
+	    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+		    return false;
+		}
 	}); 
 }
 

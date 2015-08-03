@@ -56,10 +56,6 @@
 		<div class="container_box cell_layout side_l" style="min-height:400px;height:550px;;">
 			<div class="col_main" style="min-height:400px;height:550px;;">
 				<div class="mp_news_area notices_box">
-					<div class="title_bar">
-						<h3>用户列表</h3>
-						<button class="add" onclick="addToGroup();" style="float:right;margin-top: 5px;padding:5px;">加&nbsp;入</button>
-					</div>
 					<table class="userList" cellspacing="0">
 						<tr style="background: aliceblue;">
 							<td></td>

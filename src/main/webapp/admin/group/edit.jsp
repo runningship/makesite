@@ -31,7 +31,7 @@ function save(){
 	    url: '${projectName }/c/admin/group/update',
 	    data:a,
 	    mysuccess: function(data){
-	        alert('添加成功');
+	        alert('修改成功');
 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 			parent.window.location.reload();
 			parent.layer.close(index); //再执行关闭   
@@ -59,7 +59,7 @@ $(function(){
 			<input name="name" id="name" class="form-input" value="${group.name }" />
 		</div>
 		
-		<div class="form-group action">
+		<div class="form-group action hidden">
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<div class="form-input btn-wrap" >
 				<button onclick="save();return false;" class="form-button save">保&nbsp;&nbsp;存</button>

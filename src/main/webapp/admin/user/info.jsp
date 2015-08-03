@@ -41,7 +41,12 @@ function modifyPwd(){
 	    shadeClose: false,
 	    shade: 0.5,
 	    area: ['400px', '310px'],
-	    content: 'pwd.jsp?uid='+${user.id}
+	    content: 'pwd.jsp?uid='+${user.id},
+	    btn: ['确定','取消'],
+	    yes:function(index){
+	    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+		    return false;
+		}
 	}); 
 }
 

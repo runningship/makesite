@@ -82,7 +82,12 @@ function openAdd(){
 	    shadeClose: false,
 	    shade: 0.5,
 	    area: ['500px', '300px'],
-	    content: 'addMenu.jsp'
+	    content: 'addMenu.jsp',
+	    btn: ['确定','取消'],
+	    yes:function(index){
+	    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+		    return false;
+		}
 	}); 
 }
 	function delThis(id){

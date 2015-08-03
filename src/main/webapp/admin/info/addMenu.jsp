@@ -78,9 +78,9 @@ $(function(){
 				<td class="first"><label >序&nbsp;号</label></td>
 				<td><input name="orderx" value="100" class="form-input" /></td>
 			</tr>
-			<tr>
+			<tr class="hidden">
 				<td class="first"></td>
-				<td ><button onclick="save();return false;" class="form-button fr hand" style="margin-right:2%;margin-top:20px;">保&nbsp;&nbsp;存</button></td>
+				<td ><button onclick="save();return false;" class="form-button fr save hand" style="margin-right:2%;margin-top:20px;">保&nbsp;&nbsp;存</button></td>
 			</tr>
 		</table>
 		<div class="form-group">

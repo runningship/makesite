@@ -33,7 +33,12 @@
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['400px', '250px'],
-		    content: 'add.jsp'
+		    content: 'add.jsp',
+		    btn: ['确定','取消'],
+		    yes:function(index){
+		    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+			    return false;
+			}
 		}); 
 	}
 
@@ -44,7 +49,12 @@
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['400px', '250px'],
-		    content: 'edit.jsp?id='+id
+		    content: 'edit.jsp?id='+id,
+		    btn: ['确定','取消'],
+		    yes:function(index){
+		    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+			    return false;
+			}
 		}); 
 	}
 
