@@ -211,7 +211,7 @@ $(document).ready(function(){
                 	</c:if>
                 	<div style="height:160px;overflow:hidden">
                     <c:forEach items="${menus.get(0).articleChildren }" var="art"  begin="0" step="1" end="6">
-                    	<li><a href="#" class="inTit fl">${art.name }</a> <span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
+                    	<li><a target="_blank" href="new.jsp?id=${art.id }&parentId=${menus.get(0).id }" class="inTit fl">${art.name }</a> <span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
                     </c:forEach>
                     </div>
                 </ul>
@@ -234,7 +234,7 @@ $(document).ready(function(){
                 </span><strong>${menus.get(1).name }</strong></div>
                 <ul class="ul_news_list">
                     <c:forEach items="${menus.get(1).articleChildren }" var="art"  begin="0" step="1" end="4">
-                    	<li><a href="#" class="inTit fl">${art.name }</a><span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
+                    	<li><a target="_blank" href="new.jsp?id=${art.id }&parentId=${menus.get(1).id }" class="inTit fl">${art.name }</a><span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
                     </c:forEach>
                 </ul>
             </div>
@@ -245,7 +245,7 @@ $(document).ready(function(){
 				</span><strong>${menus.get(2).name }</strong></div>
                 <ul class="ul_news_list">
                     <c:forEach items="${menus.get(2).articleChildren }" var="art"  begin="0" step="1" end="4">
-                    	<li><a href="#" class="inTit fl">${art.name }</a><span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
+                    	<li><a target="_blank" href="new.jsp?id=${art.id }&parentId=${menus.get(2).id }" class="inTit fl">${art.name }</a><span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
                     </c:forEach>
                 </ul>
             </div>
@@ -256,7 +256,7 @@ $(document).ready(function(){
                 </span><strong>${menus.get(3).name }</strong></div>
                 <ul class="ul_news_list">
                     <c:forEach items="${menus.get(3).articleChildren }" var="art"  begin="0" step="1" end="4">
-                    	<li><a href="#" class="inTit fl">${art.name }</a><span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
+                    	<li><a target="_blank" href="new.jsp?id=${art.id }&parentId=${menus.get(3).id }" class="inTit fl">${art.name }</a><span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
                     </c:forEach>
                 </ul>
             </div>

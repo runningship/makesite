@@ -25,14 +25,15 @@
 	request.setAttribute("articleList", articleList);
 	
 	String articleId = request.getParameter("id");
+	Article currentArticle;
 	if(StringUtils.isEmpty(articleId)){
-		request.setAttribute("currentArticle", articleList.get(0));
+		currentArticle=articleList.get(0);
 	}else{
-		Article currentArticle = dao.get(Article.class, Integer.valueOf(articleId));
-		request.setAttribute("currentArticle", currentArticle);
+		currentArticle = dao.get(Article.class, Integer.valueOf(articleId));
 	}
-	
-	
+	request.setAttribute("currentArticle", currentArticle);
+	Menu currentArticleMenu = dao.get(Menu.class, currentArticle.parentId);
+	request.setAttribute("currentArticleMenu", currentArticleMenu);
 %>
 <!DOCTYPE html>
 <html>
@@ -80,8 +81,10 @@ $(document).on({
         <div class="wbox newspage">
             <div class="wrap">
                 <ul class="breadcrumb">
-                  <li><a href="#">首页</a><span>/</span></li>
-                  <li><a href="#">行业动态</a></li>
+                  <li><a>首页</a><span>/</span></li>
+                  <li><a>${topMenu.name }</a><span>/</span></li>
+                  <li><a>${currentArticleMenu.name }</a><span>/</span></li>
+                  <li><a>${currentArticle.name }</a></li>
                 </ul>
             </div>
             <div class="wrap table ">

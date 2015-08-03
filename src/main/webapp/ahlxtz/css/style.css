@@ -297,7 +297,7 @@ login
 
 
 /* book */
-.bookpage .bookbox{ padding: 60px 0 0 0; width: 550px;}
+.bookpage .bookbox{ padding: 60px 0 0 0; width: 550px;margin-left:auto;margin-right:auto;}
 .bookpage .bookbox strong{ display: block; font-size: 18px; font-weight: bold;}
 .bookpage .bookbox b{ display: inline-block; margin-top: 10px; font-size: 18px; font-weight: bold; color: #D7182A;}
 .bookcont{ font-size: 16px; margin: 20px 0;}

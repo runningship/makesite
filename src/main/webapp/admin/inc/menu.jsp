@@ -94,9 +94,9 @@
 				公司信息
 			</dt>
 
-			<dd class="menu_item ">
-				<a data-id="lxwm" href="${projectName }/admin/company/contact.jsp?nav=lxwm">联系我们</a>
-			</dd>
+<!-- 			<dd class="menu_item "> -->
+<%-- 				<a data-id="lxwm" href="${projectName }/admin/company/contact.jsp?nav=lxwm">联系我们</a> --%>
+<!-- 			</dd> -->
 			<dd class="menu_item ">
 				<a data-id="gsjj" href="${projectName }/admin/company/compinfo.jsp?nav=gsjj">公司简介</a>
 			</dd>

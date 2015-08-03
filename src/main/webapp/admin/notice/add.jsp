@@ -128,7 +128,7 @@ function addDiyDom(treeId, treeNode) {
 						<table style="width:100%" >
 							<tr class="form-group">
 								<td style="text-align:left;"><label class="label">标题</label></td>
-								<td><input name="title" id="title" class="form-input" /></td>
+								<td><input name="title" id="title" class="form-input" / style="  height: 30px;  width: 300px;  border: 1px solid #ddd;"></td>
 							</tr>
 							<tr class="form-group">
 								<td style="vertical-align: top;width:50px;text-align:left;"><label class="label">接收人</label></td>

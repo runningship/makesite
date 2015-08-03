@@ -81,7 +81,7 @@ public class UserService {
 		}
 		po.lasttime = new Date();
 		dao.saveOrUpdate(po);
-		ThreadSession.getHttpSession().setAttribute("user", po);
+		ThreadSession.getHttpSession().setAttribute(MakesiteConstant.Session_Attr_User, po);
 		List<Map> result = dao.listAsMap("select ra.authId as authId from UserRole ur ,RoleAuth ra where ur.roleId=ra.roleId and ur.uid=?", po.id);
 		StringBuilder authList= new StringBuilder("");
 		for(Map map : result){
@@ -125,6 +125,7 @@ public class UserService {
 		}
 		po.tel = user.tel;
 		dao.saveOrUpdate(po);
+		ThreadSession.getHttpSession().setAttribute(MakesiteConstant.Session_Attr_User, po);
 		if(roleIds!=null && roleIds.length() != 0){
 			String[] Ids = roleIds.split(",");
 			dao.execute("delete from UserRole where uid=?", user.id);
@@ -146,6 +147,9 @@ public class UserService {
 		ModelAndView mv = new ModelAndView();
 		User po = dao.get(User.class, uid);
 		if(po!=null){
+			if(!po.pwd.equals(SecurityHelper.Md5(oldPwd))){
+				throw new GException(PlatformExceptionType.BusinessException,"原密码不正确,请重新输入后重试");
+			}
 			po.pwd = SecurityHelper.Md5(newPwd);
 			dao.saveOrUpdate(po);
 		}

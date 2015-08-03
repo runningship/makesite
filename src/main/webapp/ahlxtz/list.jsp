@@ -33,8 +33,13 @@
 	request.setAttribute("articleList", articleList);
 	
 	Page<Article> p = new Page<Article>();
-	p.setPageSize(1);
+	//p.setPageSize(1);
 	String currentPageNo =  request.getParameter("currentPageNo");
+	try{
+		p.currentPageNo = Integer.valueOf(currentPageNo);
+	}catch(Exception ex){
+		
+	}
 	//加载二级栏目下的文章列表 
 	p = dao.findPage(p, "from Article where parentId=?", Integer.valueOf(menuId));
 	request.setAttribute("page", p);
@@ -71,7 +76,7 @@ $(document).on({
 },'.hv');
 
 function goPage(pageNo){
-	window.location = window.location.href+"&currentPageNo="+pageNo;
+	window.location = window.location.pathname+"?id=${menuId}&parentId=${topId}&currentPageNo="+pageNo;
 }
 </script>
 
@@ -89,8 +94,9 @@ function goPage(pageNo){
         <div class="wbox newspage listpage">
             <div class="wrap">
                 <ul class="breadcrumb">
-                  <li><a href="#">首页</a><span>/</span></li>
-                  <li><a href="#">行业动态</a></li>
+                  <li><a>首页</a><span>/</span></li>
+                  <li><a>${topMenu.name }</a><span>/</span></li>
+                  <li><a>${currentMenu.name }</a></li>
                 </ul>
             </div>
             <div class="wrap table ">
@@ -130,22 +136,25 @@ function goPage(pageNo){
                             </c:forEach>
                         </ul>
                         <ul class="pagelist">
-                            <li><a href="#">首页</a></li>
+                            <li><a href="javascript:void(0)" onclick=goPage(1)>首页</a></li>
+                            <c:if test="${page.currentPageNo-2 >1}">
+                             	<li><span>...</span></li>
+                             </c:if>
                             <c:forEach var="offset" begin="1" end="2" step="1">
-                            	<c:if test="${page.currentPageNo-offset >0}">
-                            	<li><a href="javascript:void(0)" onclick="goPage(${page.currentPageNo-offset})">${page.currentPageNo-offset }</a></li>
+                            	<c:if test="${page.currentPageNo+offset-3 >0}">
+                            	<li><a href="javascript:void(0)" onclick="goPage(${page.currentPageNo+(offset-3)})">${page.currentPageNo+(offset-3) }</a></li>
                             	</c:if>  
                             </c:forEach>
                             <li><a href="#" class="active">${page.currentPageNo}</a></li> 
                   			<c:forEach var="offset" begin="1" end="2" step="1">
-                  				<c:if test="${page.currentPageNo+offset <page.totalPageCount}">
+                  				<c:if test="${page.currentPageNo+offset <=page.totalPageCount}">
                             	<li><a href="javascript:void(0)" onclick="goPage(${page.currentPageNo+offset})">${page.currentPageNo+offset }</a></li>
                             	</c:if> 
                             </c:forEach>
-                            <c:if test="${page.currentPageNo+offset <page.totalPageCount}">
-                             	<li><a href="#">...</a></li>
+                            <c:if test="${page.currentPageNo+2 <page.totalPageCount}">
+                             	<li><span>...</span></li>
                              </c:if>
-                            <li><a href="#">尾页</a></li>
+                            <li><a  href="javascript:void(0)" onclick="goPage(${page.totalPageCount})">尾页</a></li>
                         </ul>
                     </div>
                 </div>

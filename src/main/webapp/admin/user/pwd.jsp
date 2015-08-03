@@ -21,7 +21,6 @@
 <style type="text/css">
 #pwd-table .form-input{width:240px;;}
 .save{margin-right:15px;float:right;margin-top:30px;}
-.add-form{padding-top:40px;}
 </style>
 </head>
 <script type="text/javascript">
@@ -35,6 +34,10 @@ function save(){
 	};
 	if (newPwd=="") {
 		alert('请输入新密码');
+		return;
+	};
+	if (newPwd.length<6) {
+		alert('密码必须六位以上');
 		return;
 	};
 	if (newPwd2=="") {
@@ -61,21 +64,21 @@ function save(){
 <body style="background-color:white">
 	
 	<form name="form1" class="add-form" onsubmit="save();">
-		<input type="hidden"  name="id" value="${user.id }"/>
+		<input type="hidden"  name="uid" value="${user.id }"/>
 		<table id="pwd-table">
 			<tr class="form-group">
 				<td><label class="label">原密码</label></td>
-				<td><input name="groupName" id="oldPwd" class="form-input"  /></td>
+				<td><input type="password" name="oldPwd" id="oldPwd" class="form-input"  /></td>
 			</tr>
 			<tr class="form-group">
 				<td><label class="label">新密码</label></td>
-				<td><input name="account" id="newPwd" class="form-input" /></td>
+				<td><input type="password" name="newPwd" id="newPwd" class="form-input" /></td>
 			</tr>
 			<tr class="form-group">
 				<td><label class="label">重复新密码</label></td>
-				<td><input name="name" id="name" class="form-input"/></td>
+				<td><input type="password" name="newPwd2" id="newPwd2" class="form-input"/></td>
 			</tr>
-			<tr>
+			<tr style="display:none">
 				<td colspan="2"><button onclick="save();return false;" class="form-button save">确&nbsp;&nbsp;定</button></td>
 			</tr>
 		</table>
