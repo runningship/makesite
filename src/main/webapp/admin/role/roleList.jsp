@@ -96,7 +96,7 @@ function reloadWindow(){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<div class="title_bar" style="height:50px;line-height:50px;">
-						<button style="float:left;margin-top: 12px;padding:5px;cursor:pointer" onclick="roleAdd();">添加职位</button>
+						<button style="float:left;margin-top: 12px;padding:5px;cursor:pointer;height: 30px;  line-height: 20px;" onclick="roleAdd();">添加职位</button>
 					</div>
 					<table class="userList" cellspacing="0">
 						<tr style="background: aliceblue;">

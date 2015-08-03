@@ -161,7 +161,7 @@ function openAdd(id){
 				<div class="mp_news_area notices_box">
 						<div class="title_bar" style="height:50px;line-height:50px;">
 						<c:if test="${session_auth_list.indexOf('$info_article')>-1 }">
-							<button style="float:left;margin-top: 11px;padding:5px;margin-right:20px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
+							<button style="float:left;margin-top: 11px;padding:5px;margin-right:20px;cursor:pointer;height: 30px; line-height: 20px;" onclick="openAdd();">添 &nbsp;加</button>
 						</c:if>
 					<form name="form1" type="form" method="post" action="list3.jsp?nav=wzlb" style="">
 							<select name="yijiId" style="height:32px;width:120px;word-wrap: normal;" id="level_1" onchange="topMenuChange()">

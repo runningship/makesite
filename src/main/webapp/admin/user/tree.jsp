@@ -284,7 +284,7 @@ background: #428bca;
 					<c:if test="${session_auth_list.indexOf('$user_org_group')>-1 }">
 					<div class="title_bar" style="height:50px;line-height:50px;">
 						
-						<button style="float:left;margin-right:20px;margin-top:12px;height:28px;cursor:pointer" onclick="addTopGroup();return false;" class="add">添加部门</button>
+						<button style="float:left;margin-right:20px;margin-top:12px;height: 30px;  line-height: 20px;cursor:pointer" onclick="addTopGroup();return false;" class="add">添加部门</button>
 						
 					</div>
 					</c:if>

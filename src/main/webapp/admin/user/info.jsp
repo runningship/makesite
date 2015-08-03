@@ -100,7 +100,7 @@ function save(){
 						<div class="form-group action">
 							<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 							<div class="form-input btn-wrap" >
-								<button onclick="save();return false;" class="form-button" style="float:right;cursor:pointer">保&nbsp;&nbsp;存</button>
+								<button onclick="save();return false;" class="form-button" style="float:right;cursor:pointer;height: 30px;  line-height: 20px;">保&nbsp;&nbsp;存</button>
 							</div>
 						</div>
 					</form>

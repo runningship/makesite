@@ -124,7 +124,7 @@ function openAdd(){
 							<input style="margin-right:20px;margin-top:12px;height:28px;width:60px;cursor:pointer;display:none" id="submit" type="submit" value="搜索"/>
 					</form>
 						<c:if test="${session_auth_list.indexOf('$info_menu')>-1 }">
-							<button style="float:right;margin-top: 11px;padding:5px;margin-right:20px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
+							<button style="float:right;margin-top: 11px;padding:5px;margin-right:20px;cursor:pointer;height: 30px;line-height: 20px;" onclick="openAdd();">添 &nbsp;加</button>
 						</c:if>
 					</div>
 					<table class="fileList" cellspacing="0">
