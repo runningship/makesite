@@ -29,7 +29,7 @@ function save(){
 	var newPwd = $('#newPwd').val();
 	var newPwd2 = $('#newPwd2').val();
 	if (oldPwd=="") {
-		alert('请输入旧密码');
+		alert('请输入原密码');
 		return;
 	};
 	if (newPwd=="") {
