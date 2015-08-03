@@ -92,14 +92,17 @@ function banUser(){
 }
 
 function deleteGroup(){
-	YW.ajax({
-	    type: 'POST',
-	    url: '${projectName }/c/admin/group/delete?id='+parentGroupId,
-	    mysuccess: function(data){
-	        alert('删除成功');
-			window.location.reload();
-	    }
-    });
+	layer.confirm('删除后将无法恢复，是否确定删除', {icon: 3}, function(index){
+	    layer.close(index);
+		YW.ajax({
+		    type: 'POST',
+		    url: '${projectName }/c/admin/group/delete?id='+parentGroupId,
+		    mysuccess: function(data){
+		        alert('删除成功');
+				window.location.reload();
+		    }
+	    });
+	});
 }
 
 function sendNotice(){
@@ -112,7 +115,7 @@ function addTopGroup(){
     	title: '添加部门',
 	    shadeClose: false,
 	    shade: 0.5,
-	    area: ['400px', '250px'],
+	    area: ['400px', '210px'],
 	    content: '../group/add.jsp',
 	    btn: ['确定','取消'],
 	    yes:function(index){
@@ -127,7 +130,7 @@ function addGroup(){
     	title: '添加部门',
 	    shadeClose: false,
 	    shade: 0.5,
-	    area: ['400px', '250px'],
+	    area: ['400px', '210px'],
 	    content: '../group/add.jsp?parentId='+parentGroupId+'&parentName='+parentGroupName,
 	    btn: ['确定','取消'],
 	    yes:function(index){
@@ -143,7 +146,7 @@ function editGroup(){
     	title: '修改部门',
 	    shadeClose: false,
 	    shade: 0.5,
-		area: ['400px', '250px'],
+		area: ['400px', '210px'],
 	    content: '../group/edit.jsp?groupId='+parentGroupId,
 	    btn: ['确定','取消'],
 	    yes:function(index){
@@ -159,7 +162,7 @@ function addUser(){
     	title: '添加新用户',
 	    shadeClose: false,
 	    shade: 0.5,
-		area: ['500px', '500px'],
+		area: ['500px', '420px'],
 	    content: 'add.jsp?groupId='+parentGroupId,
 	    btn: ['确定','取消'],
 	    yes:function(index){

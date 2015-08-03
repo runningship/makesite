@@ -62,7 +62,7 @@ function editOK(i,a,b){
 	    	title: '修改栏目',
 		    shadeClose: false,
 		    shade: 0.5,
-		    area: ['400px', '280px'],
+		    area: ['400px', '200px'],
 		    content: 'edit1.jsp?id='+id,
 		    btn: ['确定','取消'],
 		    yes:function(index){
@@ -81,7 +81,7 @@ function openAdd(){
     	title: '添加栏目',
 	    shadeClose: false,
 	    shade: 0.5,
-	    area: ['500px', '300px'],
+	    area: ['500px', '250px'],
 	    content: 'addMenu.jsp',
 	    btn: ['确定','取消'],
 	    yes:function(index){
@@ -91,14 +91,17 @@ function openAdd(){
 	}); 
 }
 	function delThis(id){
-		YW.ajax({
-		    type: 'POST',
-		    url: '${projectName }/c/admin/menu/delete?id='+id,
-		    mysuccess: function(data){
-		        alert('删除成功');
-		        window.location.reload();
-		    }
-	    });
+		layer.confirm('删除后将无法恢复，是否确定删除', {icon: 3}, function(index){
+		    layer.close(index);
+			YW.ajax({
+			    type: 'POST',
+			    url: '${projectName }/c/admin/menu/delete?id='+id,
+			    mysuccess: function(data){
+			        alert('删除成功');
+			        window.location.reload();
+			    }
+		    });
+		});
 	}
 </script>
 <body>

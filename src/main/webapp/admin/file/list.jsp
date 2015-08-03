@@ -58,14 +58,17 @@ $(function(){
 });
 
 function fileDel(id){
-	YW.ajax({
-	    type: 'POST',
-	    url: '${projectName }/c/admin/file/delete?id='+id,
-	    mysuccess: function(data){
-	        alert('删除成功');
-	        window.location.reload();
-	    }
-    });
+	layer.confirm('删除后将无法恢复，是否确定删除', {icon: 3}, function(index){
+	    layer.close(index);
+		YW.ajax({
+		    type: 'POST',
+		    url: '${projectName }/c/admin/file/delete?id='+id,
+		    mysuccess: function(data){
+		        alert('删除成功');
+		        window.location.reload();
+		    }
+	    });
+	});
 }
 function fileShenHe(id , btn){
 	YW.ajax({

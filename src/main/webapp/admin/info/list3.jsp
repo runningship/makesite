@@ -24,7 +24,7 @@
 	}catch(Exception ex){
 	}
 	StringBuilder hql = new StringBuilder("select art.id as artId, art.name as name ,art._site , art.addtime as addtime , art.orderx as orderx , tt.* from Article art left join ( "
-			  +" SELECT m1.id as fid , m2.id as tfid , m1.name as fname ,m2.name as tfname FROM Menu m1 left join Menu m2 on m1.parentId=m2.id ) tt on art.parentId=tt.fid where art._site=? and art.parentId>0");
+			  +" SELECT m1.id as fid , m2.id as tfid ,  m1.name as fname ,m2.name as tfname FROM Menu m1 left join Menu m2 on m1.parentId=m2.id ) tt on art.parentId=tt.fid where art._site=? and art.parentId>0");
 	List<Object> params = new ArrayList<Object>();
 	params.add(_site);
 	if(StringUtils.isNotEmpty(yijiId)){
@@ -40,7 +40,7 @@
 		hql.append(" and art.name like ?");
 		params.add("%"+searchText+"%");
 	}
-	//hql.append(" order by m1.orderx asc , m2.orderx asc , art.orderx asc , art.addtime desc");
+// 	hql.append(" order by art.parentId , order by art.orderx , order by art.addtime desc");
 	p  = dao.findPageBySql(p, hql.toString(), params.toArray());
 
 
@@ -73,14 +73,17 @@ $(function(){
 });
 
 	function infoDel(id){
-		YW.ajax({
-		    type: 'POST',
-		    url: '${projectName }/c/admin/article/delete?id='+id,
-		    mysuccess: function(data){
-		        alert('删除成功');
-		        window.location.reload();
-		    }
-	    });
+		layer.confirm('删除后将无法恢复，是否确定删除', {icon: 3}, function(index){
+		    layer.close(index);
+			YW.ajax({
+			    type: 'POST',
+			    url: '${projectName }/c/admin/article/delete?id='+id,
+			    mysuccess: function(data){
+			        alert('删除成功');
+			        window.location.reload();
+			    }
+		    });
+		});
 	}
 
 function reloadWindow(){
@@ -138,7 +141,7 @@ function openAdd(id){
     	title: '添加文章',
 	    shadeClose: false,
 	    shade: 0.5,
-	    area: ['800px', '700px'],
+	    area: ['800px', '650px'],
 	    content: 'add3.jsp?parentId='+id,
 	    btn: ['确定','取消'],
 	    yes:function(index){

@@ -71,14 +71,17 @@ function reloadWindow(){
 }
 
 	function userDel(id){
-		YW.ajax({
-		    type: 'POST',
-		    url: '${projectName }/c/admin/user/delete?id='+id,
-		    mysuccess: function(data){
-		        alert('删除成功');
-		        window.location.reload();
-		    }
-	    });
+		layer.confirm('删除后将无法恢复，是否确定删除', {icon: 3}, function(index){
+		    layer.close(index);
+			YW.ajax({
+			    type: 'POST',
+			    url: '${projectName }/c/admin/user/delete?id='+id,
+			    mysuccess: function(data){
+			        alert('删除成功');
+			        window.location.reload();
+			    }
+		    });
+		});
 	}
 </script>
 <body>
