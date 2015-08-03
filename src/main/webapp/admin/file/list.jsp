@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.MakesiteConstant"%>
 <%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.youwei.makesite.ThreadSessionHelper"%>
@@ -22,7 +23,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	StringBuilder hql = new StringBuilder("select sf.name as name, sf.id as fid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  ,sf.path as path, sf.publish as publish from SharedFile sf,User u where sf.uid = u.id");
+	StringBuilder hql = new StringBuilder("select sf.name as name, sf.id as fid, sf.uid as uid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  ,sf.path as path, sf.publish as publish from SharedFile sf,User u where sf.uid = u.id");
 	List<Object> params = new ArrayList<Object>();
 	if(StringUtils.isNotEmpty(filename)){
 		hql.append(" and sf.name like ?");
@@ -36,7 +37,14 @@
 		hql.append(" and sf._site = ?");
 		params.add(_site);
 	}
-		hql.append(" order by sf.id desc");
+	String session_auth_list=(String)request.getAttribute(MakesiteConstant.Session_Auth_List);
+	if(StringUtils.isEmpty(session_auth_list)  || !session_auth_list.contains("$file_shenhe")){
+		//没有审核权限
+		hql.append(" and (sf.uid = ? or sf.publish=1)");
+		params.add(ThreadSessionHelper.getUser().id);
+	}
+	
+	hql.append(" order by sf.id desc");
 	p  = dao.findPage(p, hql.toString(),true, params.toArray());
 	request.setAttribute("page", p);
 	request.setAttribute("filename", filename);
@@ -97,9 +105,7 @@ function fileShenHe(id , btn){
 							<span>文件名: </span><input name="filename" value="${filename}"  style="height:26px;width:200px;">
 							<span style="margin-left:20px;">上传人: </span><input name="sendName" value="${sendName}"  style="height:26px;width:200px;">
 							<input style="margin-left:20px;margin-top:12px;height:28px;width:60px;cursor:pointer" type="submit" value="搜索"/>
-							<c:if test="${session_auth_list.indexOf('$file_upload')>-1 }">
 							<button id="fileUploadBtn" style="float:right;margin-top:-35px;padding:5px;">上 &nbsp;传</button>
-							</c:if>
 					</form>
 						
 					</div>
@@ -128,7 +134,7 @@ function fileShenHe(id , btn){
 								<c:if test="${session_auth_list.indexOf('$file_shenhe')>-1 }">
 								<a href="#"  onclick="fileShenHe(${file.fid} , this)"><c:if test="${file.publish ==1}">已公开</c:if><c:if test="${file.publish ==0}">未公开</c:if></a>
 								</c:if>
-								<a href="#"  onclick="fileDel(${file.fid})">删除</a>
+								<c:if test="${session_auth_list.indexOf('$file_shenhe')>-1 || file.uid==user.id}"><a href="#"  onclick="fileDel(${file.fid})">删除</a></c:if>
 							</td>
 						</tr>
 						</c:forEach>

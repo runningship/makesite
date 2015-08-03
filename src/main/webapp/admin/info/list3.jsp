@@ -160,7 +160,7 @@ function openAdd(id){
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 						<div class="title_bar" style="height:50px;line-height:50px;">
-						<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
+						<c:if test="${session_auth_list.indexOf('$info_article')>-1 }">
 							<button style="float:left;margin-top: 11px;padding:5px;margin-right:20px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
 						</c:if>
 					<form name="form1" type="form" method="post" action="list3.jsp?nav=wzlb" style="">
@@ -195,8 +195,8 @@ function openAdd(id){
 							<td>${article.orderx }</td> 
 							<td><fmt:formatDate value="${article.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 
 							<td>
-								<c:if test="${session_auth_list.indexOf('$info_modifyArticle')>-1 }"><a href="#" onclick="editThis(${article.artId})">修改</a></c:if> 
-							 	<c:if test="${session_auth_list.indexOf('$info_delArticle')>-1 }"><a href="#" onclick="infoDel(${article.artId})">删除</a></c:if></td>
+								<c:if test="${session_auth_list.indexOf('$info_article')>-1 }"><a href="#" onclick="editThis(${article.artId})">修改</a></c:if> 
+							 	<c:if test="${session_auth_list.indexOf('$info_article')>-1 }"><a href="#" onclick="infoDel(${article.artId})">删除</a></c:if></td>
 						</tr>
 						</c:forEach>
 					</table>

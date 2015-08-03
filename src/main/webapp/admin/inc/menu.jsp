@@ -14,13 +14,11 @@
 </script>
 <div class="col_side">
 	<div class="menu_box">
-		<c:if test="${session_auth_list.indexOf('$info')>-1 }">
 			<dl class="menu no_extra">
 			<dt class="menu_title">
 				<i class="iconfont">&#xe60c;</i>
 				信息发布
 			</dt>
-
 			<dd class="menu_item ">
 				<a data-id="lmgl" href="${projectName }/admin/info/menu.jsp?nav=lmgl">栏目管理</a>
 			</dd>
@@ -28,9 +26,7 @@
 				<a data-id="wzlb" href="${projectName }/admin/info/list3.jsp?nav=wzlb">文章列表</a>
 			</dd>
 		</dl>
-		</c:if>
-		
-		<dl class="menu no_extra">
+		<dl class="menu ">
 			<dt class="menu_title">
 				<i class="iconfont">&#xe60d;</i>
 				通知管理
@@ -54,7 +50,6 @@
 				</a>
 			</dt>
 		</dl>
-		<c:if test="${session_auth_list.indexOf('$feedback')>-1 }">
 		<dl class="menu ">
 			<dt class="menu_title clickable">
 				<a data-id="fk" href="${projectName }/admin/feedback/list.jsp?nav=fk">
@@ -63,7 +58,7 @@
 				</a>
 			</dt>
 		</dl>
-		</c:if>
+		
 		<dl class="menu ">
 			<dt class="menu_title clickable">
 				<a data-id="me" href="${projectName }/admin/user/info.jsp?nav=me">
@@ -81,26 +76,27 @@
 			<dd class="menu_item ">
 				<a data-id="zzjg" href="${projectName }/admin/user/tree.jsp?nav=zzjg">组织架构</a>
 			</dd>
+			<c:if test="${session_auth_list.indexOf('$user_role')>-1 }">
 			<dd class="menu_item ">
 				<a data-id="zwqx" href="${projectName }/admin/role/roleList.jsp?nav=zwqx">职位权限</a>
 			</dd>
+			</c:if>
 			<dd class="menu_item ">
 				<a data-id="yglb" href="${projectName }/admin/user/list.jsp?nav=yglb">员工列表</a>
 			</dd>
 		</dl>
+		<c:if test="${session_auth_list.indexOf('$user_role')>-1 }">
 		<dl class="menu ">
 			<dt class="menu_title">
 				<i class="iconfont">&#xe60e;</i>
 				公司信息
 			</dt>
 
-<!-- 			<dd class="menu_item "> -->
-<%-- 				<a data-id="lxwm" href="${projectName }/admin/company/contact.jsp?nav=lxwm">联系我们</a> --%>
-<!-- 			</dd> -->
 			<dd class="menu_item ">
 				<a data-id="gsjj" href="${projectName }/admin/company/compinfo.jsp?nav=gsjj">公司简介</a>
 			</dd>
 		</dl>
+		</c:if>
 	</div>
 
 </div>

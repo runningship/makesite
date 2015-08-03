@@ -123,7 +123,7 @@ function openAdd(){
 							</select>
 							<input style="margin-right:20px;margin-top:12px;height:28px;width:60px;cursor:pointer;display:none" id="submit" type="submit" value="搜索"/>
 					</form>
-						<c:if test="${session_auth_list.indexOf('$info_addMenu')>-1 }">
+						<c:if test="${session_auth_list.indexOf('$info_menu')>-1 }">
 							<button style="float:right;margin-top: 11px;padding:5px;margin-right:20px;cursor:pointer" onclick="openAdd();">添 &nbsp;加</button>
 						</c:if>
 					</div>
@@ -140,8 +140,8 @@ function openAdd(){
 							<td class="fname">${menu.fname }</td> 
 							<td class="orders">${menu.orderx }</td> 
 							<td>
-							<c:if test="${session_auth_list.indexOf('$info_modifyMenu')>-1 }"><a href="#" onclick="editThis(${menu.id})">修改</a></c:if> 
-							<c:if test="${session_auth_list.indexOf('$info_delMenu')>-1 }"> <a href="#" onclick="delThis(${menu.id})">删除</a> </c:if>
+							<c:if test="${session_auth_list.indexOf('$info_menu')>-1 }"><a href="#" onclick="editThis(${menu.id})">修改</a></c:if> 
+							<c:if test="${session_auth_list.indexOf('$info_menu')>-1 }"> <a href="#" onclick="delThis(${menu.id})">删除</a> </c:if>
 							</td>
 						</tr>
 						</c:forEach>

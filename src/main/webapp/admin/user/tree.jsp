@@ -172,6 +172,22 @@ function addUser(){
 	}); 
 }
 
+function editUser(id){
+	layer.open({
+    	type: 2,
+    	title: '修改用户',
+	    shadeClose: false,
+	    shade: 0.5,
+	    area: ['500px', '500px'],
+	    content: 'edit.jsp?id='+currentUid,
+	    btn: ['确定','取消'],
+	    yes:function(index){
+	    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+		    return false;
+		}
+	}); 
+}
+
 function inviteUser(){
 	layer.open({
     	type: 2,
@@ -265,9 +281,13 @@ background: #428bca;
 			<jsp:include page="../inc/menu.jsp"></jsp:include>
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
+					<c:if test="${session_auth_list.indexOf('$user_org_group')>-1 }">
 					<div class="title_bar" style="height:50px;line-height:50px;">
+						
 						<button style="float:left;margin-right:20px;margin-top:12px;height:28px;cursor:pointer" onclick="addTopGroup();return false;" class="add">添加部门</button>
+						
 					</div>
+					</c:if>
 					<div class="zTreeDemoBackground left">
 						<ul id="treeDemo" class="ztree"></ul>
 					</div>
@@ -282,15 +302,16 @@ background: #428bca;
 <div id="rMenu"   class="list-group" style="position:absolute;z-index:999;display:none;" onclick="hideRMenu();">
 	<span id="groupMenu">
 	
-  <c:if test="${session_auth_list.indexOf('$user_org_addGroup')>-1 }"><a href="javascript:void(0)" id="m_edit_comp" onclick="addGroup();" class="list-group-item">添加部门</a></c:if>
-  <c:if test="${session_auth_list.indexOf('$user_org_addGroup')>-1 }"><a href="javascript:void(0)" id="m_edit_comp" onclick="editGroup();" class="list-group-item">修改部门</a></c:if>
-    <c:if test="${session_auth_list.indexOf('$user_org_addNewUser')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="addUser()" class="list-group-item">加入新用户</a></c:if>
-    <c:if test="${session_auth_list.indexOf('$user_org_inviteUser')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="inviteUser()" class="list-group-item">加入已有用户</a></c:if>
-    <c:if test="${session_auth_list.indexOf('$user_org_delGroup')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="deleteGroup()" class="list-group-item">删除部门</a></c:if>
+  <c:if test="${session_auth_list.indexOf('$user_org_group')>-1 }"><a href="javascript:void(0)" id="m_edit_comp" onclick="addGroup();" class="list-group-item">添加部门</a></c:if>
+  <c:if test="${session_auth_list.indexOf('$user_org_group')>-1 }"><a href="javascript:void(0)" id="m_edit_comp" onclick="editGroup();" class="list-group-item">修改部门</a></c:if>
+    <c:if test="${session_auth_list.indexOf('$user_org_user')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="addUser()" class="list-group-item">加入新用户</a></c:if>
+    <c:if test="${session_auth_list.indexOf('$user_org_user')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="inviteUser()" class="list-group-item">加入已有用户</a></c:if>
+    <c:if test="${session_auth_list.indexOf('$user_org_group')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="deleteGroup()" class="list-group-item">删除部门</a></c:if>
     <a href="javascript:void(0)"  id="m_del_comp" onclick="sendNotice()" class="list-group-item">发送通知</a>
   </span>
   <span id="userMenu">
-  <c:if test="${session_auth_list.indexOf('$user_org_removeUserFromGroup')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="banUser()" class="list-group-item">移出部门</a></c:if>
+  <c:if test="${session_auth_list.indexOf('$user_org_user')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="banUser()" class="list-group-item">移出部门</a></c:if>
+  <c:if test="${session_auth_list.indexOf('$user_org_user')>-1 }"><a href="javascript:void(0)"  id="m_del_comp" onclick="editUser()" class="list-group-item">编辑</a></c:if>
   </span>
 </div>
 </html>

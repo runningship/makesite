@@ -81,7 +81,7 @@
 							<td>${feedback.name}</td> 
 							<td>${feedback.contact}</td> 
 							<td><fmt:formatDate value="${feedback.addtime }" pattern="yyyy-MM-dd HH:mm"/></td> 
-							<td><a href="#" onclick="infoDel(${feedback.id})">删除</a></td>
+							<td><c:if test="${session_auth_list.indexOf('$feedback_del')>-1 }"><a href="#" onclick="infoDel(${feedback.id})">删除</a></c:if></td>
 						</tr>
 						</c:forEach>
 					</table>

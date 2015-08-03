@@ -17,7 +17,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	p  = dao.findPage(p,"from Role where _site=? order by id desc",DataHelper.getServerName(request));
+	p  = dao.findPage(p,"from Role where _site=? and isSystemRole=0 order by id desc",DataHelper.getServerName(request));
 	request.setAttribute("page", p);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -73,9 +73,9 @@ $(function(){
 	}
 });
 </script>
-<body>
+<body style="background:white;">
 	<div class="body2">
-		<div class="container_box cell_layout side_l">
+		<div class="cell_layout side_l">
 			<div class="col_main">
 				<div class="mp_news_area notices_box">
 					<table class="userList" cellspacing="0">
