@@ -49,16 +49,6 @@
 <link rel="stylesheet" href="list.css">
 </head>
 <script type="text/javascript">
-	function userAdd(){
-		layer.open({
-	    	type: 2,
-	    	title: '添加用户',
-		    shadeClose: false,
-		    shade: 0.5,
-		    area: ['500px', '500px'],
-		    content: 'add.jsp'
-		}); 
-	}
 
 	function userEdit(id){
 		layer.open({
@@ -67,7 +57,12 @@
 		    shadeClose: false,
 		    shade: 0.5,
 		    area: ['500px', '500px'],
-		    content: 'edit.jsp?id='+id
+		    content: 'edit.jsp?id='+id,
+		    btn: ['确定','取消'],
+		    yes:function(index){
+		    	$('[name=layui-layer-iframe'+index+']').contents().find('.save').click();
+			    return false;
+			}
 		}); 
 	}
 
