@@ -95,7 +95,7 @@ function userDel(id){
 	    	title: '查看通知',
 		    shadeClose: false,
 		    shade: 0.5,
-		    area: ['600px', '500px'],
+		    area: ['600px', '600px'],
 		    content: 'receiveInfo.jsp?id='+id+'&nrid='+nrid
 		}); 
 	}
