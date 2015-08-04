@@ -1,3 +1,4 @@
+<%@page import="com.youwei.makesite.cache.ConfigCache"%>
 <%@page import="com.youwei.makesite.MakesiteConstant"%>
 <%@page import="com.youwei.makesite.util.DataHelper"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
@@ -14,6 +15,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <% 
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+	String download_prefix = ConfigCache.get("download_prefix", "");
+	request.setAttribute("download_prefix", download_prefix);
 	Page<Map> p = new Page<Map>();
 	String currentPageNo =  request.getParameter("currentPageNo");
 	String filename =  request.getParameter("filename");
@@ -119,7 +122,7 @@ function fileShenHe(id , btn){
 						</tr>
 						<c:forEach items="${page.result }" var="file" varStatus="status">
 							<tr class="statue_${status.index%2}">
-							<td><a href='${projectName }/upload/${file.path }' target="_blank "> ${file.name } </a></td> 
+							<td><a href='${download_prefix }/upload/${file.path }' target="_blank "> ${file.name } </a></td> 
 							<c:choose>
 								<c:when test="${file.size/1000/1000 >=0.99}">  
 									<td><fmt:formatNumber type="number" value="${file.size/1000/1000 }" maxFractionDigits="1"/>M</td>

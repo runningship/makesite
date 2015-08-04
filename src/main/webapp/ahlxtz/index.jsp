@@ -165,7 +165,7 @@ $(document).ready(function(){
             <div class="aboutbox">
                 <strong class="tita">${jianjie.name}</strong>
                 <strong class="titb">COMPANY PROFILE</strong>
-                <p style="height:130px;overflow:hidden;">${jianjie.conts}</p>
+                <p style="height:129px;overflow:hidden;">${jianjie.conts}</p>
             </div>
         </div>
         <div class="wbox clearfix">

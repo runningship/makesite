@@ -7,6 +7,7 @@
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	String topId = request.getParameter("parentId");
 	
@@ -131,7 +132,7 @@ function goPage(pageNo){
                         <ul class="UList">
                         	<c:forEach items="${page.result}" var="art">
                             <li class="first">
-                                <a href="info.jsp?id=${art.id}&parent2Id=${art.parentId}" title="${art.name }"><span>${art.addtime }</span>${art.name }</a>
+                                <a href="info.jsp?id=${art.id}&parent2Id=${art.parentId}" title="${art.name }"><span><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span>${art.name }</a>
                             </li>
                             </c:forEach>
                         </ul>

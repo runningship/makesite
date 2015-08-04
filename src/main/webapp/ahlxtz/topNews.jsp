@@ -35,7 +35,7 @@
             <div class="wrap">
                 <ul class="breadcrumb">
                   <li><a href="#">首页</a><span>/</span></li>
-                  <li><a href="#">行业动态</a></li>
+                  <li><a>${currentArticle.name }</a></li>
                 </ul>
             </div>
             <div class="wrap table ">

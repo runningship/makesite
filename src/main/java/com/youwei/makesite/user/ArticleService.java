@@ -43,8 +43,10 @@ public class ArticleService {
 			Article po = dao.get(Article.class, art.id);
 			po.conts = art.conts;
 		}else{
-			//TODO
 			art.addtime = new Date();
+		}
+		if(art.parentId==null){
+			art.parentId=0;
 		}
 		dao.saveOrUpdate(art);
 		return mv;
