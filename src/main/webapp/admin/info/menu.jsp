@@ -62,7 +62,7 @@ function editOK(i,a,b){
 	    	title: '修改栏目',
 		    shadeClose: false,
 		    shade: 0.5,
-		    area: ['400px', '200px'],
+	    	area: ['500px', '220px'],
 		    content: 'edit1.jsp?id='+id,
 		    btn: ['确定','取消'],
 		    yes:function(index){

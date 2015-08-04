@@ -51,13 +51,16 @@ $(function(){
 <body style="background-color:white">
 	<form name="form1" class="add-form" onsubmit="return false;">
 	<input name="id" value="${menu.id}" style="display:none">
-		<div class="form-group">
-			<input name="name" value="${menu.name}" class="form-input"  placeholder="名称"/>
-		</div>
-		<div class="form-group">
-			<input name="orderx" value="${menu.orderx}" class="form-input" placeholder="序号" />
-		</div>
-		
+		<table style="width:80%;  margin-right: auto;margin-left:auto;">
+			<tr>
+				<td class="first"><label>名&nbsp;称</label></td>
+				<td><input name="name" id="name" value="${menu.name}" class="form-input" /></td>
+			</tr>
+			<tr>
+				<td class="first"><label >序&nbsp;号</label></td>
+				<td><input name="orderx" value="${menu.orderx}" class="form-input" /></td>
+			</tr>
+		</table>
 		<div class="form-group action hidden">
 			<label class="label" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<div class="form-input btn-wrap" >
@@ -65,7 +68,6 @@ $(function(){
 				<button onclick="closeThis();return false;" class="form-button cancel">取&nbsp;&nbsp;消</button>
 			</div>
 		</div>
-		<div id="menu_conts" style="display:none">${menu.conts}</div>
 	</form>
 </body>
 </html>
