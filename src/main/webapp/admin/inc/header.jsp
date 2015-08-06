@@ -14,4 +14,6 @@
 <link rel="stylesheet" href="${projectName }/admin/style/pagination.css">
 <script type="text/javascript" src="${projectName }/admin/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="${projectName }/admin/js/buildHtml.js"></script>
+<script type="text/javascript" src="${projectName }/admin/js/json2.js"></script>
 <script type="text/javascript" src="${projectName }/admin/js/layer-v1.9.3/layer/layer.js"></script>
+

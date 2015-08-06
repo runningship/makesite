@@ -17614,7 +17614,7 @@ UE.plugins['video'] = function (){
                 var ext = url.substr(url.lastIndexOf('.') + 1);
                 if(ext == 'ogv') ext = 'ogg';
                 str = '<video' + (id ? ' id="' + id + '"' : '') + ' class="' + classname + ' video-js" ' + (align ? ' style="float:' + align + '"': '') +
-                    ' controls preload="none" style="margin-left:auto;margin-right:auto;" poster="http://video-js.zencoder.com/oceans-clip.png" width="' + width + '" height="' + height + '" src="' + url + '" data-setup="{}">' +
+                    ' controls preload="none" style="margin-left:auto;margin-right:auto;" poster="http://www.zhongjiebao.com/images/play.png" width="' + width + '" height="' + height + '" src="' + url + '" data-setup="{}">' +
                     '<source src="' + url + '" type="video/' + ext + '" /></video>';
                 break;
         }

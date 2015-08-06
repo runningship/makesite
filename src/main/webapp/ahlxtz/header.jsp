@@ -13,6 +13,7 @@
 <script type="text/javascript" src="js/slides.min.jquery.js"></script>
 <script type="text/javascript" src="js/jquery.imagesAutoBox.js"></script>
 <script type="text/javascript" src="js/javascript.js"></script>
+<script type="text/javascript" src="js/json2.js"></script>
 <link href="css/reset.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css">

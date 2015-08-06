@@ -85,7 +85,7 @@
 				<a data-id="yglb" href="${projectName }/admin/user/list.jsp?nav=yglb">员工列表</a>
 			</dd>
 		</dl>
-		<c:if test="${session_auth_list.indexOf('$user_role')>-1 }">
+		<c:if test="${session_auth_list.indexOf('$comp_sumary')>-1 }">
 		<dl class="menu ">
 			<dt class="menu_title">
 				<i class="iconfont">&#xe60e;</i>

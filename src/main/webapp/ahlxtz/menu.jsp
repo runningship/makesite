@@ -19,7 +19,7 @@
 		menu.articleChildren = articleList;
 	}
 	request.setAttribute("topMenus", topMenus);
-	List<Article> topArticles = dao.listByParams(Article.class, "from Article where parentId is null and _site = ?", DataHelper.getServerName(request));
+	List<Article> topArticles = dao.listByParams(Article.class, "from Article where parentId =0 and _site = ?", DataHelper.getServerName(request));
 	request.setAttribute("topArticles", topArticles);
 	request.setAttribute("topMenuId", request.getParameter("parentId"));
 %>
@@ -49,7 +49,7 @@
 	                </li>
 			</c:forEach>
 			<c:forEach items="${topArticles}" var="topArt">
-				<li class="navli hv"><a href="topNews.jsp?topArticleId=${topArt.id}">${topArt.name}</a></li>
+				<li class="navli hv <c:if test="${topArt.id==topMenu.id }">active</c:if>"><a href="topNews.jsp?topArticleId=${topArt.id}">${topArt.name}</a></li>
 			</c:forEach>
             <li class="navli hv "><a href="book.jsp" class="a">反馈信息</a></li>
         </ul>
