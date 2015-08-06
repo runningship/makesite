@@ -58,26 +58,27 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endCo
 .tMenu dd a{ display: block; color: #FFF; padding: 2px 5px; overflow: hidden; white-space:nowrap;}
 .tMenu.hover dd{ display: block; }
 
-.hreader{ background: #FFF; border-bottom: 1px solid #FFF; position: relative;}
+.hreader{ background: #FFF; border-bottom: 1px solid #FFF; position: relative;z-index: 9;}
 .hreader .frbox{ position: absolute; right: 0; top: 40px; padding-top: 20px;
- position:relative; top: 4px; display: inline-block; padding-top: 0px;}
+ position:relative; top: 4px; display: inline-block; padding-top: 0px;
+*position: absolute; *top:50px;}
 .hreader .logo_box{display: inline-block;}
-.hreader .bgb{ background: url('../images/bgb.png') repeat-x top; position: absolute; bottom: -10px; width: 100%; height: 10px; z-index: 2;}
+.hreader .bgb{ background: url('../images/bgb.png') repeat-x top; position: absolute; bottom: -11px; width: 100%; height: 10px; z-index: 2;}
 
 .banner{}
 .nav { margin: 10px 0 0; padding:0 0px; text-align: center; }
-.nav .navli{ float: left; line-height: 34px; padding:0 12px; position: relative;font-size: 15px;font-family: 'Microsoft Yahei','黑体';  font-size: 18px;}
+.nav .navli{ float: left; line-height: 34px; padding:0 8px; position: relative; z-index: 99; font-size: 15px;font-family: 'Microsoft Yahei','黑体';  font-size: 18px;
+* padding:0 9px;}
 .nav .navli a.a{padding-bottom: 11px; display: block;}
 .nav .navli a.a:hover{ color: #D7182A;}
-.nav .navli.active{color: #d7523A;border-bottom: 3px solid #D7182A;height: 42px;}
-.nav .navli.active a.a{ color: #D7182A;}
 .nav .subnav{display: none;background: url(subbg.gif) no-repeat left top;position: absolute;left: 0;top: 44px;z-index: 99;font-size: 12px;border-radius: 3px;/*box-shadow:0px 5px 10px #000;*/overflow: hidden;padding: 10px 0;border-top: 3px solid #D7182A;
 box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .nav .subnav {background-color: #646e71;width: 100%;
 /* Fallback for web browsers that doesn't support RGBa */ background: rgb(255, 255, 255); /* RGBa with 0.6 opacity */ background: rgba(255, 255, 255, 0.6); /* For IE 5.5 - 7*/ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#9999999, endColorstr=#99000000); /* For IE 8*/ -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
 }
 .nav .subnav li{ padding:0 0px;}
-.nav .subnav a{ display: block; color: #000;font-weight: normal;}
+.nav .subnav a{ display: block; color: #000;font-weight: normal;white-space:nowrap; padding: 0 5px;}
+.nav .subnav a span{overflow: hidden;}
 .nav .subnav a:hover{  background: #FFF;}
 
 
@@ -102,7 +103,8 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .loginboxs li{ margin-top: 20px;}
 .loginboxs label.inputbox{}
 .loginboxs label.inputbox .iu{ padding: 0 10px;}
-.loginboxs label.inputbox input.input{ padding: 8px 10px; border: 1px solid #DDD;}
+.loginboxs label.inputbox input.input{ padding: 8px 10px; border: 1px solid #DDD;
+*width: 169px;}
 .loginboxs li.btnbox{ padding-left: 36px;}
 .loginboxs li a.btn{ display: inline-block; height: 30px; line-height: 30px; text-align: center; padding:0 20px; background: #EC3C4D; border-radius: 4px; color: #FFF; font-size: 16px;}
 .loginboxs li a.btn:hover{ background: #EC3C4D;}
@@ -110,9 +112,9 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 
 .newbox{ padding:20px 0;}
 .newbox .h2{ margin-bottom: 20px;}
-.ul_news_list{height:110px;overflow:hidden}
 .ul_news_list.w360 {  width: 360px; height: 290px;}
-.ul_news_list li a{font-size: 13px; display: block; color: #666;margin-bottom: 5px;font-family: 'Microsoft Yahei';position: relative;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;  width: 220px;}
+.ul_news_list li{margin-bottom: 15px;}
+.ul_news_list li a{font-size: 13px; display: block; color: #666;font-family: 'Microsoft Yahei';position: relative;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 230px;}
 .ul_news_list li strong a{ font-size: 16px;display: inline-block; color: #333;}
 .ul_news_list li a:hover{ color: #D7182A;}
 .ul_news_list li a span{ position: absolute; right: 0; top: 0;}
@@ -120,7 +122,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .ul_news_list li.first{ padding-bottom: 10px; margin-bottom: 10px; border-bottom: solid 1px #ccc;}
 .newimgbox{ position: relative; float: right; width: 550px;}
 
-.newbox.w300{ width: 300px;display:inline-block;}
+.newbox.w300{ width: 300px;}
 .newbox.w300.m{ margin-left: 30px;}
 
 .imgLink { padding:20px 0; }
@@ -136,10 +138,9 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .imgbox{ border-radius: 3px; overflow: hidden;}
 .imgbox img{ display: block; width: 100%;}
 
-.topMenuSubLi{height:30px;overflow:hidden;;}
-.topMenuSubLi a{width:80%;margin-left:auto;margin-right:auto;}
 
-.footer{ background: #FFF; padding-top: 0px;}
+
+.footer{ background: #FFF; margin-top: 0px;}
 .footer .fline{ padding: 20px 0;}
 .footer .fline_list{}
 .footer .fline_list li {color: #b5b5b7;float: left;line-height: 23px;}
@@ -161,7 +162,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .footer .flink a{ margin-right: 30px;}
 .footer .copyright{ background:#D7182A; padding: 20px 0; color: #FFF; }
 .footer .copyright img{ vertical-align: middle; margin-right: 50px;}
-.footer .copyright .fr{ padding-top: 10px;}
+.footer .copyright .fr{ padding-top: 10px;*margin-top: -30px;*padding: 0;}
 
 
 
@@ -241,12 +242,12 @@ login
 * news
 */
 .newspage{}
-.newspage .table{width: 100%;border-top: 1px solid #e2e2e2; background: #FFF;}
+.newspage .table{width: 100%;border-top: 1px solid #e2e2e2; background: #FFF;*border:1px solid #e2e2e2;}
 .newspage .table .l{ text-align: right; width: 200px; background: #F7F7F7;}
-.newspage .table .l a{color: #595959;  overflow: hidden;height:36px;width: 60%;margin-left: auto;  margin-right: auto;}
+.newspage .table .l a{color: #595959;}
 .newspage .table .l a:hover{color: #D7182A;}
 .newspage .table .l a:hover .posa{ display:inline-block;}
-.newspage .table .r{ border: 1px solid #e2e2e2; border-top: 0;}
+.newspage .table .r{ border: 1px solid #e2e2e2; border-top: 0; *border:none;}
 .newspage .table .r .content{ padding: 20px 30px;}
 .titlebox{padding: 20px 0 20px 40px;margin-bottom: 5px;background: url(../images/linebg.gif) repeat-x bottom;}
 .titlebox h1{ font-size: 18px;}
@@ -257,9 +258,13 @@ login
 .breadcrumb li a{display: inline-block; padding: 0 5px; color: #999;}
 .breadcrumb li a:hover{ color: #D7182A;}
 
+.newspage .table .l{*float: left;}
+.newspage .table .r{*margin-left: 200px;}
+.newspage .table .r.nol{*margin: 0;}
+
 .menutabs{ margin-right: -1px;}
-.menutabs dt{ font-size: 18px; font-weight: bold; border-bottom: 1px solid #CFCFCF; padding: 30px 0px 20px 0px;text-align:center}
-.menutabs dd {height: 35px;line-height: 35px;font-weight: normal;border-bottom: #e2e2e2 solid 1px;color: #7b7b7b;font-size: 16px;text-align:center;}
+.menutabs dt{ font-size: 18px; font-weight: bold; border-bottom: 1px solid #CFCFCF; padding: 30px 30px 20px 0;}
+.menutabs dd {height: 35px;line-height: 35px;text-indent: 35px;font-weight: normal;border-bottom: #e2e2e2 solid 1px;color: #7b7b7b;font-size: 16px;padding-right: 30px;overflow: hidden;}
 .menutabs dd.active {border-right: 4px solid #D7182A;background: #ffffff;  font-weight: bold;}
 .menutabs dd a{ display: block;}
 .menutabs dd a:hover{ color:#D7182A; }
@@ -273,8 +278,8 @@ login
 .listpage .UList li a span{ float: right; font-size: 14px; color: #999;}
 .listpage .UList li a:hover{ color: #D7182A; text-decoration:underline;}
 
-.pagelist{text-align: center; margin: 20px 0;}
-.pagelist li{ display: inline-block;}
+.pagelist{text-align: center; margin: 20px 0; *padding-left: 40px;}
+.pagelist li{ display: inline-block; *float: left; *margin-right: 5px;}
 .pagelist li a{display: block; padding: 5px 10px; background: #F6F6F6; border-radius: 3px; border:1px solid #DFDFDF;}
 .pagelist li a:hover{ color: #D7182A; border:1px solid #D7182A; }
 .pagelist li a.active{ color: #FFF; border:1px solid #FF5666; background: #FF929C; }
@@ -299,7 +304,7 @@ login
 
 
 /* book */
-.bookpage .bookbox{ padding: 60px 0 0 0; width: 550px;margin-left:auto;margin-right:auto;}
+.bookpage .bookbox{ padding: 60px 0 0 0; width: 550px;}
 .bookpage .bookbox strong{ display: block; font-size: 18px; font-weight: bold;}
 .bookpage .bookbox b{ display: inline-block; margin-top: 10px; font-size: 18px; font-weight: bold; color: #D7182A;}
 .bookcont{ font-size: 16px; margin: 20px 0;}

@@ -39,17 +39,17 @@
 	            	<c:if test="${topMenu.menuChildren.size()>0 ||  topMenu.articleChildren.size()>0}">
 	                 <ul class="subnav hvB"  >
 						<c:forEach items="${topMenu.menuChildren}" var="menu">
-		                      <li class="topMenuSubLi"><a href="list.jsp?id=${menu.id}&parentId=${topMenu.id}">${menu.name}</a></li>
+		                      <li class="topMenuSubLi"><a href="list.jsp?id=${menu.id}&parentId=${topMenu.id}"><span>${menu.name}</span></a></li>
 		                 </c:forEach>
 						<c:forEach items="${topMenu.articleChildren}" var="art">
-		                      <li class="topMenuSubLi"><a href="new.jsp?id=${art.id}&parentId=${topMenu.id}">${art.name}</a></li>
+		                      <li class="topMenuSubLi"><a href="new.jsp?id=${art.id}&parentId=${topMenu.id}"><span>${art.name}</span></a></li>
 		                 </c:forEach>
 	                 </ul>
 	                 </c:if>
 	                </li>
 			</c:forEach>
 			<c:forEach items="${topArticles}" var="topArt">
-				<li class="navli hv <c:if test="${topArt.id==topMenu.id }">active</c:if>"><a href="topNews.jsp?topArticleId=${topArt.id}">${topArt.name}</a></li>
+				<li class="navli hv <c:if test="${topArt.id==topMenu.id }">active</c:if>"><a href="topNews.jsp?topArticleId=${topArt.id}" class="a">${topArt.name}</a></li>
 			</c:forEach>
             <li class="navli hv "><a href="book.jsp" class="a">反馈信息</a></li>
         </ul>

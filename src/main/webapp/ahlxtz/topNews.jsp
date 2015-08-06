@@ -40,7 +40,7 @@
             </div>
             <div class="wrap table ">
                 <div class="tr">
-                    <div class="td r">
+                    <div class="td r nol">
                         <div class="titlebox">
                             <h1 class="h1">${currentArticle.name}</h1>
                             <p></p>

@@ -141,6 +141,7 @@ $(document).ready(function(){
     <jsp:include page="top.jsp"></jsp:include>
     <div class="hreader">
      <jsp:include page="menu.jsp"></jsp:include>
+    </div>
     <div class="banner">
     <ul class="slides">
         <li style="background:url(images/temp/img1.jpg) 50% 0 no-repeat;"></li>
@@ -209,11 +210,9 @@ $(document).ready(function(){
 	                        <p style="height:70px;overflow:hidden">${firstArticleConts }</p>
 	                    </li>
                 	</c:if>
-                	<div style="height:160px;overflow:hidden">
                     <c:forEach items="${menus.get(0).articleChildren }" var="art"  begin="0" step="1" end="6">
                     	<li><a target="_blank" href="new.jsp?id=${art.id }&parentId=${menus.get(0).id }" class="inTit fl">${art.name }</a> <span class="fr"><fmt:formatDate value="${art.addtime }" pattern="yyyy-MM-dd"/></span></li>
                     </c:forEach>
-                    </div>
                 </ul>
             </div>
         </div>
