@@ -136,6 +136,7 @@ function goPage(pageNo){
                             </li>
                             </c:forEach>
                         </ul>
+                        <c:if test="${page.totalPageCount >1 }">
                         <ul class="pagelist">
                             <li><a href="javascript:void(0)" onclick=goPage(1)>首页</a></li>
                             <c:if test="${page.currentPageNo-2 >1}">
@@ -157,6 +158,7 @@ function goPage(pageNo){
                              </c:if>
                             <li><a  href="javascript:void(0)" onclick="goPage(${page.totalPageCount})">尾页</a></li>
                         </ul>
+                        </c:if>
                     </div>
                 </div>
             </div>
