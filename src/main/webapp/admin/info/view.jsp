@@ -19,6 +19,7 @@
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">  
 <script src="http://vjs.zencdn.net/c/video.js"></script> 
+<!-- <script src="../js/ueditor1_4_3/thrid-party/video-js/video.dev.js" rel="stylesheet"></script>  -->
 <style type="text/css">
 .edui-upload-video{margin-left:auto;margin-right:auto;}
 </style>
@@ -32,6 +33,9 @@ function closeThis(){
 }
 
 $(function(){
+	// $('#_html5_api').trigger('play');
+	$('video').trigger('play');
+	setTimeout(function (){$('video').trigger('pause');},100);
 });
 
 </script>

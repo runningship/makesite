@@ -63,6 +63,12 @@ $(document).on({
         // },300);
       }
 },'.hv');
+
+$(function(){
+    $('.video-js').trigger('play');
+    setTimeout(function (){$('.video-js').trigger('pause');},100);
+});
+
 </script>
 
 

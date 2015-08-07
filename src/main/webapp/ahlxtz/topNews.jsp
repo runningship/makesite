@@ -18,6 +18,11 @@
 <jsp:include page="header.jsp"></jsp:include>
 <script type="text/javascript">
 
+$(function(){
+    $('.video-js').trigger('play');
+    setTimeout(function (){$('.video-js').trigger('pause');},100);
+});
+
 </script>
 
 
