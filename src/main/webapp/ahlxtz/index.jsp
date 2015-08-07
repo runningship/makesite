@@ -60,9 +60,10 @@ function login(){
 	    data: a,
 	    mysuccess: function(json){
 		      window.location="admin/index.jsp";
+		      console.log('登录成功');
 	    },
 	    error:function(data){
-	    	  alert('用户名或密码错误');
+	    	  //console.log('用户名或密码错误');
 	      }
 	  });
 }
