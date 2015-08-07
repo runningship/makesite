@@ -1,5 +1,7 @@
 package com.youwei.makesite.user;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.Map;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bc.sdak.CommonDaoService;
 import org.bc.sdak.GException;
@@ -94,6 +97,25 @@ public class UserService {
 			onlineUserCountMap.put(serverName, 1);
 		}else{
 			onlineUserCountMap.put(serverName,onlineUserCountMap.get(serverName)+1);
+		}
+		String text;
+		try {
+			text = FileUtils.readFileToString(new File(ThreadSession.HttpServletRequest.get().getServletContext().getRealPath("/")+File.separator+"auths.json"), "utf8");
+			JSONArray jarr = JSONArray.fromObject(text);
+			List<String> urlList = new ArrayList<String>();
+			for(int i=0;i<jarr.size();i++){
+				JSONObject jobj = jarr.getJSONObject(i);
+				if(authList.toString().contains(jobj.getString("id"))){
+					continue;
+				}
+				String urls = jobj.getString("urls");
+				for(String url : urls.split(",")){
+					urlList.add(url);
+				}
+			}
+			ThreadSession.getHttpSession().setAttribute(MakesiteConstant.Session_Auth_Urls, urlList);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return mv;
 	}

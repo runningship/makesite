@@ -1,6 +1,7 @@
 package com.youwei.makesite;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -60,6 +61,11 @@ public class UserSessionFilter implements Filter {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
+    		return;
+    	}
+    	List<String> urls = (List<String>) session.getAttribute(MakesiteConstant.Session_Auth_Urls);
+    	if(urls!=null && urls.contains(path)){
+    		response.getOutputStream().write("您的权限不能访问该页面".getBytes());
     		return;
     	}
 		chain.doFilter(request, response);
