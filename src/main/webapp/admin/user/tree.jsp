@@ -24,7 +24,7 @@ var setting = {
   view: {
     showIcon: false,
     addDiyDom: addDiyDom,
-    dblClickExpand: false,
+    dblClickExpand: false
   },
   data: {
   },

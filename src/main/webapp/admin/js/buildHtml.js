@@ -1,7 +1,4 @@
-window.blockAlert=window.alert;
-window.alert=function(msg){
-	layer.msg(msg);
-}
+
 function buildHtmlWithJsonArray(id,json,removeTemplate,remainItems){
     var temp = $('.'+id);
 

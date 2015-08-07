@@ -36,7 +36,7 @@ public class UserSessionFilter implements Filter {
 		ThreadSession.setHttpSession(req.getSession());
 		HttpSession session = ThreadSession.getHttpSession();
 		String path = req.getServletPath();
-		if(path.contains("login") || path.contains("/js/")){
+		if(path.contains("login") || path.contains("/js/") || path.contains("feedback")){
 			chain.doFilter(request, response);
 			return;
 		}

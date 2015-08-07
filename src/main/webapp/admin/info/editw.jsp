@@ -52,7 +52,7 @@ $(function(){
             ['forecolor','source', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize','insertvideo','map',
              'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
             ]
-        ],
+        ]
   });
     ue.addListener( 'ready', function( editor ) {
         ue.setContent($('#menu_conts').html());

@@ -54,7 +54,7 @@ $(function(){
              'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
              'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
             ]
-        ],
+        ]
   });
     ue.addListener( 'ready', function( editor ) {
         ue.setContent($('#menu_conts').html());

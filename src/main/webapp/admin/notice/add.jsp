@@ -61,7 +61,7 @@ $(function(){
              'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
              'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
             ]
-        ],
+        ]
   });
 });
 
@@ -69,7 +69,7 @@ var setting = {
   view: {
     showIcon: false,
     addDiyDom: addDiyDom,
-    dblClickExpand: false,
+    dblClickExpand: false
   },
   data: {
   },
