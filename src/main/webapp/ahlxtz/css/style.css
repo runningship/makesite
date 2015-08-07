@@ -47,7 +47,7 @@ filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false)
 .mainer{ background: url('../images/bodyback.jpg'); padding-bottom: 40px;}
 
 .toper{ border-top:5px solid #D7182A; }
-.tA{ float: right; height: 25px; line-height: 25px; padding-right: 20px;z-index: 9;  position: relative;
+.tA{ float: right; height: 25px; line-height: 25px; padding-right: 20px;z-index: 99;  position: relative;
   position: absolute; right: 0;}
 .tA li{ float: left; margin-left: 15px;}
 .tMenu{ display: none; color: #FFF; float: right; position: relative; z-index: 9; background: #09F;}
