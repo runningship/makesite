@@ -45,7 +45,7 @@ catch (e) {
         </dl>
         <ul class="tA">
             <li><a href="javascript:void(0);" onclick="AddFavorite('联信投资',location.href)">加入收藏</a></li>
-            <li><a href="javascript:void(0);" onclick="SetHome(this,'http://192.168.1.5:8080/makesite/index.jsp');">设为首页</a></li>
+            <li><a href="javascript:void(0);" onclick="SetHome(this,'http://ahlxtz.zhongjiebao.com//makesite/index.jsp');">设为首页</a></li>
                 <!-- <li><a href="#" class="btn_act" data-type="addFavorite">加入收藏</a></li>
                 <li><a href="#" class="btn_act" data-type="addHome">设置首页</a></li> -->
         </ul>

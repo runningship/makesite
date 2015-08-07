@@ -26,7 +26,7 @@
 		p.currentPageNo = Integer.valueOf(currentPageNo);
 	}catch(Exception ex){
 	}
-	StringBuilder hql = new StringBuilder("select sf.name as name, sf.id as fid, sf.uid as uid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  ,sf.path as path, sf.publish as publish from SharedFile sf,User u where sf.uid = u.id");
+	StringBuilder hql = new StringBuilder("select sf.name as name, sf.id as fid, sf.uid as uid, sf.uploadTime as uploadTime, sf.size as size, u.name as uname  ,sf.path as path, sf.publish as publish from SharedFile sf left join uc_user u on sf.uid = u.id where 1=1 ");
 	List<Object> params = new ArrayList<Object>();
 	if(StringUtils.isNotEmpty(filename)){
 		hql.append(" and sf.name like ?");
@@ -40,7 +40,7 @@
 		hql.append(" and sf._site = ?");
 		params.add(_site);
 	}
-	String session_auth_list=(String)request.getAttribute(MakesiteConstant.Session_Auth_List);
+	String session_auth_list=(String)session.getAttribute(MakesiteConstant.Session_Auth_List);
 	if(StringUtils.isEmpty(session_auth_list)  || !session_auth_list.contains("$file_shenhe")){
 		//没有审核权限
 		hql.append(" and (sf.uid = ? or sf.publish=1)");
@@ -48,7 +48,7 @@
 	}
 	
 	hql.append(" order by sf.id desc");
-	p  = dao.findPage(p, hql.toString(),true, params.toArray());
+	p  = dao.findPageBySql(p, hql.toString(), params.toArray());
 	request.setAttribute("page", p);
 	request.setAttribute("filename", filename);
 	request.setAttribute("sendName", sendName);

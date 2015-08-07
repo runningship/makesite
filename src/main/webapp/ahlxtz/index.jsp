@@ -220,9 +220,9 @@ $(document).ready(function(){
 
         <div class="wbox clearfix imgLink">
             <ul class="imgLink_list">
-                <li class="tal"><a href="#"><img src="images/a1.jpg" alt=""></a></li>
-                <li class="tac"><a href="#"><img src="images/a2.jpg" alt=""></a></li>
-                <li class="tar"><a href="#"><img src="images/a3.jpg" alt=""></a></li>
+                <li class="tal"><a><img src="images/a1.jpg" alt=""></a></li>
+                <li class="tac"><a><img src="images/a2.jpg" alt=""></a></li>
+                <li class="tar"><a><img src="images/a3.jpg" alt=""></a></li>
             </ul>
         </div>
 
