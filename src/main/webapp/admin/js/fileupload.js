@@ -6,7 +6,8 @@ function initUploadHouseImage(id , projectName){
       'buttonText': '上传文件',
       'removeTimeout': 0.5,
       'fileSizeLimit' : '500MB',
-      'height':40,
+      'height':35,
+      'width':100,
       'onUploadError' : function(file, errorCode, errorMsg, errorString){
           //console.log('The file ' + file.name + ' could not be uploaded: ' + errorString);
       },

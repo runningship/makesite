@@ -17,8 +17,8 @@
 <head>
 <title>文章预览</title>
 <jsp:include page="../inc/header.jsp"></jsp:include>
-<link href="../js/video-js/video-js.css" rel="stylesheet">  
-<script src="../js/video-js/video.dev.js" rel="stylesheet"></script> 
+<!-- <link href="../js/video-js/video-js.css" rel="stylesheet">   -->
+<!-- <script src="../js/video-js/video.js" rel="stylesheet"></script>  -->
 <style type="text/css">
 .edui-upload-video{margin-left:auto;margin-right:auto;}
 </style>
@@ -35,7 +35,7 @@ $(function(){
 	// $('#_html5_api').trigger('play');
 	//$('video').trigger('play');
 	//setTimeout(function (){$('video').trigger('pause');},100);
-	$('.video-js').each(function(index,obj){
+	/* $('.video-js').each(function(index,obj){
 		videojs(obj).ready(function(){
 		  var myPlayer = this;
 		  myPlayer.play();
@@ -44,7 +44,7 @@ $(function(){
 		  },300);
 		  //myPlayer.pause();
 		});
-	});
+	}); */
 	
 });
 

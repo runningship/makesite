@@ -8729,7 +8729,10 @@ vjs.TextTrackList = function(tracks) {
     list = document.createElement('custom');
 
     for (prop in vjs.TextTrackList.prototype) {
-      list[prop] = vjs.TextTrackList.prototype[prop];
+    	try{
+    		list[prop] = vjs.TextTrackList.prototype[prop];
+    	}catch(e){}
+      
     }
   }
 

@@ -16,21 +16,20 @@
 <html>
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="js/video-js/video-js.css" rel="stylesheet">  
-<script src="js/video-js/video.dev.js" rel="stylesheet"></script> 
+<!-- <link href="js/video-js/video-js.css" rel="stylesheet">   -->
+<!-- <script src="js/video-js/video.dev.js" rel="stylesheet"></script>  -->
 <script type="text/javascript">
 
 $(function(){
-    $('.video-js').each(function(index,obj){
-        videojs(obj).ready(function(){
-          var myPlayer = this;
-          myPlayer.play();
-          setTimeout(function(){
-              myPlayer.pause();
-          },300);
-          //myPlayer.pause();
-        });
-    });
+//     $('.video-js').each(function(index,obj){
+//         videojs(obj).ready(function(){
+//           var myPlayer = this;
+//           myPlayer.play();
+//           setTimeout(function(){
+//               myPlayer.pause();
+//           },300);
+//         });
+//     });
 });
 
 </script>

@@ -61,6 +61,7 @@
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <script type="text/javascript"  src="../js/fileupload.js" ></script>
 <script type="text/javascript" src="../js/uploadify/jquery.uploadify.js"></script>
+<link rel="stylesheet" href="../js/uploadify/uploadify.css">
 <link rel="stylesheet" href="list.css">
 </head>
 <script type="text/javascript">
