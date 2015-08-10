@@ -22,28 +22,36 @@
 	
 	String menuId = request.getParameter("id");
 	if(StringUtils.isEmpty(menuId)){
-		menuId = menuList.get(0).id.toString();
+		if(menuList.size()>0){
+			menuId = menuList.get(0).id.toString();	
+		}
 	}
-	Menu currentMenu = dao.get(Menu.class, Integer.valueOf(menuId));
-	request.setAttribute("currentMenu", currentMenu);
-	request.setAttribute("menuId", menuId);
+	if(StringUtils.isNotEmpty(menuId)){
+		Menu currentMenu = dao.get(Menu.class, Integer.valueOf(menuId));
+		request.setAttribute("currentMenu", currentMenu);
+		request.setAttribute("menuId", menuId);
+		
+		Page<Article> p = new Page<Article>();
+		//p.setPageSize(1);
+		String currentPageNo =  request.getParameter("currentPageNo");
+		try{
+			p.currentPageNo = Integer.valueOf(currentPageNo);
+		}catch(Exception ex){
+			
+		}
+		//加载二级栏目下的文章列表 
+		p = dao.findPage(p, "from Article where parentId=?", Integer.valueOf(menuId));
+		request.setAttribute("page", p);
+	}
+	
 	
 	//加载文章列表
 	List<Article> articleList = dao.listByParams(Article.class, "from Article where parentId=?", Integer.valueOf(topId));
 	request.setAttribute("menuList", menuList);
 	request.setAttribute("articleList", articleList);
 	
-	Page<Article> p = new Page<Article>();
-	//p.setPageSize(1);
-	String currentPageNo =  request.getParameter("currentPageNo");
-	try{
-		p.currentPageNo = Integer.valueOf(currentPageNo);
-	}catch(Exception ex){
-		
-	}
-	//加载二级栏目下的文章列表 
-	p = dao.findPage(p, "from Article where parentId=?", Integer.valueOf(menuId));
-	request.setAttribute("page", p);
+	
+	
 %>
 <!DOCTYPE html>
 <html>
