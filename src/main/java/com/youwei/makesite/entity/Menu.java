@@ -29,6 +29,8 @@ public class Menu {
 	
 	public String _site;
 	
+	public Integer isImgMenu;
+	
 	public transient List<Menu> menuChildren = new ArrayList<Menu>();
 	
 	public transient List<Article> articleChildren = new ArrayList<Article>();

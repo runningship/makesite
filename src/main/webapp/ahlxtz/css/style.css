@@ -126,7 +126,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .newbox.w300.m{ margin-left: 30px;}
 
 .imgLink { padding:20px 0; }
-.imgLink li{ float: left; width: 320px; }
+.imgLink li{ display: inline-block; width: 24.7%; text-align: center; }
 
 .picbox{}
 .pic_list_box{ overflow: hidden; padding: 30px 0;}

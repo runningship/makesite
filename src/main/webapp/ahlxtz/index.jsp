@@ -153,8 +153,8 @@ $(document).ready(function(){
     <div class="mainer">
         <div class="wbox PT30 clearfix">
             <div class="loginboxs">
-                
-                <form name="form1" onsubmit="login();return false;">
+                <EMBED class=edui-faked-video type=application/x-shockwave-flash pluginspage=http://www.macromedia.com/go/getflashplayer height=240 width=320 src="http://ahlxtz.zhongjiebao.com/upload/ahlxtz/20150810/9de2b30e-3725-4216-9e04-38d3b51cca45.avi" allowfullscreen="true" allowscriptaccess="never" menu="false" loop="false" play="true" wmode="transparent"></embed>
+                <!-- <form name="form1" onsubmit="login();return false;">
                 <ul>
                     <li class="tit"><strong>登录</strong></li>
                     <li><label class="inputbox focus"><i class="iconfont iu">&#xe608;</i><input type="text" name="account" class="input u" value=""></label></li>
@@ -162,7 +162,7 @@ $(document).ready(function(){
                     <li class="btnbox"><a href="#" class="btn btn_submit btn_act" data-type="submit">登　录</a></li>
                         <input type="submit" class="hidden submit" name="submit">
                 </ul>
-                </form>
+                </form> -->
             </div>
             <div class="aboutbox">
                 <strong class="tita">${jianjie.name}</strong>
@@ -220,9 +220,10 @@ $(document).ready(function(){
 
         <div class="wbox clearfix imgLink">
             <ul class="imgLink_list">
-                <li class="tal"><a><img src="images/a1.jpg" alt=""></a></li>
-                <li class="tac"><a><img src="images/a2.jpg" alt=""></a></li>
-                <li class="tar"><a><img src="images/a3.jpg" alt=""></a></li>
+                <li class=""><a><img src="images/a1.jpg" alt=""></a></li>
+                <li class=""><a><img src="images/a2.jpg" alt=""></a></li>
+                <li class=""><a><img src="images/a3.jpg" alt=""></a></li>
+                <li class=""><a target="_blank" href="http://gtjt.cc/gt/"><img src="images/a4.jpg" alt=""></a></li>
             </ul>
         </div>
 

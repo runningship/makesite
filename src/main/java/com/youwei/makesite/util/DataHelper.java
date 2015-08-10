@@ -28,7 +28,8 @@ public class DataHelper {
 	}
 	
 	public static String getServerName(HttpServletRequest req){
-		return "ahlxtz";
+		String site = ConfigCache.get(req.getServerName(), "default");
+		return site;
 //		return req.getServerName();
 	}
 }
