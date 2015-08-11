@@ -123,11 +123,11 @@ $(function(){
                             <h2>电话：</h2>
                             <p>0551-63611301</p>
                             <h2>传真：</h2>
-                            <p>055163611817</p>
+                            <p>0551-63611817</p>
                             <h2>邮箱：</h2>
                             <p>lxtz@ahlxtz.com</p>
                             <h2>网址：</h2>
-                            <p>ahlxtz.com</p>
+                            <p>www.ahlxtz.com</p>
                         </div>
                     </div>
                     <div class="td r">

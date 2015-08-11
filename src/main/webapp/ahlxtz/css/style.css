@@ -109,6 +109,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .loginboxs li a.btn{ display: inline-block; height: 30px; line-height: 30px; text-align: center; padding:0 20px; background: #EC3C4D; border-radius: 4px; color: #FFF; font-size: 16px;}
 .loginboxs li a.btn:hover{ background: #EC3C4D;}
 
+.loginboxs2 { background: #F6F6F6; float: right; height: 190px; border: 3px solid #EEE; border-top-width: 3px; width: 280px; }
 
 .newbox{ padding:20px 0;}
 .newbox .h2{ margin-bottom: 20px;}
@@ -126,7 +127,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .newbox.w300.m{ margin-left: 30px;}
 
 .imgLink { padding:20px 0; }
-.imgLink li{ display: inline-block; width: 24.7%; text-align: center; }
+.imgLink li{ display: inline-block; width: 24.5%; text-align: right; }
 
 .picbox{}
 .pic_list_box{ overflow: hidden; padding: 30px 0;}
@@ -318,4 +319,9 @@ login
 
 
 
-
+body .bx-controls-auto {
+    display: none;
+}
+body .bx-pager.bx-default-pager {
+    display: none;
+}

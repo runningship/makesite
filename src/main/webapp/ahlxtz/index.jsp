@@ -36,6 +36,7 @@ if(menus.get(0).articleChildren!=null && menus.get(0).articleChildren.size()>0){
 <html>
 <head>
 <jsp:include page="header.jsp"></jsp:include>
+<!-- <script src="/js/swfobject.js" type="text/javascript"></script> -->
 <script type="text/javascript">
 $(document).on('click', '.btn_act', function(event) {
     var Thi=$(this),
@@ -132,6 +133,7 @@ $(document).ready(function(){
         slideMargin: 10
     });
 });
+
 </script>
 
 
@@ -152,8 +154,20 @@ $(document).ready(function(){
     </div>
     <div class="mainer">
         <div class="wbox PT30 clearfix">
-            <div class="loginboxs">
-                <EMBED class=edui-faked-video type=application/x-shockwave-flash pluginspage=http://www.macromedia.com/go/getflashplayer height=240 width=320 src="http://ahlxtz.zhongjiebao.com/upload/ahlxtz/20150810/9de2b30e-3725-4216-9e04-38d3b51cca45.avi" allowfullscreen="true" allowscriptaccess="never" menu="false" loop="false" play="true" wmode="transparent"></embed>
+            <div class="loginboxs2">
+            <!-- <object id="movie" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="320" height="200">
+              <embed src="video.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="290" height="218"></embed>
+            </object>
+            <button onClick="movie.Play()">Play</button>
+            <button onClick="movie.StopPlay()">StopPlay</button> -->
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="232" height="193">
+                <param name="movie" value="images/videoPlayer.swf">
+                <param name="quality" value="high">
+                <param name="allowFullScreen" value="true">
+                <param name="FlashVars" value="vcastr_file=video.swf&amp;LogoText=www.dgjjc.com&amp;BufferTime=3&amp;IsAutoPlay=1">
+                <embed src="images/videoPlayer.swf" allowfullscreen="true" flashvars="vcastr_file=video.swf&amp;LogoText=www.dgjjc.com&amp;IsAutoPlay=1" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="290" height="218">
+            </object>
+                <!-- <EMBED class=edui-faked-video type=application/x-shockwave-flash pluginspage=http://www.macromedia.com/go/getflashplayer height=240 width=320 src="http://ahlxtz.zhongjiebao.com/upload/ahlxtz/20150810/9de2b30e-3725-4216-9e04-38d3b51cca45.avi" allowfullscreen="true" allowscriptaccess="never" menu="false" loop="false" play="true" wmode="transparent"></embed> -->
                 <!-- <form name="form1" onsubmit="login();return false;">
                 <ul>
                     <li class="tit"><strong>登录</strong></li>
