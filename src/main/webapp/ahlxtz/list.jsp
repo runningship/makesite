@@ -40,7 +40,7 @@
 			
 		}
 		//加载二级栏目下的文章列表 
-		p = dao.findPage(p, "from Article where parentId=?", Integer.valueOf(menuId));
+		p = dao.findPage(p, "from Article where parentId=? order by orderx asc, id desc", Integer.valueOf(menuId));
 		request.setAttribute("page", p);
 	}
 	

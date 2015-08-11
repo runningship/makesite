@@ -90,7 +90,7 @@ YW={
         },
         error: function(data){
         },
-        success:function(data){
+        success:function(data , mysuccess){
         	if(data!=undefined && data.indexOf('login.jsp')>-1){
                 eval(data);
         		return;
@@ -136,8 +136,8 @@ YW={
                 }else if(data.return_status){
                     alert('请求服务失败，请稍后重试');
                 }else{
-                	if(YW.options.mysuccess!=undefined){
-                		YW.options.mysuccess(json);
+                	if(mysuccess!=undefined){
+                		mysuccess(json);
                 	}
                 }
         	}
@@ -153,8 +153,13 @@ YW={
         if(options.error==undefined){
             options.error = YW.options.error;
         }
-        options.success = YW.options.success;
-        YW.options.mysuccess = options.mysuccess;
+//        options.success = YW.options.success;
+//        YW.options.mysuccess = options.mysuccess;
+        if(options.mysuccess!=undefined){
+            options.success = function(data){
+            	YW.options.success(data , options.mysuccess);
+            };
+        }
         $.ajax(options);
     }
 }

@@ -59,6 +59,7 @@ $(function(){
 </script>
 <body style="background-color:white">
 	<form name="form1" class="add-form" onsubmit="save();">
+		<input type="hidden" name="isImgMenu" value="0"/>
 		<table style="width:80%;  margin-right: auto;margin-left:auto;">
 			<tr>
 				<td class="first"><label >父栏目</label></td>

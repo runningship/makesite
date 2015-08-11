@@ -22,7 +22,7 @@
 	}catch(Exception ex){
 	}
 	List<Menu> yiji  = dao.listByParams(Menu.class, "from Menu where parentId is null and _site = ? order by orderx desc" , _site);
-	StringBuilder hql = new StringBuilder("select m1.id as id , m2.name as fname , m1.orderx as orderx , m1.name as name from Menu m1 left join "
+	StringBuilder hql = new StringBuilder("select m1.id as id , m2.name as fname , m1.orderx as orderx , m1.name as name , m1.isImgMenu as isImgMenu from Menu m1 left join "
 			+" Menu m2 on m1.parentId = m2.id where m1._site =?");
 	List<Object> params = new ArrayList<Object>();
 	params.add(_site);
@@ -30,7 +30,7 @@
 		hql.append(" and m1.parentId =?");
 		params.add(Integer.valueOf(parentId));
 	}
-	hql.append(" order by m2.orderx asc,m1.orderx desc");
+	hql.append(" order by m2.orderx asc,m1.orderx asc");
 	p  = dao.findPageBySql(p, hql.toString(), params.toArray());
 	request.setAttribute("page", p);
 	request.setAttribute("yijiList", yiji);
@@ -141,7 +141,7 @@ function openAdd(){
 							<td class="orders">${menu.orderx }</td> 
 							<td>
 							<c:if test="${session_auth_list.indexOf('$info_menu')>-1 }"><a href="#" onclick="editThis(${menu.id})">修改</a></c:if> 
-							<c:if test="${session_auth_list.indexOf('$info_menu')>-1 }"> <a href="#" onclick="delThis(${menu.id})">删除</a> </c:if>
+							<c:if test="${session_auth_list.indexOf('$info_menu')>-1 && menu.isImgMenu==0}"> <a href="#" onclick="delThis(${menu.id})">删除</a> </c:if>
 							</td>
 						</tr>
 						</c:forEach>
