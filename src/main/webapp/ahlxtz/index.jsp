@@ -134,13 +134,8 @@ $(function(){
 
 </script>
 <script type="text/javascript">
-$(document).ready(function(){
-	$(document).on('keyup',function(event){
-		if(event.keyCode==13){
-			login();
-		}
-	});
-	
+function getSider(){
+
     $('.ul_pic_lists').bxSlider({
         slideWidth: 200, 
         auto: true,
@@ -149,6 +144,18 @@ $(document).ready(function(){
         maxSlides: 5,
         slideMargin: 10
     });
+}
+$(document).ready(function(){
+	$(document).on('keyup',function(event){
+		if(event.keyCode==13){
+			login();
+		}
+	});
+	
+
+    var GS=setTimeout(function(){
+getSider();
+    },5000)
 });
 
 
@@ -241,10 +248,10 @@ function play(){
 
         <div class="wbox clearfix imgLink">
             <ul class="imgLink_list">
-                <li class=""><a href="list.jsp?parentId=47" target="_blank"><img src="images/a1.jpg" alt=""></a></li>
-                <li class=""><a href="list.jsp?parentId=51" target="_blank"><img src="images/a2.jpg" alt=""></a></li>
-                <li class=""><a href="list.jsp?parentId=52" target="_blank"><img src="images/a3.jpg" alt=""></a></li>
-                <li class=""><a href="list.jsp?parentId=53" target="_blank" ><img src="images/a4.jpg" alt=""></a></li>
+                <li class=""><a href="new.jsp?parentId=26" target="_blank"><img src="images/a1.jpg" alt=""></a></li>
+                <li class=""><a href="new.jsp?id=21&parentId=24" target="_blank"><img src="images/a2.jpg" alt=""></a></li>
+                <li class=""><a href="topNews.jsp?topArticleId=54" target="_blank"><img src="images/a3.jpg" alt=""></a></li>
+                <li class=""><a href="http://gtjt.cc/gt/" target="_blank" ><img src="images/a4.jpg" alt=""></a></li>
             </ul>
         </div>
 
