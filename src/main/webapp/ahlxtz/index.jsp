@@ -1,3 +1,7 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.bc.sdak.Page"%>
 <%@page import="com.youwei.makesite.util.HTMLSpirit"%>
 <%@page import="com.youwei.makesite.entity.Menu"%>
 <%@page import="java.util.List"%>
@@ -21,9 +25,22 @@ for(Menu menu : menus){
 	//加载子栏目列表
 	List<Menu> menuList = dao.listByParams(Menu.class, "from Menu where parentId=? order by orderx asc", menu.id);
 	//加载文章列表
-	List<Article> articleList = dao.listByParams(Article.class, "from Article where parentId=? order by orderx asc", menu.id);
+	Page<Map> p = new Page<Map>();
+	p.setPageSize(5);
+	String sql = "select art.id as artId, art.name as name ,art._site ,art.conts as conts, art.addtime as addtime , art.orderx as orderx , tt.* from " 
+			+"Article art left join (  SELECT m1.id as fid , m2.id as tfid ,  m1.name as fname ,m2.name as tfname FROM Menu m1 left join Menu m2 on m1.parentId=m2.id ) tt on art.parentId=tt.fid where art._site=? and art.parentId>=0 and (tt.tfid=? or tt.fid=?) order by art.orderx asc,art.id desc ";
+	p  = dao.findPageBySql(p, sql, DataHelper.getServerName(request) , menu.id , menu.id);
+	//List<Article> articleList = dao.listByParams(Article.class, "from Article where parentId=? order by orderx asc", menu.id);
 	menu.menuChildren = menuList;
-	menu.articleChildren = articleList;
+	menu.articleChildren = new ArrayList<Article>();
+	for(Map map : p.getResult()){
+		Article art = new Article();
+		art.id = (Integer)map.get("artId");
+		art.name = (String)map.get("name");
+		art.conts = (String)map.get("conts");
+		art.addtime = (Date)map.get("addtime");
+		menu.articleChildren.add(art);
+	}
 }
 request.setAttribute("menus", menus);
 if(menus.get(0).articleChildren!=null && menus.get(0).articleChildren.size()>0){
@@ -134,6 +151,17 @@ $(document).ready(function(){
     });
 });
 
+
+function play(){
+	var html = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="280" height="188">'
+    					+'<param name="movie" value="images/videoPlayer.swf">'
+    					+'<param name="quality" value="high">'
+    					+'<param name="allowFullScreen" value="true">'
+    					+'<param name="FlashVars" value="vcastr_file=http://ahlxtz.zhongjiebao.com/upload/ahlxtz/video.flv&amp;LogoText=www.zhlxtz.com&amp;BufferTime=1&amp;IsAutoPlay=1">'
+    					+'<embed src="images/videoPlayer.swf" allowfullscreen="true" flashvars="vcastr_file=http://ahlxtz.zhongjiebao.com/upload/ahlxtz/video.flv&amp;LogoText=www.ahlxtz.com&amp;IsAutoPlay=1" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="280" height="188">'
+						+'</object>';
+	$('#index_video').html(html);
+}
 </script>
 
 
@@ -154,14 +182,8 @@ $(document).ready(function(){
     </div>
     <div class="mainer">
         <div class="wbox PT30 clearfix">
-            <div class="loginboxs2" style="margin-top:10px;">
-            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="280" height="188">
-                <param name="movie" value="images/videoPlayer.swf">
-                <param name="quality" value="high">
-                <param name="allowFullScreen" value="true">
-                <param name="FlashVars" value="vcastr_file=http://ahlxtz.zhongjiebao.com/upload/ahlxtz/video.flv&amp;LogoText=www.zhlxtz.com&amp;BufferTime=1&amp;IsAutoPlay=0">
-                <embed src="images/videoPlayer.swf" allowfullscreen="true" flashvars="vcastr_file=http://ahlxtz.zhongjiebao.com/upload/ahlxtz/video.flv&amp;LogoText=www.ahlxtz.com&amp;IsAutoPlay=0" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="280" height="188">
-            </object>
+            <div class="loginboxs2" style="margin-top:10px;" id="index_video">
+            	<img src="images/yulan.png" onclick="play();" style="cursor:pointer;margin-left:auto;display:block;"/>
             </div>
             <div class="aboutbox">
                 <strong class="tita">${jianjie.name}</strong>

@@ -52,7 +52,7 @@
 				<li class="navli hv <c:if test="${topArt.id==topMenu.id }">active</c:if>"><a href="topNews.jsp?topArticleId=${topArt.id}" class="a">${topArt.name}</a></li>
 			</c:forEach>
             <li class="navli hv "><a href="book.jsp" class="a">反馈信息</a></li>
-            <li class="navli hv"><a target="_blank" href="${projectName}/login/login.jsp" class="a">系统登录</a></li>
+            <li class="navli hv"><a target="_blank" href="login/login.jsp" class="a">系统登录</a></li>
         </ul>
         </div>
     </div>

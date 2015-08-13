@@ -78,7 +78,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 }
 .nav .subnav li{ padding:0 0px;}
 .nav .subnav a{ display: block; color: #000;font-weight: normal;white-space:nowrap; padding: 0 5px;}
-.nav .subnav a span{overflow: hidden;}
+.nav .subnav a span{overflow: hidden; display: block;}
 .nav .subnav a:hover{  background: #FFF;}
 
 
@@ -109,7 +109,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .loginboxs li a.btn{ display: inline-block; height: 30px; line-height: 30px; text-align: center; padding:0 20px; background: #EC3C4D; border-radius: 4px; color: #FFF; font-size: 16px;}
 .loginboxs li a.btn:hover{ background: #EC3C4D;}
 
-.loginboxs2 { background: #F6F6F6; float: right; height: 190px; border: 3px solid #EEE; border-top-width: 3px; width: 280px; }
+.loginboxs2 { float: right; height: 190px;border-top-width: 3px; width: 280px; }
 
 .newbox{ padding:20px 0;}
 .newbox .h2{ margin-bottom: 20px;}
@@ -250,6 +250,7 @@ login
 .newspage .table .l a:hover .posa{ display:inline-block;}
 .newspage .table .r{ border: 1px solid #e2e2e2; border-top: 0; *border:none;}
 .newspage .table .r .content{ padding: 20px 30px;}
+.newspage .table .r .content img{ width: 100%; display: block;}
 .titlebox{padding: 20px 0 20px 40px;margin-bottom: 5px;background: url(../images/linebg.gif) repeat-x bottom;}
 .titlebox h1{ font-size: 18px;}
 

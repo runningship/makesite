@@ -9,6 +9,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
+	request.setAttribute("projectName", request.getServletContext().getContextPath());
 	String topId = request.getParameter("parentId");
 	
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
@@ -49,8 +50,6 @@
 	List<Article> articleList = dao.listByParams(Article.class, "from Article where parentId=?", Integer.valueOf(topId));
 	request.setAttribute("menuList", menuList);
 	request.setAttribute("articleList", articleList);
-	
-	
 	
 %>
 <!DOCTYPE html>
@@ -120,7 +119,7 @@ function goPage(pageNo){
                             	</dd>
                             </c:forEach>
                             <c:forEach items="${articleList}" var="art">
-                            	<dd ><a href="new.jsp?id=${art.id }&parentId=${topId}">${art.name }</a> </dd>
+                            	<dd><a href="new.jsp?id=${art.id }&parentId=${topId}">${art.name }</a> </dd>
                             </c:forEach>
                         </dl>
                         <div class="aboutContent">
