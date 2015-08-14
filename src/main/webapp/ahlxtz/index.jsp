@@ -53,7 +53,7 @@ if(menus.get(0).articleChildren!=null && menus.get(0).articleChildren.size()>0){
 <html>
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<!-- <script src="/js/swfobject.js" type="text/javascript"></script> -->
+<script src="js/jquery.carouFredSel-6.0.4-packed.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).on('click', '.btn_act', function(event) {
     var Thi=$(this),
@@ -134,17 +134,6 @@ $(function(){
 
 </script>
 <script type="text/javascript">
-function getSider(){
-
-    $('.ul_pic_lists').bxSlider({
-        slideWidth: 200, 
-        auto: true,
-        autoControls: true,
-        minSlides: 3,
-        maxSlides: 5,
-        slideMargin: 10
-    });
-}
 $(document).ready(function(){
 	$(document).on('keyup',function(event){
 		if(event.keyCode==13){
@@ -152,10 +141,6 @@ $(document).ready(function(){
 		}
 	});
 	
-
-    var GS=setTimeout(function(){
-getSider();
-    },5000)
 });
 
 
@@ -171,6 +156,17 @@ function play(){
 }
 </script>
 
+<script type="text/javascript">
+    $(function() {
+        $('.pic_list_box ul').carouFredSel({
+            prev: '#prev',
+            next: '#next',
+            pagination: "#pager",
+            scroll: 1000
+        });
+
+    });
+</script>
 
 <style>
 </style>
@@ -295,19 +291,19 @@ function play(){
             <div class="picbox">
 
                 <div class="pic_list_box">
-                <div class="ul_pic_lists">
-                    <div class="slide"><img src="images/temp/01.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/02.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/03.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/04.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/05.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/06.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/07.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/08.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/09.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/10.jpg" alt=""></div>
-                    <div class="slide"><img src="images/temp/11.jpg" alt=""></div>
-                </div>
+
+                <ul>
+                    <li><img src="images/temp/01.jpg" alt="" /><span>Image1</span></li>
+                    <li><img src="images/temp/02.jpg" alt="" /><span>Image2</span></li>
+                    <li><img src="images/temp/03.jpg" alt="" /><span>Image3</span></li>
+                    <li><img src="images/temp/04.jpg" alt="" /><span>Image4</span></li>
+                    <li><img src="images/temp/05.jpg" alt="" /><span>Image5</span></li>
+                    <li><img src="images/temp/06.jpg" alt="" /><span>Image6</span></li>                    
+                </ul>
+                <div class="clearfix"></div>
+                <a id="prev" class="prev" href="#">&lt;</a>
+                <a id="next" class="next" href="#">&gt;</a>
+                <div id="pager" class="pager"></div>
                 </div>
             </div>
         </div>

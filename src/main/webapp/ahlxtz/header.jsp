@@ -9,12 +9,10 @@
 <!-- <script type="text/javascript" src="js/jquery-1.9.1.js"></script> -->
 <script type="text/javascript" src="js/buildHtml.js"></script>
 <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="js/jquery.bxslider.js"></script>
 <script type="text/javascript" src="js/slides.min.jquery.js"></script>
 <script type="text/javascript" src="js/jquery.imagesAutoBox.js"></script>
 <script type="text/javascript" src="js/javascript.js"></script>
 <script type="text/javascript" src="js/json2.js"></script>
 <link href="css/reset.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css">
 <link type="image/x-icon" rel="icon" href="favicon.ico">

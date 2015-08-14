@@ -15,6 +15,7 @@
 <script type="text/javascript" src="js/slides.min.jquery.js"></script>
 <script type="text/javascript" src="js/jquery.imagesAutoBox.js"></script>
 <script type="text/javascript" src="js/javascript.js"></script>
+<script src="js/jquery.carouFredSel-6.0.4-packed.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).on('click', '.selector', function(event) {
     event.preventDefault();
@@ -86,134 +87,16 @@ $(function(){
 
 </script>
 <script type="text/javascript">
-/**
- * parallelRoll 左右无缝滚动
- * boxName : 最外层盒子类名
- * tagName : 滚动标签元素
- * time : 滚动间隔时间
- * direction : 滚动方向  right-->向右    left-->向左
- * visual : 可视数
- * prev : 上一张
- * next : 下一张
- * author : MR chen  370489175@qq.com
- * Date: 15-03-19
- * */
-(function($){
-    $.fn.parallelRoll = function(options){
-        var opts = $.extend({}, $.fn.parallelRoll.defaults, options);
-        var _this = this;                   
-        var l = _this.find(opts.tagName).length;
-        var autoRollTimer;
-        var flag = true; // 防止用户快速多次点击上下按钮
-        var arr = new Array();
-        /**
-         * 如果当  (可视个数+滚动个数 >滚动元素个数)  时  为不出现空白停顿   将滚动元素再赋值一次
-         * 同时赋值以后的滚动元素个数是之前的两倍  2 * l.
-         * */
-         var w=0;
-         var imgLen=0;
-$(_this).find('img').each(function(index, el) {
-    var thi=$(this),thiW,thiSrc=thi.attr('src');
-var lens=thi.parent().siblings().length+1;
-    Imgttmt = new Image();
-    Imgttmt.src = thiSrc;
-    Imgttmt.onload = function(){
-        thiW=thi.innerWidth();
-        thi.parent().width(thiW);
-        w=w+thiW;
-        //alert(thiW)
-        if(++imgLen == lens){
-            //alert(thi.parent().siblings().length+1 +'|'+w)
-            _this.css({width: (lens * w) + 'px'});
-        }
-    }
-});
-
-
-        if(opts.amount + opts.visual > l){
-            _this[0].innerHTML += _this[0].innerHTML;
-            l = 2 * l;
-        }else{
-            l = l;
-        }                   
-        //var w = $(opts.tagName).outerWidth(true); //计算元素的宽度  包括补白+边框
-        _this.css({width: (l * w) + 'px'}); // 设置滚动层盒子的宽度
-        return this.each(function(){
-            _this.closest('.'+opts.boxName).hover(function(){
-                clearInterval(autoRollTimer);
-            },function(){                           
-                switch (opts.direction){
-                    case 'left':
-                        autoRollTimer = setInterval(function(){
-                            left();
-                        },opts.time);
-                    break;
-                    case 'right':
-                        autoRollTimer = setInterval(function(){
-                            right();
-                        },opts.time);
-                    break;
-                    default : 
-                        alert('参数错误！');
-                    break;
-                }                           
-            }).trigger('mouseleave');
-            $('.'+opts.prev).on('click',function(){
-                flag ? left() : "";
-            });
-            $('.'+opts.next).on('click',function(){
-                flag ? right() : "";
-            });
-        });                 
-        function left(){
-            flag = false;
-            _this.animate({marginLeft : -(w*opts.amount)},1000,function(){
-                _this.find(opts.tagName).slice(0,opts.amount).appendTo(_this);
-                _this.css({marginLeft:0});
-                flag = true;
-            });
-        };
-        function right(){
-            flag = false;
-            arr = _this.find(opts.tagName).slice(-opts.amount);
-            for(var i = 0; i<opts.amount; i++){
-                $(arr[i]).css({marginLeft : -w*(i+1)}).prependTo(_this);
-            }
-            _this.animate({marginLeft : w*opts.amount},1000,function(){
-                _this.find(opts.tagName).removeAttr('style');
-                _this.css({marginLeft:0});
-                flag = true;
-            });
-        };
-    };
-    //插件默认选项
-    $.fn.parallelRoll.defaults = {
-        boxName : 'pic_list_box',
-        tagName : 'dd',
-        time : 3000,  // 
-        direction : 'left', // 滚动方向
-        visual : 7 , //可视数
-        prev : 'prev',
-        next : 'next',
-        amount : 1   // 滚动数  默认是1
-    };
-})(jQuery);
-
-$(document).ready(function(){
-    var a=setTimeout(function(){
-
-        clearTimeout(a);
-    },500)
-        $("#roll").parallelRoll({
-            amount : 2
+    $(function() {
+        $('.pic_list_box ul').carouFredSel({
+            prev: '#prev',
+            next: '#next',
+            pagination: "#pager",
+            scroll: 1000
         });
-});
 
-            
-
+    });
 </script>
-
-
 <style>
 </style>
 </head>
@@ -377,20 +260,19 @@ $(document).ready(function(){
             <div class="picbox">
 
                 <div class="pic_list_box">
-    <span class="prev">上一张</span>
-    <dl id="roll">
-        <dd><img src="images/temp/01.jpg"/></dd>
-        <dd><img src="images/temp/02.jpg"/></dd>
-        <dd><img src="images/temp/03.jpg"/></dd>
-        <dd><img src="images/temp/04.jpg"/></dd>
-        <dd><img src="images/temp/05.jpg"/></dd>
-        <dd><img src="images/temp/06.jpg"/></dd>
-        <dd><img src="images/temp/07.jpg"/></dd>
-        <dd><img src="images/temp/08.jpg"/></dd>
-        <dd><img src="images/temp/09.jpg"/></dd>
-        <dd><img src="images/temp/10.jpg"/></dd>
-    </dl>
-    <span class="next">下一张</span>
+
+                <ul>
+                    <li><img src="images/temp/01.jpg" alt="" /><span>Image1</span></li>
+                    <li><img src="images/temp/02.jpg" alt="" /><span>Image2</span></li>
+                    <li><img src="images/temp/03.jpg" alt="" /><span>Image3</span></li>
+                    <li><img src="images/temp/04.jpg" alt="" /><span>Image4</span></li>
+                    <li><img src="images/temp/05.jpg" alt="" /><span>Image5</span></li>
+                    <li><img src="images/temp/06.jpg" alt="" /><span>Image6</span></li>                    
+                </ul>
+                <div class="clearfix"></div>
+                <a id="prev" class="prev" href="#">&lt;</a>
+                <a id="next" class="next" href="#">&gt;</a>
+                <div id="pager" class="pager"></div>
                 </div>
             </div>
         </div>

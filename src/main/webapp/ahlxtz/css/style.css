@@ -129,12 +129,27 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .imgLink { padding:20px 0; }
 .imgLink li{ display: inline-block; width: 24.5%; text-align: right; }
 
-.picbox{}
-.pic_list_box{ overflow: hidden; padding: 30px 0;}
-.ul_pic_list { width: 1500px;}
-.ul_pic_list li{ width: 200px; margin-left: 15px; float: left;}
-.ul_pic_list li.first{ margin-left: 0;}
-.ul_pic_list li a.inTit{ margin-top: 10px; display: block; text-align: center;}
+.pic_list_box {width: 960px;position:relative;}
+.pic_list_box ul {list-style: none;display: block;margin: 0;padding: 0;}
+.pic_list_box li {background: transparent url(../images/carousel_polaroid.png) no-repeat 0 0;font-size: 40px;color: #999;text-align: center;display: block;width: 230px;height: 178px;padding: 0;margin: 5px;float: left;position: relative;}
+.pic_list_box li img {width: 201px;height: 127px;margin-top: 14px;}
+.pic_list_box li span {background: transparent url(../images/carousel_shine.png) no-repeat 0 0;text-indent: -999px;display: block;overflow: hidden;width: 201px;height: 127px;position: absolute;z-index: 2;top: 14px;left: 16px;}
+.clearfix {float: none;clear: both;}
+.pic_list_box .prev, .pic_list_box .next {background: transparent url(../images/carousel_control.png) no-repeat 0 0;text-indent: -999px;display: block;overflow: hidden;width: 15px;height: 21px;margin-left: 10px;position: absolute;top: 70px;}
+.pic_list_box .prev {background-position: 0 0;left: -30px;}
+.pic_list_box .prev:hover {left: -31px;}
+.pic_list_box .next {background-position: -18px 0;right: -30px;}
+.pic_list_box .next:hover {right: -31px;}
+.pic_list_box .pager {text-align: center;margin: 0 auto; display: none;}
+.pic_list_box .pager a {background: transparent url(../images/carousel_control.png) no-repeat -2px -32px;text-decoration: none;text-indent: -999px;display: inline-block;overflow: hidden;width: 8px;height: 8px;margin: 0 5px 0 0; display: none;}
+.pic_list_box .pager a.selected {background: transparent url(../images/carousel_control.png) no-repeat -12px -32px;text-decoration: underline;}
+#source {text-align: center;width: 100%;position: absolute;bottom: 10px;left: 0;}
+#source, #source a {font-size: 12px;color: #999;}
+#donate-spacer {height: 100%;}
+#donate {border-top: 1px solid #999;width: 750px;padding: 50px 75px;margin: 0 auto;overflow: hidden;}
+#donate p, #donate form {margin: 0;float: left;}
+#donate p {width: 650px;}
+#donate form {width: 100px;}
 
 .imgbox{ border-radius: 3px; overflow: hidden;}
 .imgbox img{ display: block; width: 100%;}
