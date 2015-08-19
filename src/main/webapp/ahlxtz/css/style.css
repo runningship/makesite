@@ -71,6 +71,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endCo
 * padding:0 9px;}
 .nav .navli a.a{padding-bottom: 11px; display: block;}
 .nav .navli a.a:hover{ color: #D7182A;}
+.nav .navli.active a.a{ color: #D7182A;}
 .nav .subnav{display: none;background: url(subbg.gif) no-repeat left top;position: absolute;left: 0;top: 44px;z-index: 99;font-size: 12px;border-radius: 3px;/*box-shadow:0px 5px 10px #000;*/overflow: hidden;padding: 10px 0;border-top: 3px solid #D7182A;
 box-shadow: 0 5px 15px rgba(0,0,0,0.5)}
 .nav .subnav {background-color: #646e71;width: 100%;
