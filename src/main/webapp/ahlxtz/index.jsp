@@ -244,10 +244,11 @@ function play(){
 
         <div class="wbox clearfix imgLink">
             <ul class="imgLink_list">
+                <li class=""><a href="http://gtjt.cc/gt/" target="_blank" ><img src="images/a4.jpg" alt=""></a></li>
                 <li class=""><a href="new.jsp?parentId=26" target="_blank"><img src="images/a1.jpg" alt=""></a></li>
                 <li class=""><a href="new.jsp?id=21&parentId=24" target="_blank"><img src="images/a2.jpg" alt=""></a></li>
                 <li class=""><a href="topNews.jsp?topArticleId=54" target="_blank"><img src="images/a3.jpg" alt=""></a></li>
-                <li class=""><a href="http://gtjt.cc/gt/" target="_blank" ><img src="images/a4.jpg" alt=""></a></li>
+                
             </ul>
         </div>
 
