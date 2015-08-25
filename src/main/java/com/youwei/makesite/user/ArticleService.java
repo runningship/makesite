@@ -30,7 +30,6 @@ import com.youwei.makesite.util.SecurityHelper;
 public class ArticleService {
 
 	static final int MAX_SIZE = 1024000*100;
-	static final String BaseFileDir = ConfigCache.get("upload_path", "");
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 
 	@WebMethod

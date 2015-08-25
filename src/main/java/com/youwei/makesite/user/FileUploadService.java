@@ -24,7 +24,6 @@ import org.bc.web.WebMethod;
 import com.youwei.makesite.ThreadSessionHelper;
 import com.youwei.makesite.cache.ConfigCache;
 import com.youwei.makesite.entity.SharedFile;
-import com.youwei.makesite.entity.User;
 import com.youwei.makesite.util.DataHelper;
 
 
@@ -32,7 +31,7 @@ import com.youwei.makesite.util.DataHelper;
 public class FileUploadService {
 
 	static final int MAX_SIZE = 1024000*100;
-	static final String BaseFileDir = ConfigCache.get("upload_path", "");
+	static final String BaseFileDir = ConfigCache.get("file_upload_path", "");
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
 	@WebMethod
